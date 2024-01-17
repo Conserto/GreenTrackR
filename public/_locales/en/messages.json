@@ -1,0 +1,454 @@
+{
+  "analysisInProgress": {
+    "message": "Analysis in progress. Start browsing the web, then come back here to get stats !",
+    "description": "Analysis in progress message"
+  },
+  "clearBrowserCacheButton": {
+    "message": "Reset settings",
+    "description": "Clear Browser Cache Button"
+  },
+  "csvColumnsLabel": {
+    "message": "Date;Url;Size(b)Size(kb);GES Data Center(gCO2e);GES Network(gCO2e);GES Device(gCO2e);GES Total(gCO2e); GES Score; Grade; Country; CarbonIntensity; NumberRequest",
+    "description": "csvColumnsLabel"
+  },
+  "date": {
+    "message": "Date",
+    "description": "Date"
+  },
+  "deleteAllButton": {
+    "message": "Delete All",
+    "description": "Delete All Button"
+  },
+  "deleteAllConfirmMessage": {
+    "message": "Do you really want to delete all history ?",
+    "description": "Delete All Confirm Message"
+  },
+  "deleteButton": {
+    "message": "Delete",
+    "description": "Delete Button"
+  },
+  "exportButton": {
+    "message": "Export",
+    "description": "Export Button"
+  },
+  "greenhouseGasesEmission": {
+    "message": "GES",
+    "description": "Greenhouse Gases Emission (gCO2eq)"
+  },
+  "greenhouseGasesEmissionDefault": {
+    "message": "GES (gCO2eq)",
+    "description": "Greenhouse Gases Emission (gCO2e), default"
+  },
+  "gesDataCenter": {
+    "message": "GES Data Center",
+    "description": "GES Data Center"
+  },
+  "gesNetwork": {
+    "message": "GES Network",
+    "description": "GES Network"
+  },
+  "gesDevice": {
+    "message": "GES Device",
+    "description": "GES Device"
+  },
+  "gesTotal": {
+    "message": "GES Total",
+    "description": "GES Total"
+  },
+  "gesScore": {
+    "message": "Score",
+    "description": "Score"
+  },
+  "gesGrade": {
+    "message": "Grade",
+    "description": "Grade"
+  },
+  "historyButton": {
+    "message": "History",
+    "description": "History Button"
+  },
+  "historyPageTitle": {
+    "message": "GES  - Analysis History",
+    "description": "History page title"
+  },
+  "journeyAnalysisAlreadyStarted": {
+    "message": "A user journey analysis is already started",
+    "description": "User journey analysis already started"
+  },
+  "launchAnalysisButton": {
+    "message": "Start analysis",
+    "description": "Launch Analysis"
+  },
+  "launchAnalysisButtonWithAutoScrollButton": {
+    "message": "Auto Scrolling",
+    "description": "Launch Analysis with auto scroll"
+  },
+  "mean": {
+    "message": "Average GES",
+    "description": "GES Mean"
+  },
+  "menuText": {
+    "message": "GreenTrackr V1.0.2 is install in your browser and accessible via the devtool panel (F12 or CMD + ALT + i sur Mac",
+    "description": "Text when you click on the plugin's icone"
+  },
+  "menuMoreInformation": {
+    "message": "more information ...",
+    "description": "Link for help in the menu frame"
+  },
+  "titleHistory": {
+    "message": "GreenTrackr History",
+    "description": "history title"
+  },
+  "pluginTitle": {
+    "message": "GES Plugin",
+    "description": "Plugin title"
+  },
+  "unsupportedRuleAnalyse": {
+    "message": "-- Analysis not supported by this browser --",
+    "description": "Analysis not supported by this browser"
+  },
+  "resetConfirmation": {
+    "message": "Confirm the statistics reset ?",
+    "description": "Reset Journey Analysis Confirmation"
+  },
+  "resetEvaluationMessage": {
+    "message": "Rating reset successful",
+    "description": "Confirmation message that impact assessment reset was successful"
+  },
+  "resetScrollMessage": {
+    "message": "Auto scroll settings reset successful",
+    "description": "Confirmation message that auto scroll settings reset was successful"
+  },
+  "resetJourneyMessage": {
+    "message": "Course reset successful",
+    "description": "Confirmation message that route reset was successful"
+  },
+  "resetJourneyButton": {
+    "message": "Reset journey",
+    "description": "Reset Journey Analysis"
+  },
+  "receivedResults": {
+    "message": "Results received",
+    "description": "Received user journey results"
+  },
+  "saveAnalysisButton": {
+    "message": "Save assessment",
+    "description": "Save Analyse Button"
+  },
+  "sizeTransferred": {
+    "message": "Page size",
+    "description": "Transferred size (KB)"
+  },
+  "sizeTransferredDefault": {
+    "message": "Page size (KB) : --",
+    "description": "Transferred size (KB), default"
+  },
+  "sizeTransferredBytes": {
+    "message": "Page size",
+    "description": "Transferred size (KB)"
+  },
+  "sizeTransferredBytesDefault": {
+    "message": "Page size (KB) : --",
+    "description": "Transferred size (KB), default"
+  },
+  "startJourneyButton": {
+    "message": "Start saving user journey",
+    "description": "Start Journey Analysis"
+  },
+  "stopJourneyButton": {
+    "message": "Stop saving",
+    "description": "Stop Journey Analysis"
+  },
+  "tabEvaluation": {
+    "message": "Assessment/Page",
+    "description": "GES analysis tab"
+  },
+  "tabAutoScroll": {
+    "message": "Auto Scroll/Page",
+    "description": "GES auto scroll analysis tab"
+  },
+  "tabJourney": {
+    "message": "User Journey",
+    "description": "User Journey tab"
+  },
+  "tabHelp": {
+    "message": "Help",
+    "description": "Help tab"
+  },
+  "url": {
+    "message": "Url",
+    "description": "Url"
+  },
+  "viewHistoryButton": {
+    "message": "View History",
+    "description": "View History Button"
+  },
+  "waitingResults": {
+    "message": "Waiting for results...",
+    "description": "Waiting user journey results"
+  },
+  "resetDataResultButton": {
+    "message": "Reset settings",
+    "description": "Reset parameters"
+  },
+  "placeNumberSteps": {
+    "message": "Number of steps",
+    "description": "Number of steps"
+  },
+  "placePixelsToMove": {
+    "message": "Number of pixels to go down",
+    "description": "Number of pixels to go down"
+  },
+  "placeTimeBetweenSteps": {
+    "message": "Time in ms between 2 steps",
+    "description": "Time in ms between 2 steps"
+  },
+  "titleAutoScrollPart": {
+    "message": "Auto-scroll analysis",
+    "description": "Analysis with auto scroll (lazy loading page)"
+  },
+  "averageGesTableTitle": {
+    "message": "Average =",
+    "description": "Average value of GES"
+  },
+  "maximumGesTableTitle": {
+    "message": "Max =",
+    "description": "Maximum value of GES"
+  },
+  "backToTop": {
+    "message": "Back to top",
+    "description": "Back to top"
+  },
+  "gesZone": {
+    "message": "Server Country",
+    "description": "Give the country where the server of the website is localized"
+  },
+  "gesZoneByDefault": {
+    "message": "Server Country",
+    "description": "Give the country where the server of the website is localized"
+  },
+  "gesIntensity": {
+    "message": "Country's carbon intensity",
+    "description": "Give the country carbon intensity from electricitymaps"
+  },
+  "gesIntensityByDefault": {
+    "message": "Country's carbon intensity",
+    "description": "Give the country carbon intensity from electricitymaps"
+  },
+  "nbRequest": {
+    "message": "Number of requests",
+    "description": "Number of request made by the website"
+  },
+  "nbRequestByDefault": {
+    "message": "Number of requests",
+    "description": "Number of request made by the website"
+  },
+  "infoMix": {
+    "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season:",
+    "description": "Infos pour comprendre l'impact du mix énergétiques"
+  },
+  "infoTooltip": {
+    "message": "The score displayed corresponds to the country in which your server is located. You can simulate the impact of hosting in another region of the globe",
+    "description": "Info to understand the simulation by region"
+  },
+  "infoTooltipUser": {
+    "message": "The score displayed corresponds to the country in which you're located. You can simulate the impact of hosting in another region of the globe",
+    "description": "Info to understand the simulation by user region"
+  },
+  "betaMessage": {
+    "message": "This feature is a beta version, errors may occur.",
+    "description": "Message to warn the user that not all features are present"
+  },
+  "franceDefaultServerMessage": {
+    "message": "Unable to locate your server. You're probably working locally. GreenTrackr uses France as default location.",
+    "description": "Message to warn the user the default server is set to FR"
+  },
+  "urlChromeExtMessage": {
+    "message": "The data on your page has not been loaded correctly. Refresh your page, then click on 'Start analysis'.",
+    "description": "Message to warn the user the default server is set to FR and need to reload the page (potentially wrong url stored)"
+  },
+  "saveAnalysis": {
+    "message": "Analysis successfully saved.",
+    "description": "Popup message"
+  },
+  "closePopup": {
+    "message": "Close",
+    "description": "close popup content"
+  },
+  "missingAnalysis": {
+    "message": "You did not start analysis",
+    "description": "Popup message if you try to save an undefined analysis"
+  },
+  "nocontentPhrase": {
+    "message": "Estimate the carbon footprint of your website",
+    "description": "Message when you arrive on the auto-scroll page and the analysis is not yet launched"
+  },
+  "nocontentPhraseJourney": {
+    "message": "Estimate the carbon footprint of your website",
+    "description": "Message when you arrive on the user page and the analysis is not yet launched"
+  },
+  "nocontentPhraseEvaluation": {
+    "message": "Estimate the carbon footprint of your website",
+    "description": "Message when you arrive on the evaluation page and the analysis is not yet launched"
+  },
+  "serverError": {
+    "message": "Whoops ! An error has occurred. Choose a region.",
+    "description": "Popup when error occurs on the server."
+  },
+  "serverRegionLabel": {
+    "message": "Simulate server localization in an other zone : ",
+    "description": "Label for select"
+  },
+  "serverUserLabel": {
+    "message": "Simulate user localization in an other zone : ",
+    "description": "Label for select"
+  },
+  "eitherFor": {
+    "message": "Either for ",
+    "description": "Label for informations about visits part. 1"
+  },
+  "visitEquivalent": {
+    "message": "visit(s) the equivalent of : ",
+    "description": "Label for informations about visits part. 2"
+  },
+  "smartphoneIndicator": {
+    "message": "Charged smartphones ",
+    "description": "Label for smartphone indicator"
+  },
+  "carIndicator": {
+    "message": "Km by car",
+    "description": "Label for car indicator"
+  },
+  "numberVisit": {
+    "message": "Number of visits",
+    "description": "Label for visit indicator"
+  },
+  "messageResults": {
+    "message": "Analysis results",
+    "description": "Analysis results"
+  },
+  "validateRegionButton": {
+    "message": "Confirm",
+    "description": "Confirm Region"
+  },
+  "messageRight": {
+    "message": ".All rights reserved.",
+    "description": "Copyright"
+  },
+  "title1": {
+    "message": "Test the extension",
+    "description": "Test the extension"
+  },
+  "li1title1": {
+    "message": "Please note: This version of the extension is only compatible with Manifest V3 (Chromium). A specific version for Firefox / Manifest V2 will be available separately.",
+    "description": "Please note: This version of the extension is only compatible with Manifest V3 (Chromium). A specific version for Firefox / Manifest V2 will be available separately."
+  },
+  "title2": {
+    "message": "Use the extension",
+    "description": "Use the extension"
+  },
+  "li1title2": {
+    "message": "Open the devtools in your browser.",
+    "description": "Open the devtools in your browser."
+  },
+  "li2title2": {
+    "message": "Go to the 'Assessment/Page' tab.",
+    "description": "Go to the 'Assessment/Page' tab."
+  },
+  "li3title2": {
+    "message": "In the browser, go to the page to be analyzed.",
+    "description": "In the browser, go to the page to be analyzed."
+  },
+  "li4title2": {
+    "message": "In the 'Assessment/Page'  tab of the devtools, click on the 'Start analysis' button.",
+    "description": "In the 'Assessment/Page'  tab of the devtools, click on the 'Start analysis' button."
+  },
+  "li5title2": {
+    "message": "The results are displayed.",
+    "description": "The results are displayed."
+  },
+  "li6title2": {
+    "message": "You can save this result in a history (only the indicators are saved) via the 'Save assessment' button.",
+    "description": "You can save this result in a history (only the indicators are saved) via the 'Save assessment' button."
+  },
+  "li7title2": {
+    "message": "The history of saved results is available via the 'View history' button.",
+    "description": "The history of saved results is available via the 'View history' button."
+  },
+  "title3": {
+    "message": "The main points to watch",
+    "description": "The main points to watch"
+  },
+  "li1title3": {
+    "message": "If the number of requests is zero, it's probably you haven't loaded the page with the devtools running. You should therefore consider reloading the page.",
+    "description": "If the number of requests is zero, it's probably you haven't loaded the page with the devtools running. You should therefore consider reloading the page."
+  },
+  "li2title3": {
+    "message": "To obtain the right assessment, you need to clear your browser's cache (otherwise, the size transferred will be reduced if you have already consulted the site being assessed). To avoid having to go into the browser menus, a 'Reset settings' button is provided for this purpose in the extension.",
+    "description": "To obtain the right assessment, you need to clear your browser's cache (otherwise, the size transferred will be reduced if you have already consulted the site being assessed). To avoid having to go into the browser menus, a 'Reset settings' button is provided for this purpose in the extension."
+  },
+  "li3title3": {
+    "message": "The use of an ad blocker or other filter has an influence on the result.",
+    "description": "The use of an ad blocker or other filter has an influence on the result."
+  },
+  "li4title3": {
+    "message": "Different results between two analyses may be caused by:",
+    "description": "Different results between two analyses may be caused by:"
+  },
+  "li5title3": {
+    "message": "Continuous updating processes (Even if the site appears to have loaded, other elements may still be loading when the analysis is launched. The volume of data downloaded and the number of requests therefore depend on when you click on the 'Start analysis' button). The same effect applies if you launch the analysis before the site has finished loading.",
+    "description": "Continuous updating processes (Even if the site appears to have loaded, other elements may still be loading when the analysis is launched. The volume of data downloaded and the number of requests therefore depend on when you click on the 'Start analysis' button). The same effect applies if you launch the analysis before the site has finished loading."
+  },
+  "li6title3": {
+    "message": "Ads that may change between two analyses (location, time of day, previous browser visits and many other parameters taken into account by retargeting specialists will result in the cascading loading of different *.js libraries and the display of different advertising content).",
+    "description": "Ads that may change between two analyses (location, time of day, previous browser visits and many other parameters taken into account by retargeting specialists will result in the cascading loading of different *.js libraries and the display of different advertising content)."
+  },
+  "li7title3": {
+    "message": "Scrolling: if you scroll through the data during analysis, you run the risk of launching loads of data that would have not normally been taken into account.",
+    "description": "Scrolling: if you scroll through the data during analysis, you run the risk of launching loads of data that would have not normally been taken into account."
+  },
+  "li8title3": {
+    "message": "The level of 'privacy' which, depending on the level set and the browser, will also induce side effects.",
+    "description": "The level of 'privacy' which, depending on the level set and the browser, will also induce side effects."
+  },
+  "li9title3": {
+    "message": "Cache effects.",
+    "description": "Cache effects."
+  },
+  "li10title3": {
+    "message": "User journey saving:",
+    "description": "User journey saving:"
+  },
+  "li11title3": {
+    "message": "You can quantify the carbon footprint of a user journey by going to the 'User Journey' tab. When you start the analysis by clicking on the 'Start saving user journey' button, the extension will save the results for each visited URL. Once the journey is complete, click on the 'Stop saving' button. That will display the results table for each URL, as well as the different totals. The button 'Reset journey' allows you to empty the locally stored results and to restart a journey from scratch.",
+    "description": "You can quantify the carbon footprint of a user journey by going to the 'User Journey' tab. When you start the analysis by clicking on the 'Start saving user journey' button, the extension will save the results for each visited URL. Once the journey is complete, click on the 'Stop saving' button. That will display the results table for each URL, as well as the different totals. The button 'Reset journey' allows you to empty the locally stored results and to restart a journey from scratch."
+  },
+  "li12title3": {
+    "message": "Extension permissions:",
+    "description": "Extension permissions:"
+  },
+  "li13title3": {
+    "message": "To work properly, the extension requires the following permissions:",
+    "description": "To work properly, the extension requires the following permissions:"
+  },
+  "li14title3": {
+    "message": "activeTab, tabs: used to display the saved analyses page and to access the contents of the pages for analysis.",
+    "description": "activeTab, tabs: used to display the saved analyses page and to access the contents of the pages for analysis."
+  },
+  "li15title3": {
+    "message": "<all_urls>: used to access URLs for analysis.",
+    "description": "<all_urls>: used to access URLs for analysis."
+  },
+  "li16title3": {
+    "message": "browsingData: used to clear the browser cache.",
+    "description": "browsingData: used to clear the browser cache."
+  },
+  "li17title3": {
+    "message": "Storage: used to store the different assessments.",
+    "description": "Storage: used to store the different assessments."
+  },
+  "li18title3": {
+    "message": "Web Navigation: used to detect when the analyzed page has finished loading.",
+    "description": "Web Navigation: used to detect when the analyzed page has finished loading."
+  }
+}
