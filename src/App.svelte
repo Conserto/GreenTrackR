@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Menu from './lib/share/Menu.svelte';
+  import Tabs from './lib/share/Tabs.svelte';
 </script>
 
-<Menu></Menu>
+<Tabs />
 
 <style>
 </style>

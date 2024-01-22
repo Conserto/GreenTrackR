@@ -8,12 +8,12 @@
   export let name: string;
   export let translateKey: string;
 
-  function handleClickItem() {
-    dispatch('clickItem', { id });
+  function handleClickTab() {
+    dispatch('clickTab', { id });
   }
 </script>
 
-<li class="nav-item" role="presentation">
+<li class="nav-tab" role="presentation">
   <button
     class:active={isActive}
     class="nav-link"
@@ -23,7 +23,7 @@
     aria-controls={name}
     aria-selected="true"
     data-i18n={translateKey}
-    on:click={handleClickItem}
+    on:click={handleClickTab}
   >
   </button>
 </li>
