@@ -3,8 +3,8 @@
   import Evaluation from '../pages/Evaluation.svelte';
   import Help from '../pages/Help.svelte';
   import Parcours from '../pages/Parcours.svelte';
-  import MenuItem from './MenuItem.svelte';
-  export let items = [
+  import Tab from './Tab.svelte';
+  export let tabs = [
     {
       translateKey: 'tabEvaluation',
       name: 'evaluation',
@@ -38,20 +38,20 @@
 </script>
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
-  {#each items as item}
-    <MenuItem
-      on:clickItem={handleClick}
-      isActive={activeTabId === item.id}
-      id={item.id}
-      name={item.name}
-      translateKey={item.translateKey}
-    ></MenuItem>
+  {#each tabs as tab}
+    <Tab
+      on:clickTab={handleClick}
+      isActive={activeTabId === tab.id}
+      id={tab.id}
+      name={tab.name}
+      translateKey={tab.translateKey}
+    />
   {/each}
 </ul>
-{#each items as item}
-  {#if activeTabId == item.id}
+{#each tabs as tab}
+  {#if activeTabId == tab.id}
     <div class="box">
-      <svelte:component this={item.component} />
+      <svelte:component this={tab.component} />
     </div>
   {/if}
 {/each}
