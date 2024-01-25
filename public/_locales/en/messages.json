@@ -335,119 +335,119 @@
     "message": ".All rights reserved.",
     "description": "Copyright"
   },
-  "title1": {
+  "help_test_extension": {
     "message": "Test the extension",
     "description": "Test the extension"
   },
-  "li1title1": {
+  "help_prerequisite_field": {
     "message": "Please note: This version of the extension is only compatible with Manifest V3 (Chromium). A specific version for Firefox / Manifest V2 will be available separately.",
     "description": "Please note: This version of the extension is only compatible with Manifest V3 (Chromium). A specific version for Firefox / Manifest V2 will be available separately."
   },
-  "title2": {
+  "help_use_extension": {
     "message": "Use the extension",
     "description": "Use the extension"
   },
-  "li1title2": {
+  "help_use_extension_nav_tools": {
     "message": "Open the devtools in your browser.",
     "description": "Open the devtools in your browser."
   },
-  "li2title2": {
+  "help_use_extension_eval_page": {
     "message": "Go to the 'Assessment/Page' tab.",
     "description": "Go to the 'Assessment/Page' tab."
   },
-  "li3title2": {
+  "help_use_extension_analyze": {
     "message": "In the browser, go to the page to be analyzed.",
     "description": "In the browser, go to the page to be analyzed."
   },
-  "li4title2": {
+  "help_use_extension_start_analysis": {
     "message": "In the 'Assessment/Page'  tab of the devtools, click on the 'Start analysis' button.",
     "description": "In the 'Assessment/Page'  tab of the devtools, click on the 'Start analysis' button."
   },
-  "li5title2": {
+  "help_use_extension_results": {
     "message": "The results are displayed.",
     "description": "The results are displayed."
   },
-  "li6title2": {
+  "help_use_extension_save": {
     "message": "You can save this result in a history (only the indicators are saved) via the 'Save assessment' button.",
     "description": "You can save this result in a history (only the indicators are saved) via the 'Save assessment' button."
   },
-  "li7title2": {
+  "help_use_extension_saved_results": {
     "message": "The history of saved results is available via the 'View history' button.",
     "description": "The history of saved results is available via the 'View history' button."
   },
-  "title3": {
+  "help_warnings": {
     "message": "The main points to watch",
     "description": "The main points to watch"
   },
-  "li1title3": {
+  "help_warnings_no_requests": {
     "message": "If the number of requests is zero, it's probably you haven't loaded the page with the devtools running. You should therefore consider reloading the page.",
     "description": "If the number of requests is zero, it's probably you haven't loaded the page with the devtools running. You should therefore consider reloading the page."
   },
-  "li2title3": {
+  "help_warnings_correct_eval": {
     "message": "To obtain the right assessment, you need to clear your browser's cache (otherwise, the size transferred will be reduced if you have already consulted the site being assessed). To avoid having to go into the browser menus, a 'Reset settings' button is provided for this purpose in the extension.",
     "description": "To obtain the right assessment, you need to clear your browser's cache (otherwise, the size transferred will be reduced if you have already consulted the site being assessed). To avoid having to go into the browser menus, a 'Reset settings' button is provided for this purpose in the extension."
   },
-  "li3title3": {
+  "help_warnings_ad_block": {
     "message": "The use of an ad blocker or other filter has an influence on the result.",
     "description": "The use of an ad blocker or other filter has an influence on the result."
   },
-  "li4title3": {
+  "help_warnings_diff_results": {
     "message": "Different results between two analyses may be caused by:",
     "description": "Different results between two analyses may be caused by:"
   },
-  "li5title3": {
+  "help_warnings_continuous_update": {
     "message": "Continuous updating processes (Even if the site appears to have loaded, other elements may still be loading when the analysis is launched. The volume of data downloaded and the number of requests therefore depend on when you click on the 'Start analysis' button). The same effect applies if you launch the analysis before the site has finished loading.",
     "description": "Continuous updating processes (Even if the site appears to have loaded, other elements may still be loading when the analysis is launched. The volume of data downloaded and the number of requests therefore depend on when you click on the 'Start analysis' button). The same effect applies if you launch the analysis before the site has finished loading."
   },
-  "li6title3": {
+  "help_warnings_ads": {
     "message": "Ads that may change between two analyses (location, time of day, previous browser visits and many other parameters taken into account by retargeting specialists will result in the cascading loading of different *.js libraries and the display of different advertising content).",
     "description": "Ads that may change between two analyses (location, time of day, previous browser visits and many other parameters taken into account by retargeting specialists will result in the cascading loading of different *.js libraries and the display of different advertising content)."
   },
-  "li7title3": {
+  "help_warnings_scrolling": {
     "message": "Scrolling: if you scroll through the data during analysis, you run the risk of launching loads of data that would have not normally been taken into account.",
     "description": "Scrolling: if you scroll through the data during analysis, you run the risk of launching loads of data that would have not normally been taken into account."
   },
-  "li8title3": {
+  "help_warnings_privacy": {
     "message": "The level of 'privacy' which, depending on the level set and the browser, will also induce side effects.",
     "description": "The level of 'privacy' which, depending on the level set and the browser, will also induce side effects."
   },
-  "li9title3": {
+  "help_warnings_cache": {
     "message": "Cache effects.",
     "description": "Cache effects."
   },
-  "li10title3": {
+  "help_warnings_user_path": {
     "message": "User journey saving:",
     "description": "User journey saving:"
   },
-  "li11title3": {
+  "help_warnings_env_impacts": {
     "message": "You can quantify the carbon footprint of a user journey by going to the 'User Journey' tab. When you start the analysis by clicking on the 'Start saving user journey' button, the extension will save the results for each visited URL. Once the journey is complete, click on the 'Stop saving' button. That will display the results table for each URL, as well as the different totals. The button 'Reset journey' allows you to empty the locally stored results and to restart a journey from scratch.",
     "description": "You can quantify the carbon footprint of a user journey by going to the 'User Journey' tab. When you start the analysis by clicking on the 'Start saving user journey' button, the extension will save the results for each visited URL. Once the journey is complete, click on the 'Stop saving' button. That will display the results table for each URL, as well as the different totals. The button 'Reset journey' allows you to empty the locally stored results and to restart a journey from scratch."
   },
-  "li12title3": {
+  "help_warnings_permissions": {
     "message": "Extension permissions:",
     "description": "Extension permissions:"
   },
-  "li13title3": {
+  "help_warnings_permissions_use": {
     "message": "To work properly, the extension requires the following permissions:",
     "description": "To work properly, the extension requires the following permissions:"
   },
-  "li14title3": {
+  "help_warnings_activeTab": {
     "message": "activeTab, tabs: used to display the saved analyses page and to access the contents of the pages for analysis.",
     "description": "activeTab, tabs: used to display the saved analyses page and to access the contents of the pages for analysis."
   },
-  "li15title3": {
+  "help_warnings_all_urls": {
     "message": "<all_urls>: used to access URLs for analysis.",
     "description": "<all_urls>: used to access URLs for analysis."
   },
-  "li16title3": {
+  "help_warnings_browsing_data": {
     "message": "browsingData: used to clear the browser cache.",
     "description": "browsingData: used to clear the browser cache."
   },
-  "li17title3": {
+  "help_warnings_storage": {
     "message": "Storage: used to store the different assessments.",
     "description": "Storage: used to store the different assessments."
   },
-  "li18title3": {
+  "help_warnings_web_nav": {
     "message": "Web Navigation: used to detect when the analyzed page has finished loading.",
     "description": "Web Navigation: used to detect when the analyzed page has finished loading."
   }
