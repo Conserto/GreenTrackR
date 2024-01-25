@@ -1,6 +1,11 @@
 'use strict';
 
 let connections: any = {};
+
+//TODO: mplement this sending message to svelte component to prevent it there is new entries laoded
+/*chrome.webNavigation.onCompleted.addListener((details) => {
+  chrome.runtime.sendMessage({ details });
+});*/
 /*
  * Listen for message form tab and send it to devtools
  **/
