@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
 
@@ -13,7 +12,7 @@
   }
 </script>
 
-<li class="nav-tab" role="presentation">
+<div class="nav-tab" role="presentation">
   <button
     class:active={isActive}
     class="nav-link"
@@ -22,11 +21,11 @@
     role="tab"
     aria-controls={name}
     aria-selected="true"
-    data-i18n={translateKey}
     on:click={handleClickTab}
   >
+    {chrome.i18n.getMessage(translateKey)}
   </button>
-</li>
+</div>
 
 <style>
   button {
@@ -42,6 +41,7 @@
     border: 1px solid transparent;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
+    cursor: pointer;
   }
 
   .nav-link.active {

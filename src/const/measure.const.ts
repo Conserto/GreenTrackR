@@ -1,0 +1,4 @@
+export const NUMBER_OF_VISITS = 100;
+export const KWH_PER_BYTE_DATA_CENTER = 0.000000000072;
+export const KWH_PER_BYTE_NETWORK = 0.0000000002905;
+export const KWH_DEVICE = 0.000215;

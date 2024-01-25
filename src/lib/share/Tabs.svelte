@@ -1,6 +1,6 @@
 <script lang="ts">
   import AutoScroll from '../pages/AutoScroll.svelte';
-  import Evaluation from '../pages/Evaluation.svelte';
+  import Evaluation from '../pages/Evaluation/Evaluation.svelte';
   import Help from '../pages/Help.svelte';
   import Parcours from '../pages/Parcours.svelte';
   import Tab from './Tab.svelte';
@@ -37,7 +37,7 @@
   }
 </script>
 
-<ul class="nav nav-tabs" id="myTab" role="tablist">
+<div class="nav nav-tabs" id="myTab" role="tablist">
   {#each tabs as tab}
     <Tab
       on:clickTab={handleClick}
@@ -47,12 +47,11 @@
       translateKey={tab.translateKey}
     />
   {/each}
-</ul>
+</div>
+
 {#each tabs as tab}
   {#if activeTabId == tab.id}
-    <div class="box">
-      <svelte:component this={tab.component} />
-    </div>
+    <svelte:component this={tab.component} />
   {/if}
 {/each}
 
@@ -71,5 +70,13 @@
     border-bottom: 1px solid #dee2e6;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
+  }
+  .tab-content {
+    display: none;
+    justify-content: center;
+  }
+
+  .tab-content.active {
+    display: flex;
   }
 </style>

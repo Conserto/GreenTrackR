@@ -25,5 +25,11 @@ export default defineConfig({
       },
     },
   },
+  resolve: {
+    alias: {
+      src: '/src',
+    },
+  },
+  envDir: 'src/',
   plugins: [svelte(), viteManifestHackIssue846, crx({ manifest })],
 });
