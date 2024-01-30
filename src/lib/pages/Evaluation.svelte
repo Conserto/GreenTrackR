@@ -1,31 +1,29 @@
 <script lang="ts">
   import logo from '/icons/Logo_GreenTrackr.png';
-  import Actions from '../../share/Actions.svelte';
-  import Results from '../../share/GES/Results.svelte';
-  const actions = [
+  import Actions from '../share/Actions.svelte';
+  import Results from '../share/GES/Results.svelte';
+  import { ButtonTypeEnum } from 'src/enum';
+  import type { Action as ActionInterface } from 'src/interface';
+  const actions: ActionInterface[] = [
     {
       id: 'launchAnalysis',
-      typeButton: 'principal',
-      className: 'launchAnalysis',
+      buttonType: ButtonTypeEnum.PRIMARY,
       translateKey: 'launchAnalysisButton',
       component: Results,
     },
     {
       id: 'saveAnalysis',
-      typeButton: 'secondary',
-      className: 'saveAnalysis',
+      buttonType: ButtonTypeEnum.SECONDARY,
       translateKey: 'saveAnalysisButton',
     },
     {
       id: 'viewHistory',
-      typeButton: 'secondary',
-      className: 'viewHistory',
+      buttonType: ButtonTypeEnum.SECONDARY,
       translateKey: 'viewHistoryButton',
     },
     {
       id: 'clearBrowserCache',
-      typeButton: 'secondary',
-      className: 'clearBrowserCache',
+      buttonType: ButtonTypeEnum.SECONDARY,
       translateKey: 'clearBrowserCacheButton',
     },
   ];

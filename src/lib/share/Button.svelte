@@ -1,33 +1,39 @@
 <script lang="ts">
+  import { ButtonTypeEnum } from 'src/enum';
   import { createEventDispatcher } from 'svelte';
+  import { translate } from 'src/utils/utils';
+
   const dispatch = createEventDispatcher();
 
   export let translateKey: string;
-  export let className: string;
+  export let buttonType: ButtonTypeEnum;
   function handleButtonClick() {
     dispatch('buttonClick');
   }
 </script>
 
-<button on:click={handleButtonClick} class={'btn btn-secondary btn-sm ' + className}
-  >{chrome.i18n.getMessage(translateKey)}</button
+<button
+  on:click={handleButtonClick}
+  class:primary={buttonType === ButtonTypeEnum.PRIMARY}
+  class:secondary={buttonType === ButtonTypeEnum.SECONDARY}
+  class={'button'}>{translate(translateKey)}</button
 >
 
 <style>
   /* Bootstrap Button Base Styles */
-  .btn {
-    margin: 4px;
+  .button {
+    margin: var(--spacing--xs);
     display: inline-block;
-    font-weight: 400;
+    font-weight: var(--font-weight--normal);
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
     user-select: none;
-    border: 1px solid transparent;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
+    border: var(--border-width--thin) solid transparent;
+    padding: var(--spacing--xs) var(--spacing--md);
+    font-size: var(--font-size--md);
     line-height: 1.5;
-    border-radius: 0.25rem;
+    border-radius: var(--border-radius--slight);
     transition:
       color 0.15s ease-in-out,
       background-color 0.15s ease-in-out,
@@ -35,35 +41,27 @@
       box-shadow 0.15s ease-in-out;
     cursor: pointer;
   }
+  .primary {
+    /* Vos styles personnalisés ici */
+    color: var(--color--light);
+    background: var(--button_background-color--primary);
+  }
+
+  .primary:hover {
+    color: #212529;
+    background: var(--button_hover-background-color--primary);
+  }
 
   /* Bootstrap Secondary Button Styles */
   .secondary {
-    color: #fff;
-    background-color: #6c757d;
-    border-color: #6c757d;
+    color: var(--color--light);
+    background-color: var(--button_background-color--secondary);
+    border-color: var(--button_border-color--secondary);
   }
 
   .secondary:hover {
-    color: #fff;
-    background-color: #5c636a;
-    border-color: #565e64;
-  }
-
-  /* Bootstrap Small Button Styles */
-  .btn-sm {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    border-radius: 0.2rem;
-  }
-
-  .principal {
-    /* Vos styles personnalisés ici */
-    color: #fff;
-    background: rgb(96, 128, 108);
-  }
-
-  .principal:hover {
-    color: #212529;
+    color: var(--color--light);
+    background-color: var(--button_hover_background-color--secondary);
+    border-color: var(--button_hover_border-color--secondary);
   }
 </style>

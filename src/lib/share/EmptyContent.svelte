@@ -1,9 +1,11 @@
 <script lang="ts">
+  import { translate } from 'src/utils/utils';
+
   export let isActive: boolean;
 </script>
 
 <div class="empty-content" class:active={isActive}>
-  <p class="empty-content-message">{chrome.i18n.getMessage('nocontentPhraseEvaluation')}</p>
+  <p class="empty-content-message">{translate('nocontentPhraseEvaluation')}</p>
 </div>
 
 <style>
@@ -20,9 +22,9 @@
   .empty-content-message {
     max-width: 600px;
     text-align: center;
-    font-size: 2.5rem;
+    font-size: var(--font-size--xxl);
     font-weight: bold;
-    color: rgb(96, 128, 108);
+    color: var(--color--primary);
     font-family: system-ui;
   }
 </style>

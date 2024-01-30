@@ -1,111 +1,76 @@
 <!-- Bloc contenant le score sous forme d'echelle imagée allant de A -> G-->
 <script lang="ts">
-  const scores = [
-    {
-      grade: 'A+',
-      class: 'gradeAPlus',
-      color: 'rgba(3, 126, 34, 1)',
-    },
-    {
-      grade: 'A',
-      class: 'gradeA',
-      color: 'rgba(24, 164, 64, 1)',
-    },
-    {
-      grade: 'B+',
-      class: 'gradeBPlus',
-      color: 'rgba(52, 188, 110, 1)',
-    },
-    {
-      grade: 'B',
-      class: 'B',
-      color: 'rgb(191, 222, 57)',
-    },
-    {
-      grade: 'C+',
-      class: 'gradeCPlus',
-      color: 'rgb(254, 244, 46)',
-    },
-    {
-      grade: 'C',
-      class: 'gradeC',
-      color: 'rgb(255, 212, 58)',
-    },
-    {
-      grade: 'D+',
-      class: 'gradeDPlus',
-      color: 'rgb(255, 183, 0)',
-    },
-    {
-      grade: 'D',
-      class: 'gradeD',
-      color: 'rgb(255, 139, 14)',
-    },
-    {
-      grade: 'E',
-      class: 'gradeE',
-      color: 'rgb(255, 102, 13)',
-    },
-    {
-      grade: 'F',
-      class: 'gradeF',
-      color: 'rgb(255, 19, 7)',
-    },
-  ];
+  import { ALL_SCORES } from 'src/const';
+  import type { Score } from 'src/interface';
+  import { ScoreService } from 'src/utils/service';
+
+  export let score: Score;
+  const resScore = ScoreService.getScoreForGrade(score.value);
 </script>
 
 <div class="scores-tag">
-  {#each scores as score}
-    <span class="score {score.class}" style:background-color={score.color}>
-      <span class="score-letter">{score.grade}</span>
-      <p class="score-number"></p>
-    </span>
+  {#each ALL_SCORES as scoreLevel}
+    <div class="score {scoreLevel.class}" style:background-color={scoreLevel.color}>
+      <span
+        class:active={scoreLevel.gradeLetter === score.gradeLetter}
+        class="score-letter"
+        style:color={scoreLevel.gradeLetter === score.gradeLetter
+          ? scoreLevel.textColor
+          : 'transparent'}>{scoreLevel.gradeLetter}</span
+      >
+      {#if scoreLevel.gradeLetter === score.gradeLetter}
+        <p class="score-number">
+          {resScore}
+        </p>{/if}
+    </div>
   {/each}
 </div>
 
-<style>
+<style lang="scss">
   .scores-tag {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     max-width: 280px;
+    margin-bottom: var(--spacing--xxxl);
   }
 
   .score {
-    /*width: 2.5rem;*/
     width: 10%;
     height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--color--light);
   }
 
   .score-letter {
     color: transparent;
-  }
 
-  .score-active {
-    height: 4rem;
-    width: 4rem;
-    border-radius: 100%;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 0.3rem solid white;
-    color: white;
-    font-size: 1.8rem;
-    font-weight: bold;
-    line-height: 2;
+    &.active {
+      background-color: inherit;
+      height: 4rem;
+      width: 4rem;
+      border-radius: 100%;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: var(--border-width--thick) solid var(--color--light);
+      color: var(--color--light);
+      font-size: var(--font-size--xxl);
+      font-weight: var(--font-weight--bold);
+      line-height: 2;
+    }
   }
 
   .score-number {
     display: flex;
-    color: black;
+    color: var(--color--dark);
     position: relative;
     top: 3rem;
-    font-weight: bold;
+    font-weight: var(--font-weight--bold);
+    font-size: var(--font-size--sm);
     /* display: none; */
   }
 </style>

@@ -1,5 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import { translate } from 'src/utils/utils';
+
   const dispatch = createEventDispatcher();
 
   export let isActive: boolean;
@@ -23,7 +25,7 @@
     aria-selected="true"
     on:click={handleClickTab}
   >
-    {chrome.i18n.getMessage(translateKey)}
+    {translate(translateKey)}
   </button>
 </div>
 
@@ -38,21 +40,21 @@
   .nav-link {
     margin-bottom: -1px;
     background: 0 0;
-    border: 1px solid transparent;
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border: var(--border-width--thin) solid transparent;
+    border-top-left-radius: var(--border-radius--slight);
+    border-top-right-radius: var(--border-radius--slight);
     cursor: pointer;
   }
 
   .nav-link.active {
-    color: rgb(96, 128, 108) !important;
-    background-color: #fff;
-    border-color: #dee2e6 #dee2e6 #fff;
+    color: var(--color--primary);
+    background-color: var(--color--light);
+    border-color: var(--color--grey-light) var(--color--grey-light) var(--color--light);
   }
   .nav-link {
     display: block;
-    padding: 0.5rem 1rem;
-    color: rgb(91, 91, 91) !important;
+    padding: var(--spacing--sm) var(--spacing--lg);
+    color: var(--color--grey);
     text-decoration: none;
     transition:
       color 0.15s ease-in-out,
