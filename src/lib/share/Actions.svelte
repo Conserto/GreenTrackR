@@ -2,12 +2,13 @@
   import Results from './GES/Results.svelte';
   import Action from './Action.svelte';
   import EmptyContent from './EmptyContent.svelte';
+  import type { Action as ActionInterface } from 'src/interface';
 
-  export let actions: string;
+  export let actions: ActionInterface[];
   // var that we will toggle so we can be sure component will be re render even if we click consecutively on same action
   let forceRerender: boolean = true;
-
   let actionClicked: string;
+
   function handleActionClick(event) {
     forceRerender = !forceRerender;
     actionClicked = event.detail.actionId;
@@ -17,12 +18,7 @@
 <div class="actions">
   <div class="actions-btn">
     {#each actions as action}
-      <Action
-        on:clickAction={handleActionClick}
-        actionId={action.id}
-        className={action.className + ' ' + action.typeButton}
-        translateKey={action.translateKey}
-      />
+      <Action on:clickAction={handleActionClick} {action} />
     {/each}
   </div>
 
@@ -55,18 +51,6 @@
 
   .actions-results {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .action-results-content {
-    width: 100%;
-    display: none;
-    justify-content: center;
-  }
-
-  .action-results-content.active {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

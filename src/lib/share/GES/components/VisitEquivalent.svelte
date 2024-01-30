@@ -1,1 +1,0 @@
-<!-- Bloc 'Soit pour XXX visite de l'equivalent de XX km en voiture ou XX smartphones chargés -->

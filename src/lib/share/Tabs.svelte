@@ -1,6 +1,6 @@
 <script lang="ts">
   import AutoScroll from '../pages/AutoScroll.svelte';
-  import Evaluation from '../pages/Evaluation/Evaluation.svelte';
+  import Evaluation from '../pages/Evaluation.svelte';
   import Help from '../pages/Help.svelte';
   import Parcours from '../pages/Parcours.svelte';
   import Tab from './Tab.svelte';
@@ -67,16 +67,8 @@
   .nav-tabs {
     margin-bottom: -1px;
     background: 0 0;
-    border-bottom: 1px solid #dee2e6;
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
-  }
-  .tab-content {
-    display: none;
-    justify-content: center;
-  }
-
-  .tab-content.active {
-    display: flex;
+    border-bottom: var(--border-width--thin) solid var(--color--grey-light);
+    border-top-left-radius: var(--border-radius--slight);
+    border-top-right-radius: var(--border-radius--slight);
   }
 </style>

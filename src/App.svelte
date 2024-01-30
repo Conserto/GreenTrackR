@@ -3,6 +3,3 @@
 </script>
 
 <Tabs />
-
-<style>
-</style>

@@ -1,4 +1,5 @@
 import type { CarbonData, GES, Measure } from '../../interface';
+
 import { NetworkService, GESService, ScoreService } from '../service';
 
 export class MeasureAcquisition {
@@ -34,7 +35,9 @@ export class MeasureAcquisition {
       score: {
         value: 0,
         color: '',
-        grade: '',
+        textColor: '',
+        gradeLetter: '',
+        limit: 0,
       },
       carbonIntensity: 0,
     };
@@ -62,16 +65,16 @@ export class MeasureAcquisition {
   }
 
   async getGESMeasure() {
-    console.info('5');
-
     let urlHost = this.networkService.getUrl(this.measure.url);
     const { zoneGES, userGES } = await this.gesService.computeGES(urlHost, 'auto', 'auto');
     this.updateMeasureValues(zoneGES, userGES);
+    return this.measure;
   }
 
   async getNetworkMeasure() {
     const har = await this.networkService.getHarEntries();
     const entries: HARFormatEntry[] = this.networkService.filterNetworkResources(har.entries);
+
     if (entries.length > 0) {
       const { responsesSize, responsesSizeUncompress } =
         this.networkService.calculateResponseSizes(entries);
@@ -114,5 +117,13 @@ export class MeasureAcquisition {
 
       chrome.tabs.onUpdated.addListener(onTabUpdated);
     });
+  }
+
+  static async getZones() {
+    let zones = await fetch(
+      `
+        ${import.meta.env.VITE_CARBON_API_URL}/zones`,
+    );
+    return zones.json();
   }
 }

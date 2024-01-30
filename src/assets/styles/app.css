@@ -1,4 +1,59 @@
 :root {
+  --color--light: rgb(255 255 255);
+  --color--dark: rgb(0 0 0);
+  --color--grey: rgb(91 91 91);
+  --color--grey-light: rgb(222 226 230);
+
+  --color--primary: rgb(96 128 108);
+  --color--secondary: rgb();
+
+  --background-color--primary: rgb(96 128 108);
+  --background-color--secondary: rgb(92 99 106);
+
+  --border-radius--slight: 0.25rem;
+  --border-radius--mark: 0.5rem;
+  --border-radius--strong: 0.75rem;
+  --border-radius--round: 2rem;
+
+  --box-shadow--md: rgba(0, 0, 0, 0.35) 0 5px 15px;
+
+  --spacing--xs: 0.25rem; /* équivalent à 4px (par exemple) */
+  --spacing--sm: 0.5rem; /* équivalent à 8px (par exemple) */
+  --spacing--md: 0.75rem; /* équivalent à 12px (par exemple) */
+  --spacing--lg: 1rem; /* équivalent à 16px (par exemple) */
+  --spacing--xl: 1.5rem; /* équivalent à 24px (par exemple) */
+  --spacing--xxl: 2rem; /* équivalent à 32px (par exemple) */
+  --spacing--xxxl: 3rem; /* équivalent à 48px (par exemple) */
+
+  --font-size--xs: 0.75rem; /* équivalent à 12px (par exemple) */
+  --font-size--sm: 0.875rem; /* équivalent à 14px (par exemple) */
+  --font-size--md: 1rem; /* équivalent à 16px (par exemple) */
+  --font-size--lg: 1.125rem; /* équivalent à 18px (par exemple) */
+  --font-size--xl: 1.5rem; /* équivalent à 24px (par exemple) */
+  --font-size--xxl: 2rem; /* équivalent à 32px (par exemple) */
+
+  --font-weight--light: 300;
+  --font-weight--normal: 400;
+  --font-weight--medium: 500;
+  --font-weight--bold: 700;
+
+  --border-width--thin: 1px;
+  --border-width--normal: 2px;
+  --border-width--thick: 4px;
+
+  --button_color--primary: var(--color-light);
+  --button_background-color--primary: var(--background-color--primary);
+  --button_hover-background-color--primary: rgb(90 121 102);
+  --button_hover_color--primary: rgba(33, 37, 41);
+
+  --button_color--secondary: var(--color-light);
+  --button_background-color--secondary: var(--background-color--secondary);
+  --button_border-color--secondary: rgba(108, 117, 125);
+  --button_hover_background-color--secondary: rgb(83 91 99);
+  --button_hover_border-color--secondary: rgba(86, 94, 100);
+
+  --img_icon_size--size: 1.5rem;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;

@@ -1,5 +1,7 @@
 export interface Score {
-  value: number;
-  grade: string;
+  value?: number;
+  gradeLetter: string;
   color: string;
+  limit: number;
+  textColor: string;
 }
