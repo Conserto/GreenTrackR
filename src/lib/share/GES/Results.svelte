@@ -9,10 +9,7 @@
   import ScoreTag from './components/ScoreTag.svelte';
   import VisitsEquivalent from './components/VisitsEquivalent.svelte';
   import EmissionInformations from './components/EmissionInformations.svelte';
-  import Input from '../Input.svelte';
-  import Select from '../Select.svelte';
-  import Button from '../Button.svelte';
-  import ZoneSimulation from './ZoneSimulation.svelte';
+  // import ZoneSimulation from './ZoneSimulation.svelte';
   let score: Score, measure: Measure;
   onMount(async () => {
     const measureAcquisition = new MeasureAcquisition();
@@ -34,9 +31,9 @@
       <EmissionInformations {measure} />
     </div>
   </div>
-  <div class="zone-simulation__wrapper">
+  <!-- <div class="zone-simulation__wrapper">
     <ZoneSimulation />
-  </div>
+  </div> -->
 {/if}
 
 <style lang="scss">

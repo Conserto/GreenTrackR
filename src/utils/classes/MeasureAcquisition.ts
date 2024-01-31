@@ -18,6 +18,7 @@ export class MeasureAcquisition {
 
   initMeasureAcquisition(): Measure {
     return {
+      date: new Date(),
       cityName: '',
       url: '',
       network: {
@@ -80,6 +81,7 @@ export class MeasureAcquisition {
         this.networkService.calculateResponseSizes(entries);
       this.measure = {
         ...this.measure,
+        date: new Date(),
         url: this.networkService.getMotherUrl(entries) || '',
         nbRequest: entries.length,
         network: {

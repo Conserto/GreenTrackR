@@ -1,6 +1,7 @@
 import type { GESTotals, NetworkResponse, Score } from '.';
 
 export interface Measure {
+  date: Date;
   cityName: string;
   url: string;
   network: NetworkResponse;

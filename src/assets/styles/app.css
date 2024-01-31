@@ -43,13 +43,13 @@
 
   --button_color--primary: var(--color-light);
   --button_background-color--primary: var(--background-color--primary);
-  --button_hover-background-color--primary: rgb(90 121 102);
-  --button_hover_color--primary: rgba(33, 37, 41);
+  --button_hover-background-color--primary: #4d6c59;
+  --button_hover_color--primary: var(--color-light);
 
   --button_color--secondary: var(--color-light);
-  --button_background-color--secondary: var(--background-color--secondary);
-  --button_border-color--secondary: rgba(108, 117, 125);
-  --button_hover_background-color--secondary: rgb(83 91 99);
+  --button_background-color--secondary: #6c757d;
+  --button_border-color--secondary: var(--color-light);
+  --button_hover_background-color--secondary: var(--background-color--secondary);
   --button_hover_border-color--secondary: rgba(86, 94, 100);
 
   --img_icon_size--size: 1.5rem;
@@ -66,6 +66,32 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #e0e0e0;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    background-color: #9e9e9e;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #757575;
+  }
+}
+
+.flex-center {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 a {

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
   import { translate } from 'src/utils/utils';
+  import { createEventDispatcher } from 'svelte';
 
   export let isActive: boolean;
   export let id: string;

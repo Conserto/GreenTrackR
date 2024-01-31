@@ -3,6 +3,10 @@
     "message": "Analysis in progress. Start browsing the web, then come back here to get stats !",
     "description": "Analysis in progress message"
   },
+  "firstResults": {
+    "message": "First results received !",
+    "description": "First analysis resulted have been computed."
+  },
   "clearBrowserCacheButton": {
     "message": "Reset settings",
     "description": "Clear Browser Cache Button"
@@ -220,7 +224,7 @@
     "description": "Back to top"
   },
   "gesZone": {
-    "message": "Server Country",
+    "message": "Server location",
     "description": "Give the country where the server of the website is localized"
   },
   "gesZoneByDefault": {
@@ -324,7 +328,7 @@
     "description": "Label for visit indicator"
   },
   "messageResults": {
-    "message": "Analysis results",
+    "message": "Results of journey's analysis",
     "description": "Analysis results"
   },
   "validateRegionButton": {

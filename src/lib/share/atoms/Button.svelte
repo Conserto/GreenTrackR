@@ -5,6 +5,7 @@
 
   export let translateKey: string;
   export let buttonType: ButtonTypeEnum;
+  export let disabled: boolean = false;
 
   const dispatch = createEventDispatcher();
 
@@ -15,12 +16,13 @@
 
 <button
   on:click={handleButtonClick}
+  {disabled}
   class:primary={buttonType === ButtonTypeEnum.PRIMARY}
   class:secondary={buttonType === ButtonTypeEnum.SECONDARY}
   class={'button'}>{translate(translateKey)}</button
 >
 
-<style>
+<style lang="scss">
   /* Bootstrap Button Base Styles */
   .button {
     margin: var(--spacing--xs);
@@ -41,28 +43,29 @@
       border-color 0.15s ease-in-out,
       box-shadow 0.15s ease-in-out;
     cursor: pointer;
-  }
-  .primary {
-    /* Vos styles personnalisés ici */
-    color: var(--color--light);
-    background: var(--button_background-color--primary);
-  }
 
-  .primary:hover {
-    color: #212529;
-    background: var(--button_hover-background-color--primary);
-  }
+    &:disabled {
+      cursor: default;
+      pointer-events: none;
+      opacity: 0.4;
+    }
 
-  /* Bootstrap Secondary Button Styles */
-  .secondary {
-    color: var(--color--light);
-    background-color: var(--button_background-color--secondary);
-    border-color: var(--button_border-color--secondary);
-  }
+    &.primary {
+      color: var(--color--light);
+      background: var(--background-color--primary);
 
-  .secondary:hover {
-    color: var(--color--light);
-    background-color: var(--button_hover_background-color--secondary);
-    border-color: var(--button_hover_border-color--secondary);
+      &:hover {
+        background: var(--button_hover-background-color--primary);
+      }
+    }
+
+    &.secondary {
+      color: var(--color--light);
+      background-color: var(--button_background-color--secondary);
+
+      &:hover {
+        background-color: var(--button_hover_background-color--secondary);
+      }
+    }
   }
 </style>

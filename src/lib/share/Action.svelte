@@ -19,6 +19,3 @@
   buttonType={action.buttonType}
   translateKey={action.translateKey}
 />
-
-<style>
-</style>
