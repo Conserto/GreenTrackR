@@ -1,7 +1,9 @@
 <script lang="ts">
   import { Results } from 'src/lib/share/GES';
-  import { Action, EmptyContent } from 'src/lib/share';
+  import { Action, EmptyContent, Alert } from 'src/lib/share';
   import type { Action as ActionInterface } from 'src/interface';
+
+  export let betaVersion: boolean;
 
   export let actions: ActionInterface[];
   // var that we will toggle so we can be sure component will be re render even if we click consecutively on same action
@@ -31,6 +33,10 @@
     {/each}
   </div>
 </div>
+{#if betaVersion}
+  <Alert message="betaMessage" />
+{/if}
+
 <EmptyContent isActive={!actionClicked} />
 
 <style>

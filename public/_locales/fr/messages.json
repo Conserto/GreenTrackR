@@ -3,6 +3,10 @@
     "message": "Analyse en cours. Naviguez sur le web puis revenez ici pour les résultats.",
     "description": "Message analyse en cours"
   },
+  "firstResults": {
+    "message": "Premiers résultats reçus !",
+    "description": "Les premiers résultat de l'analyse ont été calculés"
+  },
   "clearBrowserCacheButton": {
     "message": "Réinitialiser les paramètres",
     "description": "Clear Browser Cache Button"
@@ -220,7 +224,7 @@
     "description": "Remonter la page"
   },
   "gesZone": {
-    "message": "Pays où se situe le serveur",
+    "message": "Localisation du serveur",
     "description": "Donne le pays où l'ip du serveur se trouve"
   },
   "gesZoneByDefault": {
@@ -324,7 +328,7 @@
     "description": "Label pour l'indicateur visite"
   },
   "messageResults": {
-    "message": "Résultat de l'analyse",
+    "message": "Résultat de l'analyse du parcours effectué",
     "description": "Résultat de l'analyse"
   },
   "validateRegionButton": {

@@ -5,7 +5,7 @@
   import phoneIcon from '/icons/phone.png';
 
   import { NUMBER_OF_VISITS, CAR_AVERAGE_CO2, PHONE_AVERAGE_CO2 } from 'src/const/measure.const';
-  import Input from '../../Input.svelte';
+  import { Input } from 'src/lib/share/atoms';
   import { InputTypeEnum } from 'src/enum';
   export let measure: any;
 

@@ -14,3 +14,11 @@ export function getAverageValue(data: number[]) {
 export const translate = (message: string) => {
   return chrome.i18n.getMessage(message);
 };
+
+export const formatDate = (date: Date) => {
+  return date.toLocaleString();
+};
+
+export const formatNumber = (value: number) => {
+  return value.toFixed(2);
+};
