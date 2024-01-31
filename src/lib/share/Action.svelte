@@ -1,8 +1,9 @@
 <script lang="ts">
   import type { ButtonTypeEnum } from 'src/enum';
-  import Button from './Button.svelte';
   import { createEventDispatcher } from 'svelte';
   import type { Action as ActionInterface } from 'src/interface';
+
+  import { Button } from 'src/lib/share/atoms';
 
   const dispatch = createEventDispatcher();
 

@@ -1,7 +1,6 @@
 <script lang="ts">
-  import Results from './GES/Results.svelte';
-  import Action from './Action.svelte';
-  import EmptyContent from './EmptyContent.svelte';
+  import { Results } from 'src/lib/share/GES';
+  import { Action, EmptyContent } from 'src/lib/share';
   import type { Action as ActionInterface } from 'src/interface';
 
   export let actions: ActionInterface[];

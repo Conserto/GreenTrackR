@@ -1,9 +1,7 @@
 <script lang="ts">
-  import AutoScroll from '../pages/AutoScroll.svelte';
-  import Evaluation from '../pages/Evaluation.svelte';
-  import Help from '../pages/Help.svelte';
-  import Parcours from '../pages/Parcours.svelte';
-  import Tab from './Tab.svelte';
+  import { AutoScroll, Evaluation, Parcours, Help } from 'src/lib/pages';
+  import { Tab } from 'src/lib/share/atoms';
+  
   export let tabs = [
     {
       translateKey: 'tabEvaluation',

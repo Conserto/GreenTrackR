@@ -5,6 +5,7 @@
   import { ScoreService } from 'src/utils/service';
 
   export let score: Score;
+
   const resScore = ScoreService.getScoreForGrade(score.value);
 </script>
 
