@@ -1,9 +1,11 @@
 <script lang="ts">
-  import logo from '/icons/Logo_GreenTrackr.png';
-  import Actions from '../share/Actions.svelte';
-  import Results from '../share/GES/Results.svelte';
   import { ButtonTypeEnum } from 'src/enum';
   import type { Action as ActionInterface } from 'src/interface';
+  import logo from '/icons/128.png';
+
+  import { Actions } from 'src/lib/share';
+  import { Results } from 'src/lib/share/GES';
+
   const actions: ActionInterface[] = [
     {
       id: 'launchAnalysis',

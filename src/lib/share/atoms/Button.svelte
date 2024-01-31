@@ -3,10 +3,11 @@
   import { createEventDispatcher } from 'svelte';
   import { translate } from 'src/utils/utils';
 
-  const dispatch = createEventDispatcher();
-
   export let translateKey: string;
   export let buttonType: ButtonTypeEnum;
+
+  const dispatch = createEventDispatcher();
+
   function handleButtonClick() {
     dispatch('buttonClick');
   }

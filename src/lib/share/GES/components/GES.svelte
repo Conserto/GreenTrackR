@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { Measure } from 'src/interface';
 
-  import CO2Equivalent from './CO2Equivalent.svelte';
-  import VisitsEquivalent from './VisitsEquivalent.svelte';
+  import { CO2Equivalent, VisitsEquivalent } from 'src/lib/share/GES/components';
+
   export let measure: Measure;
 </script>
 

@@ -2,12 +2,12 @@
   import { createEventDispatcher } from 'svelte';
   import { translate } from 'src/utils/utils';
 
-  const dispatch = createEventDispatcher();
-
   export let isActive: boolean;
   export let id: string;
   export let name: string;
   export let translateKey: string;
+
+  const dispatch = createEventDispatcher();
 
   function handleClickTab() {
     dispatch('clickTab', { id });

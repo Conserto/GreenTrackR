@@ -4,7 +4,8 @@
   import { Units } from 'src/const';
 
   export let measure: Measure;
-  const sizeUnCompressKo = Math.round(measure.network.sizeUncompress / 1000);
+
+  const sizeUncompressKo = Math.round(measure.network.sizeUncompress / 1000);
 </script>
 
 <div class="emissions-infos">
@@ -20,7 +21,7 @@
     </div>
     <div class="data page-size">
       <span class="data-label">{translate('sizeTransferredBytes')}</span>
-      <span class="data-value">{sizeUnCompressKo} {Units.pageSize}</span>
+      <span class="data-value">{sizeUncompressKo} {Units.pageSize}</span>
     </div>
     <div class="data request-number">
       <span class="data-label">{translate('nbRequest')}</span>
