@@ -54,43 +54,56 @@ export class MeasureAcquisition {
           this.measure.network,
           this.measure.nbRequest,
         );
+
       this.measure.ges.dataCenterTotal = dataCenterTotal;
       this.measure.ges.networkTotal = networkTotal;
       this.measure.ges.deviceTotal = deviceTotal;
       this.measure.ges.websiteTotal = websiteTotal;
       this.measure.score = this.scoreService.getScore(this.measure.ges.websiteTotal);
+
       this.measure.zone = zoneGES.countryName;
       this.measure.carbonIntensity = zoneGES.carbonIntensity;
       this.measure.cityName = zoneGES.cityName;
+      this.measure.hourlyCarbonData = zoneGES.hourlyCarbonData;
     }
   }
 
-  async getGESMeasure() {
+  async getGESMeasure(countryCodeSelected: string, userCountryCodeSelected: string) {
     let urlHost = this.networkService.getUrl(this.measure.url);
-    const { zoneGES, userGES } = await this.gesService.computeGES(urlHost, 'auto', 'auto');
+    const { zoneGES, userGES } = await this.gesService.computeGES(
+      urlHost,
+      countryCodeSelected,
+      userCountryCodeSelected,
+    );
     this.updateMeasureValues(zoneGES, userGES);
     return this.measure;
   }
 
   async getNetworkMeasure() {
-    const har = await this.networkService.getHarEntries();
-    const entries: HARFormatEntry[] = this.networkService.filterNetworkResources(har.entries);
-
-    if (entries.length > 0) {
-      const { responsesSize, responsesSizeUncompress } =
-        this.networkService.calculateResponseSizes(entries);
-      this.measure = {
-        ...this.measure,
-        date: new Date(),
-        url: this.networkService.getMotherUrl(entries) || '',
-        nbRequest: entries.length,
-        network: {
-          size: responsesSize,
-          sizeUncompress: responsesSizeUncompress,
-        },
-      };
-    } else {
+    let har,
+      entries: HARFormatEntry[] = [];
+    if (this.harRetryCount === 0) {
       await this.retryGetNetworkMeasure();
+    } else {
+      har = await this.networkService.getHarEntries();
+      entries = this.networkService.filterNetworkResources(har.entries);
+
+      if (entries.length > 0) {
+        const { responsesSize, responsesSizeUncompress } =
+          this.networkService.calculateResponseSizes(entries);
+        this.measure = {
+          ...this.measure,
+          date: new Date(),
+          url: this.networkService.getMotherUrl(entries) || '',
+          nbRequest: entries.length,
+          network: {
+            size: responsesSize,
+            sizeUncompress: responsesSizeUncompress,
+          },
+        };
+      } else {
+        await this.retryGetNetworkMeasure();
+      }
     }
   }
   async retryGetNetworkMeasure(): Promise<void> {
@@ -126,6 +139,11 @@ export class MeasureAcquisition {
       `
         ${import.meta.env.VITE_CARBON_API_URL}/zones`,
     );
-    return zones.json();
+    const zonesContent = await zones.json();
+    const sortedZones = zonesContent?.sort((a: any, b: any) =>
+      a.countryName.localeCompare(b.countryName),
+    );
+
+    return sortedZones;
   }
 }

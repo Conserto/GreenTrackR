@@ -1,7 +1,7 @@
 <script lang="ts">
   import logo from '/icons/128.png';
-  import { Button } from 'src/lib/share/atoms';
-  import { Alert, Footer, EmptyContent, LoadingWheel } from 'src/lib/share';
+  import { Button, LoadingWheel } from 'src/lib/share/atoms';
+  import { Alert, Footer, EmptyContent } from 'src/lib/share';
   import { ButtonTypeEnum } from 'src/enum';
   import { CheckIcon } from 'src/assets/icons';
   import { translate } from 'src/utils/utils';
@@ -37,7 +37,7 @@
 
     const measureAcquisition = new MeasureAcquisition();
     await measureAcquisition.getNetworkMeasure();
-    const measure = await measureAcquisition.getGESMeasure();
+    const measure = await measureAcquisition.getGESMeasure('auto', 'auto');
     if (measure) {
       results = [...results, measure];
     }

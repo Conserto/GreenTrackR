@@ -10,9 +10,9 @@
 
 <div class="input-wrapper">
   <label for={name}>{translate(translateKey)}</label>
-  {#if type === InputTypeEnum.Text}
+  {#if type === InputTypeEnum.TEXT}
     <input class="input" type="text" {name} bind:value />
-  {:else if type === InputTypeEnum.Number}
+  {:else if type === InputTypeEnum.NUMBER}
     <input class="input" type="number" {name} bind:value />
   {/if}
 </div>

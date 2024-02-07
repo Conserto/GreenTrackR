@@ -11,8 +11,18 @@ export function getAverageValue(data: number[]) {
   return sum / data.length;
 }
 
-export const translate = (message: string) => {
-  return chrome.i18n.getMessage(message);
+export const translate = (translateKey: string) => {
+  let translatedLabel = '';
+  if (translateKey) {
+    try {
+      translatedLabel = chrome.i18n.getMessage(translateKey);
+    } catch (e) {
+      console.warn('Warning ! YOu are trying to translate a null translateKey.');
+    }
+    translatedLabel = translatedLabel ? translatedLabel : translateKey;
+  }
+
+  return translatedLabel;
 };
 
 export const formatDate = (date: Date) => {

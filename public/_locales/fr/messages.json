@@ -454,5 +454,9 @@
   "help_warnings_web_nav": {
     "message": "web Navigation : utilisée pour détecter la fin du chargement de la page analysée.",
     "description": "web Navigation : utilisée pour détecter la fin du chargement de la page analysée."
+  },
+  "carbonIntensity": {
+    "message": "Intensité carbone (en gCO2eq/Kwh)",
+    "description": "Intensité carbone (en gCO2eq/Kwh)"
   }
 }

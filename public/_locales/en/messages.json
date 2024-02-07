@@ -454,5 +454,9 @@
   "help_warnings_web_nav": {
     "message": "Web Navigation: used to detect when the analyzed page has finished loading.",
     "description": "Web Navigation: used to detect when the analyzed page has finished loading."
+  },
+  "carbonIntensity": {
+    "message": "Carbon intensity (CO2eq/Kwh)",
+    "description": "Carbon intensity (gCO2eq/Kwh)"
   }
 }

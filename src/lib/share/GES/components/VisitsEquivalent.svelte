@@ -1,36 +1,28 @@
-<!-- Bloc contenant VisitEquivalent et CO2Equivalent -->
 <script lang="ts">
   import { translate } from 'src/utils/utils';
   import carIcon from '/icons/car.png';
   import phoneIcon from '/icons/phone.png';
-
   import { NUMBER_OF_VISITS, CAR_AVERAGE_CO2, PHONE_AVERAGE_CO2 } from 'src/const/measure.const';
   import { Input } from 'src/lib/share/atoms';
   import { InputTypeEnum } from 'src/enum';
+
   export let measure: any;
 
-  const carEquivalent = ((measure.ges.websiteTotal / CAR_AVERAGE_CO2) * NUMBER_OF_VISITS).toFixed(
-    2,
-  );
-  const phoneEquivalent = (
-    (measure.ges.websiteTotal / PHONE_AVERAGE_CO2) *
-    NUMBER_OF_VISITS
-  ).toFixed(2);
+  let visitsNumber = NUMBER_OF_VISITS >= 1 ? NUMBER_OF_VISITS : 1000;
+
+  $: carEquivalent = ((measure.ges.websiteTotal / CAR_AVERAGE_CO2) * visitsNumber).toFixed(2);
+  $: phoneEquivalent = ((measure.ges.websiteTotal / PHONE_AVERAGE_CO2) * visitsNumber).toFixed(2);
 </script>
 
 <!-- Bloc 'Soit pour XXX visite de l'equivalent de XX km en voiture ou XX smartphones chargés -->
 <div class="visits-equivalent">
-  <span class="label-equivalent"
-    >{translate('eitherFor')}
-    <Input
-      type={InputTypeEnum.TEXT}
-      name="numberVisit"
-      translateKey="visitEquivalent"
-      value={NUMBER_OF_VISITS >= 1 ? NUMBER_OF_VISITS : 1000}
-    />
-
-    {translate('visitEquivalent')}</span
-  >
+  <p class="label-equivalent">
+    {translate('eitherFor')}
+    &nbsp;
+    <Input type={InputTypeEnum.TEXT} name="numberVisit" bind:value={visitsNumber} />
+    &nbsp;
+    {translate('visitEquivalent')}
+  </p>
   <div class="values-equivalent">
     <div class="car-equivalent">
       <img class="car-icon" src={carIcon} alt="car" />
@@ -54,8 +46,11 @@
   }
 
   .label-equivalent {
+    display: flex;
+    flex-wrap: wrap;
     font-weight: var(--font-weight--bold);
     font-size: var(--font-size--sm);
+    margin: 0;
   }
 
   .values-equivalent {

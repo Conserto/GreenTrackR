@@ -3,24 +3,79 @@
   import { translate } from 'src/utils/utils';
   import { onMount } from 'svelte';
   import { InputTypeEnum } from 'src/enum';
-  import type { Measure, Score } from 'src/interface';
-  import { MeasureAcquisition } from '../../../utils/classes/MeasureAcquisition';
-  import GES from './components/GES.svelte';
-  import ScoreTag from './components/ScoreTag.svelte';
-  import VisitsEquivalent from './components/VisitsEquivalent.svelte';
-  import EmissionInformations from './components/EmissionInformations.svelte';
-  // import ZoneSimulation from './ZoneSimulation.svelte';
-  let score: Score, measure: Measure;
+  import type { Measure, Score, TableHeader, TableData } from 'src/interface';
+  import { MeasureAcquisition } from 'src/utils/classes/MeasureAcquisition';
+  import { Input, Select, Button, Table, LoadingWheel } from 'src/lib/share/atoms';
+  import {
+    GES,
+    ScoreTag,
+    VisitsEquivalent,
+    EmissionInformations,
+    ZoneSimulation,
+  } from 'src/lib/share/GES/components';
+
+  let loading = true;
+  let measureAcquisition = new MeasureAcquisition();
+  let measure = measureAcquisition.measure;
+  let score: Score,
+    countryCodeSelected: string,
+    userCountryCodeSelected: string,
+    dataFormatted: { hourGEs: TableData; carbonIntensity: TableData }[] = [],
+    columnHeaders: TableHeader[],
+    rowHeaders: TableHeader[];
+
   onMount(async () => {
-    const measureAcquisition = new MeasureAcquisition();
     await measureAcquisition.getNetworkMeasure();
-    measure = await measureAcquisition.getGESMeasure();
+    measure = await measureAcquisition.getGESMeasure('auto', 'auto');
 
     score = measure.score;
+    loading = false;
   });
+
+  $: dataFormatted = measure?.hourlyCarbonData?.reduce(
+    (acc, hourCarbonData) => {
+      //We want all our results on one line
+      acc[0][hourCarbonData.date.getTime()] = { content: hourCarbonData.carbonIntensity };
+      return acc;
+    },
+    [[]],
+  );
+
+  $: columnHeaders = [
+    {
+      id: 'columnLabel',
+      translateKey: measure.hourlyCarbonData?.[0]?.date?.toLocaleDateString('fr-FR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      }),
+    },
+    ...(measure?.hourlyCarbonData || []).map((hourCarbonData) => ({
+      id: hourCarbonData.date?.getTime(),
+      translateKey: hourCarbonData.date.toLocaleTimeString('fr-FR', {
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+    })),
+  ];
+
+  rowHeaders = [
+    {
+      id: 'carbonIntensity',
+      translateKey: 'carbonIntensity',
+    },
+  ];
+
+  async function getMeasure(event) {
+    loading = true;
+    const { countryCodeSelected, userCountryCodeSelected } = event.detail;
+    await measureAcquisition.getNetworkMeasure();
+    measure = await measureAcquisition.getGESMeasure(countryCodeSelected, userCountryCodeSelected);
+    loading = false;
+  }
 </script>
 
-{#if score}
+{#if score && !loading}
   <div class="results">
     <div class="score-tag__wrapper">
       <span class="score-tag__label">{translate('gesScore')} : </span>
@@ -31,12 +86,23 @@
       <EmissionInformations {measure} />
     </div>
   </div>
-  <!-- <div class="zone-simulation__wrapper">
-    <ZoneSimulation />
-  </div> -->
+  <div class="zone-simulation__wrapper">
+    <ZoneSimulation on:submitSimulation={getMeasure} />
+  </div>
+  <div class="ges-table">
+    <Table datas={dataFormatted} {rowHeaders} {columnHeaders} />
+  </div>
+{:else if loading === true}
+  <div class="loading-wheel">
+    <LoadingWheel />
+  </div>
 {/if}
 
 <style lang="scss">
+  .ges-table {
+    width: 80%;
+    overflow: auto;
+  }
   .score-tag {
     &__wrapper {
       display: flex;
@@ -68,5 +134,9 @@
     justify-content: start;
     width: 100%;
     margin: var(--spacing--xs) 0;
+  }
+
+  .loading-wheel {
+    margin: var(--spacing--xl);
   }
 </style>
