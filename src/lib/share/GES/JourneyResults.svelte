@@ -6,8 +6,8 @@
   export let measures: Measure[];
 </script>
 
+<h4 class="table-caption">{translate('messageResults')}</h4>
 <div class="journey-result-container">
-  <h4 class="table-caption">{translate('messageResults')}</h4>
   <table class="journey-result-table">
     <thead>
       <tr>
@@ -28,7 +28,7 @@
     <tbody>
       {#each measures as measure, index (index)}
         <tr class:even={index % 2 === 0}>
-          <td>{formatDate(measure.date)}</td>
+          <td style:font-weight="bold">{formatDate(measure.date)}</td>
           <td>{measure.url}</td>
           <td>{`${measure.network.size} ${Units.pageSize}`} </td>
           <td>{measure.nbRequest}</td>
@@ -49,6 +49,7 @@
 <style lang="scss">
   .journey-result-container {
     width: 100%;
+    height: 42%;
     overflow: auto;
     margin-bottom: 20px;
     box-shadow:
@@ -62,6 +63,8 @@
         border-bottom: 4px solid var(--background-color--primary);
         text-transform: uppercase;
         background-color: #f9fafb;
+        position: sticky;
+        top: 0;
 
         th {
           padding: 12px 24px;
