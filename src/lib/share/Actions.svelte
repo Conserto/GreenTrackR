@@ -3,7 +3,7 @@
   import { Action, EmptyContent, Alert } from 'src/lib/share';
   import type { Action as ActionInterface } from 'src/interface';
 
-  export let betaVersion: boolean;
+  export let betaVersion: boolean = false;
 
   export let actions: ActionInterface[];
   // var that we will toggle so we can be sure component will be re render even if we click consecutively on same action

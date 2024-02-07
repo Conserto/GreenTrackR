@@ -13,7 +13,9 @@
   <div class="emissions-infos_data">
     <div class="data country">
       <span class="data-label">{translate('gesZone')}</span>
-      <span class="data-value">{`${measure.cityName}, ${measure.zone}`}</span>
+      <span class="data-value"
+        >{measure.cityName ? `${measure.cityName}, ${measure.zone}` : measure.zone}</span
+      >
     </div>
     <div class="data intensity">
       <span class="data-label">{translate('gesIntensity')}</span>

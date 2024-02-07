@@ -37,7 +37,7 @@
   role="tabpanel"
   aria-labelledby="evaluation-tab"
 >
-  <img src={logo} width="300" alt="Conserto" class="rounded" />
+  <img src={logo} alt="Conserto" class="rounded" />
   <Actions {actions} />
 </div>
 

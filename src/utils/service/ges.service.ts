@@ -13,7 +13,6 @@ import type {
 } from 'src/interface';
 
 export class GESService {
-  private jsonFile = import.meta.env.VITE_CARBON_DATA_FILE;
   private headers = new Headers({
     Host: 'api.localhost',
     'X-Forwarded-Proto': 'http',
@@ -25,18 +24,33 @@ export class GESService {
   async computeGES(urlHost: URL, countryCodeSelected: string, userCountryCodeSelected: string) {
     const zoneGES = await this.getGES(urlHost, this.headers, countryCodeSelected);
     const userGES = await this.getGES(urlHost, this.headers, userCountryCodeSelected);
+
     return { zoneGES, userGES };
   }
 
-  async getGES(url: URL, headers: Headers, countryCodeSelected: string) {
+  async getGES(url: URL, headers: Headers, countryCodeSelected: string): Promise<GES> {
     let GES;
     try {
       GES = await this.getGESFromApi(url, headers, countryCodeSelected);
       if (!GES.carbonIntensity) {
-        GES = await this.getGESFromLocalFile(this.jsonFile, countryCodeSelected);
+        GES = await this.getGESFromLocalFile(countryCodeSelected);
       }
     } catch (error) {
-      throw new Error('There has been a problem when trying to get GES Emissions : ' + error);
+      try {
+        console.warn(
+          'There has been a problem when trying to get distant GES Emissions : ' +
+            error +
+            '. Trying to get data from local file',
+        );
+
+        GES = await this.getGESFromLocalFile(countryCodeSelected);
+      } catch (e) {
+        throw new Error(
+          'There has been a problem when trying to get GES Emissions : ' +
+            error +
+            'from distant API and local file',
+        );
+      }
     }
     return GES;
   }
@@ -52,8 +66,10 @@ export class GESService {
         },
       );
       const results = await zonesGES.json();
+      const hourlyCarbonData = await this.getHourlyGES(urlHost, this.headers, results.countryCode);
+
       return {
-        dailyCarbonData: [],
+        hourlyCarbonData: hourlyCarbonData,
         carbonIntensity: results.carbonIntensity,
         countryName: results.countryName,
         cityName: results.cityName,
@@ -66,16 +82,17 @@ export class GESService {
     }
   }
 
-  async getGESFromLocalFile(carbonJsonFile: string, countryCodeSelected: string): Promise<GES> {
+  async getGESFromLocalFile(countryCodeSelected: string): Promise<GES> {
     let lastReportOnDate;
     const { data: carbonData, countryName } =
-      (await this.parseCarbonFile(carbonJsonFile, countryCodeSelected)) || [];
+      (await this.parseCarbonFile(countryCodeSelected)) || [];
 
     if (carbonData.length > 0) {
       lastReportOnDate = carbonData[carbonData.length - 1];
     }
+
     return {
-      dailyCarbonData: carbonData,
+      hourlyCarbonData: carbonData,
       carbonIntensity: lastReportOnDate?.carbonIntensity ?? 0,
       countryName: countryName,
       cityName: '',
@@ -83,23 +100,19 @@ export class GESService {
     };
   }
 
-  async parseCarbonFile(carbonJsonFile: string, countryCodeSelected: string): Promise<CarbonDatas> {
+  async parseCarbonFile(countryCodeSelected: string): Promise<CarbonDatas> {
     let data: CarbonData[] = [];
     let countryName: string = '';
     try {
-      if (countryCodeSelected !== 'auto') {
-        let response = await fetch(chrome.runtime.getURL(carbonJsonFile));
-        if (response.ok) {
-          const jsonContent = await response.json();
-          countryName = jsonContent[countryCodeSelected][0].country_name;
-          data = this.getSortedDayGESReport(jsonContent, countryCodeSelected);
-          console.log('chargement reussi');
-        } else {
-          throw new Error(
-            'There has been a problem when trying to get GES emissions from Local file',
-          );
-        }
+      if (countryCodeSelected == 'auto') {
+        countryCodeSelected = 'FR';
       }
+      let response: any = await import('src/assets/data/data_carbon.json');
+      countryName = response[countryCodeSelected]?.[0].country_name;
+
+      data = this.getSortedDayGESReport(response, countryCodeSelected);
+
+      console.log('chargement reussi');
     } catch (error: any) {
       throw new Error(
         'There has been a problem when trying to get GES emissions from Local file : ' + error,
@@ -123,16 +136,16 @@ export class GESService {
   }
 
   getDayGESReport(jsonContent: any, countryCodeSelected: string): CarbonData[] {
-    const carbonData = jsonContent[countryCodeSelected].map((dataCountry: any) => {
-      let now = new Date();
-      let reportDate = new Date(dataCountry.date);
-      if (now.getDay() === reportDate.getDay() && reportDate.getHours() < now.getHours()) {
-        return {
-          date: reportDate,
-          carbonIntensity: dataCountry.carbonfactor,
-        };
-      }
-    });
+    const carbonData = jsonContent[countryCodeSelected]
+      .filter((dataCountry: any) => {
+        let now = new Date();
+        let reportDate = new Date(dataCountry.date);
+        return now.getDay() === reportDate.getDay() && reportDate.getHours() < now.getHours();
+      })
+      .map((dataCountry: any) => ({
+        date: new Date(dataCountry.date),
+        carbonIntensity: dataCountry.carbonfactor,
+      }));
 
     return carbonData;
   }
@@ -169,5 +182,40 @@ export class GESService {
     const websiteTotal = dataCenterTotal + networkTotal + deviceTotal;
 
     return { dataCenterTotal, networkTotal, deviceTotal, websiteTotal };
+  }
+
+  async getHourlyGES(url: URL, headers: Headers, countryCodeSelected: string) {
+    let hourlyGES;
+    try {
+      hourlyGES = await this.getHourlyGESFromApi(url, headers, countryCodeSelected);
+    } catch (error) {
+      throw new Error('There has been a problem when trying to get GES Emissions : ' + error);
+    }
+    return hourlyGES;
+  }
+
+  async getHourlyGESFromApi(url: URL, headers: Headers, codeCountry: string) {
+    let hourlyCarbonDataFormatted: CarbonData[];
+    try {
+      let hourlyCarbonData = await fetch(
+        `${import.meta.env.VITE_CARBON_API_URL}/carbon/daily/${codeCountry}/${new Date().toJSON().slice(0, 10)}`,
+        {
+          headers: headers,
+        },
+      );
+
+      const res = await hourlyCarbonData.json();
+      hourlyCarbonDataFormatted = res.map((hourlyCarbonData: any) => {
+        return {
+          date: new Date(hourlyCarbonData.date),
+          carbonIntensity: hourlyCarbonData.carbonfactor,
+        };
+      });
+    } catch (error) {
+      throw new Error(
+        'There has been a problem when trying to get Hourly GES Emissions : ' + error,
+      );
+    }
+    return hourlyCarbonDataFormatted;
   }
 }

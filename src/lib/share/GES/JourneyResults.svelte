@@ -26,8 +26,8 @@
       </tr>
     </thead>
     <tbody>
-      {#each measures as measure}
-        <tr>
+      {#each measures as measure, index (index)}
+        <tr class:even={index % 2 === 0}>
           <td>{formatDate(measure.date)}</td>
           <td>{measure.url}</td>
           <td>{`${measure.network.size} ${Units.pageSize}`} </td>
@@ -79,6 +79,9 @@
         }
       }
     }
+  }
+  .even {
+    background-color: #eff0f1;
   }
   .table-caption {
     text-align: center;

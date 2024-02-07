@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let selectedValue = 'default';
+  export let selectedValue = 'auto';
   export let selectValues = [];
 </script>
 

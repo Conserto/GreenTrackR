@@ -1,4 +1,4 @@
-import type { GESTotals, NetworkResponse, Score } from '.';
+import type { CarbonData, GESTotals, NetworkResponse, Score } from '.';
 
 export interface Measure {
   date: Date;
@@ -10,4 +10,5 @@ export interface Measure {
   score: Score;
   zone: string;
   carbonIntensity: number;
+  hourlyCarbonData?: CarbonData[];
 }
