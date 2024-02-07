@@ -36,7 +36,7 @@
     }
 
     const measureAcquisition = new MeasureAcquisition();
-    await measureAcquisition.getNetworkMeasure();
+    await measureAcquisition.getNetworkMeasure(false);
     const measure = await measureAcquisition.getGESMeasure('auto', 'auto');
     if (measure) {
       results = [...results, measure];
@@ -82,10 +82,12 @@
 
 <style lang="scss">
   .tab-panel {
+    height: 93%;
+    flex: 1;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     margin: 0 var(--spacing--xl) 0 var(--spacing--xl);
 

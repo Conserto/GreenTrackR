@@ -79,15 +79,16 @@ export class MeasureAcquisition {
     return this.measure;
   }
 
-  async getNetworkMeasure() {
+  async getNetworkMeasure(forceRefresh: boolean = true) {
     let har,
       entries: HARFormatEntry[] = [];
-    if (this.harRetryCount === 0) {
+    if (this.harRetryCount === 0 && forceRefresh) {
+      console.log('harretry');
       await this.retryGetNetworkMeasure();
     } else {
       har = await this.networkService.getHarEntries();
       entries = this.networkService.filterNetworkResources(har.entries);
-
+      console.log('entries', entries);
       if (entries.length > 0) {
         const { responsesSize, responsesSizeUncompress } =
           this.networkService.calculateResponseSizes(entries);
