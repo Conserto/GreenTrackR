@@ -35,6 +35,10 @@
     "message": "Exporter",
     "description": "Export Button"
   },
+  "cancelButton": {
+    "message": "Annuler",
+    "description": "Annuler"
+  },
   "greenhouseGasesEmission": {
     "message": "GES",
     "description": "Greenhouse Gases Emission (gCO2eq)"
@@ -327,6 +331,10 @@
     "message": "Nombre de visites",
     "description": "Label pour l'indicateur visite"
   },
+  "messageResultsAnalysis": {
+    "message": "Résultat de l'analyse",
+    "description": "Résultat de l'analyse"
+  },
   "messageResults": {
     "message": "Résultat de l'analyse du parcours effectué",
     "description": "Résultat de l'analyse"
@@ -455,8 +463,20 @@
     "message": "web Navigation : utilisée pour détecter la fin du chargement de la page analysée.",
     "description": "web Navigation : utilisée pour détecter la fin du chargement de la page analysée."
   },
-  "carbonIntensity": {
-    "message": "Intensité carbone (en gCO2eq/Kwh)",
-    "description": "Intensité carbone (en gCO2eq/Kwh)"
+  "dataCenterTotal": {
+    "message": "Centre de données",
+    "description": "Emissions GES totales des centres de données"
+  },
+  "networkTotal": {
+    "message": "Réseau",
+    "description": "Emissions GES totales du réseau"
+  },
+  "deviceTotal": {
+    "message": "Appareils",
+    "description": "Emissions GES totales des appareils electroniques"
+  },
+  "websiteTotal": {
+    "message": "Total du site",
+    "description": "Emissions GES totales du site"
   }
 }
