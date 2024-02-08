@@ -1,13 +1,12 @@
 <script lang="ts">
   import logo from '/icons/128.png';
-  import { Button, LoadingWheel } from 'src/lib/share/atoms';
-  import { Alert, Footer, EmptyContent } from 'src/lib/share';
+  import { Alert, Footer, EmptyContent, Button, LoadingWheel } from 'src/components';
   import { ButtonTypeEnum } from 'src/enum';
   import { CheckIcon } from 'src/assets/icons';
   import { translate } from 'src/utils/utils';
   import { MeasureAcquisition } from 'src/utils/classes/MeasureAcquisition';
   import type { Measure } from 'src/interface';
-  import { JourneyResults } from 'src/lib/share/GES';
+  import { JourneyResults } from 'src/components/GES/results';
 
   let onGoingAnalysis = false;
   let resultsAvailable = false;

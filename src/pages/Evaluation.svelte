@@ -1,13 +1,9 @@
 <script lang="ts">
   import { ButtonTypeEnum } from 'src/enum';
-  import { Button, Modal } from 'src/lib/share/atoms';
   import logo from '/icons/128.png';
-
-  import { Results } from 'src/lib/share/GES';
-  import EmptyContent from '../share/EmptyContent.svelte';
-  import Footer from '../share/Footer.svelte';
+  import { Results, HistoricResults } from 'src/components/GES/results';
+  import { EmptyContent, Footer, Button, Modal } from 'src/components';
   import { getLocalStorageObject, setLocalStorageObject, translate } from 'src/utils/utils';
-  import HistoricResults from '../share/GES/HistoricResults.svelte';
   import { savedMeasures } from 'src/const';
 
   enum TabType {
