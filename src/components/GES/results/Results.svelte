@@ -4,15 +4,14 @@
   import { InputTypeEnum } from 'src/enum';
   import type { Measure, Score, TableHeader, TableData, HistoData } from 'src/interface';
   import { MeasureAcquisition } from 'src/utils/classes/MeasureAcquisition';
-  import { Input, Select, Button, Table, LoadingWheel } from 'src/lib/share/atoms';
+  import { Input, Select, Button, Table, LoadingWheel, Histogram } from 'src/components';
   import {
     GES,
     ScoreTag,
     VisitsEquivalent,
     EmissionInformations,
     ZoneSimulation,
-  } from 'src/lib/share/GES/components';
-  import { Histogram } from 'src/lib/share';
+  } from 'src/components/GES';
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();

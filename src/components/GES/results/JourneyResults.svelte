@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Measure } from 'src/interface';
   import { formatGesMeasuresForTable, translate } from 'src/utils/utils';
-  import { Table } from 'src/lib/share/atoms';
+  import { Table } from 'src/components';
   import { gesTableHeaders } from 'src/const';
 
   export let measures: Measure[];

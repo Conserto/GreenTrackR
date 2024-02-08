@@ -6,7 +6,7 @@
 
   import { MeasureAcquisition } from 'src/utils/classes/MeasureAcquisition.ts';
 
-  import { Select, Button } from 'src/lib/share/atoms';
+  import { Select, Button } from 'src/components';
 
   let zonesOptions, countryCodeSelected, userCountryCodeSelected;
   const dispatch = createEventDispatcher();

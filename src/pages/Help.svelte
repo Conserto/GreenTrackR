@@ -1,6 +1,6 @@
 <script lang="ts">
   import { translate } from 'src/utils/utils';
-  import { Footer } from 'src/lib/share';
+  import { Footer } from 'src/components';
   import logo from '/icons/128.png';
 
   const { version } = chrome.runtime.getManifest();

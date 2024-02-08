@@ -2,7 +2,7 @@
   import { gesTableHeaders, savedMeasures } from 'src/const';
   import { ButtonTypeEnum } from 'src/enum';
   import type { Measure } from 'src/interface';
-  import { Table, Button, Modal } from 'src/lib/share/atoms';
+  import { Table, Button, Modal } from 'src/components';
   import { export_data } from 'src/utils/service';
   import {
     formatGesMeasuresForTable,

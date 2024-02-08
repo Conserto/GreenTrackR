@@ -3,7 +3,7 @@
   import carIcon from '/icons/car.png';
   import phoneIcon from '/icons/phone.png';
   import { NUMBER_OF_VISITS, CAR_AVERAGE_CO2, PHONE_AVERAGE_CO2 } from 'src/const/measure.const';
-  import { Input } from 'src/lib/share/atoms';
+  import { Input } from 'src/components';
   import { InputTypeEnum } from 'src/enum';
 
   export let measure: any;
