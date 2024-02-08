@@ -4,3 +4,4 @@ export { default as Select } from './Select.svelte';
 export { default as Tab } from './Tab.svelte';
 export { default as Table } from './Table.svelte';
 export { default as LoadingWheel } from './LoadingWheel.svelte';
+export { default as Modal } from './Modal.svelte';

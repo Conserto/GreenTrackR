@@ -1,4 +1,4 @@
-import type { CarbonData, GES, Measure } from '../../interface';
+import type { GES, Measure } from '../../interface';
 
 import { NetworkService, GESService, ScoreService } from '../service';
 
@@ -83,12 +83,10 @@ export class MeasureAcquisition {
     let har,
       entries: HARFormatEntry[] = [];
     if (this.harRetryCount === 0 && forceRefresh) {
-      console.log('harretry');
       await this.retryGetNetworkMeasure();
     } else {
       har = await this.networkService.getHarEntries();
       entries = this.networkService.filterNetworkResources(har.entries);
-      console.log('entries', entries);
       if (entries.length > 0) {
         const { responsesSize, responsesSizeUncompress } =
           this.networkService.calculateResponseSizes(entries);
