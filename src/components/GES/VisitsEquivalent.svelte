@@ -17,9 +17,12 @@
 <!-- Bloc 'Soit pour XXX visite de l'equivalent de XX km en voiture ou XX smartphones chargés -->
 <div class="visits-equivalent">
   <p class="label-equivalent">
-    {translate('eitherFor')}
-    &nbsp;
-    <Input type={InputTypeEnum.TEXT} name="numberVisit" bind:value={visitsNumber} />
+    <Input
+      type={InputTypeEnum.TEXT}
+      name="numberVisit"
+      bind:value={visitsNumber}
+      translateKey="eitherFor"
+    />
     &nbsp;
     {translate('visitEquivalent')}
   </p>

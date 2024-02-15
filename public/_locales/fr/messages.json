@@ -478,5 +478,17 @@
   "websiteTotal": {
     "message": "Total du site",
     "description": "Emissions GES totales du site"
+  },
+  "pixelDisplayed": {
+    "message": "Cet onglet affiche une hauteur de ",
+    "description": "Nombre de pixel du viewport"
+  },
+  "autoscrollPxInput": {
+    "message": "Saisir un nombre de pixels à scroller pour l'analyse",
+    "description": "Nombre de pixels à scroller"
+  },
+  "autoscrollPercentInput": {
+    "message": "Saisir un % de la page à scroller pour l'analyse",
+    "description": "% de la page à scroller"
   }
 }
