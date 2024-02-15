@@ -6,10 +6,6 @@
   "icons": {
     "64": "icons/128.png"
   },
-  "background": {
-    "service_worker": "src/service-worker.ts",
-    "type": "module"
-  },
   "default_locale": "fr",
   "permissions": ["activeTab", "tabs", "browsingData", "storage", "webNavigation", "webRequest"],
   "content_scripts": [

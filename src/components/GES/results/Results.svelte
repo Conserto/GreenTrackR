@@ -16,6 +16,7 @@
 
   const dispatch = createEventDispatcher();
 
+  export let forceRefresh = true;
   let loading = true;
   let loadGes = false;
   let measureAcquisition = new MeasureAcquisition();
@@ -26,7 +27,7 @@
     dataFormatted: HistoData[] = [];
 
   onMount(async () => {
-    await measureAcquisition.getNetworkMeasure();
+    await measureAcquisition.getNetworkMeasure(forceRefresh);
     measure = await measureAcquisition.getGESMeasure('auto', 'auto');
 
     loading = false;

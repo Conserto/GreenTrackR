@@ -1,18 +1,26 @@
 import type { Measure } from 'src/interface';
 import { Units } from 'src/const/units.const';
 
-export function wait(milliseconds: number): Promise<void> {
+export const sendChromeMsg = (payload: any) => {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    if (tabs.length && tabs[0].id) {
+      chrome.tabs.sendMessage(tabs[0].id, payload);
+    }
+  });
+};
+
+export const wait = (milliseconds: number): Promise<void> => {
   return new Promise<void>((resolve) => {
     setTimeout(() => {
       resolve();
     }, milliseconds);
   });
-}
+};
 
-export function getAverageValue(data: number[]) {
+export const getAverageValue = (data: number[]) => {
   let sum = data.reduce((partialSum: number, a) => partialSum + a, 0);
   return sum / data.length;
-}
+};
 
 export const translate = (translateKey: string) => {
   let translatedLabel = '';

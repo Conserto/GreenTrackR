@@ -7,6 +7,7 @@
   import { MeasureAcquisition } from 'src/utils/classes/MeasureAcquisition.ts';
 
   import { Select, Button } from 'src/components';
+  import { ButtonTypeEnum } from 'src/enum';
 
   let zonesOptions, countryCodeSelected, userCountryCodeSelected;
   const dispatch = createEventDispatcher();
@@ -39,21 +40,13 @@
 <form class="zone-simulation" on:submit|preventDefault={handleSubmitSimulation}>
   <div class="simulation-select simulation-region">
     <span class="simulation-select__label">{translate('serverRegionLabel')}</span>
-    <Select
-      bind:selectedValue={countryCodeSelected}
-      selectValues={zonesOptions}
-      translateDefaultKey="serverRegionLabel"
-    />
+    <Select bind:selectedValue={countryCodeSelected} selectValues={zonesOptions} />
   </div>
   <div class="simulation-select simulation-user">
     <span class="simulation-select__label">{translate('serverUserLabel')}</span>
-    <Select
-      bind:selectedValue={userCountryCodeSelected}
-      selectValues={zonesOptions}
-      translateDefaultKey="serverUserLabel"
-    />
+    <Select bind:selectedValue={userCountryCodeSelected} selectValues={zonesOptions} />
   </div>
-  <Button translateKey="validateRegionButton"></Button>
+  <Button translateKey="validateRegionButton" buttonType={ButtonTypeEnum.SECONDARY}></Button>
 </form>
 
 <style lang="scss">

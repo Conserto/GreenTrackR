@@ -4,12 +4,14 @@
 
   export let name: string;
   export let value: string;
-  export let translateKey: string;
+  export let translateKey: string = undefined;
   export let type: InputType;
 </script>
 
 <div class="input-wrapper">
-  <label for={name}>{translate(translateKey)}</label>
+  {#if translateKey}
+    <label for={name}>{translate(translateKey)}</label>
+  {/if}
   {#if type === InputTypeEnum.TEXT}
     <input class="input" type="text" {name} bind:value />
   {:else if type === InputTypeEnum.NUMBER}

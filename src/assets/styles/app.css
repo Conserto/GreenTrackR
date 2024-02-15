@@ -96,6 +96,15 @@
   gap: 5px;
 }
 
+.tab-panel {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: center;
+  margin: 0 var(--spacing--xl) 0 var(--spacing--xl);
+}
+
 a {
   font-weight: 500;
   color: #646cff;

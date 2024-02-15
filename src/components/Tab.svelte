@@ -30,35 +30,20 @@
 </div>
 
 <style>
-  button {
-    margin: 0;
+  .nav-link {
+    background: 0 0;
+    cursor: pointer;
+    border: none;
+    padding: var(--spacing--sm) var(--spacing--lg);
+    color: var(--color--grey);
     font-family: inherit;
     font-size: inherit;
-    line-height: inherit;
-  }
-
-  .nav-link {
-    margin-bottom: -1px;
-    background: 0 0;
-    border: var(--border-width--thin) solid transparent;
-    border-top-left-radius: var(--border-radius--slight);
-    border-top-right-radius: var(--border-radius--slight);
-    cursor: pointer;
+    font-weight: bold;
   }
 
   .nav-link.active {
     color: var(--color--primary);
-    background-color: var(--color--light);
-    border-color: var(--color--grey-light) var(--color--grey-light) var(--color--light);
-  }
-  .nav-link {
-    display: block;
-    padding: var(--spacing--sm) var(--spacing--lg);
-    color: var(--color--grey);
-    text-decoration: none;
-    transition:
-      color 0.15s ease-in-out,
-      background-color 0.15s ease-in-out,
-      border-color 0.15s ease-in-out;
+    border-bottom: var(--border-width--normal) solid transparent;
+    border-color: var(--color--primary);
   }
 </style>

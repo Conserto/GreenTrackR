@@ -482,5 +482,17 @@
   "websiteTotal": {
     "message": "Website total",
     "description": "Total GES emissions of website"
+  },
+  "pixelDisplayed": {
+    "message": "This tab displays a height of",
+    "description": "Display viewport pixels number"
+  },
+  "autoscrollPxInput": {
+    "message": "Enter pixels number to scroll for page's analysis",
+    "description": "Enter pixels number to scroll"
+  },
+  "autoscrollPercentInput": {
+    "message": "Enter % to scroll for page's analysis",
+    "description": "Enter % to scroll"
   }
 }

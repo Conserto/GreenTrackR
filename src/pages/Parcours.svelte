@@ -1,6 +1,5 @@
 <script lang="ts">
-  import logo from '/icons/128.png';
-  import { Alert, Footer, EmptyContent, Button, LoadingWheel } from 'src/components';
+  import { Button, LoadingWheel } from 'src/components';
   import { ButtonTypeEnum } from 'src/enum';
   import { CheckIcon } from 'src/assets/icons';
   import { translate } from 'src/utils/utils';
@@ -29,11 +28,6 @@
    * Called when the page document is fully loaded
    */
   const onPageLoaded = async (details) => {
-    const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (!details.url || details.frameId !== 0 || details.tabId !== tabs[0].id) {
-      return;
-    }
-
     const measureAcquisition = new MeasureAcquisition();
     await measureAcquisition.getNetworkMeasure(false);
     const measure = await measureAcquisition.getGESMeasure('auto', 'auto');
@@ -43,55 +37,37 @@
   };
 </script>
 
-<div class="tab-panel" role="tabpanel" aria-labelledby="User journey tab">
-  <img src={logo} alt="Logo green tracker" />
-  <div class="flex-center">
-    <Button
-      on:buttonClick={handleAnalysis}
-      buttonType={ButtonTypeEnum.PRIMARY}
-      translateKey={onGoingAnalysis ? 'stopJourneyButton' : 'launchAnalysisButton'}
-    />
-    <Button
-      disabled={onGoingAnalysis}
-      on:buttonClick={resetUserJourney}
-      buttonType={ButtonTypeEnum.SECONDARY}
-      translateKey="resetJourneyButton"
-    />
-  </div>
-  <Alert message="betaMessage" />
-
-  {#if onGoingAnalysis}
-    <LoadingWheel />
-    <p class="in-progress-text">{translate('analysisInProgress')}</p>
-
-    {#if results.length}
-      <div class="flex-center">
-        <CheckIcon />
-        <p>{translate('firstResults')}</p>
-      </div>
-    {/if}
-  {:else}
-    <EmptyContent isActive={true} />
-  {/if}
-  {#if results.length && !onGoingAnalysis}
-    <JourneyResults measures={results} />
-  {/if}
+<div class="flex-center">
+  <Button
+    on:buttonClick={handleAnalysis}
+    buttonType={ButtonTypeEnum.PRIMARY}
+    translateKey={onGoingAnalysis ? 'stopJourneyButton' : 'launchAnalysisButton'}
+  />
+  <Button
+    disabled={onGoingAnalysis}
+    on:buttonClick={resetUserJourney}
+    buttonType={ButtonTypeEnum.SECONDARY}
+    translateKey="resetJourneyButton"
+  />
 </div>
-<Footer />
+
+{#if onGoingAnalysis}
+  <LoadingWheel />
+  <p class="in-progress-text">{translate('analysisInProgress')}</p>
+
+  {#if results.length}
+    <div class="flex-center">
+      <CheckIcon />
+      <p>{translate('firstResults')}</p>
+    </div>
+  {/if}
+{/if}
+{#if results.length && !onGoingAnalysis}
+  <JourneyResults measures={results} />
+{/if}
 
 <style lang="scss">
-  .tab-panel {
-    height: 93%;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: start;
-    align-items: center;
-    margin: 0 var(--spacing--xl) 0 var(--spacing--xl);
-
-    .in-progress-text {
-      text-align: center;
-    }
+  .in-progress-text {
+    text-align: center;
   }
 </style>

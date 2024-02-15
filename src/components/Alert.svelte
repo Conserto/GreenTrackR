@@ -13,11 +13,13 @@
   .alert {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 0 var(--spacing--md);
     color: #0d479a;
     background-color: #cfe2ff;
     border-radius: var(--border-radius--slight);
-    margin: var(--spacing--xl) 0;
+    margin: var(--spacing--md) 0;
+    font-size: smaller;
 
     p {
       margin-left: var(--spacing--md);
