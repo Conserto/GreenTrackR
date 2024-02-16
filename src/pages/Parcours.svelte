@@ -6,6 +6,7 @@
   import { MeasureAcquisition } from 'src/utils/classes/MeasureAcquisition';
   import type { Measure } from 'src/interface';
   import { JourneyResults } from 'src/components/GES/results';
+  import { cleanCache } from 'src/utils/chrome.utils';
 
   let onGoingAnalysis = false;
   let resultsAvailable = false;
@@ -22,6 +23,7 @@
   };
   const resetUserJourney = () => {
     results = [];
+    cleanCache();
   };
 
   /**

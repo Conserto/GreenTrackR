@@ -1,7 +1,6 @@
 <script lang="ts">
   import { translate } from 'src/utils/utils';
-  import carIcon from '/icons/car.png';
-  import phoneIcon from '/icons/phone.png';
+  import { CarIcon, PhoneIcon } from 'src/assets/icons';
   import { NUMBER_OF_VISITS, CAR_AVERAGE_CO2, PHONE_AVERAGE_CO2 } from 'src/const/measure.const';
   import { Input } from 'src/components';
   import { InputTypeEnum } from 'src/enum';
@@ -28,13 +27,13 @@
   </p>
   <div class="values-equivalent">
     <div class="car-equivalent">
-      <img class="car-icon" src={carIcon} alt="car" />
+      <img class="car-icon" src={CarIcon} alt="car" />
       <span>{carEquivalent} {translate('carIndicator')}</span>
     </div>
 
     <span>&nbsp;ou&nbsp;</span>
     <div class="phone-equivalent">
-      <img class="phone-icon" src={phoneIcon} alt="phone" />
+      <img class="phone-icon" src={PhoneIcon} alt="phone" />
       <span>{phoneEquivalent} {translate('smartphoneIndicator')}</span>
     </div>
   </div>

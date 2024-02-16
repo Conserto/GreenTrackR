@@ -4,7 +4,7 @@
   "description": "Extension d'évaluation des impacts environnementaux d'un site Web",
   "version": "2.0.0",
   "icons": {
-    "64": "icons/128.png"
+    "64": "images/logo.png"
   },
   "default_locale": "fr",
   "permissions": ["activeTab", "tabs", "browsingData", "storage", "webNavigation", "webRequest"],
@@ -20,7 +20,7 @@
   },
   "devtools_page": "extension/devtools-page.html",
   "action": {
-    "default_icon": "icons/128.png",
+    "default_icon": "images/logo.png",
     "default_title": "GreenTrackr",
     "default_popup": "extension/menu.html"
   },

@@ -1,14 +1,6 @@
 import type { Measure } from 'src/interface';
 import { Units } from 'src/const/units.const';
 
-export const sendChromeMsg = (payload: any) => {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    if (tabs.length && tabs[0].id) {
-      chrome.tabs.sendMessage(tabs[0].id, payload);
-    }
-  });
-};
-
 export const wait = (milliseconds: number): Promise<void> => {
   return new Promise<void>((resolve) => {
     setTimeout(() => {
@@ -86,4 +78,33 @@ export const formatGesMeasuresForTable = (measures: Measure[]) => {
     gesZone: { content: `${measure.cityName}, ${measure.zone}` },
     gesIntensity: { content: `${measure.carbonIntensity} ${Units.carbonIntensity}` },
   }));
+};
+
+export const toHistoFormattedDatas = (measure: Measure) => {
+  if (measure) {
+    return [
+      {
+        label: 'dataCenterTotal',
+        value: formatNumber(measure.ges.dataCenterTotal),
+        color: '#86665f',
+      },
+      {
+        label: 'networkTotal',
+        value: formatNumber(measure.ges.networkTotal),
+        color: '#7b7aab',
+      },
+      {
+        label: 'deviceTotal',
+        value: formatNumber(measure.ges.deviceTotal),
+        color: '#5e806d',
+      },
+      {
+        label: 'websiteTotal',
+        value: formatNumber(measure.ges.websiteTotal),
+        color: '#535481',
+      },
+    ];
+  } else {
+    return [];
+  }
 };

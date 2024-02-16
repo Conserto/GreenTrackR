@@ -1,21 +1,26 @@
 <script lang="ts">
-  import { Button, LoadingWheel } from 'src/components';
-  import Results from 'src/components/GES/results/Results.svelte';
-  import Input from 'src/components/Input.svelte';
-  import Select from 'src/components/Select.svelte';
+  import { Button, LoadingWheel, Input, Select } from 'src/components';
   import { ButtonTypeEnum, InputTypeEnum, ScrollInputType } from 'src/enum';
-  import { sendChromeMsg, translate } from 'src/utils/utils';
+  import { cleanCache, sendChromeMsg } from 'src/utils/chrome.utils';
+  import { toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { onDestroy, onMount } from 'svelte';
+  import { MeasureAcquisition } from 'src/utils/classes/MeasureAcquisition';
+  import Histogram from 'src/components/Histogram.svelte';
+  import GesResults from 'src/components/GES/results/GesResults.svelte';
 
   const scrollTypes = [
     { label: 'Px', value: ScrollInputType.PIXEL },
     { label: '%', value: ScrollInputType.PERCENT },
   ];
   let currentScrollType = ScrollInputType.PERCENT;
-  let displayResults = false;
   let scrollValue = 10;
   const viewportPixels = window.innerHeight;
   let totalPagePixels = 0;
+
+  let loading = false;
+  let measureAcquisition = new MeasureAcquisition();
+  let currentMeasure: Measure = null;
+  let histoDatas: HistoData[] = [];
 
   onMount(() => {
     chrome.runtime.onMessage.addListener(handleRuntimeMsg);
@@ -26,32 +31,30 @@
     chrome.runtime.onMessage.removeListener(handleRuntimeMsg);
   });
 
-  const handleResultDisplay = (visible: boolean) => {
-    if (visible) {
-      if (displayResults) {
-        displayResults = false;
-      }
-      displayResults = visible;
-    } else {
-      displayResults = visible;
-    }
-  };
-
-  const handleRuntimeMsg = (message) => {
+  const handleRuntimeMsg = async (message) => {
     if (message.type === 'pageHeight') {
       totalPagePixels = message.height;
     } else if (message.autoScrollDone) {
-      displayResults = true;
+      loading = true;
+      await measureAcquisition.getNetworkMeasure();
+      currentMeasure = await measureAcquisition.getGESMeasure('auto', 'auto');
+      loading = false;
+      histoDatas = toHistoFormattedDatas(currentMeasure);
     }
   };
 
   const handleAutoScroll = () => {
-    displayResults = false;
+    loading = false;
     const value =
       currentScrollType === ScrollInputType.PIXEL
         ? scrollValue
         : ((totalPagePixels - viewportPixels) * scrollValue) / 100;
     sendChromeMsg({ action: 'scrollTo', value });
+  };
+
+  const handleResetData = () => {
+    cleanCache();
+    currentMeasure = null;
   };
 </script>
 
@@ -59,12 +62,12 @@
   <div class="flex-center">
     <Button
       disabled={!scrollValue}
-      on:buttonClick={() => handleAutoScroll()}
+      on:buttonClick={handleAutoScroll}
       buttonType={ButtonTypeEnum.PRIMARY}
       translateKey={'launchAnalysisButtonWithAutoScrollButton'}
     />
     <Button
-      on:buttonClick={() => (displayResults = false)}
+      on:buttonClick={handleResetData}
       buttonType={ButtonTypeEnum.SECONDARY}
       translateKey="resetDataResultButton"
     />
@@ -85,8 +88,15 @@
     <Select bind:selectedValue={currentScrollType} selectValues={scrollTypes} />
   </div>
 
-  {#if displayResults}
-    <Results forceRefresh={false} />
+  {#if currentMeasure && !loading}
+    <GesResults measure={currentMeasure} />
+    <div class="histo-container">
+      <Histogram datas={histoDatas} yLabel="greenhouseGasesEmissionDefault" />
+    </div>
+  {:else if loading === true}
+    <div class="loading-wheel">
+      <LoadingWheel />
+    </div>
   {/if}
 </div>
 
@@ -99,5 +109,14 @@
   }
   .input-container {
     margin-bottom: var(--spacing--xl);
+  }
+  .loading-wheel {
+    margin: var(--spacing--xl);
+  }
+  .histo-container {
+    width: 100%;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
   }
 </style>
