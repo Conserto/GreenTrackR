@@ -1,5 +1,5 @@
 <script lang="ts">
-  import logo from '/icons/128.png';
+  import logo from '/images/logo.png';
   import { AutoScroll, Evaluation, Parcours, Help } from 'src/pages';
   import { Alert, Tab, Footer } from 'src/components';
   import { translate } from './utils/utils';

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { translate } from 'src/utils/utils';
   import { Footer } from 'src/components';
-  import logo from '/icons/128.png';
+  import logo from '/images/logo.png';
 
   const { version } = chrome.runtime.getManifest();
 </script>

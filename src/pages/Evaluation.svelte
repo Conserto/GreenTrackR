@@ -1,9 +1,18 @@
 <script lang="ts">
   import { ButtonTypeEnum } from 'src/enum';
-  import { Results, HistoricResults } from 'src/components/GES/results';
-  import { Button, Modal } from 'src/components';
-  import { getLocalStorageObject, setLocalStorageObject, translate } from 'src/utils/utils';
+  import { HistoricResults, GesResults } from 'src/components/GES/results';
+  import { Button, Modal, LoadingWheel, Histogram } from 'src/components';
+  import { ZoneSimulation } from 'src/components/GES';
+  import {
+    formatNumber,
+    getLocalStorageObject,
+    setLocalStorageObject,
+    toHistoFormattedDatas,
+    translate,
+  } from 'src/utils/utils';
   import { savedMeasures } from 'src/const';
+  import { cleanCache } from 'src/utils/chrome.utils';
+  import { MeasureAcquisition } from 'src/utils/classes/MeasureAcquisition';
 
   enum TabType {
     ResultTab,
@@ -12,16 +21,18 @@
   }
 
   let currentDisplayedTab = TabType.None;
-  let currentMeasure = null;
   let showPopUp = false;
 
-  const onMeasureUpdated = (event) => {
-    currentMeasure = event.detail.measure;
-  };
+  let loading = false;
+  let loadGes = false;
+  let measureAcquisition = new MeasureAcquisition();
+  let currentMeasure: Measure = null;
+  let histoDatas: HistoData[] = [];
 
   const onResetMeasure = () => {
     currentMeasure = null;
     currentDisplayedTab = TabType.None;
+    cleanCache();
   };
 
   const onSaveCurrentMeasure = () => {
@@ -32,11 +43,33 @@
     );
     showPopUp = true;
   };
+
+  const handleRunAnalysis = async () => {
+    currentDisplayedTab = TabType.ResultTab;
+    loading = true;
+    await measureAcquisition.getNetworkMeasure();
+    currentMeasure = await measureAcquisition.getGESMeasure('auto', 'auto');
+
+    loading = false;
+    histoDatas = toHistoFormattedDatas(currentMeasure);
+  };
+
+  const handleSimulation = async (event) => {
+    loadGes = true;
+    const { countryCodeSelected, userCountryCodeSelected } = event.detail;
+    await measureAcquisition.getNetworkMeasure();
+    currentMeasure = await measureAcquisition.getGESMeasure(
+      countryCodeSelected,
+      userCountryCodeSelected,
+    );
+    histoDatas = toHistoFormattedDatas(currentMeasure);
+    loadGes = false;
+  };
 </script>
 
 <div class="flex-center">
   <Button
-    on:buttonClick={() => (currentDisplayedTab = TabType.ResultTab)}
+    on:buttonClick={handleRunAnalysis}
     buttonType={ButtonTypeEnum.PRIMARY}
     translateKey={'launchAnalysisButton'}
   />
@@ -59,7 +92,23 @@
   />
 </div>
 {#if currentDisplayedTab === TabType.ResultTab}
-  <Results on:measureUpdated={onMeasureUpdated} />
+  {#if currentMeasure && !loading}
+    <GesResults measure={currentMeasure} />
+    <ZoneSimulation on:submitSimulation={handleSimulation} />
+    <div class="histo-container">
+      {#if loadGes}
+        <div class="loading-ges">
+          <LoadingWheel />
+        </div>
+      {:else}
+        <Histogram datas={histoDatas} yLabel="greenhouseGasesEmissionDefault" />
+      {/if}
+    </div>
+  {:else if loading === true}
+    <div class="loading-wheel">
+      <LoadingWheel />
+    </div>
+  {/if}
 {:else if currentDisplayedTab === TabType.HistoricTab}
   <HistoricResults />
 {/if}
@@ -76,11 +125,24 @@
   </Modal>
 {/if}
 
-<style>
+<style lang="scss">
   .modal {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+  }
+  .loading-wheel {
+    margin: var(--spacing--xl);
+  }
+  .loading-ges {
+    $margin-y: 50px;
+    margin: $margin-y 0 $margin-y 0;
+  }
+  .histo-container {
+    width: 100%;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
   }
 </style>
