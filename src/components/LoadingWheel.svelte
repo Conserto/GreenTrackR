@@ -6,6 +6,7 @@
     height: 48px;
     display: inline-block;
     position: relative;
+    margin-block: var(--spacing--xl);
   }
   .loader::after,
   .loader::before {

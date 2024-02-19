@@ -3,7 +3,7 @@
   export let selectValues = [];
 </script>
 
-<select bind:value={selectedValue}>
+<select class="generic-input" bind:value={selectedValue}>
   {#each selectValues as selectValue}
     <option value={selectValue.value}>
       {selectValue.label}
@@ -12,4 +12,7 @@
 </select>
 
 <style lang="scss">
+  option {
+    font-weight: bold;
+  }
 </style>

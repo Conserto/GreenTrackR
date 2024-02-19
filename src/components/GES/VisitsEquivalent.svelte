@@ -17,7 +17,7 @@
 <div class="visits-equivalent">
   <p class="label-equivalent">
     <Input
-      type={InputTypeEnum.TEXT}
+      type={InputTypeEnum.NUMBER}
       name="numberVisit"
       bind:value={visitsNumber}
       translateKey="eitherFor"

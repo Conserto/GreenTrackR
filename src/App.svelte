@@ -39,7 +39,7 @@
   }
 </script>
 
-<div class="app-container">
+<header class="flex-col-center">
   <img src={logo} alt="Logo green tracker" />
   <div class="nav nav-tabs" id="myTab" role="tablist">
     {#each tabs as tab}
@@ -52,7 +52,9 @@
       />
     {/each}
   </div>
+</header>
 
+<div class="app-container">
   {#if activeTabId !== 'help-tab'}
     <h1 class="plugin-title">{translate('nocontentPhraseEvaluation')}</h1>
   {/if}
@@ -70,12 +72,15 @@
 <Footer />
 
 <style>
-  .app-container {
+  .flex-col-center {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: start;
     align-items: center;
+  }
+
+  .app-container {
+    justify-content: start;
     margin: 0 var(--spacing--xl) 0 var(--spacing--xl);
   }
 
