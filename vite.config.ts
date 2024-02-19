@@ -40,4 +40,11 @@ export default defineConfig({
   },
   envDir: 'src/',
   plugins: [svelte(), viteManifestHackIssue846, crx({ manifest })],
+  server: {
+    strictPort: true,
+    port: 5173,
+    hmr: {
+      clientPort: 5173,
+    },
+  },
 });
