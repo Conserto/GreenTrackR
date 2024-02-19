@@ -59,7 +59,21 @@
 </script>
 
 <div class="tab-panel" role="tabpanel" aria-labelledby="User journey tab">
-  <div class="flex-center">
+  <p class="pixel-indicator">{`${translate('pixelDisplayed')} ${viewportPixels}px`}</p>
+  <p class="input-label">
+    {#if currentScrollType === ScrollInputType.PIXEL}
+      {translate('autoscrollPxInput')}
+    {:else}
+      {translate('autoscrollPercentInput')}
+    {/if}
+  </p>
+
+  <div class="flex-center input-container">
+    <Input type={InputTypeEnum.NUMBER} name="scrollValue" bind:value={scrollValue} />
+    <Select bind:selectedValue={currentScrollType} selectValues={scrollTypes} />
+  </div>
+
+  <div class="flex-center buttons-container">
     <Button
       disabled={!scrollValue}
       on:buttonClick={handleAutoScroll}
@@ -76,16 +90,6 @@
       buttonType={ButtonTypeEnum.SECONDARY}
       translateKey="backToTop"
     />
-  </div>
-  <p class="pixel-indicator">{`${translate('pixelDisplayed')} ${viewportPixels}px`}</p>
-  <p class="pixel-indicator">
-    {translate('autoscrollPxInput')}
-    <!-- {translate("autoscrollPercentInput")}  -->
-  </p>
-
-  <div class="flex-center input-container">
-    <Input type={InputTypeEnum.NUMBER} name="scrollValue" bind:value={scrollValue} />
-    <Select bind:selectedValue={currentScrollType} selectValues={scrollTypes} />
   </div>
 
   {#if currentMeasure && !loading}
@@ -105,7 +109,10 @@
     font-style: italic;
     font-weight: bold;
     text-align: center;
-    margin: 1em 0 0 0;
+    margin: var(--spacing--md) 0;
+  }
+  .input-label {
+    text-align: center;
   }
   .input-container {
     margin-bottom: var(--spacing--xl);
@@ -118,5 +125,8 @@
     overflow-x: auto;
     display: flex;
     justify-content: center;
+  }
+  .buttons-container {
+    margin-bottom: var(--spacing--xl);
   }
 </style>

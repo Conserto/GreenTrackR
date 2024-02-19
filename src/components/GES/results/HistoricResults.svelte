@@ -45,7 +45,12 @@
   };
 </script>
 
-<h2>{translate('titleHistory')}</h2>
+<h4>{translate('messageResultsAnalysis')}</h4>
+<Table
+  columnHeaders={[...gesTableHeaders, { id: 'action', translateKey: '' }]}
+  datas={formattedData}
+  on:actionClicked={handleDeleteMeasure}
+/>
 <div class="flex-center">
   <Button
     on:buttonClick={handleExport}
@@ -60,12 +65,6 @@
     disabled={!formattedData.length}
   />
 </div>
-<Table
-  columnHeaders={[...gesTableHeaders, { id: 'action', translateKey: '' }]}
-  datas={formattedData}
-  on:actionClicked={handleDeleteMeasure}
-/>
-<h4>{translate('messageResultsAnalysis')}</h4>
 
 {#if showPopUp}
   <Modal>
