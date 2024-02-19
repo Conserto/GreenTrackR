@@ -58,51 +58,48 @@
   };
 </script>
 
-<div class="tab-panel" role="tabpanel" aria-labelledby="User journey tab">
-  <p class="pixel-indicator">{`${translate('pixelDisplayed')} ${viewportPixels}px`}</p>
-  <p class="input-label">
-    {#if currentScrollType === ScrollInputType.PIXEL}
-      {translate('autoscrollPxInput')}
-    {:else}
-      {translate('autoscrollPercentInput')}
-    {/if}
-  </p>
+<p class="pixel-indicator">{`${translate('pixelDisplayed')} ${viewportPixels}px`}</p>
+<p class="input-label">
+  {#if currentScrollType === ScrollInputType.PIXEL}
+    {translate('autoscrollPxInput')}
+  {:else}
+    {translate('autoscrollPercentInput')}
+  {/if}
+</p>
 
-  <div class="flex-center input-container">
-    <Input type={InputTypeEnum.NUMBER} name="scrollValue" bind:value={scrollValue} />
-    <Select bind:selectedValue={currentScrollType} selectValues={scrollTypes} />
-  </div>
+<div class="flex-center input-container">
+  <Input type={InputTypeEnum.NUMBER} name="scrollValue" bind:value={scrollValue} />
+  <Select bind:selectedValue={currentScrollType} selectValues={scrollTypes} />
+</div>
 
-  <div class="flex-center buttons-container">
-    <Button
-      disabled={!scrollValue}
-      on:buttonClick={handleAutoScroll}
-      buttonType={ButtonTypeEnum.PRIMARY}
-      translateKey={'launchAnalysisButtonWithAutoScrollButton'}
-    />
-    <Button
-      on:buttonClick={handleResetData}
-      buttonType={ButtonTypeEnum.SECONDARY}
-      translateKey="resetDataResultButton"
-    />
-    <Button
-      on:buttonClick={() => sendChromeMsg({ action: 'scrollToTop' })}
-      buttonType={ButtonTypeEnum.SECONDARY}
-      translateKey="backToTop"
-    />
-  </div>
+<div class="flex-center buttons-container">
+  <Button
+    disabled={!scrollValue}
+    on:buttonClick={handleAutoScroll}
+    buttonType={ButtonTypeEnum.PRIMARY}
+    translateKey={'launchAnalysisButtonWithAutoScrollButton'}
+  />
+  <Button
+    on:buttonClick={handleResetData}
+    buttonType={ButtonTypeEnum.SECONDARY}
+    translateKey="resetDataResultButton"
+  />
+  <Button
+    on:buttonClick={() => sendChromeMsg({ action: 'scrollToTop' })}
+    buttonType={ButtonTypeEnum.SECONDARY}
+    translateKey="backToTop"
+  />
 
   {#if currentMeasure && !loading}
     <GesResults measure={currentMeasure} />
     <div class="histo-container">
       <Histogram datas={histoDatas} yLabel="greenhouseGasesEmissionDefault" />
     </div>
-  {:else if loading === true}
-    <div class="loading-wheel">
-      <LoadingWheel />
-    </div>
   {/if}
 </div>
+{#if loading === true}
+  <LoadingWheel />
+{/if}
 
 <style lang="scss">
   .pixel-indicator {
@@ -116,9 +113,6 @@
   }
   .input-container {
     margin-bottom: var(--spacing--xl);
-  }
-  .loading-wheel {
-    margin: var(--spacing--xl);
   }
   .histo-container {
     width: 100%;

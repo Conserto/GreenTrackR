@@ -52,8 +52,6 @@
 <style lang="scss">
   .zone-simulation {
     display: grid;
-    flex-wrap: wrap;
-    /* flex-direction: column; */
     justify-items: center;
   }
 

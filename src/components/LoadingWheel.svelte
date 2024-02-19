@@ -15,7 +15,7 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    border: 2px solid var(--color--primary);
+    border: 2px solid var(--color--green);
     position: absolute;
     left: 0;
     top: 0;

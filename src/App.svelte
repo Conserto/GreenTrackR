@@ -72,13 +72,6 @@
 <Footer />
 
 <style>
-  .flex-col-center {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
   .app-container {
     justify-content: start;
     margin: 0 var(--spacing--xl) 0 var(--spacing--xl);
@@ -90,12 +83,20 @@
     padding-left: 0;
     margin: 0;
     list-style: none;
-    margin-bottom: -1px;
+  }
+
+  .tab-panel {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    margin: 0 var(--spacing--xl) 0 var(--spacing--xl);
   }
 
   .plugin-title {
     font-size: var(--font-size--xxl);
-    color: var(--color--primary);
+    color: var(--color--green);
     text-align: center;
   }
 </style>

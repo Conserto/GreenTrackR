@@ -1,66 +1,20 @@
-:root {
-  --color--light: rgb(255 255 255);
-  --color--dark: rgb(0 0 0);
-  --color--grey: rgb(91 91 91);
-  --color--grey-light: rgb(222 226 230);
+#app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: minmax(0, 100%);
+}
 
-  --color--primary: rgb(96 128 108);
-  --color--secondary: rgb(92 99 106);
-
-  --background-color--primary: rgb(96 128 108);
-  --background-color--secondary: rgb(92 99 106);
-
-  --border-radius--slight: 0.25rem;
-  --border-radius--mark: 0.5rem;
-  --border-radius--strong: 0.75rem;
-  --border-radius--round: 2rem;
-
-  --box-shadow--md: rgba(0, 0, 0, 0.35) 0 5px 15px;
-
-  --spacing--xs: 0.25rem; /* équivalent à 4px (par exemple) */
-  --spacing--sm: 0.5rem; /* équivalent à 8px (par exemple) */
-  --spacing--md: 0.75rem; /* équivalent à 12px (par exemple) */
-  --spacing--lg: 1rem; /* équivalent à 16px (par exemple) */
-  --spacing--xl: 1.5rem; /* équivalent à 24px (par exemple) */
-  --spacing--xxl: 2rem; /* équivalent à 32px (par exemple) */
-  --spacing--xxxl: 3rem; /* équivalent à 48px (par exemple) */
-
-  --font-size--xs: 0.75rem; /* équivalent à 12px (par exemple) */
-  --font-size--sm: 0.875rem; /* équivalent à 14px (par exemple) */
-  --font-size--md: 1rem; /* équivalent à 16px (par exemple) */
-  --font-size--lg: 1.125rem; /* équivalent à 18px (par exemple) */
-  --font-size--xl: 1.5rem; /* équivalent à 24px (par exemple) */
-  --font-size--xxl: 2rem; /* équivalent à 32px (par exemple) */
-
-  --font-weight--light: 300;
-  --font-weight--normal: 400;
-  --font-weight--medium: 500;
-  --font-weight--bold: 700;
-
-  --border-width--thin: 1px;
-  --border-width--normal: 2px;
-  --border-width--thick: 4px;
-
-  --button_color--primary: var(--color-light);
-  --button_background-color--primary: var(--background-color--primary);
-  --button_hover-background-color--primary: #4d6c59;
-  --button_hover_color--primary: var(--color-light);
-
-  --button_color--secondary: var(--color-light);
-  --button_background-color--secondary: #6c757d;
-  --button_border-color--secondary: var(--color-light);
-  --button_hover_background-color--secondary: var(--background-color--secondary);
-  --button_hover_border-color--secondary: rgba(86, 94, 100);
-
-  --img_icon_size--size: 1.5rem;
-
+body {
+  margin: 0;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-size: 1rem;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  line-height: 1.5;
+  color: var(--color--dark);
+  background-color: var(--color--white);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -83,97 +37,5 @@
 
   ::-webkit-scrollbar-thumb:hover {
     background: #757575;
-  }
-}
-
-.flex-center {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 5px;
-}
-
-.generic-input {
-  background-color: var(--color--light);
-  color: var(--color--secondary);
-  border: var(--border-width--normal) solid #d1d5db;
-  border-radius: var(--border-radius--strong);
-  padding: var(--spacing--sm);
-  text-align: center;
-  font-weight: bold;
-
-  &:focus {
-    border-color: var(--color--primary);
-    outline: none;
-  }
-}
-
-.tab-panel {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: start;
-  align-items: center;
-  margin: 0 var(--spacing--xl) 0 var(--spacing--xl);
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-#app {
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-columns: minmax(0, 100%);
-}
-
-body {
-  margin: 0;
-  font-family:
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    'Noto Sans',
-    'Liberation Sans',
-    sans-serif,
-    'Apple Color Emoji',
-    'Segoe UI Emoji',
-    'Segoe UI Symbol',
-    'Noto Color Emoji';
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: transparent;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
   }
 }

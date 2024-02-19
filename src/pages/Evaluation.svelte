@@ -136,7 +136,7 @@
     margin: var(--spacing--xl);
   }
   .loading-ges {
-    $margin-y: 50px;
+    $margin-y: var(--spacing--xxxl);
     margin: $margin-y 0 $margin-y 0;
   }
   .histo-container {

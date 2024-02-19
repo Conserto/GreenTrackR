@@ -19,6 +19,6 @@
 
 <style>
   .check-icon {
-    color: var(--color--primary);
+    color: var(--color--green);
   }
 </style>

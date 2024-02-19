@@ -45,6 +45,3 @@
     </g>
   {/each}
 </svg>
-
-<style>
-</style>

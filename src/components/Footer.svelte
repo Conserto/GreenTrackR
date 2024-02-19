@@ -6,12 +6,7 @@
 
 <style lang="scss">
   footer {
+    margin-top: var(--spacing--lg);
     text-align: center;
-    a {
-      color: var(--color--primary);
-      &:hover {
-        color: blue;
-      }
-    }
   }
 </style>

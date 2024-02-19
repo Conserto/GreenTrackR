@@ -68,7 +68,7 @@
 
 {#if showPopUp}
   <Modal>
-    <div class="modal">
+    <div class="flex-col-center">
       <h2>{translate('deleteAllConfirmMessage')}</h2>
       <div class="flex-center">
         <Button
@@ -90,10 +90,5 @@
   h2,
   h4 {
     text-align: center;
-  }
-  .modal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 </style>

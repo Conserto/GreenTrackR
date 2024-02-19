@@ -4,16 +4,13 @@
   export let message: string;
 </script>
 
-<div class="alert" aria-describedby="Zone d'information" role="alert">
+<div class="flex-center alert" aria-describedby="Zone d'information" role="alert">
   <WarnIcon />
   <p class="development-message">{translate(message)}</p>
 </div>
 
 <style lang="scss">
   .alert {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 0 var(--spacing--md);
     color: #0d479a;
     background-color: #cfe2ff;
