@@ -31,19 +31,19 @@
 
 <style>
   .nav-link {
-    background: 0 0;
+    background: var(---color--white);
     cursor: pointer;
     border: none;
     padding: var(--spacing--sm) var(--spacing--lg);
-    color: var(--color--grey);
+    color: var(---color--dark-grey);
     font-family: inherit;
     font-size: inherit;
     font-weight: bold;
   }
 
   .nav-link.active {
-    color: var(--color--primary);
+    color: var(--color--green);
     border-bottom: var(--border-width--normal) solid transparent;
-    border-color: var(--color--primary);
+    border-color: var(--color--green);
   }
 </style>

@@ -12,8 +12,8 @@
     transform: translate(-50%, -50%);
     background: white;
     padding: var(--spacing--xl);
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: var(--border-width--thin) solid #ccc;
+    box-shadow: var(--box-shadow--sm);
     z-index: 1000;
   }
 

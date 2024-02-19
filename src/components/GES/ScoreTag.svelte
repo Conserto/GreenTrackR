@@ -42,7 +42,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color--light);
+    color: var(--color--white);
   }
 
   .score-letter {
@@ -57,8 +57,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: var(--border-width--thick) solid var(--color--light);
-      color: var(--color--light);
+      border: var(--border-width--thick) solid var(--color--white);
+      color: var(--color--white);
       font-size: var(--font-size--xxl);
       font-weight: var(--font-weight--bold);
       line-height: 2;

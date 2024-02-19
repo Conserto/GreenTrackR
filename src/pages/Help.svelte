@@ -65,14 +65,13 @@
 
 <style lang="scss">
   .version-title {
-    color: var(--color--primary);
+    color: var(--color--green);
     margin-top: var(--spacing--xl);
   }
 
   h2 {
     align-self: flex-start;
-    color: var(--color--primary);
-    margin-bottom: calc(-1 * var(--spacing--md));
-    margin-top: var(--spacing--xs);
+    color: var(--color--green);
+    margin-block: var(--spacing--xs);
   }
 </style>

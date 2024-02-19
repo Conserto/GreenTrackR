@@ -26,7 +26,6 @@
   /* Bootstrap Button Base Styles */
   .button {
     margin: var(--spacing--xs);
-    display: inline-block;
     font-weight: var(--font-weight--normal);
     text-align: center;
     white-space: nowrap;
@@ -51,20 +50,20 @@
     }
 
     &.primary {
-      color: var(--color--light);
-      background: var(--background-color--primary);
+      color: var(--color--white);
+      background: var(--color--green);
 
       &:hover {
-        background: var(--button_hover-background-color--primary);
+        background: var(--color-dark-green);
       }
     }
 
     &.secondary {
-      color: var(--color--light);
-      background-color: var(--button_background-color--secondary);
+      color: var(--color--white);
+      background-color: var(--color--grey);
 
       &:hover {
-        background-color: var(--button_hover_background-color--secondary);
+        background-color: var(---color--dark-grey);
       }
     }
   }

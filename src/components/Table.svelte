@@ -60,17 +60,15 @@
   .table-container {
     width: 100%;
     overflow: auto;
-    box-shadow:
-      0 4px 6px -1px rgb(0 0 0 / 0.1),
-      0 2px 4px -2px rgb(0 0 0 / 0.1);
+    box-shadow: var(--box-shadow--sm), var(--box-shadow--sm);
     border-radius: 8px;
 
     .table {
       border-collapse: collapse;
       thead {
-        border-bottom: var(--spacing--xs) solid var(--background-color--primary);
+        border-bottom: var(--spacing--xs) solid var(--color--green);
         text-transform: uppercase;
-        background-color: #f9fafb;
+        background-color: var(--color--light);
         position: sticky;
         top: 0;
 
@@ -80,10 +78,6 @@
       }
 
       tbody {
-        tr {
-          border-bottom: solid #e0e9ec;
-        }
-
         td {
           text-align: center;
           padding: var(--spacing--lg) var(--spacing--xl);
@@ -92,6 +86,6 @@
     }
   }
   .even {
-    background-color: #eff0f1;
+    background-color: var(--color--light-grey);
   }
 </style>
