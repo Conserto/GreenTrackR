@@ -25,13 +25,13 @@
 </p>
 <div class="values-equivalent flex-center">
   <div class="car-equivalent">
-    <img class="car-icon" src={CarIcon} alt="car" />
+    <img class="car-icon" src={CarIcon} alt="car" loading="lazy" />
     <span>{carEquivalent} {translate('carIndicator')}</span>
   </div>
 
   <span>&nbsp;ou&nbsp;</span>
   <div class="phone-equivalent">
-    <img class="phone-icon" src={PhoneIcon} alt="phone" />
+    <img class="phone-icon" src={PhoneIcon} alt="phone" loading="lazy" />
     <span>{phoneEquivalent} {translate('smartphoneIndicator')}</span>
   </div>
 </div>

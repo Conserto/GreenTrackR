@@ -14,7 +14,7 @@
   ];
   let currentScrollType = ScrollInputType.PERCENT;
   let scrollValue = 10;
-  const viewportPixels = window.innerHeight;
+  let viewportPixels = 0;
   let totalPagePixels = 0;
 
   let loading = false;
@@ -33,10 +33,11 @@
 
   const handleRuntimeMsg = async (message) => {
     if (message.type === 'pageHeight') {
-      totalPagePixels = message.height;
+      totalPagePixels = message.totalHeight;
+      viewportPixels = message.viewportHeight;
     } else if (message.autoScrollDone) {
       loading = true;
-      await measureAcquisition.getNetworkMeasure();
+      await measureAcquisition.getNetworkMeasure(false);
       currentMeasure = await measureAcquisition.getGESMeasure('auto', 'auto');
       loading = false;
       histoDatas = toHistoFormattedDatas(currentMeasure);
@@ -58,7 +59,9 @@
   };
 </script>
 
-<p class="pixel-indicator">{`${translate('pixelDisplayed')} ${viewportPixels}px`}</p>
+<p class="pixel-indicator">
+  {`${translate('pixelDisplayed')} ${viewportPixels}px.`}
+</p>
 <p class="input-label">
   {#if currentScrollType === ScrollInputType.PIXEL}
     {translate('autoscrollPxInput')}
