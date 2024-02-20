@@ -60,7 +60,7 @@
   {#if results.length}
     <div class="flex-center">
       <CheckIcon />
-      <p>{translate('firstResults')}</p>
+      <p>{translate('receivedResults')}</p>
     </div>
   {/if}
 {/if}

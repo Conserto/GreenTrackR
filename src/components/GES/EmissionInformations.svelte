@@ -1,33 +1,39 @@
 <script lang="ts">
-  import { translate } from 'src/utils/utils';
+  import { formatNumber, formatSize, translate } from 'src/utils/utils';
   import type { Measure } from 'src/interface';
   import { Units } from 'src/const';
 
   export let measure: Measure;
-
-  const sizeUncompressKo = Math.round(measure.network.sizeUncompress / 1000);
 </script>
 
 <div class="emissions-infos">
-  <p class="emissions-infos_label">{translate('infoMix')}</p>
+  <p>{translate('infoMix')}</p>
   <div class="emissions-infos_data">
-    <div class="data country">
+    <div>
       <span class="data-label">{translate('gesZone')}</span>
       <span class="data-value"
         >{measure.cityName ? `${measure.cityName}, ${measure.zone}` : measure.zone}</span
       >
     </div>
-    <div class="data intensity">
+    <div>
+      <span class="data-label">{translate('sizeTransferredBytesCompressed')}</span>
+      <span class="data-value">{formatSize(measure.network.size)} {Units.pageSize}</span>
+    </div>
+    <div>
       <span class="data-label">{translate('gesIntensity')}</span>
       <span class="data-value">{measure.carbonIntensity} {Units.carbonIntensity}</span>
     </div>
-    <div class="data page-size">
-      <span class="data-label">{translate('sizeTransferredBytes')}</span>
-      <span class="data-value">{sizeUncompressKo} {Units.pageSize}</span>
-    </div>
-    <div class="data request-number">
+    <div>
       <span class="data-label">{translate('nbRequest')}</span>
       <span class="data-value">{measure.nbRequest}</span>
+    </div>
+    <div>
+      <span class="data-label">{translate('DOM')}</span>
+      <span class="data-value">{measure.dom}</span>
+    </div>
+    <div>
+      <span class="data-label">{translate('sizeTransferredBytesUncompressed')}</span>
+      <span class="data-value">{formatSize(measure.network.sizeUncompress)} {Units.pageSize}</span>
     </div>
   </div>
 </div>

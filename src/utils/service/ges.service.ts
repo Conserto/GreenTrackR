@@ -111,8 +111,6 @@ export class GESService {
       countryName = response[countryCodeSelected]?.[0].country_name;
 
       data = this.getSortedDayGESReport(response, countryCodeSelected);
-
-      console.log('chargement reussi');
     } catch (error: any) {
       throw new Error(
         'There has been a problem when trying to get GES emissions from Local file : ' + error,

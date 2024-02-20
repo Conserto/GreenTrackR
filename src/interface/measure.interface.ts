@@ -11,4 +11,5 @@ export interface Measure {
   zone: string;
   carbonIntensity: number;
   hourlyCarbonData?: CarbonData[];
+  dom: number;
 }

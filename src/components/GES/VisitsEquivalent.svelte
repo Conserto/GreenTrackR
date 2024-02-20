@@ -13,29 +13,26 @@
   $: phoneEquivalent = ((measure.ges.websiteTotal / PHONE_AVERAGE_CO2) * visitsNumber).toFixed(2);
 </script>
 
-<!-- Bloc 'Soit pour XXX visite de l'equivalent de XX km en voiture ou XX smartphones chargés -->
-<div class="visits-equivalent">
-  <p class="label-equivalent">
-    <Input
-      type={InputTypeEnum.NUMBER}
-      name="numberVisit"
-      bind:value={visitsNumber}
-      translateKey="eitherFor"
-    />
-    &nbsp;
-    {translate('visitEquivalent')}
-  </p>
-  <div class="values-equivalent">
-    <div class="car-equivalent">
-      <img class="car-icon" src={CarIcon} alt="car" />
-      <span>{carEquivalent} {translate('carIndicator')}</span>
-    </div>
+<p class="label-equivalent">
+  <Input
+    type={InputTypeEnum.NUMBER}
+    name="numberVisit"
+    bind:value={visitsNumber}
+    translateKey="eitherFor"
+  />
+  &nbsp;
+  {translate('visitEquivalent')}
+</p>
+<div class="values-equivalent flex-center">
+  <div class="car-equivalent">
+    <img class="car-icon" src={CarIcon} alt="car" />
+    <span>{carEquivalent} {translate('carIndicator')}</span>
+  </div>
 
-    <span>&nbsp;ou&nbsp;</span>
-    <div class="phone-equivalent">
-      <img class="phone-icon" src={PhoneIcon} alt="phone" />
-      <span>{phoneEquivalent} {translate('smartphoneIndicator')}</span>
-    </div>
+  <span>&nbsp;ou&nbsp;</span>
+  <div class="phone-equivalent">
+    <img class="phone-icon" src={PhoneIcon} alt="phone" />
+    <span>{phoneEquivalent} {translate('smartphoneIndicator')}</span>
   </div>
 </div>
 
@@ -47,18 +44,8 @@
     margin: var(--spacing--xs);
   }
 
-  .label-equivalent {
-    display: flex;
-    flex-wrap: wrap;
-    font-weight: var(--font-weight--bold);
-    font-size: var(--font-size--sm);
-    margin: 0;
-  }
-
+  .label-equivalent,
   .values-equivalent {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
     font-weight: var(--font-weight--bold);
     font-size: var(--font-size--sm);
   }

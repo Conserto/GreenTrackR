@@ -16,6 +16,8 @@ const create_csv = (measureHistory: Measure[]) => {
       ';' +
       Math.round(measure.network.size / 1024) +
       ';' +
+      measure.dom +
+      ';' +
       formatNumber(measure.ges.dataCenterTotal) +
       ';' +
       formatNumber(measure.ges.networkTotal) +

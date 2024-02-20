@@ -12,7 +12,7 @@
     "description": "Clear Browser Cache Button"
   },
   "csvColumnsLabel": {
-    "message": "Date;Url;Taille(o);Taille(Ko);GES Data Center(gCO2eq/kWh);GES Réseau(gCO2eq/kWh);GES Périphérique(gCO2eq/kWh);GES Total(gCO2eq/kWh); GES Score; Grade; Pays; IntensiteCarbon; NombreRequetes",
+    "message": "Date;Url;Taille decompressée(o);Taille compressée(Ko);DOM;GES Data Center(gCO2eq/kWh);GES Réseau(gCO2eq/kWh);GES Périphérique(gCO2eq/kWh);GES Total(gCO2eq/kWh); GES Score; Grade; Pays; IntensiteCarbon; NombreRequetes",
     "description": "csvColumnsLabel"
   },
   "date": {
@@ -75,14 +75,6 @@
     "message": "Historique",
     "description": "History Button"
   },
-  "historyPageTitle": {
-    "message": "Historique des analyses",
-    "description": "History page title"
-  },
-  "journeyAnalysisAlreadyStarted": {
-    "message": "Un parcours utilisateur est déjà démarré",
-    "description": "User journey analysis already started"
-  },
   "launchAnalysisButton": {
     "message": "Démarrer l'analyse",
     "description": "Launch Analysis"
@@ -91,45 +83,9 @@
     "message": "Auto Scroller",
     "description": "Lancer l'analyse avec scroll auto"
   },
-  "mean": {
-    "message": "Moyenne des GES",
-    "description": "GES Mean"
-  },
   "menuText": {
     "message": "GreenTrackr V1.0.2 est installé et accessible via le panneau développeur (F12 ou CMD + ALT + i sur Mac) ",
     "description": "Text when you click on the plugin's icone"
-  },
-  "menuMoreInformation": {
-    "message": "plus d'information ...",
-    "description": "Link for help in the menu frame"
-  },
-  "titleHistory": {
-    "message": "GreenTrackr Historique",
-    "description": "titre de l'historique"
-  },
-  "pluginTitle": {
-    "message": "GES Plugin ",
-    "description": "Plugin title"
-  },
-  "unsupportedRuleAnalysis": {
-    "message": "-- Analyse non supportée par ce navigateur --",
-    "description": "Analysis not supported by this browser"
-  },
-  "resetConfirmation": {
-    "message": "Confirmer la réinitialisation des statistiques ?",
-    "description": "Reset Journey Analysis Confirmation"
-  },
-  "resetEvaluationMessage": {
-    "message": "La réinitialisation de l'évaluation a bien été effectuée",
-    "description": "Message de confirmation que la réinitialisation de l'évaluation d'impact a bien été faite"
-  },
-  "resetScrollMessage": {
-    "message": "La réinitialisation des paramètres de l'auto scroll a bien été effectuée",
-    "description": "Message de confirmation que la réinitialisation des paramètres de l'auto scroll a bien été faite"
-  },
-  "resetJourneyMessage": {
-    "message": "La réinitialisation du parcours a bien été effectuée",
-    "description": "Message de confirmation que la réinitialisation du parcours a bien été faite"
   },
   "resetJourneyButton": {
     "message": "Réinitialiser le parcours",
@@ -143,10 +99,6 @@
     "message": "Enregistrer l'évaluation",
     "description": "Save Analysis Button"
   },
-  "startJourneyButton": {
-    "message": "Démarrer l'enregistrement d'un parcours",
-    "description": "Start Journey Analysis"
-  },
   "stopJourneyButton": {
     "message": "Stopper l'enregistrement",
     "description": "Stop Journey Analysis"
@@ -155,17 +107,17 @@
     "message": "Taille de la page",
     "description": "Transferred size (KB)"
   },
-  "sizeTransferredDefault": {
-    "message": "Taille de la page (Ko)",
-    "description": "Transferred size (KB), default"
-  },
   "sizeTransferredBytes": {
     "message": "Taille de la page",
     "description": "Transferred size (KB)"
   },
-  "sizeTransferredBytesDefault": {
-    "message": "Taille de la page (Ko): --",
-    "description": "Transferred size (KB), default"
+  "sizeTransferredBytesCompressed": {
+    "message": "Taille de la page compressée",
+    "description": "Compressed transferred size (KB)"
+  },
+  "sizeTransferredBytesUncompressed": {
+    "message": "Taille de la page décompresssée",
+    "description": "Uncompressed transferred size (KB)"
   },
   "tabEvaluation": {
     "message": "Evaluation/Page",
@@ -191,37 +143,9 @@
     "message": "Voir l'historique",
     "description": "View History Button"
   },
-  "waitingResults": {
-    "message": "En attente des résultats...",
-    "description": "Waiting user journey results"
-  },
   "resetDataResultButton": {
     "message": "Réinitialiser les paramètres",
     "description": "Réinitialiser les paramètres"
-  },
-  "placeNumberSteps": {
-    "message": "Nombre d'étapes",
-    "description": "Nombre d'étapes"
-  },
-  "placePixelsToMove": {
-    "message": "Nombre de pixels à scroller",
-    "description": "Nombre de pixels à scroller"
-  },
-  "placeTimeBetweenSteps": {
-    "message": "Temps entre 2 étapes en ms",
-    "description": "Temps entre 2 étapes en ms"
-  },
-  "titleAutoScrollPart": {
-    "message": "Analyse auto scroll",
-    "description": "Analyse avec scroll auto (page lazy loading)"
-  },
-  "averageGesTableTitle": {
-    "message": "Moyenne = ",
-    "description": "Average value of GES"
-  },
-  "maximumGesTableTitle": {
-    "message": "Max = ",
-    "description": "Maximum value of GES"
   },
   "backToTop": {
     "message": "Remonter la page",
@@ -231,23 +155,11 @@
     "message": "Localisation du serveur",
     "description": "Donne le pays où l'ip du serveur se trouve"
   },
-  "gesZoneByDefault": {
-    "message": "Pays où se situe le serveur",
-    "description": "Donne le pays où l'ip du serveur se trouve"
-  },
   "gesIntensity": {
     "message": "Intensité carbone du pays",
     "description": "Donne l'intensité carbon du pays depuis elctrictymaps"
   },
-  "gesIntensityByDefault": {
-    "message": "Intensité carbone du pays (gCO2eq/kWh)",
-    "description": "Donne l'intensité carbon du pays depuis elctrictymaps"
-  },
   "nbRequest": {
-    "message": "Nombre de requêtes",
-    "description": "Nombre de requêtes effectuées par le site"
-  },
-  "nbRequestByDefault": {
     "message": "Nombre de requêtes",
     "description": "Nombre de requêtes effectuées par le site"
   },
@@ -255,25 +167,9 @@
     "message": "Vos émissions dépendent du mix énergétique du pays dans lequel vous vous trouvez, et dans lequel le site est hébergé. Ce mix énergétique peut varier d'heure en heure et au gré des saisons :",
     "description": "Infos pour comprendre l'impact du mix énergétiques"
   },
-  "infoTooltip": {
-    "message": "Le score affiché correspond au pays dans lequel se situe votre serveur. Vous pouvez simuler l'impact d'un hébergement dans une autre région du globe",
-    "description": "Infos pour comprendre la simulation par région"
-  },
-  "infoTooltipUser": {
-    "message": "Le score affiché correspond au pays dans lequel se situe votre localisation. Vous pouvez simuler l'impact d'un hébergement dans une autre région du globe",
-    "description": "Infos pour comprendre la simulation par région"
-  },
   "betaMessage": {
     "message": "Cette fonctionnalité est une version bêta, des erreurs peuvent survenir.",
     "description": "Message pour prévenir l'utilisateur que toutes les fonctionnalités ne sont pas présentes"
-  },
-  "franceDefaultServerMessage": {
-    "message": "Impossible de localiser votre serveur. Vous travaillez probablement en local. GreenTrackr utilise la France comme localisation par défaut.",
-    "description": "Message pour prévenir l'utilisateur que le serveur par défault est 'France'"
-  },
-  "urlChromeExtMessage": {
-    "message": "Les données de votre page n'ont pas été correctement chargées. Rafraîchissez votre page puis cliquez sur 'Démarrer l'analyse'.",
-    "description": "Message pour prévenir l'utilisateur que le serveur par défault est 'France', et qu'il doit recharger sa page (possiblement une mauvaise url stocké)"
   },
   "saveAnalysis": {
     "message": "L'évaluation a bien été enregistrée.",
@@ -283,25 +179,13 @@
     "message": "Fermer",
     "description": "Texte pour fermer la popup"
   },
-  "missingAnalysis": {
-    "message": "Vous n'avez pas lancé d'évaluation",
-    "description": "message quand on ne lance pas d'évaluation et que l'on veut enregistrer"
-  },
   "nocontentPhrase": {
     "message": "Estimez l'empreinte carbone de votre site web",
     "description": "message quand on arrive sur la page auto-scroll et que l'analyse n'est pas encore lancée"
   },
-  "nocontentPhraseJourney": {
-    "message": "Estimez l'empreinte carbone de votre site web",
-    "description": "message quand on arrive sur la page parcours utilisateurs et que l'analyse n'est pas encore lancée"
-  },
   "nocontentPhraseEvaluation": {
     "message": "Estimez l'empreinte carbone de votre site web",
     "description": "message quand on arrive sur la page évaluation d'impact et que l'analyse n'est pas encore lancée"
-  },
-  "serverError": {
-    "message": "Oups ! Une erreur est intervenu. Choisissez une région.",
-    "description": "Popup quand le serveur ne répond pas."
   },
   "serverRegionLabel": {
     "message": "Simuler la localisation du serveur dans une autre zone : ",
@@ -342,10 +226,6 @@
   "validateRegionButton": {
     "message": "Valider",
     "description": "Valider Région"
-  },
-  "messageRight": {
-    "message": ".Tous droits réservés.",
-    "description": "Droit auteur"
   },
   "help_test_extension": {
     "message": "Tester l'extension",
