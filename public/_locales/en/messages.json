@@ -75,14 +75,6 @@
     "message": "History",
     "description": "History Button"
   },
-  "historyPageTitle": {
-    "message": "GES  - Analysis History",
-    "description": "History page title"
-  },
-  "journeyAnalysisAlreadyStarted": {
-    "message": "A user journey analysis is already started",
-    "description": "User journey analysis already started"
-  },
   "launchAnalysisButton": {
     "message": "Start analysis",
     "description": "Launch Analysis"
@@ -91,45 +83,9 @@
     "message": "Auto Scrolling",
     "description": "Launch Analysis with auto scroll"
   },
-  "mean": {
-    "message": "Average GES",
-    "description": "GES Mean"
-  },
   "menuText": {
     "message": "GreenTrackr V1.0.2 is install in your browser and accessible via the devtool panel (F12 or CMD + ALT + i sur Mac",
     "description": "Text when you click on the plugin's icone"
-  },
-  "menuMoreInformation": {
-    "message": "more information ...",
-    "description": "Link for help in the menu frame"
-  },
-  "titleHistory": {
-    "message": "GreenTrackr History",
-    "description": "history title"
-  },
-  "pluginTitle": {
-    "message": "GES Plugin",
-    "description": "Plugin title"
-  },
-  "unsupportedRuleAnalyse": {
-    "message": "-- Analysis not supported by this browser --",
-    "description": "Analysis not supported by this browser"
-  },
-  "resetConfirmation": {
-    "message": "Confirm the statistics reset ?",
-    "description": "Reset Journey Analysis Confirmation"
-  },
-  "resetEvaluationMessage": {
-    "message": "Rating reset successful",
-    "description": "Confirmation message that impact assessment reset was successful"
-  },
-  "resetScrollMessage": {
-    "message": "Auto scroll settings reset successful",
-    "description": "Confirmation message that auto scroll settings reset was successful"
-  },
-  "resetJourneyMessage": {
-    "message": "Course reset successful",
-    "description": "Confirmation message that route reset was successful"
   },
   "resetJourneyButton": {
     "message": "Reset journey",
@@ -147,10 +103,6 @@
     "message": "Page size",
     "description": "Transferred size (KB)"
   },
-  "sizeTransferredDefault": {
-    "message": "Page size (KB) : --",
-    "description": "Transferred size (KB), default"
-  },
   "sizeTransferredBytes": {
     "message": "Page size",
     "description": "Transferred size (KB)"
@@ -162,14 +114,6 @@
   "sizeTransferredBytesUncompressed": {
     "message": "Uncompressed page size",
     "description": "Uncompressed transferred size (KB)"
-  },
-  "sizeTransferredBytesDefault": {
-    "message": "Page size (KB) : --",
-    "description": "Transferred size (KB), default"
-  },
-  "startJourneyButton": {
-    "message": "Start saving user journey",
-    "description": "Start Journey Analysis"
   },
   "stopJourneyButton": {
     "message": "Stop saving",
@@ -199,37 +143,9 @@
     "message": "View History",
     "description": "View History Button"
   },
-  "waitingResults": {
-    "message": "Waiting for results...",
-    "description": "Waiting user journey results"
-  },
   "resetDataResultButton": {
     "message": "Reset settings",
     "description": "Reset parameters"
-  },
-  "placeNumberSteps": {
-    "message": "Number of steps",
-    "description": "Number of steps"
-  },
-  "placePixelsToMove": {
-    "message": "Number of pixels to go down",
-    "description": "Number of pixels to go down"
-  },
-  "placeTimeBetweenSteps": {
-    "message": "Time in ms between 2 steps",
-    "description": "Time in ms between 2 steps"
-  },
-  "titleAutoScrollPart": {
-    "message": "Auto-scroll analysis",
-    "description": "Analysis with auto scroll (lazy loading page)"
-  },
-  "averageGesTableTitle": {
-    "message": "Average =",
-    "description": "Average value of GES"
-  },
-  "maximumGesTableTitle": {
-    "message": "Max =",
-    "description": "Maximum value of GES"
   },
   "backToTop": {
     "message": "Back to top",
@@ -239,15 +155,7 @@
     "message": "Server location",
     "description": "Give the country where the server of the website is localized"
   },
-  "gesZoneByDefault": {
-    "message": "Server Country",
-    "description": "Give the country where the server of the website is localized"
-  },
   "gesIntensity": {
-    "message": "Country's carbon intensity",
-    "description": "Give the country carbon intensity from electricitymaps"
-  },
-  "gesIntensityByDefault": {
     "message": "Country's carbon intensity",
     "description": "Give the country carbon intensity from electricitymaps"
   },
@@ -255,33 +163,13 @@
     "message": "Number of requests",
     "description": "Number of request made by the website"
   },
-  "nbRequestByDefault": {
-    "message": "Number of requests",
-    "description": "Number of request made by the website"
-  },
   "infoMix": {
     "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season:",
     "description": "Infos pour comprendre l'impact du mix énergétiques"
   },
-  "infoTooltip": {
-    "message": "The score displayed corresponds to the country in which your server is located. You can simulate the impact of hosting in another region of the globe",
-    "description": "Info to understand the simulation by region"
-  },
-  "infoTooltipUser": {
-    "message": "The score displayed corresponds to the country in which you're located. You can simulate the impact of hosting in another region of the globe",
-    "description": "Info to understand the simulation by user region"
-  },
   "betaMessage": {
     "message": "This feature is a beta version, errors may occur.",
     "description": "Message to warn the user that not all features are present"
-  },
-  "franceDefaultServerMessage": {
-    "message": "Unable to locate your server. You're probably working locally. GreenTrackr uses France as default location.",
-    "description": "Message to warn the user the default server is set to FR"
-  },
-  "urlChromeExtMessage": {
-    "message": "The data on your page has not been loaded correctly. Refresh your page, then click on 'Start analysis'.",
-    "description": "Message to warn the user the default server is set to FR and need to reload the page (potentially wrong url stored)"
   },
   "saveAnalysis": {
     "message": "Analysis successfully saved.",
@@ -291,25 +179,13 @@
     "message": "Close",
     "description": "close popup content"
   },
-  "missingAnalysis": {
-    "message": "You did not start analysis",
-    "description": "Popup message if you try to save an undefined analysis"
-  },
   "nocontentPhrase": {
     "message": "Estimate the carbon footprint of your website",
     "description": "Message when you arrive on the auto-scroll page and the analysis is not yet launched"
   },
-  "nocontentPhraseJourney": {
-    "message": "Estimate the carbon footprint of your website",
-    "description": "Message when you arrive on the user page and the analysis is not yet launched"
-  },
   "nocontentPhraseEvaluation": {
     "message": "Estimate the carbon footprint of your website",
     "description": "Message when you arrive on the evaluation page and the analysis is not yet launched"
-  },
-  "serverError": {
-    "message": "Whoops ! An error has occurred. Choose a region.",
-    "description": "Popup when error occurs on the server."
   },
   "serverRegionLabel": {
     "message": "Simulate server localization in an other zone : ",
@@ -350,10 +226,6 @@
   "validateRegionButton": {
     "message": "Confirm",
     "description": "Confirm Region"
-  },
-  "messageRight": {
-    "message": ".All rights reserved.",
-    "description": "Copyright"
   },
   "help_test_extension": {
     "message": "Test the extension",
