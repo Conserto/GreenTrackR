@@ -11,7 +11,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["src/content-scripts/autoScroll.ts"]
+      "js": ["src/content-scripts/contentScripts.ts"]
     }
   ],
   "host_permissions": ["*://*/*"],
