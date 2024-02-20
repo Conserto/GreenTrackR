@@ -1,6 +1,4 @@
-# GreenTrackr 1.0.4 for Manifest V3
-
-<descriptif de l'extension>
+# GreenTrackr for Manifest V3
 
 ### Tester l'extension
 
@@ -11,20 +9,6 @@
 
 - Edge >
   [Installation de l'extension](https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/getting-started/extension-sideloading)
-
-### Build l'extension
-
-IL a été décidé de développer cette extension à l'aide de plusieurs technologies :
-
-- Vite, pour builder notre application rapidement
-- Svelte, pour disposer d'un framework orienté composants rapide, léger et de sa complémentarité avec Typescript et Vite. A la différence de beaucoup de "framework" comme React, il n'utilise pas le shadowDom et la réactivité est essentiellement
-
-Pour build l'extension, il suffira d'executer la commande "yarn run build".
-
-Ceci étant une extension chrome, nous avons du utiliser crxjs pour permettre à vite de build correctement le projet.
-En effet, le point d'entrée d'une extension chrome est le fichier manifest.json. Celui ci va, entre autres, chargé le fichier devtools-page.html, fichier qui va permettre de créer notre devtools page (c'est-à-dire un onglet dans l'inspecteur) grâce au fichier devtools-page.ts appelé par le fichier html.
-
-Le devtools-page.ts va donc créer le tab devtools, et appelé le fichier index.html, qui sera finalement pour notre code le point d'entrée. 
 
 ### Utiliser l'extension
 
