@@ -6,17 +6,10 @@
   export let measure: Measure;
 </script>
 
-<div class="ges-value">
+<div class="flex-center">
   <CO2Equivalent {measure} />
   <VisitsEquivalent {measure} />
 </div>
 
 <style lang="scss">
-  .ges-value {
-    display: grid;
-    width: 100%;
-    grid-template-columns: auto auto;
-    gap: var(--spacing--lg);
-    align-items: center;
-  }
 </style>
