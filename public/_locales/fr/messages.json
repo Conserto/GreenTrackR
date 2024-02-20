@@ -12,7 +12,7 @@
     "description": "Clear Browser Cache Button"
   },
   "csvColumnsLabel": {
-    "message": "Date;Url;Taille(o);Taille(Ko);GES Data Center(gCO2eq/kWh);GES Réseau(gCO2eq/kWh);GES Périphérique(gCO2eq/kWh);GES Total(gCO2eq/kWh); GES Score; Grade; Pays; IntensiteCarbon; NombreRequetes",
+    "message": "Date;Url;Taille decompressée(o);Taille compressée(Ko);DOM;GES Data Center(gCO2eq/kWh);GES Réseau(gCO2eq/kWh);GES Périphérique(gCO2eq/kWh);GES Total(gCO2eq/kWh); GES Score; Grade; Pays; IntensiteCarbon; NombreRequetes",
     "description": "csvColumnsLabel"
   },
   "date": {
@@ -162,6 +162,14 @@
   "sizeTransferredBytes": {
     "message": "Taille de la page",
     "description": "Transferred size (KB)"
+  },
+  "sizeTransferredBytesCompressed": {
+    "message": "Taille de la page compressée",
+    "description": "Compressed transferred size (KB)"
+  },
+  "sizeTransferredBytesUncompressed": {
+    "message": "Taille de la page décompresssée",
+    "description": "Uncompressed transferred size (KB)"
   },
   "sizeTransferredBytesDefault": {
     "message": "Taille de la page (Ko): --",

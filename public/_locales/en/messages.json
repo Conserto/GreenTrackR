@@ -12,7 +12,7 @@
     "description": "Clear Browser Cache Button"
   },
   "csvColumnsLabel": {
-    "message": "Date;Url;Size(b)Size(kb);GES Data Center(gCO2e);GES Network(gCO2e);GES Device(gCO2e);GES Total(gCO2e); GES Score; Grade; Country; CarbonIntensity; NumberRequest",
+    "message": "Date;Url;Uncompressed size(b);Compressed size(kb);DOM;GES Data Center(gCO2e);GES Network(gCO2e);GES Device(gCO2e);GES Total(gCO2e); GES Score; Grade; Country; CarbonIntensity; NumberRequest",
     "description": "csvColumnsLabel"
   },
   "date": {
@@ -154,6 +154,14 @@
   "sizeTransferredBytes": {
     "message": "Page size",
     "description": "Transferred size (KB)"
+  },
+  "sizeTransferredBytesCompressed": {
+    "message": "Compressed page size",
+    "description": "Compressed transferred size (KB)"
+  },
+  "sizeTransferredBytesUncompressed": {
+    "message": "Uncompressed page size",
+    "description": "Uncompressed transferred size (KB)"
   },
   "sizeTransferredBytesDefault": {
     "message": "Page size (KB) : --",

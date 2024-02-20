@@ -1,4 +1,6 @@
+import { RequestAction } from 'src/enum';
 import type { GES, Measure } from '../../interface';
+import { sendChromeMsg } from '../chrome.utils';
 
 import { NetworkService, GESService, ScoreService } from '../service';
 
@@ -41,6 +43,7 @@ export class MeasureAcquisition {
         limit: 0,
       },
       carbonIntensity: 0,
+      dom: 0,
     };
   }
 
@@ -76,6 +79,7 @@ export class MeasureAcquisition {
       userCountryCodeSelected,
     );
     this.updateMeasureValues(zoneGES, userGES);
+    await this.waitForDomElements();
     return this.measure;
   }
 
@@ -116,6 +120,21 @@ export class MeasureAcquisition {
       await this.waitTabUpdate();
       await this.getNetworkMeasure();
     }
+  }
+
+  waitForDomElements() {
+    return new Promise<void>((resolve) => {
+      const handleRuntimeMsg = async (message: { type: string; value: any }) => {
+        if (message.type === 'domInfos') {
+          chrome.runtime.onMessage.addListener(handleRuntimeMsg);
+          this.measure.dom = message.value;
+          resolve();
+        }
+      };
+
+      chrome.runtime.onMessage.addListener(handleRuntimeMsg);
+      sendChromeMsg({ action: RequestAction.GET_DOM_ELEMENTS });
+    });
   }
 
   //TODO: to delete, we'll have to implement this on service-worker so it can send message to svelte component

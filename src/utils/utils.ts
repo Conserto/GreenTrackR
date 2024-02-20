@@ -36,6 +36,15 @@ export const formatNumber = (value: number) => {
   return value.toFixed(2);
 };
 
+export const formatSize = (value: number) => {
+  const koValue = value / 1000;
+  if (koValue < 1) {
+    return formatNumber(koValue);
+  } else {
+    return Math.round(value / 1000);
+  }
+};
+
 export const getLocalStorageObject = (key: string) => {
   const stringValue = localStorage.getItem(key);
   if (stringValue) {
@@ -53,8 +62,12 @@ export const formatGesMeasuresForTable = (measures: Measure[]) => {
   return measures.map((measure) => ({
     date: { content: formatDate(measure.date), style: 'font-weight:bold' },
     url: { content: measure.url },
-    sizeTransferred: { content: `${measure.network.size} ${Units.pageSize}` },
+    compressedSizeTransferred: { content: `${formatSize(measure.network.size)} ${Units.pageSize}` },
+    uncompressedSizeTransferred: {
+      content: `${formatSize(measure.network.sizeUncompress)} ${Units.pageSize}`,
+    },
     nbRequest: { content: measure.nbRequest },
+    dom: { content: measure.dom },
     gesDataCenter: {
       content: `${formatNumber(measure.ges.dataCenterTotal)} ${Units.carbonEmissions}`,
     },

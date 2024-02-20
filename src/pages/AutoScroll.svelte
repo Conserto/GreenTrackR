@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Button, LoadingWheel, Input, Select } from 'src/components';
-  import { ButtonTypeEnum, InputTypeEnum, ScrollInputType } from 'src/enum';
+  import { ButtonTypeEnum, InputTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
   import { cleanCache, sendChromeMsg } from 'src/utils/chrome.utils';
   import { toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { onDestroy, onMount } from 'svelte';
@@ -24,7 +24,7 @@
 
   onMount(() => {
     chrome.runtime.onMessage.addListener(handleRuntimeMsg);
-    sendChromeMsg({ action: 'sendPageHeight' });
+    sendChromeMsg({ action: RequestAction.SEND_PAGE_HEIGHT });
   });
 
   onDestroy(() => {
@@ -49,7 +49,7 @@
       currentScrollType === ScrollInputType.PIXEL
         ? scrollValue
         : ((totalPagePixels - viewportPixels) * scrollValue) / 100;
-    sendChromeMsg({ action: 'scrollTo', value });
+    sendChromeMsg({ action: RequestAction.SCROLL_TO, value });
   };
 
   const handleResetData = () => {
@@ -86,7 +86,7 @@
       translateKey="resetDataResultButton"
     />
     <Button
-      on:buttonClick={() => sendChromeMsg({ action: 'scrollToTop' })}
+      on:buttonClick={() => sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP })}
       buttonType={ButtonTypeEnum.SECONDARY}
       translateKey="backToTop"
     />
