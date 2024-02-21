@@ -4,7 +4,7 @@
   export let message: string;
 </script>
 
-<div class="flex-center alert" aria-describedby="Zone d'information" role="alert">
+<div class="flex-center alert" aria-label="Zone d'information" role="alert">
   <WarnIcon />
   <p class="development-message">{translate(message)}</p>
 </div>

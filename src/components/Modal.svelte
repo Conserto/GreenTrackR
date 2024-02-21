@@ -1,4 +1,4 @@
-<div class="overlay">
+<div class="overlay" aria-label="Pop up générique" aria-modal="true">
   <div class="modal">
     <slot />
   </div>
