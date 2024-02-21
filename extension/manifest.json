@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "GreenTrackr",
-  "description": "Extension d'évaluation des impacts environnementaux d'un site Web",
+  "description": "Evaluez l'empreinte environnementale de votre site Web",
   "version": "2.0.0",
   "icons": {
     "64": "images/logo.png"
