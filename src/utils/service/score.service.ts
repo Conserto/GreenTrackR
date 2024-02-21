@@ -1,30 +1,22 @@
 import type { Score } from 'src/interface/score.interface';
 import { ALL_SCORES } from 'src/const';
+
 export class ScoreService {
   constructor() {}
 
   getScore(gesValue: number): Score {
-    const score = this.getScoreInfosFromGesValue(gesValue);
-    return score;
+    const scoreValue = this.getScoreValue(gesValue);
+    const score = ALL_SCORES.find((grade: Score) => gesValue <= grade.limit);
+    if (score) {
+      return { ...score, value: scoreValue };
+    } else {
+      throw 'Score not found';
+    }
   }
 
   getAllScoreGrade() {
     return ALL_SCORES;
   }
-
-  getScoreInfosFromGesValue(gesValue: number): Score {
-    const scoreValue = this.getScoreValue(gesValue);
-    const { gradeLetter, limit, color, textColor } = ALL_SCORES.find(
-      (grade: Score) => gesValue <= grade.limit,
-    ) as Score;
-    return { value: scoreValue, gradeLetter, limit, color, textColor };
-  }
-
-  /**
-   * Return the correct classes to add, to adapt the background color with the score
-   * @param {String|Number} score - The current score with a string (e.g: "A") or a number from 0 to 100
-   * @returns {Array}
-   */
 
   /**
    * Return the score of the measure in a range of 0 to 100
