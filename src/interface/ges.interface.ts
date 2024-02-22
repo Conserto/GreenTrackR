@@ -10,7 +10,7 @@ export interface GESTotals {
   dataCenterTotal: number;
   networkTotal: number;
   deviceTotal: number;
-  websiteTotal: number;
+  pageTotal: number;
 }
 
 export interface CarbonDatas {

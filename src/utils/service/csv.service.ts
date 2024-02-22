@@ -24,15 +24,15 @@ const create_csv = (measureHistory: Measure[]) => {
       ';' +
       formatNumber(measure.ges.deviceTotal) +
       ';' +
-      formatNumber(measure.ges.websiteTotal) +
+      formatNumber(measure.ges.pageTotal) +
       ';' +
       formatNumber(measure.score.value ?? -1) +
       ';' +
       measure.score.gradeLetter +
       ';' +
-      measure.zone +
+      measure.serverGES.countryName +
       ';' +
-      measure.carbonIntensity +
+      measure.serverGES.carbonIntensity +
       ';' +
       measure.nbRequest +
       '\n';
