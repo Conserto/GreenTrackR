@@ -1,5 +1,17 @@
 # GreenTrackr for Manifest V3
 
+## Eco-conception
+
+Cette extension chrome a été conçue de manière à ce qu'elle soit le plus eco-conçue possible, voici les points les plus importants à suivre pour la garder :
+
+- Réduction du nombre de requêtes
+- Réduction du poids des images (préférer le webp / svg au png si c'est possible) (outils de réduction : https://squoosh.app/ )
+- UX/UI - Réduction du temps passé par l'utilisateur sur le plugin
+- Réduction du poids global de l'application (généralisation du css, approche composants)
+- Prendre en compte l'accessibilité
+
+## Infos supplémentaires
+
 ### Tester l'extension
 
 **Attention :** Cette version de l'extension n'est compatible qu'avec _Manifest V3 (Chromium)_. Une version spécifique pour _Firefox / Manifest V2_ sera disponible séparément.

@@ -12,7 +12,17 @@
     <div>
       <span class="data-label">{translate('gesZone')}</span>
       <span class="data-value"
-        >{measure.cityName ? `${measure.cityName}, ${measure.zone}` : measure.zone}</span
+        >{measure.serverGES.cityName
+          ? `${measure.serverGES.cityName}, ${measure.serverGES.countryName}`
+          : measure.serverGES.countryName}</span
+      >
+    </div>
+    <div>
+      <span class="data-label">{translate('gesUserZone')}</span>
+      <span class="data-value"
+        >{measure.userGES.cityName
+          ? `${measure.userGES.cityName}, ${measure.userGES.countryName}`
+          : measure.userGES.countryName}</span
       >
     </div>
     <div>
@@ -20,20 +30,24 @@
       <span class="data-value">{formatSize(measure.network.size)} {Units.pageSize}</span>
     </div>
     <div>
-      <span class="data-label">{translate('gesIntensity')}</span>
-      <span class="data-value">{measure.carbonIntensity} {Units.carbonIntensity}</span>
-    </div>
-    <div>
       <span class="data-label">{translate('nbRequest')}</span>
       <span class="data-value">{measure.nbRequest}</span>
     </div>
     <div>
-      <span class="data-label">{translate('DOM')}</span>
-      <span class="data-value">{measure.dom}</span>
+      <span class="data-label">{translate('gesIntensity')}</span>
+      <span class="data-value">{measure.serverGES.carbonIntensity} {Units.carbonIntensity}</span>
+    </div>
+    <div>
+      <span class="data-label">{translate('gesUserIntensity')}</span>
+      <span class="data-value">{measure.userGES.carbonIntensity} {Units.carbonIntensity}</span>
     </div>
     <div>
       <span class="data-label">{translate('sizeTransferredBytesUncompressed')}</span>
       <span class="data-value">{formatSize(measure.network.sizeUncompress)} {Units.pageSize}</span>
+    </div>
+    <div>
+      <span class="data-label">{translate('DOM')}</span>
+      <span class="data-value">{measure.dom}</span>
     </div>
   </div>
 </div>
@@ -41,9 +55,10 @@
 <style lang="scss">
   .emissions-infos {
     grid-column: span 2;
-
+    padding: var(--spacing--xl);
     &_data {
       display: grid;
+      gap: var(--spacing--lg);
       grid-template-rows: auto auto;
       grid-template-columns: auto auto auto auto;
     }

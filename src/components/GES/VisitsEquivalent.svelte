@@ -9,8 +9,8 @@
 
   let visitsNumber = NUMBER_OF_VISITS >= 1 ? NUMBER_OF_VISITS : 1000;
 
-  $: carEquivalent = ((measure.ges.websiteTotal / CAR_AVERAGE_CO2) * visitsNumber).toFixed(2);
-  $: phoneEquivalent = ((measure.ges.websiteTotal / PHONE_AVERAGE_CO2) * visitsNumber).toFixed(2);
+  $: carEquivalent = ((measure.ges.pageTotal / CAR_AVERAGE_CO2) * visitsNumber).toFixed(2);
+  $: phoneEquivalent = ((measure.ges.pageTotal / PHONE_AVERAGE_CO2) * visitsNumber).toFixed(2);
 </script>
 
 <p class="label-equivalent">

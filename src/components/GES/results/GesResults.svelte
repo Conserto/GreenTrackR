@@ -8,15 +8,13 @@
 </script>
 
 <div class="results-container">
-  <div class="results">
-    <div class="score-tag__wrapper">
-      <span class="score-tag__label">{translate('gesScore')} : </span>
-      <ScoreTag score={measure.score} />
-    </div>
-    <div class="ges-infos">
-      <GES {measure} />
-      <EmissionInformations {measure} />
-    </div>
+  <div class="score-tag__wrapper">
+    <span class="score-tag__label">{translate('gesScore')} : </span>
+    <ScoreTag score={measure.score} />
+  </div>
+  <div class="ges-infos">
+    <GES {measure} />
+    <EmissionInformations {measure} />
   </div>
 </div>
 
@@ -24,8 +22,13 @@
   .results-container {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
+
+    margin-top: var(--spacing--md);
+    margin-bottom: var(--spacing--md);
+    box-shadow: var(--box-shadow--md);
+    padding-top: var(--spacing--xxl);
   }
   .score-tag {
     &__wrapper {
@@ -40,16 +43,6 @@
       font-weight: var(--font-weight--bold);
     }
   }
-  .results {
-    margin-top: var(--spacing--md);
-    margin-bottom: var(--spacing--md);
-    display: flex;
-    flex-wrap: wrap;
-    width: 75%;
-    box-shadow: var(--box-shadow--md);
-    padding: var(--spacing--xl);
-  }
-
   .ges-infos {
     display: grid;
     grid-template-rows: auto auto;

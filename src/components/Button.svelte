@@ -63,7 +63,7 @@
       background-color: var(--color--grey);
 
       &:hover {
-        background-color: var(---color--dark-grey);
+        background-color: var(--color--dark-grey);
       }
     }
   }

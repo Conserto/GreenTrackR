@@ -1,6 +1,6 @@
 {
   "analysisInProgress": {
-    "message": "Analysis in progress. Start browsing the web, then come back here to get stats !",
+    "message": "Analysis in progress. Start browsing on the current tab, then come back here to get stats !",
     "description": "Analysis in progress message"
   },
   "firstResults": {
@@ -46,6 +46,10 @@
   "greenhouseGasesEmissionDefault": {
     "message": "GES (gCO2eq)",
     "description": "Greenhouse Gases Emission (gCO2e), default"
+  },
+  "energyDefault": {
+    "message": "Energy (Wh)",
+    "description": "Energy used, default"
   },
   "gesDataCenter": {
     "message": "GES Data Center",
@@ -155,9 +159,17 @@
     "message": "Server location",
     "description": "Give the country where the server of the website is localized"
   },
+  "gesUserZone": {
+    "message": "User location",
+    "description": "Give the country where the user of the website is localized"
+  },
   "gesIntensity": {
-    "message": "Country's carbon intensity",
-    "description": "Give the country carbon intensity from electricitymaps"
+    "message": "Servers carbon intensity",
+    "description": "Give server's carbon intensity from electricitymaps"
+  },
+  "gesUserIntensity": {
+    "message": "Users carbon intensity",
+    "description": "Give user's carbon intensity from electricitymaps"
   },
   "nbRequest": {
     "message": "Number of requests",
@@ -359,8 +371,8 @@
     "message": "Devices",
     "description": "Total GES emissions of devices"
   },
-  "websiteTotal": {
-    "message": "Website total",
+  "pageTotal": {
+    "message": "Page total",
     "description": "Total GES emissions of website"
   },
   "pixelDisplayed": {

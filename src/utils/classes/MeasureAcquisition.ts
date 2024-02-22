@@ -31,7 +31,13 @@ export class MeasureAcquisition {
         dataCenterTotal: 0,
         networkTotal: 0,
         deviceTotal: 0,
-        websiteTotal: 0,
+        pageTotal: 0,
+      },
+      energy: {
+        kWhDataCenter: 0,
+        kWhNetwork: 0,
+        kWhDevice: 0,
+        kWhPage: 0,
       },
       nbRequest: 0,
       zone: '',
@@ -50,24 +56,18 @@ export class MeasureAcquisition {
   updateMeasureValues(zoneGES: GES | undefined, userGES: GES | undefined): void {
     if (zoneGES && userGES) {
       //Energie total requetes (réseau, user, server)
-      const { dataCenterTotal, networkTotal, deviceTotal, websiteTotal } =
-        this.gesService.getGESTotals(
-          zoneGES,
-          userGES,
-          this.measure.network,
-          this.measure.nbRequest,
-        );
+      const { ges, energy } = this.gesService.getEnergyAndGES(
+        zoneGES,
+        userGES,
+        this.measure.network,
+        this.measure.nbRequest,
+      );
 
-      this.measure.ges.dataCenterTotal = dataCenterTotal;
-      this.measure.ges.networkTotal = networkTotal;
-      this.measure.ges.deviceTotal = deviceTotal;
-      this.measure.ges.websiteTotal = websiteTotal;
-      this.measure.score = this.scoreService.getScore(this.measure.ges.websiteTotal);
-
-      this.measure.zone = zoneGES.countryName;
-      this.measure.carbonIntensity = zoneGES.carbonIntensity;
-      this.measure.cityName = zoneGES.cityName;
-      this.measure.hourlyCarbonData = zoneGES.hourlyCarbonData;
+      this.measure.ges = ges;
+      this.measure.energy = energy;
+      this.measure.userGES = userGES;
+      this.measure.serverGES = zoneGES;
+      this.measure.score = this.scoreService.getScore(this.measure.ges.pageTotal);
     }
   }
 

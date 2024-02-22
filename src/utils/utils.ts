@@ -78,7 +78,7 @@ export const formatGesMeasuresForTable = (measures: Measure[]) => {
       content: `${formatNumber(measure.ges.deviceTotal)} ${Units.carbonEmissions}`,
     },
     gesTotal: {
-      content: `${formatNumber(measure.ges.websiteTotal)} ${Units.carbonEmissions}`,
+      content: `${formatNumber(measure.ges.pageTotal)} ${Units.carbonEmissions}`,
     },
     gesScore: {
       content: formatNumber(measure.score.value ?? -1),
@@ -88,8 +88,8 @@ export const formatGesMeasuresForTable = (measures: Measure[]) => {
       content: measure.score.gradeLetter,
       style: `background-color: ${measure.score.color}; color: ${measure.score.textColor}`,
     },
-    gesZone: { content: `${measure.cityName}, ${measure.zone}` },
-    gesIntensity: { content: `${measure.carbonIntensity} ${Units.carbonIntensity}` },
+    gesZone: { content: `${measure.serverGES.cityName}, ${measure.serverGES.countryName}` },
+    gesIntensity: { content: `${measure.serverGES.carbonIntensity} ${Units.carbonIntensity}` },
   }));
 };
 
@@ -97,23 +97,27 @@ export const toHistoFormattedDatas = (measure: Measure) => {
   if (measure) {
     return [
       {
-        label: 'dataCenterTotal',
-        value: formatNumber(measure.ges.dataCenterTotal),
-        color: '#86665f',
-      },
-      {
         label: 'networkTotal',
         value: formatNumber(measure.ges.networkTotal),
+        value2: formatNumber(measure.energy.kWhNetwork * 1000),
         color: '#7b7aab',
+      },
+      {
+        label: 'dataCenterTotal',
+        value: formatNumber(measure.ges.dataCenterTotal),
+        value2: formatNumber(measure.energy.kWhDataCenter * 1000),
+        color: '#86665f',
       },
       {
         label: 'deviceTotal',
         value: formatNumber(measure.ges.deviceTotal),
+        value2: formatNumber(measure.energy.kWhDevice * 1000),
         color: '#5e806d',
       },
       {
-        label: 'websiteTotal',
-        value: formatNumber(measure.ges.websiteTotal),
+        label: 'pageTotal',
+        value: formatNumber(measure.ges.pageTotal),
+        value2: formatNumber(measure.energy.kWhPage * 1000),
         color: '#535481',
       },
     ];

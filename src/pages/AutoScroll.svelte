@@ -97,7 +97,7 @@
 {#if currentMeasure && !loading}
   <GesResults measure={currentMeasure} />
   <div class="histo-container">
-    <Histogram datas={histoDatas} yLabel="greenhouseGasesEmissionDefault" />
+    <Histogram datas={histoDatas} yLabel="greenhouseGasesEmissionDefault" yLabel2="energyDefault" />
   </div>
 {/if}
 {#if loading === true}

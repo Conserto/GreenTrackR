@@ -35,7 +35,7 @@
     cursor: pointer;
     border: none;
     padding: var(--spacing--sm) var(--spacing--lg);
-    color: var(---color--dark-grey);
+    color: var(--color--dark-grey);
     font-family: inherit;
     font-size: inherit;
     font-weight: bold;
