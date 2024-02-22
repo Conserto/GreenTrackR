@@ -13,14 +13,19 @@ import { assert, expect, test } from 'vitest';
 
 const measure: Measure = {
   date: new Date(),
-  cityName: 'Nantes',
   url: 'https://conserto.pro/',
   network: { size: 39, sizeUncompress: 488000 },
   ges: {
     dataCenterTotal: 0.55,
     networkTotal: 0.05,
     deviceTotal: 1.68,
-    websiteTotal: 2.28,
+    pageTotal: 2.28,
+  },
+  energy: {
+    kWhDataCenter: 0.007497401472,
+    kWhDevice: 0.01161,
+    kWhNetwork: 0.000280091966,
+    kWhPage: 0.019387493,
   },
   nbRequest: 21,
   score: {
@@ -30,10 +35,21 @@ const measure: Measure = {
     limit: 50,
     textColor: 'black',
   },
-  zone: 'France',
-  carbonIntensity: 371,
-  hourlyCarbonData: [],
   dom: 261,
+  userGES: {
+    countryName: 'France',
+    countryCode: 'fr',
+    cityName: 'Nantes',
+    carbonIntensity: 371,
+    hourlyCarbonData: [],
+  },
+  serverGES: {
+    countryName: 'France',
+    countryCode: 'fr',
+    cityName: 'Nantes',
+    carbonIntensity: 371,
+    hourlyCarbonData: [],
+  },
 };
 
 test('Wait function', async () => {
@@ -89,7 +105,7 @@ test('FormatGesMeasuresForTable function', async () => {
         content: `${formatNumber(measure.ges.deviceTotal)} ${Units.carbonEmissions}`,
       },
       gesTotal: {
-        content: `${formatNumber(measure.ges.websiteTotal)} ${Units.carbonEmissions}`,
+        content: `${formatNumber(measure.ges.pageTotal)} ${Units.carbonEmissions}`,
       },
       gesScore: {
         content: formatNumber(measure.score.value ?? -1),
@@ -99,8 +115,8 @@ test('FormatGesMeasuresForTable function', async () => {
         content: measure.score.gradeLetter,
         style: `background-color: ${measure.score.color}; color: ${measure.score.textColor}`,
       },
-      gesZone: { content: `${measure.cityName}, ${measure.zone}` },
-      gesIntensity: { content: `${measure.carbonIntensity} ${Units.carbonIntensity}` },
+      gesZone: { content: `${measure.serverGES.cityName}, ${measure.serverGES.countryName}` },
+      gesIntensity: { content: `${measure.serverGES.carbonIntensity} ${Units.carbonIntensity}` },
     },
   ]);
 });
@@ -108,23 +124,27 @@ test('FormatGesMeasuresForTable function', async () => {
 test('ToHistoFormattedDatas function', async () => {
   assert.deepEqual(toHistoFormattedDatas(measure), [
     {
-      label: 'dataCenterTotal',
-      value: formatNumber(measure.ges.dataCenterTotal),
-      color: '#86665f',
-    },
-    {
       label: 'networkTotal',
       value: formatNumber(measure.ges.networkTotal),
+      value2: formatNumber(measure.energy.kWhNetwork * 1000),
       color: '#7b7aab',
+    },
+    {
+      label: 'dataCenterTotal',
+      value: formatNumber(measure.ges.dataCenterTotal),
+      value2: formatNumber(measure.energy.kWhDataCenter * 1000),
+      color: '#86665f',
     },
     {
       label: 'deviceTotal',
       value: formatNumber(measure.ges.deviceTotal),
+      value2: formatNumber(measure.energy.kWhDevice * 1000),
       color: '#5e806d',
     },
     {
-      label: 'websiteTotal',
-      value: formatNumber(measure.ges.websiteTotal),
+      label: 'pageTotal',
+      value: formatNumber(measure.ges.pageTotal),
+      value2: formatNumber(measure.energy.kWhPage * 1000),
       color: '#535481',
     },
   ]);

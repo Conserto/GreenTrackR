@@ -1,11 +1,12 @@
 import {
   KWH_DEVICE,
-  KWH_PER_BYTE_DATA_CENTER,
+  KWH_PER_REQUEST_DATA_CENTER,
   KWH_PER_BYTE_NETWORK,
 } from 'src/const/measure.const';
 import type {
   CarbonData,
   CarbonDatas,
+  EnergyMeasure,
   GES,
   GESTotals,
   Measure,
@@ -55,7 +56,6 @@ export class GESService {
     return GES;
   }
 
-  //TODO: return type
   async getGESFromApi(urlHost: URL, headers: Headers, countryCodeSelected: string): Promise<GES> {
     try {
       const zonesGES = await fetch(
@@ -169,17 +169,30 @@ export class GESService {
     }
   }
 
-  getGESTotals(zoneGES: GES, userGES: GES, network: NetworkResponse, nbRequest: number): GESTotals {
-    let kWhDataCenterTotal = 2 * nbRequest * network.sizeUncompress * KWH_PER_BYTE_DATA_CENTER;
-    let kWhNetworkTotal = network.sizeUncompress * KWH_PER_BYTE_NETWORK;
-    let kWhDeviceTotal = nbRequest * KWH_DEVICE;
+  getEnergyAndGES(
+    zoneGES: GES,
+    userGES: GES,
+    network: NetworkResponse,
+    nbRequest: number,
+  ): { ges: GESTotals; energy: EnergyMeasure } {
+    let kWhDataCenter = 2 * nbRequest * network.sizeUncompress * KWH_PER_REQUEST_DATA_CENTER;
+    let kWhNetwork = network.sizeUncompress * KWH_PER_BYTE_NETWORK;
+    let kWhDevice = nbRequest * KWH_DEVICE;
 
-    const dataCenterTotal = kWhDataCenterTotal * zoneGES.carbonIntensity;
-    const networkTotal = kWhNetworkTotal * zoneGES.carbonIntensity;
-    const deviceTotal = kWhDeviceTotal * userGES.carbonIntensity;
-    const websiteTotal = dataCenterTotal + networkTotal + deviceTotal;
+    const dataCenterTotal = kWhDataCenter * zoneGES.carbonIntensity;
+    const networkTotal = kWhNetwork * zoneGES.carbonIntensity;
+    const deviceTotal = kWhDevice * userGES.carbonIntensity;
+    const pageTotal = dataCenterTotal + networkTotal + deviceTotal;
 
-    return { dataCenterTotal, networkTotal, deviceTotal, websiteTotal };
+    return {
+      ges: { dataCenterTotal, networkTotal, deviceTotal, pageTotal },
+      energy: {
+        kWhDataCenter,
+        kWhNetwork,
+        kWhDevice,
+        kWhPage: kWhDataCenter + kWhDevice + kWhNetwork,
+      },
+    };
   }
 
   async getHourlyGES(url: URL, headers: Headers, countryCodeSelected: string) {

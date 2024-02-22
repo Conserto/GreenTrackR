@@ -1,48 +1,90 @@
 <script lang="ts">
-  import { translate } from 'src/utils/utils';
+  import { formatNumber, translate } from 'src/utils/utils';
   import type { HistoData } from 'src/interface';
 
   export let datas: HistoData[];
   export let yLabel: string;
+  export let yLabel2: string = null;
+
+  const svgHeight = 300;
+  const margin = { top: 40, right: 20, bottom: 40, left: 40 };
 
   $: datasLength = datas.length;
-  $: svgWidth = datas.length * 125;
-  const svgHeight = 300;
-  const margin = { top: 20, right: 20, bottom: 40, left: 40 };
+  $: svgWidth = datas.length * 70;
+  $: fullSvgWidth = yLabel2 ? svgWidth * 2 : svgWidth;
 
   $: width = svgWidth - margin.left - margin.right;
   $: height = svgHeight - margin.top - margin.bottom;
+  $: maxDatasValue = Math.max(...datas.map((d) => d.value));
+  $: maxDatasValue2 = Math.max(...datas.map((d) => d.value2));
 
-  function calculateBarHeight(value) {
-    const yScale = height / Math.max(...datas.map((d) => d.value));
+  function calculateBarHeight(value, max) {
+    const yScale = height / max;
     return value * yScale;
   }
 </script>
 
-<svg width={svgWidth} height={svgHeight + 150} aria-describedby="title">
-  <title id="title">Histogramme des valeurs GES</title>
-  {#each datas as { label, value, color }, i}
-    <g>
-      <rect
-        style:fill={color}
-        x={(i * width) / datasLength + margin.left}
-        y={svgHeight - calculateBarHeight(value) - margin.bottom}
-        width={width / datasLength - 5}
-        height={calculateBarHeight(value)}
-      />
-      <text
-        transform={`rotate(-90) translate(${-svgHeight - 35},${(i * width) / datasLength + margin.left + width / (2 * datasLength)})`}
-        text-anchor="middle">{translate(label)}</text
+<div>
+  <svg width={fullSvgWidth} height={svgHeight + 75}>
+    {#each datas as { label, value, value2, color }, i}
+      <g>
+        <line
+          x1={margin.left}
+          y1={svgHeight - calculateBarHeight(value, maxDatasValue) - margin.bottom}
+          x2={svgWidth - margin.right}
+          y2={svgHeight - calculateBarHeight(value, maxDatasValue) - margin.bottom}
+          stroke="grey"
+        />
+        <rect
+          style:fill={color}
+          x={(i * width) / datasLength + margin.left}
+          y={svgHeight - calculateBarHeight(value, maxDatasValue) - margin.bottom}
+          width={width / datasLength - 5}
+          height={calculateBarHeight(value, maxDatasValue)}
+        />
+        <text
+          x={(i * width) / datasLength + margin.left + width / (2 * datasLength)}
+          y={svgHeight - calculateBarHeight(value, maxDatasValue) - margin.bottom - 5}
+          text-anchor="middle">{value}</text
+        >
+      </g>
+      {#if yLabel2}
+        <g>
+          <line
+            x1={svgWidth + margin.left}
+            y1={svgHeight - calculateBarHeight(value2, maxDatasValue2) - margin.bottom}
+            x2={fullSvgWidth - margin.right}
+            y2={svgHeight - calculateBarHeight(value2, maxDatasValue2) - margin.bottom}
+            stroke="grey"
+          />
+          <rect
+            style:fill={color}
+            x={(i * width) / datasLength + margin.left + svgWidth}
+            y={svgHeight - calculateBarHeight(value2, maxDatasValue2) - margin.bottom}
+            width={width / datasLength - 5}
+            height={calculateBarHeight(value2, maxDatasValue2)}
+          />
+          <text
+            x={(i * width) / datasLength + margin.left + width / (2 * datasLength) + svgWidth}
+            y={svgHeight - calculateBarHeight(value2, maxDatasValue2) - margin.bottom - 5}
+            text-anchor="middle">{value2}</text
+          >
+        </g>
+      {/if}
+      <g
+        transform={`translate(${fullSvgWidth / 5 + (i % 2) * (fullSvgWidth / 2.5)}, ${svgHeight - 40 + (Math.floor(i / 2) + 1) * 35})`}
       >
-      <text
-        x={(i * width) / datasLength + margin.left + width / (2 * datasLength)}
-        y={svgHeight - calculateBarHeight(value) - margin.bottom - 5}
-        text-anchor="middle">{value}</text
-      >
-      <text
-        transform={`rotate(-90) translate(${-svgHeight / 2},${margin.left - 15})`}
-        text-anchor="middle">{translate(yLabel)}</text
-      >
-    </g>
-  {/each}
-</svg>
+        <rect width="20" height="20" fill={color} />
+        <text x="25" y="15">{translate(label)}</text>
+      </g>
+    {/each}
+    <text
+      transform={`rotate(-90) translate(${-svgHeight / 2},${margin.left - 15})`}
+      text-anchor="middle">{translate(yLabel)}</text
+    >
+    <text
+      transform={`rotate(-90) translate(${-svgHeight / 2},${margin.left + svgWidth - 15})`}
+      text-anchor="middle">{translate(yLabel2)}</text
+    >
+  </svg>
+</div>
