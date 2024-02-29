@@ -3,6 +3,7 @@
   import { AutoScroll, Evaluation, Parcours, Help } from 'src/pages';
   import { Alert, Tab, Footer } from 'src/components';
   import { translate } from './utils/utils';
+  import { AlertTypeEnum } from './enum';
 
   export let tabs = [
     {
@@ -41,6 +42,11 @@
 
 <header class="flex-col-center">
   <img src={logo} alt="Logo green tracker" />
+  {#if !import.meta.env.VITE_CO2_SIGNAL_TOKEN}
+    <div>
+      <Alert message="errorNoToken" alertType={AlertTypeEnum.ERROR} />
+    </div>
+  {/if}
   <div class="nav nav-tabs" id="myTab" role="tablist">
     {#each tabs as tab}
       <Tab

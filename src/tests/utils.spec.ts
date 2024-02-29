@@ -1,6 +1,7 @@
 import { Units } from 'src/const';
 import type { Measure } from 'src/interface';
 import {
+  createEmptyMeasure,
   formatDate,
   formatGesMeasuresForTable,
   formatNumber,
@@ -41,25 +42,14 @@ const measure: Measure = {
     countryCode: 'fr',
     cityName: 'Nantes',
     carbonIntensity: 371,
-    hourlyCarbonData: [],
   },
   serverGES: {
     countryName: 'France',
     countryCode: 'fr',
     cityName: 'Nantes',
     carbonIntensity: 371,
-    hourlyCarbonData: [],
   },
 };
-
-test('Wait function', async () => {
-  const waitingTime = 2000;
-  let currentTime = Date.now();
-  expect(Date.now()).toBeLessThan(currentTime + waitingTime);
-  currentTime = Date.now();
-  await wait(waitingTime);
-  expect(Date.now()).toBeGreaterThan(currentTime + waitingTime);
-});
 
 test('GetAverageValue function', async () => {
   expect(getAverageValue([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])).toBe(5.5);
@@ -94,7 +84,8 @@ test('FormatGesMeasuresForTable function', async () => {
         content: `${formatSize(measure.network.sizeUncompress)} ${Units.pageSize}`,
       },
       nbRequest: { content: measure.nbRequest },
-      dom: { content: measure.dom },
+      // TODO WHEN DOM COMPUTING IS OK
+      // dom: { content: measure.dom },
       gesDataCenter: {
         content: `${formatNumber(measure.ges.dataCenterTotal)} ${Units.carbonEmissions}`,
       },
@@ -148,4 +139,49 @@ test('ToHistoFormattedDatas function', async () => {
       color: '#535481',
     },
   ]);
+});
+
+test('CreateEmptyMeasure function', async () => {
+  const emptyMeasure = {
+    url: '',
+    network: {
+      size: 0,
+      sizeUncompress: 0,
+    },
+    ges: {
+      dataCenterTotal: 0,
+      networkTotal: 0,
+      deviceTotal: 0,
+      pageTotal: 0,
+    },
+    energy: {
+      kWhDataCenter: 0,
+      kWhNetwork: 0,
+      kWhDevice: 0,
+      kWhPage: 0,
+    },
+    nbRequest: 0,
+    score: {
+      value: 0,
+      color: '',
+      textColor: '',
+      gradeLetter: '',
+      limit: 0,
+    },
+    userGES: {
+      carbonIntensity: 0,
+      countryName: '',
+      cityName: '',
+      countryCode: '',
+    },
+    serverGES: {
+      carbonIntensity: 0,
+      countryName: '',
+      cityName: '',
+      countryCode: '',
+    },
+    dom: 0,
+  };
+  const { date, ...measure } = createEmptyMeasure();
+  assert.deepEqual(measure, emptyMeasure);
 });

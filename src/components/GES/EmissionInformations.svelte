@@ -45,10 +45,11 @@
       <span class="data-label">{translate('sizeTransferredBytesUncompressed')}</span>
       <span class="data-value">{formatSize(measure.network.sizeUncompress)} {Units.pageSize}</span>
     </div>
+    <!-- TODO WHEN DOM COMPUTING IS OK
     <div>
       <span class="data-label">{translate('DOM')}</span>
       <span class="data-value">{measure.dom}</span>
-    </div>
+    </div> -->
   </div>
 </div>
 
