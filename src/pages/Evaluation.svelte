@@ -12,7 +12,7 @@
   } from 'src/utils/utils';
   import { savedMeasures } from 'src/const';
   import { cleanCache } from 'src/utils/chrome.utils';
-  import { MeasureAcquisition } from 'src/utils/classes/MeasureAcquisition';
+  import { MeasureAcquisition } from 'src/utils/service/MeasureAcquisition.service';
 
   enum TabType {
     ResultTab,
