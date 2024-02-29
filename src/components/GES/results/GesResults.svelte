@@ -1,7 +1,6 @@
 <script lang="ts">
   import { translate } from 'src/utils/utils';
   import type { Measure } from 'src/interface';
-  import { MeasureAcquisition } from 'src/utils/classes/MeasureAcquisition';
   import { GES, ScoreTag, EmissionInformations } from 'src/components/GES';
 
   export let measure: Measure = null;
