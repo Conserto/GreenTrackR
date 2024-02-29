@@ -386,5 +386,9 @@
   "autoscrollPercentInput": {
     "message": "Enter % to scroll for page's analysis",
     "description": "Enter % to scroll"
+  },
+  "errorNoToken": {
+    "message": "No CO2 token found, the extension may not work",
+    "description": "Env variable not found"
   }
 }

@@ -8,8 +8,6 @@ export const cleanCache = () => {
         },
         {
           cache: true,
-          serviceWorkers: true,
-          downloads: true,
         },
       );
     }

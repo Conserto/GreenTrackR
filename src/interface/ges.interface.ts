@@ -1,5 +1,4 @@
 export interface GES {
-  hourlyCarbonData: CarbonData[];
   carbonIntensity: number;
   countryName: string;
   cityName: string;
