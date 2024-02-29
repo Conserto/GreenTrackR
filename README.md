@@ -12,15 +12,17 @@ Cette extension chrome a été conçue de manière à ce qu'elle soit le plus ec
 
 ## Infos supplémentaires
 
-### Tester l'extension
+### Mode développement
 
-**Attention :** Cette version de l'extension n'est compatible qu'avec _Manifest V3 (Chromium)_. Une version spécifique pour _Firefox / Manifest V2_ sera disponible séparément.
-
-- Chrome >
-  [Installation de l'extension](https://developer.chrome.com/docs/extensions/mv3/tut_debugging/)
-
-- Edge >
-  [Installation de l'extension](https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/getting-started/extension-sideloading)
+- Cloner le projet
+- Copier/coller le fichier src/.env.template et le rennomer en .env puis renseigner les variables suivantes:
+  - VITE_MAX_HAR_RETRIES : Nombre d'essais pour analyser les requêtes du site courant
+  - VITE_CO2_SIGNAL_TOKEN : Token nécessaire à l'utilisation de l'API d'electricity map. Il peut être récupéré à l'adresse suivante https://api-portal.electricitymaps.com/
+    <br>**Attention !** L'extension de peut fonctionner sans ce token.
+- Lancer la commande yarn install pour installer les dépendances
+- Lancer yarn dev pour lancer l'app.
+- Importer le plugin dans chrome://extensions/ > Mode développeur > Charger l'extension non empaquetée > importer le contenu du dossier ./dist/
+  <br>**Attention :** Cette version de l'extension n'est compatible qu'avec _Manifest V3 (Chromium)_. Une version spécifique pour _Firefox / Manifest V2_ sera disponible séparément.
 
 ### Utiliser l'extension
 

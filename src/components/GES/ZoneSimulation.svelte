@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { translate } from 'src/utils/utils';
   import { createEventDispatcher } from 'svelte';
-  import { zonesLabels as zonesLabelsFile } from 'src/assets/data/zones';
+  import { codeZone } from 'src/assets/data/codeZone';
 
   import { MeasureAcquisition } from 'src/utils/classes/MeasureAcquisition.ts';
 
@@ -13,20 +13,10 @@
   const dispatch = createEventDispatcher();
 
   onMount(async () => {
-    const zones = await MeasureAcquisition.getZones();
-
-    zonesOptions = zones.reduce(
-      (acc, countryZone) => {
-        countryZone.zones.map((zoneValue) => {
-          const zoneLabel = `${zoneValue} / ${zonesLabelsFile[zoneValue]?.zoneName}`;
-          acc = [...acc, { label: zoneLabel, value: zoneValue }];
-          return acc;
-        }, []);
-
-        return acc;
-      },
-      [{ label: 'Automatique', value: 'auto' }],
-    );
+    zonesOptions = [
+      { label: 'Automatique', value: 'auto' },
+      ...codeZone.map((zone) => ({ label: zone.countryName, value: zone.zone })),
+    ];
   });
 
   function handleSubmitSimulation() {

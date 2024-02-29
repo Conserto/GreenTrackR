@@ -1,14 +1,6 @@
 import type { Measure } from 'src/interface';
 import { Units } from 'src/const/units.const';
 
-export const wait = (milliseconds: number): Promise<void> => {
-  return new Promise<void>((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, milliseconds);
-  });
-};
-
 export const getAverageValue = (data: number[]) => {
   let sum = data.reduce((partialSum: number, a) => partialSum + a, 0);
   return sum / data.length;
@@ -67,7 +59,8 @@ export const formatGesMeasuresForTable = (measures: Measure[]) => {
       content: `${formatSize(measure.network.sizeUncompress)} ${Units.pageSize}`,
     },
     nbRequest: { content: measure.nbRequest },
-    dom: { content: measure.dom },
+    // TODO WHEN DOM COMPUTING IS OK
+    // dom: { content: measure.dom },
     gesDataCenter: {
       content: `${formatNumber(measure.ges.dataCenterTotal)} ${Units.carbonEmissions}`,
     },
@@ -124,4 +117,48 @@ export const toHistoFormattedDatas = (measure: Measure) => {
   } else {
     return [];
   }
+};
+
+export const createEmptyMeasure = (): Measure => {
+  return {
+    date: new Date(),
+    url: '',
+    network: {
+      size: 0,
+      sizeUncompress: 0,
+    },
+    ges: {
+      dataCenterTotal: 0,
+      networkTotal: 0,
+      deviceTotal: 0,
+      pageTotal: 0,
+    },
+    energy: {
+      kWhDataCenter: 0,
+      kWhNetwork: 0,
+      kWhDevice: 0,
+      kWhPage: 0,
+    },
+    nbRequest: 0,
+    score: {
+      value: 0,
+      color: '',
+      textColor: '',
+      gradeLetter: '',
+      limit: 0,
+    },
+    userGES: {
+      carbonIntensity: 0,
+      countryName: '',
+      cityName: '',
+      countryCode: '',
+    },
+    serverGES: {
+      carbonIntensity: 0,
+      countryName: '',
+      cityName: '',
+      countryCode: '',
+    },
+    dom: 0,
+  };
 };

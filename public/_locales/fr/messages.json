@@ -382,5 +382,9 @@
   "autoscrollPercentInput": {
     "message": "Saisir le % de la page à scroller pour l'analyse",
     "description": "% de la page à scroller"
+  },
+  "errorNoToken": {
+    "message": "Aucun token CO2 trouvé, l'extension pourrait ne pas fonctionner",
+    "description": "Variable d'environnement inconnue"
   }
 }

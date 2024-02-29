@@ -1,38 +1,34 @@
+import { getCarbonIntensity, getCurrentZone, getServerZone } from 'src/api';
 import {
   KWH_DEVICE,
   KWH_PER_REQUEST_DATA_CENTER,
   KWH_PER_BYTE_NETWORK,
 } from 'src/const/measure.const';
+import { GesTypeEnum } from 'src/enum';
 import type {
   CarbonData,
   CarbonDatas,
   EnergyMeasure,
   GES,
   GESTotals,
-  Measure,
   NetworkResponse,
 } from 'src/interface';
+import { codeZone } from 'src/assets/data/codeZone';
 
 export class GESService {
-  private headers = new Headers({
-    Host: 'api.localhost',
-    'X-Forwarded-Proto': 'http',
-    'X-Forwarded-Host': 'api.localhost',
-    'X-Forwarded-Port': '80',
-  });
   constructor() {}
 
   async computeGES(urlHost: URL, countryCodeSelected: string, userCountryCodeSelected: string) {
-    const zoneGES = await this.getGES(urlHost, this.headers, countryCodeSelected);
-    const userGES = await this.getGES(urlHost, this.headers, userCountryCodeSelected);
+    const zoneGES = await this.getGES(urlHost, GesTypeEnum.SERVER, countryCodeSelected);
+    const userGES = await this.getGES(urlHost, GesTypeEnum.USER, userCountryCodeSelected);
 
     return { zoneGES, userGES };
   }
 
-  async getGES(url: URL, headers: Headers, countryCodeSelected: string): Promise<GES> {
+  async getGES(url: URL, gesType: GesTypeEnum, countryCodeSelected: string): Promise<GES> {
     let GES;
     try {
-      GES = await this.getGESFromApi(url, headers, countryCodeSelected);
+      GES = await this.getGESFromApi(url, gesType, countryCodeSelected);
       if (!GES.carbonIntensity) {
         GES = await this.getGESFromLocalFile(countryCodeSelected);
       }
@@ -56,25 +52,33 @@ export class GESService {
     return GES;
   }
 
-  async getGESFromApi(urlHost: URL, headers: Headers, countryCodeSelected: string): Promise<GES> {
+  async getGESFromApi(
+    urlHost: URL,
+    gesType: GesTypeEnum,
+    countryCodeSelected: string,
+  ): Promise<GES> {
     try {
-      const zonesGES = await fetch(
-        `
-        ${import.meta.env.VITE_CARBON_API_URL}/carbon/${urlHost.host}/${countryCodeSelected}`,
-        {
-          headers: headers,
-        },
-      );
-      const results = await zonesGES.json();
-      const hourlyCarbonData = await this.getHourlyGES(urlHost, this.headers, results.countryCode);
-
-      return {
-        hourlyCarbonData: hourlyCarbonData,
-        carbonIntensity: results.carbonIntensity,
-        countryName: results.countryName,
-        cityName: results.cityName,
-        countryCode: results.countryCode,
+      const GES = {
+        carbonIntensity: 0,
+        countryName: '',
+        cityName: '',
+        countryCode: '',
       };
+      if (countryCodeSelected !== 'auto') {
+        GES.carbonIntensity = await getCarbonIntensity(countryCodeSelected);
+        GES.countryCode = countryCodeSelected;
+        GES.countryName =
+          codeZone.find((zoneObj) => zoneObj.zone === countryCodeSelected)?.countryName ?? '';
+      } else {
+        const location =
+          gesType === GesTypeEnum.USER ? await getCurrentZone() : await getServerZone(urlHost);
+        GES.carbonIntensity = await getCarbonIntensity(location);
+        GES.countryCode = location.countryCode;
+        GES.countryName = location.countryName;
+        GES.cityName = location.cityName;
+      }
+
+      return GES;
     } catch (error: any) {
       throw new Error(
         'There has been a problem when trying to get GES emissions from API : ' + error,
@@ -92,7 +96,6 @@ export class GESService {
     }
 
     return {
-      hourlyCarbonData: carbonData,
       carbonIntensity: lastReportOnDate?.carbonIntensity ?? 0,
       countryName: countryName,
       cityName: '',
@@ -148,27 +151,6 @@ export class GESService {
     return carbonData;
   }
 
-  getGESColor(value: number, coeff: number) {
-    let thresholds = [
-      { limit: 4.5, grade: 'F', color: '255, 19, 7' },
-      { limit: 4.25, grade: 'E', color: '255, 102, 13' },
-      { limit: 3.75, grade: 'D', color: '255, 139, 14' },
-      { limit: 3.25, grade: 'D+', color: '255, 183, 0' },
-      { limit: 2.75, grade: 'C', color: '255, 212, 58' },
-      { limit: 2.0, grade: 'C+', color: '254, 244, 46' },
-      { limit: 1.25, grade: 'B', color: '191, 222, 57' },
-      { limit: 0.5, grade: 'B+', color: '52, 188, 110' },
-      { limit: 0.25, grade: 'A', color: '24, 164, 64' },
-      { limit: -Infinity, grade: 'A+', color: '3, 126, 34' },
-    ];
-
-    for (let element of thresholds) {
-      if (value >= element.limit) {
-        return 'rgba(' + element.color + ',' + coeff + ')';
-      }
-    }
-  }
-
   getEnergyAndGES(
     zoneGES: GES,
     userGES: GES,
@@ -193,40 +175,5 @@ export class GESService {
         kWhPage: kWhDataCenter + kWhDevice + kWhNetwork,
       },
     };
-  }
-
-  async getHourlyGES(url: URL, headers: Headers, countryCodeSelected: string) {
-    let hourlyGES;
-    try {
-      hourlyGES = await this.getHourlyGESFromApi(url, headers, countryCodeSelected);
-    } catch (error) {
-      throw new Error('There has been a problem when trying to get GES Emissions : ' + error);
-    }
-    return hourlyGES;
-  }
-
-  async getHourlyGESFromApi(url: URL, headers: Headers, codeCountry: string) {
-    let hourlyCarbonDataFormatted: CarbonData[];
-    try {
-      let hourlyCarbonData = await fetch(
-        `${import.meta.env.VITE_CARBON_API_URL}/carbon/daily/${codeCountry}/${new Date().toJSON().slice(0, 10)}`,
-        {
-          headers: headers,
-        },
-      );
-
-      const res = await hourlyCarbonData.json();
-      hourlyCarbonDataFormatted = res.map((hourlyCarbonData: any) => {
-        return {
-          date: new Date(hourlyCarbonData.date),
-          carbonIntensity: hourlyCarbonData.carbonfactor,
-        };
-      });
-    } catch (error) {
-      throw new Error(
-        'There has been a problem when trying to get Hourly GES Emissions : ' + error,
-      );
-    }
-    return hourlyCarbonDataFormatted;
   }
 }

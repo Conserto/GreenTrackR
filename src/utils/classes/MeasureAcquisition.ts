@@ -3,6 +3,7 @@ import type { GES, Measure } from '../../interface';
 import { sendChromeMsg } from '../chrome.utils';
 
 import { NetworkService, GESService, ScoreService } from '../service';
+import { createEmptyMeasure } from '../utils';
 
 export class MeasureAcquisition {
   public measure: Measure;
@@ -15,42 +16,7 @@ export class MeasureAcquisition {
     this.networkService = new NetworkService();
     this.gesService = new GESService();
     this.scoreService = new ScoreService();
-    this.measure = this.initMeasureAcquisition();
-  }
-
-  initMeasureAcquisition(): Measure {
-    return {
-      date: new Date(),
-      cityName: '',
-      url: '',
-      network: {
-        size: 0,
-        sizeUncompress: 0,
-      },
-      ges: {
-        dataCenterTotal: 0,
-        networkTotal: 0,
-        deviceTotal: 0,
-        pageTotal: 0,
-      },
-      energy: {
-        kWhDataCenter: 0,
-        kWhNetwork: 0,
-        kWhDevice: 0,
-        kWhPage: 0,
-      },
-      nbRequest: 0,
-      zone: '',
-      score: {
-        value: 0,
-        color: '',
-        textColor: '',
-        gradeLetter: '',
-        limit: 0,
-      },
-      carbonIntensity: 0,
-      dom: 0,
-    };
+    this.measure = createEmptyMeasure();
   }
 
   updateMeasureValues(zoneGES: GES | undefined, userGES: GES | undefined): void {
@@ -150,18 +116,5 @@ export class MeasureAcquisition {
 
       chrome.tabs.onUpdated.addListener(onTabUpdated);
     });
-  }
-
-  static async getZones() {
-    let zones = await fetch(
-      `
-        ${import.meta.env.VITE_CARBON_API_URL}/zones`,
-    );
-    const zonesContent = await zones.json();
-    const sortedZones = zonesContent?.sort((a: any, b: any) =>
-      a.countryName.localeCompare(b.countryName),
-    );
-
-    return sortedZones;
   }
 }
