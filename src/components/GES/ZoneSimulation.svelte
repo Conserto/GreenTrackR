@@ -13,6 +13,11 @@
   const dispatch = createEventDispatcher();
 
   onMount(async () => {
+    console.log(
+      'log',
+      codeZone.sort((a: any, b: any) => a.countryName.localeCompare(b.countryName)),
+    );
+
     zonesOptions = [
       { label: 'Automatique', value: 'auto' },
       ...codeZone.map((zone) => ({ label: zone.countryName, value: zone.zone })),
