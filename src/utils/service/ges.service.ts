@@ -1,4 +1,5 @@
 import { getCarbonIntensity, getCurrentZone, getServerZone } from 'src/api';
+import { codeZone } from 'src/assets/data/codeZone';
 import {
   KWH_DEVICE,
   KWH_PER_REQUEST_DATA_CENTER,
@@ -13,7 +14,6 @@ import type {
   GESTotals,
   NetworkResponse,
 } from 'src/interface';
-import { codeZone } from 'src/assets/data/codeZone';
 
 export class GESService {
   constructor() {}
@@ -28,18 +28,13 @@ export class GESService {
   async getGES(url: URL, gesType: GesTypeEnum, countryCodeSelected: string): Promise<GES> {
     let GES;
     try {
-      GES = await this.getGESFromApi(url, gesType, countryCodeSelected);
-      if (!GES.carbonIntensity) {
+      if (window.navigator.onLine) {
+        GES = await this.getGESFromApi(url, gesType, countryCodeSelected);
+      } else {
         GES = await this.getGESFromLocalFile(countryCodeSelected);
       }
     } catch (error) {
       try {
-        console.warn(
-          'There has been a problem when trying to get distant GES Emissions : ' +
-            error +
-            '. Trying to get data from local file',
-        );
-
         GES = await this.getGESFromLocalFile(countryCodeSelected);
       } catch (e) {
         throw new Error(

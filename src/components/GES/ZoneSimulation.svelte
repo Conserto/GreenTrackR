@@ -4,7 +4,7 @@
   import { createEventDispatcher } from 'svelte';
   import { codeZone } from 'src/assets/data/codeZone';
 
-  import { MeasureAcquisition } from 'src/utils/classes/MeasureAcquisition.ts';
+  import { MeasureAcquisition } from 'src/utils/service/MeasureAcquisition.service';
 
   import { Select, Button } from 'src/components';
   import { ButtonTypeEnum } from 'src/enum';
@@ -13,11 +13,6 @@
   const dispatch = createEventDispatcher();
 
   onMount(async () => {
-    console.log(
-      'log',
-      codeZone.sort((a: any, b: any) => a.countryName.localeCompare(b.countryName)),
-    );
-
     zonesOptions = [
       { label: 'Automatique', value: 'auto' },
       ...codeZone.map((zone) => ({ label: zone.countryName, value: zone.zone })),

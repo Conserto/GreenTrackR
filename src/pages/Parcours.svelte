@@ -3,10 +3,10 @@
   import { ButtonTypeEnum } from 'src/enum';
   import { CheckIcon } from 'src/assets/icons';
   import { translate } from 'src/utils/utils';
-  import { MeasureAcquisition } from 'src/utils/classes/MeasureAcquisition';
   import type { Measure } from 'src/interface';
   import { JourneyResults } from 'src/components/GES/results';
   import { cleanCache } from 'src/utils/chrome.utils';
+  import { MeasureAcquisition } from 'src/utils/service/MeasureAcquisition.service';
 
   let onGoingAnalysis = false;
   let resultsAvailable = false;
