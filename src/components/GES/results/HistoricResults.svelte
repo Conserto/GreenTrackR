@@ -3,7 +3,7 @@
   import { ButtonTypeEnum } from 'src/enum';
   import type { Measure } from 'src/interface';
   import { Table, Button, Modal } from 'src/components';
-  import { export_data } from 'src/utils/service';
+  import { export_data } from 'src/service';
   import {
     formatGesMeasuresForTable,
     getLocalStorageObject,
