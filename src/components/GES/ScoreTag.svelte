@@ -2,12 +2,12 @@
 <script lang="ts">
   import { ALL_SCORES } from 'src/const';
   import type { Score } from 'src/interface';
-  import { ScoreService } from 'src/utils/service';
+  import { ScoreService } from 'src/service';
   import { translate } from 'src/utils/utils';
 
   export let score: Score;
 
-  const resScore = ScoreService.getScoreForGrade(score.value);
+  $: resScore = ScoreService.getScoreForGrade(score.value);
 </script>
 
 <div class="scores-tag">

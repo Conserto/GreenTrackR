@@ -1,5 +1,5 @@
 import { ALL_SCORES } from 'src/const';
-import { ScoreService } from 'src/utils/service';
+import { ScoreService } from 'src//service';
 import { assert, expect, test } from 'vitest';
 
 const scoreService = new ScoreService();
