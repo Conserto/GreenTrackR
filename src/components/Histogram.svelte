@@ -28,13 +28,6 @@
   <svg width={fullSvgWidth} height={svgHeight + 75}>
     {#each datas as { label, value, value2, color }, i}
       <g>
-        <line
-          x1={margin.left}
-          y1={svgHeight - calculateBarHeight(value, maxDatasValue) - margin.bottom}
-          x2={svgWidth - margin.right}
-          y2={svgHeight - calculateBarHeight(value, maxDatasValue) - margin.bottom}
-          stroke="grey"
-        />
         <rect
           style:fill={color}
           x={(i * width) / datasLength + margin.left}
@@ -50,13 +43,6 @@
       </g>
       {#if yLabel2}
         <g>
-          <line
-            x1={svgWidth + margin.left}
-            y1={svgHeight - calculateBarHeight(value2, maxDatasValue2) - margin.bottom}
-            x2={fullSvgWidth - margin.right}
-            y2={svgHeight - calculateBarHeight(value2, maxDatasValue2) - margin.bottom}
-            stroke="grey"
-          />
           <rect
             style:fill={color}
             x={(i * width) / datasLength + margin.left + svgWidth}

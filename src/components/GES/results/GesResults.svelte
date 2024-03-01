@@ -1,18 +1,19 @@
 <script lang="ts">
   import { translate } from 'src/utils/utils';
   import type { Measure } from 'src/interface';
-  import { GES, ScoreTag, EmissionInformations } from 'src/components/GES';
+  import { ScoreTag, EmissionInformations, CO2Equivalent } from 'src/components/GES';
+  import VisitsEquivalent from '../VisitsEquivalent.svelte';
 
   export let measure: Measure = null;
 </script>
 
 <div class="results-container">
-  <div class="score-tag__wrapper">
-    <span class="score-tag__label">{translate('gesScore')} : </span>
+  <div class="score-container">
     <ScoreTag score={measure.score} />
+    <CO2Equivalent {measure} />
+    <VisitsEquivalent {measure} />
   </div>
   <div class="ges-infos">
-    <GES {measure} />
     <EmissionInformations {measure} />
   </div>
 </div>
@@ -23,24 +24,20 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 
     margin-top: var(--spacing--md);
     margin-bottom: var(--spacing--md);
     box-shadow: var(--box-shadow--md);
     padding-top: var(--spacing--xxl);
   }
-  .score-tag {
-    &__wrapper {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      flex-wrap: wrap;
-    }
-
-    &__label {
-      margin-right: var(--spacing--lg);
-      font-weight: var(--font-weight--bold);
-    }
+  .score-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: var(--spacing--xl);
   }
   .ges-infos {
     display: grid;

@@ -13,24 +13,21 @@
   $: phoneEquivalent = ((measure.ges.pageTotal / PHONE_AVERAGE_CO2) * visitsNumber).toFixed(2);
 </script>
 
-<p class="label-equivalent">
+<div class="visit-eq-container">
   <Input
     type={InputTypeEnum.NUMBER}
     name="numberVisit"
     bind:value={visitsNumber}
     translateKey="eitherFor"
   />
-  &nbsp;
-  {translate('visitEquivalent')}
-</p>
-<div class="values-equivalent flex-center">
-  <div class="car-equivalent">
+  <p>{translate('visitEquivalent')}</p>
+  <div class="equivalent-container">
     <img class="car-icon" src={CarIcon} alt="car" loading="lazy" />
     <span>{carEquivalent} {translate('carIndicator')}</span>
   </div>
 
-  <span>&nbsp;ou&nbsp;</span>
-  <div class="phone-equivalent">
+  <p>ou</p>
+  <div class="equivalent-container">
     <img class="phone-icon" src={PhoneIcon} alt="phone" loading="lazy" />
     <span>{phoneEquivalent} {translate('smartphoneIndicator')}</span>
   </div>
@@ -44,15 +41,19 @@
     margin: var(--spacing--xs);
   }
 
-  .label-equivalent,
-  .values-equivalent {
+  .visit-eq-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing--sm);
     font-weight: var(--font-weight--bold);
     font-size: var(--font-size--sm);
   }
 
-  .car-equivalent,
-  .phone-equivalent {
+  .equivalent-container {
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 </style>
