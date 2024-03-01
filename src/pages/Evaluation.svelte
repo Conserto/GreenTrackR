@@ -91,33 +91,31 @@
     disabled={!currentMeasure}
   />
 </div>
-<div class="flex-column-center">
-  {#if currentDisplayedTab === TabType.ResultTab}
-    {#if currentMeasure && !loading}
-      <GesResults measure={currentMeasure} />
-      <ZoneSimulation on:submitSimulation={handleSimulation} />
-      <div class="histo-container">
-        {#if loadGes}
-          <div class="loading-ges">
-            <LoadingWheel />
-          </div>
-        {:else}
-          <Histogram
-            datas={histoDatas}
-            yLabel="greenhouseGasesEmissionDefault"
-            yLabel2="energyDefault"
-          />
-        {/if}
-      </div>
-    {:else if loading === true}
-      <div class="loading-wheel">
-        <LoadingWheel />
-      </div>
-    {/if}
-  {:else if currentDisplayedTab === TabType.HistoricTab}
-    <HistoricResults />
+{#if currentDisplayedTab === TabType.ResultTab}
+  {#if currentMeasure && !loading}
+    <GesResults measure={currentMeasure} />
+    <ZoneSimulation on:submitSimulation={handleSimulation} />
+    <div class="histo-container">
+      {#if loadGes}
+        <div class="loading-ges">
+          <LoadingWheel />
+        </div>
+      {:else}
+        <Histogram
+          datas={histoDatas}
+          yLabel="greenhouseGasesEmissionDefault"
+          yLabel2="energyDefault"
+        />
+      {/if}
+    </div>
+  {:else if loading === true}
+    <div class="loading-wheel">
+      <LoadingWheel />
+    </div>
   {/if}
-</div>
+{:else if currentDisplayedTab === TabType.HistoricTab}
+  <HistoricResults />
+{/if}
 {#if showPopUp}
   <Modal>
     <div class="modal">

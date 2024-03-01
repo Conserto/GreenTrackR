@@ -22,7 +22,7 @@ Cette extension chrome a été conçue de manière à ce qu'elle soit le plus ec
 - Lancer la commande yarn install pour installer les dépendances
 - Lancer yarn dev pour lancer l'app.
 - Importer le plugin dans chrome://extensions/ > Mode développeur > Charger l'extension non empaquetée > importer le contenu du dossier ./dist/
-  <br>**Attention :** Cette version de l'extension n'est compatible qu'avec _Manifest V3 (Chromium)_. Une version spécifique pour _Firefox / Manifest V2_ sera disponible séparément.
+  <br>**Attention :** Cette version de l'extension n'est compatible qu'avec _Manifest V3 (Chromium)_.
 
 ### Utiliser l'extension
 
