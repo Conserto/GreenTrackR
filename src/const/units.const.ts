@@ -1,5 +1,5 @@
 export const Units = {
-  pageSize: 'ko',
+  pageSize: 'kB',
   carbonIntensity: 'gCO2eq/Kwh',
   carbonEmissions: 'gCO2eq',
 };

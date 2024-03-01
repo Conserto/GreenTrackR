@@ -3,6 +3,7 @@
   import { ALL_SCORES } from 'src/const';
   import type { Score } from 'src/interface';
   import { ScoreService } from 'src/utils/service';
+  import { translate } from 'src/utils/utils';
 
   export let score: Score;
 
@@ -10,6 +11,7 @@
 </script>
 
 <div class="scores-tag">
+  <p class="score-label">{translate('gesScore')} :</p>
   {#each ALL_SCORES as scoreLevel}
     <div class="score {scoreLevel.class}" style:background-color={scoreLevel.color}>
       <span
@@ -31,11 +33,14 @@
   .scores-tag {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
     max-width: 280px;
-    margin-bottom: var(--spacing--xxxl);
   }
-
+  .score-label {
+    margin-right: var(--spacing--xxl);
+    font-weight: var(--font-weight--bold);
+  }
   .score {
     width: 10%;
     height: 2.5rem;
@@ -44,7 +49,6 @@
     justify-content: center;
     color: var(--color--white);
   }
-
   .score-letter {
     color: transparent;
 
@@ -64,7 +68,6 @@
       line-height: 2;
     }
   }
-
   .score-number {
     display: flex;
     color: var(--color--dark);
@@ -72,6 +75,5 @@
     top: 3rem;
     font-weight: var(--font-weight--bold);
     font-size: var(--font-size--sm);
-    /* display: none; */
   }
 </style>

@@ -85,6 +85,7 @@
 
   .nav {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     padding-left: 0;
     margin: 0;
@@ -97,7 +98,6 @@
     flex-wrap: wrap;
     justify-content: start;
     align-items: center;
-    margin: 0 var(--spacing--xl) 0 var(--spacing--xl);
   }
 
   .plugin-title {

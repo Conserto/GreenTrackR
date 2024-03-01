@@ -152,9 +152,9 @@ export class GESService {
     network: NetworkResponse,
     nbRequest: number,
   ): { ges: GESTotals; energy: EnergyMeasure } {
-    let kWhDataCenter = 2 * nbRequest * network.sizeUncompress * KWH_PER_REQUEST_DATA_CENTER;
+    let kWhDataCenter = nbRequest * KWH_PER_REQUEST_DATA_CENTER;
     let kWhNetwork = network.sizeUncompress * KWH_PER_BYTE_NETWORK;
-    let kWhDevice = nbRequest * KWH_DEVICE;
+    let kWhDevice = KWH_DEVICE;
 
     const dataCenterTotal = kWhDataCenter * zoneGES.carbonIntensity;
     const networkTotal = kWhNetwork * zoneGES.carbonIntensity;

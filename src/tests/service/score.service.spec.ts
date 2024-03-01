@@ -7,10 +7,10 @@ const scoreService = new ScoreService();
 const scoreGESObj = {
   gesValue: 1.84,
   score: {
-    color: 'rgb(191, 222, 57)',
-    gradeLetter: 'B',
-    limit: 2,
+    gradeLetter: 'C',
+    color: '#f4e300',
     textColor: 'black',
+    limit: 2.5,
     value: 63.199999999999996,
   },
 };

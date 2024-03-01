@@ -7,7 +7,7 @@
 </script>
 
 <div class="emissions-infos">
-  <p>{translate('infoMix')}</p>
+  <p class="info-mix">{translate('infoMix')}</p>
   <div class="emissions-infos_data">
     <div>
       <span class="data-label">{translate('gesZone')}</span>
@@ -26,12 +26,8 @@
       >
     </div>
     <div>
-      <span class="data-label">{translate('sizeTransferredBytesCompressed')}</span>
-      <span class="data-value">{formatSize(measure.network.size)} {Units.pageSize}</span>
-    </div>
-    <div>
-      <span class="data-label">{translate('nbRequest')}</span>
-      <span class="data-value">{measure.nbRequest}</span>
+      <span class="data-label">{translate('sizeTransferredBytesUncompressed')}</span>
+      <span class="data-value">{formatSize(measure.network.sizeUncompress)} {Units.pageSize}</span>
     </div>
     <div>
       <span class="data-label">{translate('gesIntensity')}</span>
@@ -42,9 +38,14 @@
       <span class="data-value">{measure.userGES.carbonIntensity} {Units.carbonIntensity}</span>
     </div>
     <div>
-      <span class="data-label">{translate('sizeTransferredBytesUncompressed')}</span>
-      <span class="data-value">{formatSize(measure.network.sizeUncompress)} {Units.pageSize}</span>
+      <span class="data-label">{translate('nbRequest')}</span>
+      <span class="data-value">{measure.nbRequest}</span>
     </div>
+    <!-- TODO WHEN SIZE COMPRESSED IS USED
+    <div>
+      <span class="data-label">{translate('sizeTransferredBytesCompressed')}</span>
+      <span class="data-value">{formatSize(measure.network.size)} {Units.pageSize}</span>
+    </div> -->
     <!-- TODO WHEN DOM COMPUTING IS OK
     <div>
       <span class="data-label">{translate('DOM')}</span>
@@ -61,10 +62,14 @@
       display: grid;
       gap: var(--spacing--lg);
       grid-template-rows: auto auto;
-      grid-template-columns: auto auto auto auto;
+      grid-template-columns: auto auto auto;
+      // Resize when more infos are displayed
+      // grid-template-columns: auto auto auto auto;
     }
   }
-
+  .info-mix {
+    text-align: center;
+  }
   .data-label {
     font-weight: var(--font-weight--bold);
     margin-bottom: var(--spacing--sm);

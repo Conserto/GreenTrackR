@@ -120,7 +120,7 @@
     "description": "Compressed transferred size (KB)"
   },
   "sizeTransferredBytesUncompressed": {
-    "message": "Taille de la page décompresssée",
+    "message": "Taille de la page décompressée",
     "description": "Uncompressed transferred size (KB)"
   },
   "tabEvaluation": {
