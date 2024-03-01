@@ -4,7 +4,7 @@
   import { createEventDispatcher } from 'svelte';
   import { codeZone } from 'src/assets/data/codeZone';
 
-  import { MeasureAcquisition } from 'src/utils/service/MeasureAcquisition.service';
+  import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
 
   import { Select, Button } from 'src/components';
   import { ButtonTypeEnum } from 'src/enum';

@@ -4,7 +4,7 @@
   import { cleanCache, sendChromeMsg } from 'src/utils/chrome.utils';
   import { toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { onDestroy, onMount } from 'svelte';
-  import { MeasureAcquisition } from 'src/utils/service/MeasureAcquisition.service';
+  import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
   import Histogram from 'src/components/Histogram.svelte';
   import GesResults from 'src/components/GES/results/GesResults.svelte';
 

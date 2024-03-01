@@ -1,9 +1,8 @@
 import { RequestAction } from 'src/enum';
-import type { GES, Measure } from '../../interface';
-import { sendChromeMsg } from '../chrome.utils';
+import type { GES, Measure } from '../interface';
 
 import { NetworkService, GESService, ScoreService } from '.';
-import { createEmptyMeasure } from '../utils';
+import { createEmptyMeasure, sendChromeMsg } from 'src/utils';
 
 export class MeasureAcquisition {
   public measure: Measure;

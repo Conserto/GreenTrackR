@@ -1,5 +1,5 @@
 import { RequestAction } from 'src/enum';
-import { getDomSizeWithoutSvg } from 'src/utils/service';
+import { getDomSizeWithoutSvg } from 'src//service';
 
 const sentRuntimeMsg = (payload: any) => {
   chrome.runtime.sendMessage(payload);

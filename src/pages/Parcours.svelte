@@ -6,7 +6,7 @@
   import type { Measure } from 'src/interface';
   import { JourneyResults } from 'src/components/GES/results';
   import { cleanCache } from 'src/utils/chrome.utils';
-  import { MeasureAcquisition } from 'src/utils/service/MeasureAcquisition.service';
+  import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
 
   let onGoingAnalysis = false;
   let resultsAvailable = false;
