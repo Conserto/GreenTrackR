@@ -1,16 +1,21 @@
-import type { CarbonData, GES, GESTotals, NetworkResponse, Score } from '.';
+import type { GES, GESTotals, NetworkResponse, Score } from '.';
 
 export interface Measure {
   date: Date;
   url: string;
-  network: NetworkResponse;
   ges: GESTotals;
   energy: EnergyMeasure;
-  nbRequest: number;
   score: Score;
   dom: number;
   userGES: GES;
   serverGES: GES;
+  networkMeasure: NetworkMeasure;
+  extensionMeasure: NetworkMeasure;
+}
+
+export interface NetworkMeasure {
+  network: NetworkResponse;
+  nbRequest: number;
 }
 
 export interface EnergyMeasure {

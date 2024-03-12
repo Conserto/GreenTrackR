@@ -26,8 +26,8 @@
       >
     </div>
     <div>
-      <span class="data-label">{translate('sizeTransferredBytesUncompressed')}</span>
-      <span class="data-value">{formatSize(measure.network.sizeUncompress)} {Units.pageSize}</span>
+      <span class="data-label">{translate('sizeTransferredBytes')}</span>
+      <span class="data-value">{formatSize(measure.networkMeasure.network.size)} {Units.pageSize} / {formatSize(measure.networkMeasure.network.sizeUncompress)} {Units.pageSize}</span>
     </div>
     <div>
       <span class="data-label">{translate('gesIntensity')}</span>
@@ -39,8 +39,16 @@
     </div>
     <div>
       <span class="data-label">{translate('nbRequest')}</span>
-      <span class="data-value">{measure.nbRequest}</span>
+      <span class="data-value">{measure.networkMeasure.nbRequest}</span>
     </div>
+<!--    <div>
+      <span class="data-label">Nb Req Ext</span>
+      <span class="data-value">{measure.extensionMeasure.nbRequest}</span>
+    </div>
+    <div>
+      <span class="data-label">Taille Req Ext</span>
+      <span class="data-value">{formatSize(measure.extensionMeasure.network.size)} {Units.pageSize} / {formatSize(measure.extensionMeasure.network.sizeUncompress)} {Units.pageSize}</span>
+    </div>-->
     <!-- TODO WHEN SIZE COMPRESSED IS USED
     <div>
       <span class="data-label">{translate('sizeTransferredBytesCompressed')}</span>
