@@ -15,7 +15,10 @@ import { assert, expect, test } from 'vitest';
 const measure: Measure = {
   date: new Date(),
   url: 'https://conserto.pro/',
-  network: { size: 39, sizeUncompress: 488000 },
+  networkMeasure: {
+    nbRequest: 21,
+    network: { size: 39, sizeUncompress: 488000 },
+  },
   ges: {
     dataCenterTotal: 0.55,
     networkTotal: 0.05,
@@ -28,7 +31,6 @@ const measure: Measure = {
     kWhNetwork: 0.000280091966,
     kWhPage: 0.019387493,
   },
-  nbRequest: 21,
   score: {
     value: 54.49,
     gradeLetter: 'C+',
@@ -78,12 +80,12 @@ test('FormatGesMeasuresForTable function', async () => {
       date: { content: formatDate(measure.date), style: 'font-weight:bold' },
       url: { content: measure.url },
       compressedSizeTransferred: {
-        content: `${formatSize(measure.network.size)} ${Units.pageSize}`,
+        content: `${formatSize(measure.networkMeasure.network.size)} ${Units.pageSize}`,
       },
       uncompressedSizeTransferred: {
-        content: `${formatSize(measure.network.sizeUncompress)} ${Units.pageSize}`,
+        content: `${formatSize(measure.networkMeasure.network.sizeUncompress)} ${Units.pageSize}`,
       },
-      nbRequest: { content: measure.nbRequest },
+      nbRequest: { content: measure.networkMeasure.nbRequest },
       // TODO WHEN DOM COMPUTING IS OK
       // dom: { content: measure.dom },
       gesDataCenter: {
@@ -144,9 +146,12 @@ test('ToHistoFormattedDatas function', async () => {
 test('CreateEmptyMeasure function', async () => {
   const emptyMeasure = {
     url: '',
-    network: {
-      size: 0,
-      sizeUncompress: 0,
+    networkMeasure: {
+      nbRequest: 0,
+      network: {
+        size: 0,
+        sizeUncompress: 0,
+      },
     },
     ges: {
       dataCenterTotal: 0,
@@ -160,7 +165,6 @@ test('CreateEmptyMeasure function', async () => {
       kWhDevice: 0,
       kWhPage: 0,
     },
-    nbRequest: 0,
     score: {
       value: 0,
       color: '',
@@ -180,6 +184,13 @@ test('CreateEmptyMeasure function', async () => {
       cityName: '',
       countryCode: '',
     },
+    extensionMeasure: {
+      nbRequest: 0,
+      network: {
+        size: 0,
+        sizeUncompress: 0,
+    },
+  },
     dom: 0,
   };
   const { date, ...measure } = createEmptyMeasure();
