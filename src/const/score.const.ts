@@ -29,7 +29,7 @@ export const E: Score = {
   gradeLetter: ScoreGradeEnum.E,
   color: '#ff1307',
   textColor: 'black',
-  limit: 5,
+  limit: 4.5,
 };
 export const F: Score = {
   gradeLetter: ScoreGradeEnum.F,
