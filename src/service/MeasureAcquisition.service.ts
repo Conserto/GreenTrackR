@@ -1,8 +1,9 @@
 import { RequestAction } from 'src/enum';
-import type { GES, Measure } from '../interface';
+import type { GES, Measure, NetworkMeasure } from '../interface';
 
-import { NetworkService, GESService, ScoreService } from '.';
+import { GESService, NetworkService, ScoreService } from '.';
 import { createEmptyMeasure, sendChromeMsg } from 'src/utils';
+import { PREFIX_EXTENSION } from '../const';
 
 export class MeasureAcquisition {
   public measure: Measure;
@@ -10,6 +11,7 @@ export class MeasureAcquisition {
   private networkService: NetworkService;
   private gesService: GESService;
   private scoreService: ScoreService;
+
   constructor() {
     this.harRetryCount = 0;
     this.networkService = new NetworkService();
@@ -24,8 +26,8 @@ export class MeasureAcquisition {
       const { ges, energy } = this.gesService.getEnergyAndGES(
         zoneGES,
         userGES,
-        this.measure.network,
-        this.measure.nbRequest,
+        this.measure.networkMeasure.network,
+        this.measure.networkMeasure.nbRequest
       );
 
       this.measure.ges = ges;
@@ -41,7 +43,7 @@ export class MeasureAcquisition {
     const { zoneGES, userGES } = await this.gesService.computeGES(
       urlHost,
       countryCodeSelected,
-      userCountryCodeSelected,
+      userCountryCodeSelected
     );
     this.updateMeasureValues(zoneGES, userGES);
     await this.waitForDomElements();
@@ -50,30 +52,60 @@ export class MeasureAcquisition {
 
   async getNetworkMeasure(forceRefresh: boolean = true) {
     let har,
-      entries: HARFormatEntry[] = [];
+      entries: HARFormatEntry[] = [],
+      entries_page: HARFormatEntry[] = [],
+      entries_extension: HARFormatEntry[] = [];
     if (this.harRetryCount === 0 && forceRefresh) {
       await this.retryGetNetworkMeasure();
     } else {
       har = await this.networkService.getHarEntries();
       entries = this.networkService.filterNetworkResources(har.entries);
-      if (entries.length > 0) {
-        const { responsesSize, responsesSizeUncompress } =
-          this.networkService.calculateResponseSizes(entries);
-        this.measure = {
-          ...this.measure,
-          date: new Date(),
-          url: this.networkService.getMotherUrl(entries) || '',
-          nbRequest: entries.length,
-          network: {
-            size: responsesSize,
-            sizeUncompress: responsesSizeUncompress,
-          },
-        };
-      } else {
+      entries.forEach((entry) => {
+        if (PREFIX_EXTENSION.test(entry.request.url)) {
+          entries_extension.push(entry);
+        } else {
+          entries_page.push(entry);
+        }
+      });
+      if (entries_page.length == 0) {
         await this.retryGetNetworkMeasure();
       }
+      this.measure = this.getMeasureFromEntries(this.measure, entries_page);
+      this.measure = {
+        ...this.measure,
+        extensionMeasure: this.getNetworkAndRequestFromEntries(entries_extension)
+      };
+      console.info('Extension request ignore, datas: requests=' + this.measure.extensionMeasure.nbRequest +
+        ' / size(compress/uncompress)=' + this.measure.extensionMeasure.network.size +
+        '/' + this.measure.extensionMeasure.network.size + 'KB');
     }
   }
+
+  getMeasureFromEntries(measureCurrent: Measure, entries: HARFormatEntry[]) {
+    let measureNew: Measure;
+    measureNew = {
+      ...measureCurrent,
+      date: new Date(),
+      url: this.networkService.getMotherUrl(entries) || '',
+      networkMeasure: this.getNetworkAndRequestFromEntries(entries)
+    };
+    return measureNew;
+  }
+
+  getNetworkAndRequestFromEntries(entries: HARFormatEntry[]) {
+    let networkMeasure: NetworkMeasure;
+    const { responsesSize, responsesSizeUncompress } =
+      this.networkService.calculateResponseSizes(entries);
+    networkMeasure = {
+      nbRequest: entries.length,
+      network: {
+        size: responsesSize,
+        sizeUncompress: responsesSizeUncompress
+      }
+    };
+    return networkMeasure;
+  }
+
   async retryGetNetworkMeasure(): Promise<void> {
     if (this.harRetryCount < parseInt(import.meta.env.VITE_MAX_HAR_RETRIES)) {
       this.harRetryCount++;

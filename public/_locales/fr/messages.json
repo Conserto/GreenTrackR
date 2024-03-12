@@ -111,10 +111,6 @@
     "message": "Taille de la page",
     "description": "Transferred size (KB)"
   },
-  "sizeTransferredBytes": {
-    "message": "Taille de la page",
-    "description": "Transferred size (KB)"
-  },
   "sizeTransferredBytesCompressed": {
     "message": "Taille de la page compressée",
     "description": "Compressed transferred size (KB)"
@@ -122,6 +118,10 @@
   "sizeTransferredBytesUncompressed": {
     "message": "Taille de la page décompressée",
     "description": "Uncompressed transferred size (KB)"
+  },
+  "sizeTransferredBytes": {
+    "message": "Taille de la page (compressée / décompressée)",
+    "description": "Transferred size (KB)"
   },
   "tabEvaluation": {
     "message": "Evaluation/Page",

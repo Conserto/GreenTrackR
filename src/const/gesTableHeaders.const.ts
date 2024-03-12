@@ -15,6 +15,10 @@ export const gesTableHeaders = [
     id: 'uncompressedSizeTransferred',
     translateKey: 'sizeTransferredBytesUncompressed',
   },
+  {
+    id: 'sizeTransferred',
+    translateKey: 'sizeTransferredBytes',
+  },
   // TODO WHEN DOM COMPUTING IS OK
   // {
   //   id: 'dom',

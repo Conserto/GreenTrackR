@@ -54,35 +54,35 @@ export const formatGesMeasuresForTable = (measures: Measure[]) => {
   return measures.map((measure) => ({
     date: { content: formatDate(measure.date), style: 'font-weight:bold' },
     url: { content: measure.url },
-    compressedSizeTransferred: { content: `${formatSize(measure.network.size)} ${Units.pageSize}` },
+    compressedSizeTransferred: { content: `${formatSize(measure.networkMeasure.network.size)} ${Units.pageSize}` },
     uncompressedSizeTransferred: {
-      content: `${formatSize(measure.network.sizeUncompress)} ${Units.pageSize}`,
+      content: `${formatSize(measure.networkMeasure.network.sizeUncompress)} ${Units.pageSize}`
     },
-    nbRequest: { content: measure.nbRequest },
+    nbRequest: { content: measure.networkMeasure.nbRequest },
     // TODO WHEN DOM COMPUTING IS OK
     // dom: { content: measure.dom },
     gesDataCenter: {
-      content: `${formatNumber(measure.ges.dataCenterTotal)} ${Units.carbonEmissions}`,
+      content: `${formatNumber(measure.ges.dataCenterTotal)} ${Units.carbonEmissions}`
     },
     gesNetwork: {
-      content: `${formatNumber(measure.ges.networkTotal)} ${Units.carbonEmissions}`,
+      content: `${formatNumber(measure.ges.networkTotal)} ${Units.carbonEmissions}`
     },
     gesDevice: {
-      content: `${formatNumber(measure.ges.deviceTotal)} ${Units.carbonEmissions}`,
+      content: `${formatNumber(measure.ges.deviceTotal)} ${Units.carbonEmissions}`
     },
     gesTotal: {
-      content: `${formatNumber(measure.ges.pageTotal)} ${Units.carbonEmissions}`,
+      content: `${formatNumber(measure.ges.pageTotal)} ${Units.carbonEmissions}`
     },
     gesScore: {
       content: formatNumber(measure.score.value ?? -1),
-      style: `background-color: ${measure.score.color}; color: ${measure.score.textColor}`,
+      style: `background-color: ${measure.score.color}; color: ${measure.score.textColor}`
     },
     gesGrade: {
       content: measure.score.gradeLetter,
-      style: `background-color: ${measure.score.color}; color: ${measure.score.textColor}`,
+      style: `background-color: ${measure.score.color}; color: ${measure.score.textColor}`
     },
     gesZone: { content: `${measure.serverGES.cityName}, ${measure.serverGES.countryName}` },
-    gesIntensity: { content: `${measure.serverGES.carbonIntensity} ${Units.carbonIntensity}` },
+    gesIntensity: { content: `${measure.serverGES.carbonIntensity} ${Units.carbonIntensity}` }
   }));
 };
 
@@ -93,26 +93,26 @@ export const toHistoFormattedDatas = (measure: Measure) => {
         label: 'networkTotal',
         value: formatNumber(measure.ges.networkTotal),
         value2: formatNumber(measure.energy.kWhNetwork * 1000),
-        color: '#7b7aab',
+        color: '#7b7aab'
       },
       {
         label: 'dataCenterTotal',
         value: formatNumber(measure.ges.dataCenterTotal),
         value2: formatNumber(measure.energy.kWhDataCenter * 1000),
-        color: '#86665f',
+        color: '#86665f'
       },
       {
         label: 'deviceTotal',
         value: formatNumber(measure.ges.deviceTotal),
         value2: formatNumber(measure.energy.kWhDevice * 1000),
-        color: '#5e806d',
+        color: '#5e806d'
       },
       {
         label: 'pageTotal',
         value: formatNumber(measure.ges.pageTotal),
         value2: formatNumber(measure.energy.kWhPage * 1000),
-        color: '#535481',
-      },
+        color: '#535481'
+      }
     ];
   } else {
     return [];
@@ -123,42 +123,51 @@ export const createEmptyMeasure = (): Measure => {
   return {
     date: new Date(),
     url: '',
-    network: {
-      size: 0,
-      sizeUncompress: 0,
-    },
     ges: {
       dataCenterTotal: 0,
       networkTotal: 0,
       deviceTotal: 0,
-      pageTotal: 0,
+      pageTotal: 0
     },
     energy: {
       kWhDataCenter: 0,
       kWhNetwork: 0,
       kWhDevice: 0,
-      kWhPage: 0,
+      kWhPage: 0
     },
-    nbRequest: 0,
     score: {
       value: 0,
       color: '',
       textColor: '',
       gradeLetter: '',
-      limit: 0,
+      limit: 0
     },
     userGES: {
       carbonIntensity: 0,
       countryName: '',
       cityName: '',
-      countryCode: '',
+      countryCode: ''
     },
     serverGES: {
       carbonIntensity: 0,
       countryName: '',
       cityName: '',
-      countryCode: '',
+      countryCode: ''
     },
     dom: 0,
+    extensionMeasure: {
+      nbRequest: 0,
+      network: {
+        size: 0,
+        sizeUncompress: 0
+      }
+    },
+    networkMeasure: {
+      nbRequest: 0,
+      network: {
+        size: 0,
+        sizeUncompress: 0
+      }
+    }
   };
 };

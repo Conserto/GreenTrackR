@@ -107,10 +107,6 @@
     "message": "Page size",
     "description": "Transferred size (KB)"
   },
-  "sizeTransferredBytes": {
-    "message": "Page size",
-    "description": "Transferred size (KB)"
-  },
   "sizeTransferredBytesCompressed": {
     "message": "Compressed page size",
     "description": "Compressed transferred size (KB)"
@@ -118,6 +114,10 @@
   "sizeTransferredBytesUncompressed": {
     "message": "Uncompressed page size",
     "description": "Uncompressed transferred size (KB)"
+  },
+  "sizeTransferredBytes": {
+    "message": "Page size (compress / uncompress)",
+    "description": "Transferred size (KB)"
   },
   "stopJourneyButton": {
     "message": "Stop saving",
