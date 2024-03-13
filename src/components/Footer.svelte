@@ -1,5 +1,5 @@
 <footer>
-  Copyright © 2023 <a class="green-trackr-link" href="https://conserto.pro/greentrackr/"
+  Copyright © 2024 <a class="green-trackr-link" href="https://conserto.pro/greentrackr/"
     >Conserto.pro/greentrackr</a
   >.Tous droits réservés.
 </footer>
