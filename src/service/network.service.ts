@@ -1,11 +1,25 @@
-export class NetworkService {
-  cosntructor() {}
+import { PREFIX_URL_DATA, PREFIX_URL_EXTENSION } from '../const';
+import { getCurrentUrlAsync } from '../utils';
+import { logInfo, logWarn } from '../utils/log';
 
-  getUrl(url: string) {
-    var formattedUrl = new URL(url);
-    if (formattedUrl.host.split('.').length <= 2) {
-      formattedUrl.host = 'www.' + formattedUrl.host;
+export class NetworkService {
+
+  getUrl(url: string | undefined) {
+    let formattedUrl: URL | undefined = undefined;
+    if (url && this.isRealUrl(url)) {
+      try {
+        formattedUrl = new URL(url);
+        // FIXME pourquoi en dur, quel est le but d'ajouter www si 0 ou 1 ou 2?
+        if (formattedUrl.host.split('.').length <= 2) {
+          formattedUrl.host = 'www.' + formattedUrl.host;
+        }
+      } catch (e) {
+        logWarn(`Error when parsing url ${url} -> ${e}`);
+      }
+    } else {
+      logWarn('No url found');
     }
+    logInfo(`return url ${formattedUrl}`);
     return formattedUrl;
   }
 
@@ -16,22 +30,22 @@ export class NetworkService {
   }
 
   filterNetworkResources(entries: HARFormatEntry[]) {
-    return entries.filter((harEntry: HARFormatEntry) => !harEntry.request.url.startsWith('data'));
+    return entries.filter((harEntry: HARFormatEntry) => this.isNetworkResource(harEntry));
   }
 
-  getMotherUrl(entries: HARFormatEntry[]) {
-    return entries.length > 0 ? entries[0].request.url : null;
+  async getMotherUrl(entries: HARFormatEntry[]) {
+    const url = await getCurrentUrlAsync();
+    logInfo(`Mother url: ${url}`);
+    return url;
   }
 
   calculateResponseSizes(entries: HARFormatEntry[]) {
     let responsesSize = 0;
     let responsesSizeUncompress = 0;
-
     entries.forEach((entry: HARFormatEntry) => {
       responsesSize += entry.response._transferSize || 0;
       responsesSizeUncompress += entry.response.content.size;
     });
-
     return { responsesSize, responsesSizeUncompress };
   }
 
@@ -40,6 +54,10 @@ export class NetworkService {
    *  Test with request.url as  request.httpVersion === "data"  does not work with old chrome version (example v55)
    */
   isNetworkResource(harEntry: HARFormatEntry) {
-    return !harEntry.request.url.startsWith('data');
+    return harEntry.request.url && !harEntry.request.url.startsWith(PREFIX_URL_DATA);
+  }
+
+  isRealUrl(url: string) {
+    return url !== '' && !PREFIX_URL_EXTENSION.test(url);
   }
 }

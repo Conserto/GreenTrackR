@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host=0.0.0.0",
     "build": "vite build",
+    "build-log": "env NODE_ENV=development vite build",
     "preview": "vite preview",
     "test": "vitest",
     "check": "svelte-check --tsconfig ./tsconfig.json",

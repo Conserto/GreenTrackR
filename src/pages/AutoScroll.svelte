@@ -32,6 +32,7 @@
   });
 
   const handleRuntimeMsg = async (message) => {
+    // FIXME Const
     if (message.type === 'pageHeight') {
       totalPagePixels = message.totalHeight;
       viewportPixels = message.viewportHeight;

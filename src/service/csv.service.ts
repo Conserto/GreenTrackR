@@ -12,9 +12,9 @@ const create_csv = (measureHistory: Measure[]) => {
       ';"' +
       measure.url +
       '";' +
-      measure.network.size +
+      measure.networkMeasure.network.size +
       ';' +
-      Math.round(measure.network.size / 1024) +
+      Math.round(measure.networkMeasure.network.size / 1024) +
       ';' +
       measure.dom +
       ';' +
@@ -30,11 +30,11 @@ const create_csv = (measureHistory: Measure[]) => {
       ';' +
       measure.score.gradeLetter +
       ';' +
-      measure.serverGES.countryName +
+      measure.serverGES?.countryName +
       ';' +
-      measure.serverGES.carbonIntensity +
+      measure.serverGES?.carbonIntensity +
       ';' +
-      measure.nbRequest +
+      measure.networkMeasure.nbRequest +
       '\n';
   });
   return csv;
