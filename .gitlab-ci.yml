@@ -40,8 +40,8 @@ sonarqube:
     - echo "Version => ${P_VERSION}"
     - |
       sonar-scanner \
-        -Dsonar.lang.patterns.web="**/*.html"
-        -Dsonar.lang.patterns.htl="**/*.html"
+        -Dsonar.lang.patterns.web="**/*.html" \
+        -Dsonar.lang.patterns.htl="**/*.html" \
         -Dsonar.sources="./" \
         -Dsonar.exclusions="$SONAR_EXCLUSIONS" \
         -Dsonar.qualitygate.wait=true \
