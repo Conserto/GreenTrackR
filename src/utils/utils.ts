@@ -1,5 +1,6 @@
 import type { Measure } from 'src/interface';
 import { Units } from 'src/const/units.const';
+import { logWarn } from './log';
 
 export const getAverageValue = (data: number[]) => {
   let sum = data.reduce((partialSum: number, a) => partialSum + a, 0);
@@ -12,11 +13,10 @@ export const translate = (translateKey: string) => {
     try {
       translatedLabel = chrome.i18n.getMessage(translateKey);
     } catch (e) {
-      console.warn('Warning ! YOu are trying to translate a null translateKey.');
+      logWarn('Warning ! YOu are trying to translate a null translateKey.');
     }
     translatedLabel = translatedLabel ? translatedLabel : translateKey;
   }
-
   return translatedLabel;
 };
 
@@ -81,8 +81,8 @@ export const formatGesMeasuresForTable = (measures: Measure[]) => {
       content: measure.score.gradeLetter,
       style: `background-color: ${measure.score.color}; color: ${measure.score.textColor}`
     },
-    gesZone: { content: `${measure.serverGES.cityName}, ${measure.serverGES.countryName}` },
-    gesIntensity: { content: `${measure.serverGES.carbonIntensity} ${Units.carbonIntensity}` }
+    gesZone: { content: `${measure.serverGES?.cityName}, ${measure.serverGES?.countryName}` },
+    gesIntensity: { content: `${measure.serverGES?.carbonIntensity} ${Units.carbonIntensity}` }
   }));
 };
 

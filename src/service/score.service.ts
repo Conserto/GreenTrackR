@@ -2,10 +2,14 @@ import type { Score } from 'src/interface/score.interface';
 import { ALL_SCORES } from 'src/const';
 
 export class ScoreService {
-  constructor() {}
+  constructor() {
+  }
 
   getScore(gesValue: number): Score {
-    const scoreValue = this.getScoreValue(gesValue);
+    let scoreValue = 0;
+    if (gesValue > 0) {
+      scoreValue = this.getScoreValue(gesValue);
+    }
     const score = ALL_SCORES.find((grade: Score) => gesValue <= grade.limit);
     if (score) {
       return { ...score, value: scoreValue };
@@ -18,11 +22,6 @@ export class ScoreService {
     return ALL_SCORES;
   }
 
-  /**
-   * Return the score of the measure in a range of 0 to 100
-   * @param {Number} gesMeasure
-   * @returns {Number}
-   */
   getScoreValue(gesValue: number) {
     const calcGESScore = -20 * gesValue + 100;
 
@@ -43,8 +42,8 @@ export class ScoreService {
   }
 
   static getScoreForGrade(score: number) {
-    let resultat = '';
-    resultat += Math.round(score) + '/100';
-    return resultat;
+    let result = '';
+    result += Math.round(score) + '/100';
+    return result;
   }
 }
