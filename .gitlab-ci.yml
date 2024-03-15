@@ -32,6 +32,7 @@ sonarqube:
     GIT_DEPTH: 0
     SONAR_PROJECT_KEY: greentrackr-opensource
     SONAR_PROJECT_NAME: greentrackr-opensource
+    SONAR_EXLUSIONS: "**/extensions/*"
   script:
     - export P_VERSION=$(cat package.json | grep -m 1 "\"version\":" | cut -d':' -f2- | cut -d'"' -f2)
     - echo "Version => ${P_VERSION}"
