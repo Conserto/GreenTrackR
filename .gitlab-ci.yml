@@ -5,7 +5,7 @@ stages:
 variables:
   SONAR_PROJECT_KEY: greentrackr-opensource
   SONAR_PROJECT_NAME: greentrackr-opensource
-  SONAR_EXCLUSIONS: "**/extension/**"
+  SONAR_EXCLUSIONS: "**/extension/**, **/src/index.html"
 
 cache:
   paths:
