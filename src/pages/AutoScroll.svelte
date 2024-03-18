@@ -1,16 +1,18 @@
 <script lang="ts">
-  import { Button, LoadingWheel, Input, Select } from 'src/components';
+  import { Button, Input, LoadingWheel, Select } from 'src/components';
   import { ButtonTypeEnum, InputTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
-  import { cleanCache, sendChromeMsg } from 'src/utils/chrome.utils';
+  import { cleanCache, debugBtn, sendChromeMsg, waitTest } from 'src/utils/chrome.utils';
   import { toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { onDestroy, onMount } from 'svelte';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
   import Histogram from 'src/components/Histogram.svelte';
   import GesResults from 'src/components/GES/results/GesResults.svelte';
+  import { PAGE_HEIGHT } from '../const/action.const';
+  import { logInfo } from '../utils/log';
 
   const scrollTypes = [
     { label: 'Px', value: ScrollInputType.PIXEL },
-    { label: '%', value: ScrollInputType.PERCENT },
+    { label: '%', value: ScrollInputType.PERCENT }
   ];
   let currentScrollType = ScrollInputType.PERCENT;
   let scrollValue = 10;
@@ -23,21 +25,24 @@
   let histoDatas: HistoData[] = [];
 
   onMount(() => {
+    logInfo("onMount");
     chrome.runtime.onMessage.addListener(handleRuntimeMsg);
     sendChromeMsg({ action: RequestAction.SEND_PAGE_HEIGHT });
   });
 
   onDestroy(() => {
+    logInfo("onDestroy");
     chrome.runtime.onMessage.removeListener(handleRuntimeMsg);
   });
 
   const handleRuntimeMsg = async (message) => {
-    // FIXME Const
-    if (message.type === 'pageHeight') {
+    if (message.type === PAGE_HEIGHT) {
       totalPagePixels = message.totalHeight;
       viewportPixels = message.viewportHeight;
     } else if (message.autoScrollDone) {
       loading = true;
+      // FIXME loop end of scroll
+      await waitTest(2000);
       await measureAcquisition.getNetworkMeasure(false);
       currentMeasure = await measureAcquisition.getGESMeasure('auto', 'auto');
       loading = false;
@@ -93,6 +98,12 @@
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="backToTop"
   />
+  <!-- TODO DELETE -->
+  <Button
+    on:buttonClick={() => debugBtn()}
+    buttonType={ButtonTypeEnum.SECONDARY}
+    translateKey="debug"
+  />
 </div>
 
 {#if currentMeasure && !loading}
@@ -112,18 +123,22 @@
     text-align: center;
     margin: var(--spacing--md) 0;
   }
+
   .input-label {
     text-align: center;
   }
+
   .input-container {
     margin-bottom: var(--spacing--xl);
   }
+
   .histo-container {
     width: 100%;
     overflow-x: auto;
     display: flex;
     justify-content: center;
   }
+
   .buttons-container {
     margin-bottom: var(--spacing--xl);
   }

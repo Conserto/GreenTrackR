@@ -1,37 +1,40 @@
-import { logErr, logWarn } from './log';
+import { logDebug, logErr } from './log';
 
 export const cleanCache = () => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    if (tabs.length && tabs[0].url) {
-      chrome.browsingData.remove(
-        {
-          origins: [tabs[0].url],
-          since: 0
-        },
-        {
-          cache: true
-        }
-      ).catch(reason => logErr(`Error when clear browsing cache: ${reason}`));
+  chrome.browsingData.remove(
+    {},
+    {
+      cache: true,
+      serviceWorkers: true,
+      downloads: true
     }
-  });
+  ).catch(reason => logErr(`Error when clear browsing cache: ${reason}`));
+};
+
+// TODO Delete
+export const debugBtn = () => {
+  getTabId();
 };
 
 export const sendChromeMsg = (payload: any) => {
-  chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-    if (tabs.length && tabs[0].id) {
-      chrome.tabs.sendMessage(tabs[0].id, payload)
-        .catch(reason => logErr(`Error when send chrome message: ${reason}`));
-    }
-  });
+  chrome.tabs.sendMessage(getTabId(), payload)
+    .catch(reason => logErr(`Error when send chrome tab message: ${reason}`));
 };
-export const getCurrentUrlAsync = async () => {
-  let url: string | undefined = undefined;
-  let queryOptions = { active: true, lastFocusedWindow: true };
-  let tabs = await chrome.tabs.query(queryOptions);
-  if (tabs.length && tabs[0].id) {
-    url = tabs[0].url;
-  } else {
-    logWarn('Cannot get current tab URL');
+
+export const getTabId = (): number => {
+  let tabId: number | undefined = chrome.devtools.inspectedWindow?.tabId;
+  logDebug('Tab ID --> ' + tabId);
+  if (!tabId) {
+    logErr('No Tab Id found, analyse aborted', true);
   }
-  return url;
+  return tabId;
 };
+
+export const getTabUrl = async (): Promise<string> => {
+  const tab = await chrome.tabs.get(getTabId());
+  return tab.url;
+};
+
+export const waitTest = async (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

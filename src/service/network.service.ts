@@ -1,6 +1,6 @@
 import { PREFIX_URL_DATA, PREFIX_URL_EXTENSION } from '../const';
-import { getCurrentUrlAsync } from '../utils';
 import { logInfo, logWarn } from '../utils/log';
+import { getTabUrl } from '../utils';
 
 export class NetworkService {
 
@@ -33,8 +33,8 @@ export class NetworkService {
     return entries.filter((harEntry: HARFormatEntry) => this.isNetworkResource(harEntry));
   }
 
-  async getMotherUrl(entries: HARFormatEntry[]) {
-    const url = await getCurrentUrlAsync();
+  async getMotherUrl() {
+    const url = await getTabUrl();
     logInfo(`Mother url: ${url}`);
     return url;
   }

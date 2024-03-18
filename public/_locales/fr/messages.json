@@ -195,7 +195,7 @@
     "message": "Estimez l'empreinte carbone de votre site web",
     "description": "message quand on arrive sur la page auto-scroll et que l'analyse n'est pas encore lancée"
   },
-  "nocontentPhraseEvaluation": {
+  "noContentPhraseEvaluation": {
     "message": "Estimez l'empreinte carbone de votre site web",
     "description": "message quand on arrive sur la page évaluation d'impact et que l'analyse n'est pas encore lancée"
   },

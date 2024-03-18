@@ -195,7 +195,7 @@
     "message": "Estimate the carbon footprint of your website",
     "description": "Message when you arrive on the auto-scroll page and the analysis is not yet launched"
   },
-  "nocontentPhraseEvaluation": {
+  "noContentPhraseEvaluation": {
     "message": "Estimate the carbon footprint of your website",
     "description": "Message when you arrive on the evaluation page and the analysis is not yet launched"
   },

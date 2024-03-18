@@ -2,9 +2,11 @@ import { RequestAction } from 'src/enum';
 import type { GES, Measure, NetworkMeasure } from '../interface';
 
 import { GESService, NetworkService, ScoreService } from '.';
-import { createEmptyMeasure, sendChromeMsg } from 'src/utils';
+import { createEmptyMeasure, getTabId, getTabUrl, sendChromeMsg } from 'src/utils';
 import { PREFIX_URL_EXTENSION } from '../const';
 import { logDebug, logInfo } from '../utils/log';
+import { DOM_INFOS } from '../const/action.const';
+import tabId = chrome.devtools.inspectedWindow.tabId;
 
 export class MeasureAcquisition {
   public measure: Measure;
@@ -72,15 +74,17 @@ export class MeasureAcquisition {
         }
       });
       if (entries_page.length == 0) {
+        logDebug("entries_page.length == 0");
         await this.retryGetNetworkMeasure();
+      } else {
+        this.measure = await this.getMeasureFromEntries(this.measure, entries_page);
+        this.measure = {
+          ...this.measure,
+          extensionMeasure: this.getNetworkAndRequestFromEntries(entries_extension)
+        };
+        logInfo(`Extension request ignore, datas: requests=${this.measure.extensionMeasure.nbRequest}` +
+          ` / size(compress/uncompress)=${this.measure.extensionMeasure.network.size}/${this.measure.extensionMeasure.network.size} KB`);
       }
-      this.measure = await this.getMeasureFromEntries(this.measure, entries_page);
-      this.measure = {
-        ...this.measure,
-        extensionMeasure: this.getNetworkAndRequestFromEntries(entries_extension)
-      };
-      logInfo(`Extension request ignore, datas: requests=${this.measure.extensionMeasure.nbRequest}` +
-        ` / size(compress/uncompress)=${this.measure.extensionMeasure.network.size}/${this.measure.extensionMeasure.network.size} KB`);
     }
   }
 
@@ -89,7 +93,7 @@ export class MeasureAcquisition {
     measureNew = {
       ...measureCurrent,
       date: new Date(),
-      url: await this.networkService.getMotherUrl(entries),
+      url: await this.networkService.getMotherUrl(),
       networkMeasure: this.getNetworkAndRequestFromEntries(entries)
     };
     return measureNew;
@@ -111,10 +115,11 @@ export class MeasureAcquisition {
 
   async retryGetNetworkMeasure(): Promise<void> {
     // FIXME check
+    // FIXME compteur réinitialisé?
     if (this.harRetryCount < parseInt(import.meta.env.VITE_MAX_HAR_RETRIES)) {
+      logInfo("Reload : " + await getTabUrl())
       this.harRetryCount++;
-      const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-      chrome.tabs.reload(() => tabs[0].id);
+      await chrome.tabs.reload(getTabId());
 
       //TODO: to delete, we'll have to implement this on service-worker so it can send message to svelte component
       // wen new entries are loaded -> Replace it by chrome?webNavigation.onCompleted on service-worker.ts (see this file)
@@ -123,11 +128,12 @@ export class MeasureAcquisition {
     }
   }
 
+  // FIXME Timeout
   waitForDomElements() {
     return new Promise<void>((resolve) => {
       const handleRuntimeMsg = async (message: { type: string; value: any }) => {
-        // FIXME constante
-        if (message.type === 'domInfos') {
+        logDebug("handleRuntimeMsg")
+        if (message.type === DOM_INFOS) {
           chrome.runtime.onMessage.addListener(handleRuntimeMsg);
           this.measure.dom = message.value;
           resolve();
