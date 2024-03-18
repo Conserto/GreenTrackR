@@ -2,7 +2,7 @@
   import logo from '/images/logo.png';
   import { AutoScroll, Evaluation, Parcours, Help } from 'src/pages';
   import { Alert, Tab, Footer } from 'src/components';
-  import { translate } from './utils/utils';
+  import { translate } from './utils';
   import { AlertTypeEnum } from './enum';
 
   export let tabs = [
@@ -62,10 +62,10 @@
 
 <div class="app-container">
   {#if activeTabId !== 'help-tab'}
-    <h1 class="plugin-title">{translate('nocontentPhraseEvaluation')}</h1>
+    <h1 class="plugin-title">{translate('noContentPhraseEvaluation')}</h1>
   {/if}
   {#each tabs as tab}
-    {#if activeTabId == tab.id}
+    {#if activeTabId === tab.id}
       {#if tab.beta}
         <Alert message="betaMessage" />
       {/if}

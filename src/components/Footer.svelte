@@ -1,7 +1,6 @@
 <footer>
-  Copyright © 2024 <a class="green-trackr-link" href="https://conserto.pro/greentrackr/"
-    >Conserto.pro/greentrackr</a
-  >.Tous droits réservés.
+  Copyright © 2024 <a class="green-trackr-link" href="https://conserto.pro/greentrackr/">Conserto.pro/greentrackr</a>.Tous
+  droits réservés.
 </footer>
 
 <style lang="scss">

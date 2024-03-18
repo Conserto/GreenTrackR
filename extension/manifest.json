@@ -7,16 +7,31 @@
     "64": "images/logo.png"
   },
   "default_locale": "fr",
-  "permissions": ["activeTab", "tabs", "browsingData", "storage", "webNavigation", "webRequest"],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "browsingData",
+    "storage",
+    "webNavigation",
+    "webRequest"
+  ],
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["src/content-scripts/contentScripts.ts"]
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content-scripts/contentScripts.ts"
+      ]
     }
   ],
-  "host_permissions": ["*://*/*"],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "externally_connectable": {
-    "matches": ["<all_urls>"]
+    "matches": [
+      "<all_urls>"
+    ]
   },
   "devtools_page": "extension/devtools-page.html",
   "action": {
