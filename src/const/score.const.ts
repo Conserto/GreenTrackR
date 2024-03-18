@@ -5,13 +5,13 @@ export const A: Score = {
   gradeLetter: ScoreGradeEnum.A,
   color: '#026739',
   textColor: 'white',
-  limit: 0.85,
+  limit: 0.65,
 };
 export const B: Score = {
   gradeLetter: ScoreGradeEnum.B,
   color: '#8fc547',
   textColor: 'black',
-  limit: 1.75,
+  limit: 1.25,
 };
 export const C: Score = {
   gradeLetter: ScoreGradeEnum.C,
