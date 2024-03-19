@@ -11,3 +11,4 @@
 - Show extension
 - Erreur dans l'affichage du tableau (logs)
 - Clean network via api 
+- Se passer du .env
