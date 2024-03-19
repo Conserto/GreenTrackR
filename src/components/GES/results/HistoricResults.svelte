@@ -1,16 +1,10 @@
 <script lang="ts">
   import { gesTableHeaders, savedMeasures } from 'src/const';
   import { ButtonTypeEnum } from 'src/enum';
-  import type { Measure } from 'src/interface';
-  import { Table, Button, Modal } from 'src/components';
+  import { Button, Modal, Table } from 'src/components';
   import { export_data } from 'src/service';
-  import {
-    formatGesMeasuresForTable,
-    getLocalStorageObject,
-    setLocalStorageObject,
-    translate,
-  } from 'src/utils/utils';
-  import { SvelteComponent, onMount } from 'svelte';
+  import { formatGesMeasuresForTable, getLocalStorageObject, setLocalStorageObject, translate } from 'src/utils/utils';
+  import { onMount } from 'svelte';
 
   let formattedData: TableData[] = [];
   let measures: Measures[] = [];
@@ -22,8 +16,8 @@
       ...measure,
       action: {
         content: 'deleteButton',
-        action: true,
-      },
+        action: true
+      }
     }));
   });
 

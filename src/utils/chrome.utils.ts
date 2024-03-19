@@ -11,11 +11,6 @@ export const cleanCache = () => {
   ).catch(reason => logErr(`Error when clear browsing cache: ${reason}`));
 };
 
-// TODO Delete
-export const debugBtn = () => {
-  getTabId();
-};
-
 export const sendChromeMsg = (payload: any) => {
   chrome.tabs.sendMessage(getTabId(), payload)
     .catch(reason => logErr(`Error when send chrome tab message: ${reason}`));
@@ -37,4 +32,4 @@ export const getTabUrl = async (): Promise<string> => {
 
 export const waitTest = async (ms) => {
   return new Promise(resolve => setTimeout(resolve, ms));
-}
+};

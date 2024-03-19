@@ -1,6 +1,6 @@
 import type { Measure } from 'src/interface';
 import { Units } from 'src/const/units.const';
-import { logWarn } from './log';
+import { logInfo, logWarn } from './log';
 
 export const getAverageValue = (data: number[]) => {
   let sum = data.reduce((partialSum: number, a) => partialSum + a, 0);
@@ -13,7 +13,7 @@ export const translate = (translateKey: string) => {
     try {
       translatedLabel = chrome.i18n.getMessage(translateKey);
     } catch (e) {
-      logWarn('Warning ! YOu are trying to translate a null translateKey.');
+      logWarn('Warning ! You are trying to translate a null translateKey. -> ' + translateKey);
     }
     translatedLabel = translatedLabel ? translatedLabel : translateKey;
   }
@@ -54,11 +54,8 @@ export const formatGesMeasuresForTable = (measures: Measure[]) => {
   return measures.map((measure) => ({
     date: { content: formatDate(measure.date), style: 'font-weight:bold' },
     url: { content: measure.url },
-    compressedSizeTransferred: { content: `${formatSize(measure.networkMeasure.network.size)} ${Units.pageSize}` },
-    uncompressedSizeTransferred: {
-      content: `${formatSize(measure.networkMeasure.network.sizeUncompress)} ${Units.pageSize}`
-    },
-    nbRequest: { content: measure.networkMeasure.nbRequest },
+    sizeTransferred: { content: `${formatSize(measure.networkMeasure.network.size)} / ${formatSize(measure.networkMeasure.network.sizeUncompress)} ${Units.pageSize}` },
+    nbRequest: { content: `${measure.networkMeasure.nbRequest}` },
     // TODO WHEN DOM COMPUTING IS OK
     // dom: { content: measure.dom },
     gesDataCenter: {
@@ -170,4 +167,31 @@ export const createEmptyMeasure = (): Measure => {
       }
     }
   };
+};
+
+export const scrollPrompt = (topPrompt: number, leftPrompt: number, timeout: number) => {
+  logInfo(`Scroll ${topPrompt} / ${leftPrompt}`);
+  window.scrollBy({ left: leftPrompt, top: topPrompt, behavior: 'smooth' });
+  return new Promise((resolve, reject) => {
+    const failed = setTimeout(() => {
+      reject();
+    }, timeout);
+
+    const scrollHandler = () => {
+      if (self.scrollY === topPrompt) {
+        logInfo("Remove 1");
+        window.removeEventListener("scroll", scrollHandler);
+        clearTimeout(failed);
+        resolve();
+      }
+    };
+    if (self.scrollY === topPrompt) {
+      logInfo("Remove 2");
+      window.removeEventListener("scroll", scrollHandler);
+      clearTimeout(failed);
+      resolve();
+    } else {
+      window.addEventListener("scroll", scrollHandler);
+    }
+  });
 };
