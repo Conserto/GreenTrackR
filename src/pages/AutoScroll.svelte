@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Button, Input, LoadingWheel, Select } from 'src/components';
   import { ButtonTypeEnum, InputTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
-  import { cleanCache, debugBtn, sendChromeMsg, waitTest } from 'src/utils/chrome.utils';
+  import { cleanCache, sendChromeMsg, waitTest } from 'src/utils/chrome.utils';
   import { toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { onDestroy, onMount } from 'svelte';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
@@ -15,7 +15,7 @@
     { label: '%', value: ScrollInputType.PERCENT }
   ];
   let currentScrollType = ScrollInputType.PERCENT;
-  let scrollValue = 10;
+  let scrollValue = 100;
   let viewportPixels = 0;
   let totalPagePixels = 0;
 
@@ -25,13 +25,15 @@
   let histoDatas: HistoData[] = [];
 
   onMount(() => {
-    logInfo("onMount");
+    logInfo('onMount');
     chrome.runtime.onMessage.addListener(handleRuntimeMsg);
+    sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
     sendChromeMsg({ action: RequestAction.SEND_PAGE_HEIGHT });
+    cleanCache();
   });
 
   onDestroy(() => {
-    logInfo("onDestroy");
+    logInfo('onDestroy');
     chrome.runtime.onMessage.removeListener(handleRuntimeMsg);
   });
 
@@ -65,9 +67,6 @@
   };
 </script>
 
-<p class="pixel-indicator">
-  {`${translate('pixelDisplayed')} ${viewportPixels}px.`}
-</p>
 <p class="input-label">
   {#if currentScrollType === ScrollInputType.PIXEL}
     {translate('autoscrollPxInput')}
@@ -98,12 +97,6 @@
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="backToTop"
   />
-  <!-- TODO DELETE -->
-  <Button
-    on:buttonClick={() => debugBtn()}
-    buttonType={ButtonTypeEnum.SECONDARY}
-    translateKey="debug"
-  />
 </div>
 
 {#if currentMeasure && !loading}
@@ -117,12 +110,6 @@
 {/if}
 
 <style lang="scss">
-  .pixel-indicator {
-    font-style: italic;
-    font-weight: bold;
-    text-align: center;
-    margin: var(--spacing--md) 0;
-  }
 
   .input-label {
     text-align: center;

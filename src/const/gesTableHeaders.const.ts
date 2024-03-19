@@ -8,14 +8,6 @@ export const gesTableHeaders = [
     translateKey: 'Url',
   },
   {
-    id: 'compressedSizeTransferred',
-    translateKey: 'sizeTransferredBytesCompressed',
-  },
-  {
-    id: 'uncompressedSizeTransferred',
-    translateKey: 'sizeTransferredBytesUncompressed',
-  },
-  {
     id: 'sizeTransferred',
     translateKey: 'sizeTransferredBytes',
   },

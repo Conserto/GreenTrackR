@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { Units } from 'src/const';
   import { translate } from 'src/utils/utils';
   import type { TableData } from 'src/interface/table.interface';
   import Button from './Button.svelte';
@@ -16,42 +15,42 @@
 <div class="table-container">
   <table class="table">
     <thead>
-      <tr>
-        {#if columnHeaders?.length > 0}
-          {#each columnHeaders as columnHeader}
-            <th scope="col">{translate(columnHeader.translateKey)}</th>
-          {/each}
-        {/if}
-      </tr>
+    <tr>
+      {#if columnHeaders?.length > 0}
+        {#each columnHeaders as columnHeader}
+          <th scope="col">{translate(columnHeader.translateKey)}</th>
+        {/each}
+      {/if}
+    </tr>
     </thead>
     <tbody>
-      {#each datas as data, index}
-        <tr class:even={index % 2 === 0}>
-          {#if rowHeaders?.length > 0}
-            <td>{translate(rowHeaders[index]?.translateKey)}</td>
-          {/if}
+    {#each datas as data, index}
+      <tr class:even={index % 2 === 0}>
+        {#if rowHeaders?.length > 0}
+          <td>{translate(rowHeaders[index]?.translateKey)}</td>
+        {/if}
 
-          {#if columnHeaders?.length > 0}
-            {#each columnHeaders as header, colNumber}
-              {#if (rowHeaders?.length > 0 && colNumber !== 0) || !rowHeaders}
-                <td style={data[header.id]?.style}>
-                  {#if data[header.id]?.action}
-                    <Button
-                      on:buttonClick={() => dispatch('actionClicked', { data })}
-                      buttonType={ButtonTypeEnum.SECONDARY}
-                      translateKey={data[header.id]?.content}
-                    />
-                  {:else}
-                    {translate(data[header.id]?.content)}
-                  {/if}
-                </td>
-              {/if}
-            {/each}
-          {:else}
-            <td style={data[index]?.style}>{translate(data[index]?.content)}</td>
-          {/if}
-        </tr>
-      {/each}
+        {#if columnHeaders?.length > 0}
+          {#each columnHeaders as header, colNumber}
+            {#if (rowHeaders?.length > 0 && colNumber !== 0) || !rowHeaders}
+              <td style={data[header.id]?.style}>
+                {#if data[header.id]?.action}
+                  <Button
+                    on:buttonClick={() => dispatch('actionClicked', { data })}
+                    buttonType={ButtonTypeEnum.SECONDARY}
+                    translateKey={data[header.id]?.content}
+                  />
+                {:else}
+                  {translate(data[header.id]?.content)}
+                {/if}
+              </td>
+            {/if}
+          {/each}
+        {:else}
+          <td style={data[index]?.style}>{translate(data[index]?.content)}</td>
+        {/if}
+      </tr>
+    {/each}
     </tbody>
   </table>
 </div>
@@ -65,6 +64,7 @@
 
     .table {
       border-collapse: collapse;
+
       thead {
         border-bottom: var(--spacing--xs) solid var(--color--green);
         text-transform: uppercase;
@@ -85,6 +85,7 @@
       }
     }
   }
+
   .even {
     background-color: var(--color--light-grey);
   }
