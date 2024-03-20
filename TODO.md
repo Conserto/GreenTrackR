@@ -13,3 +13,5 @@
 - ~~Clean network via api -> Pas possible mais stockage date derniere request~~
 - Se passer du .env
 - ~~Clean cache + reinit param + refresh~~
+- Intensiti carbon > 0 si nb request 0?
+- Histo resilience
