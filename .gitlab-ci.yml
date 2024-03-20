@@ -20,6 +20,32 @@ build:
   script:
     - yarn build
 
+build:source:
+  stage: build
+  image: node:21
+  before_script:
+    - yarn
+  script:
+    - yarn build
+    - mv dist buildout
+  cache:
+    paths:
+      - node_modules
+    key:
+      files:
+        - package.json
+  artifacts:
+    name: "$CI_COMMIT_SHORT_SHA"
+    paths:
+      - buildout/
+    expire_in: 1 hrs
+    rules:
+      - if: '$CI_COMMIT_REF_NAME =~ /^(develop|master)$/ '
+        when: on_success
+      - if: $CI_COMMIT_TAG
+        when: on_success
+      - when: never
+
 test:
   stage: test
   script:
