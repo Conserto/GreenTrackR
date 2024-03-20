@@ -155,10 +155,6 @@
     "message": "View History",
     "description": "View History Button"
   },
-  "resetDataResultButton": {
-    "message": "Reset settings",
-    "description": "Reset parameters"
-  },
   "backToTop": {
     "message": "Back to top",
     "description": "Back to top"

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Button, Input, LoadingWheel, Select } from 'src/components';
   import { ButtonTypeEnum, InputTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
-  import { cleanCache, sendChromeMsg } from 'src/utils/chrome.utils';
+  import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
   import { toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { onDestroy, onMount } from 'svelte';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
@@ -28,8 +28,8 @@
     logInfo('onMount');
     chrome.runtime.onMessage.addListener(handleRuntimeMsg);
     sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
-    sendChromeMsg({ action: RequestAction.SEND_PAGE_HEIGHT });
     cleanCache();
+    sendChromeMsg({ action: RequestAction.SEND_PAGE_HEIGHT });
   });
 
   onDestroy(() => {
@@ -59,11 +59,23 @@
     sendChromeMsg({ action: RequestAction.SCROLL_TO, value });
   };
 
-  const handleResetData = () => {
+  const handleCleanCache = () => {
     sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
     cleanCache();
     currentMeasure = null;
-    measureAcquisition.latest = undefined;
+  };
+
+  const handleResetMeasure = () => {
+    sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
+    cleanCache();
+    currentMeasure = null;
+    measureAcquisition.applyLatest();
+  };
+
+  const handleRefresh = () => {
+    sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
+    currentMeasure = null;
+    reloadCurrentTab();
   };
 </script>
 
@@ -88,9 +100,19 @@
     translateKey={'launchAnalysisButtonWithAutoScrollButton'}
   />
   <Button
-    on:buttonClick={handleResetData}
+    on:buttonClick={handleCleanCache}
     buttonType={ButtonTypeEnum.SECONDARY}
-    translateKey="resetDataResultButton"
+    translateKey="clearBrowserCacheButton"
+  />
+  <Button
+    on:buttonClick={handleResetMeasure}
+    buttonType={ButtonTypeEnum.SECONDARY}
+    translateKey="resetMeasure"
+  />
+  <Button
+    on:buttonClick={handleRefresh}
+    buttonType={ButtonTypeEnum.SECONDARY}
+    translateKey="refresh"
   />
   <Button
     on:buttonClick={() => sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP })}
