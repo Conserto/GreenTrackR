@@ -1,5 +1,7 @@
 <script lang="ts">
-  export let selectedValue = 'auto';
+  import { SEARCH_AUTO } from '../const/key.const';
+
+  export let selectedValue = SEARCH_AUTO;
   export let selectValues = [];
 </script>
 

@@ -1,28 +1,26 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   import { translate } from 'src/utils/utils';
-  import { createEventDispatcher } from 'svelte';
   import { codeZone } from 'src/assets/data/codeZone';
 
-  import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
-
-  import { Select, Button } from 'src/components';
+  import { Button, Select } from 'src/components';
   import { ButtonTypeEnum } from 'src/enum';
+  import { SEARCH_AUTO } from '../../const/key.const';
 
   let zonesOptions, countryCodeSelected, userCountryCodeSelected;
   const dispatch = createEventDispatcher();
 
   onMount(async () => {
     zonesOptions = [
-      { label: 'Automatique', value: 'auto' },
-      ...codeZone.map((zone) => ({ label: zone.countryName, value: zone.zone })),
+      { label: 'Automatique', value: SEARCH_AUTO },
+      ...codeZone.map((zone) => ({ label: zone.countryName, value: zone.zone }))
     ];
   });
 
   function handleSubmitSimulation() {
     dispatch('submitSimulation', {
       countryCodeSelected,
-      userCountryCodeSelected,
+      userCountryCodeSelected
     });
   }
 </script>

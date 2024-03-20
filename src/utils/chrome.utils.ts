@@ -6,16 +6,7 @@ export const cleanCache = () => {
     {
       cache: true,
       serviceWorkers: true,
-      downloads: true,
-      localStorage: true,
-      cacheStorage: true,
-      appcache: true,
-      fileSystems: true,
-      history: true,
-      indexedDB: true,
-      webSQL: true,
-      cookies: true,
-      formData: true
+      downloads: true
     }
   ).catch(reason => logErr(`Error when clear browsing cache: ${reason}`));
 };

@@ -7,6 +7,7 @@
   import { savedMeasures } from 'src/const';
   import { cleanCache, reloadCurrentTab } from 'src/utils/chrome.utils';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
+  import { SEARCH_AUTO } from '../const/key.const';
 
   enum TabType {
     ResultTab,
@@ -26,7 +27,6 @@
   const onResetMeasure = () => {
     currentMeasure = null;
     currentDisplayedTab = TabType.None;
-    cleanCache();
     measureAcquisition.applyLatest();
   };
 
@@ -56,7 +56,7 @@
     currentDisplayedTab = TabType.ResultTab;
     loading = true;
     await measureAcquisition.getNetworkMeasure(false);
-    currentMeasure = await measureAcquisition.getGESMeasure('auto', 'auto');
+    currentMeasure = await measureAcquisition.getGESMeasure(SEARCH_AUTO, SEARCH_AUTO);
     loading = false;
     histoDatas = toHistoFormattedDatas(currentMeasure);
   };
@@ -95,7 +95,6 @@
     on:buttonClick={onCleanCache}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="clearBrowserCacheButton"
-    disabled={!currentMeasure}
   />
   <Button
     on:buttonClick={onResetMeasure}
