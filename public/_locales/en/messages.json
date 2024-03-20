@@ -88,8 +88,12 @@
     "description": "History Button"
   },
   "launchAnalysisButton": {
-    "message": "Start analysis",
+    "message": "Analysis",
     "description": "Launch Analysis"
+  },
+  "startJourneyButton": {
+    "message": "Start recorder",
+    "description": "Start recorder"
   },
   "launchAnalysisButtonWithAutoScrollButton": {
     "message": "Auto Scrolling",

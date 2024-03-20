@@ -55,7 +55,7 @@ export const formatGesMeasuresForTable = (measures: Measure[]) => {
     date: { content: formatDate(measure.date), style: 'font-weight:bold' },
     url: { content: measure.url },
     sizeTransferred: { content: `${formatSize(measure.networkMeasure.network.size)} / ${formatSize(measure.networkMeasure.network.sizeUncompress)} ${Units.pageSize}` },
-    nbRequest: { content: `${measure.networkMeasure.nbRequest}` },
+    nbRequest: { content: `${measure.networkMeasure.nbRequest} (${measure.networkMeasure.nbRequestCache})` },
     // TODO WHEN DOM COMPUTING IS OK
     // dom: { content: measure.dom },
     gesDataCenter: {
@@ -182,19 +182,19 @@ export const scrollPrompt = (topPrompt: number, leftPrompt: number, timeout: num
 
     const scrollHandler = () => {
       if (self.scrollY === topPrompt) {
-        logInfo("Remove 1");
-        window.removeEventListener("scroll", scrollHandler);
+        logInfo('Remove 1');
+        window.removeEventListener('scroll', scrollHandler);
         clearTimeout(failed);
         resolve();
       }
     };
     if (self.scrollY === topPrompt) {
-      logInfo("Remove 2");
-      window.removeEventListener("scroll", scrollHandler);
+      logInfo('Remove 2');
+      window.removeEventListener('scroll', scrollHandler);
       clearTimeout(failed);
       resolve();
     } else {
-      window.addEventListener("scroll", scrollHandler);
+      window.addEventListener('scroll', scrollHandler);
     }
   });
 };

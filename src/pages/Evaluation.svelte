@@ -31,9 +31,10 @@
   };
 
   const onCleanCache = () => {
+    cleanCache();
     currentMeasure = null;
     currentDisplayedTab = TabType.None;
-    cleanCache();
+    reloadCurrentTab();
   };
 
   const onRefresh = () => {
