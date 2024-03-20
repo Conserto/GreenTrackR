@@ -87,7 +87,7 @@ test('FormatGesMeasuresForTable function', async () => {
       sizeTransferred: {
         content: `${formatSize(measure.networkMeasure.network.size)} / ${formatSize(measure.networkMeasure.network.sizeUncompress)} ${Units.pageSize}`
       },
-      nbRequest: { content: `${measure.networkMeasure.nbRequest}` },
+      nbRequest: { content: `${measure.networkMeasure.nbRequest} (${measure.networkMeasure.nbRequestCache})` },
       // TODO WHEN DOM COMPUTING IS OK
       // dom: { content: measure.dom },
       gesDataCenter: {
