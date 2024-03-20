@@ -33,6 +33,18 @@ export class NetworkService {
     return entries.filter((harEntry: HARFormatEntry) => this.isNetworkResource(harEntry));
   }
 
+  calculateNbCache(entries: HARFormatEntry[]) {
+    return entries.filter((harEntry: HARFormatEntry) => this.isCacheCall(harEntry)).length;
+  }
+
+  filterNewerOnly(entries: HARFormatEntry[], latest: Date | undefined) {
+    if (latest) {
+      return entries.filter((harEntry: HARFormatEntry) => this.isAfter(harEntry, latest));
+    } else {
+      return entries;
+    }
+  }
+
   async getMotherUrl() {
     const url = await getTabUrl();
     logInfo(`Mother url: ${url}`);
@@ -55,6 +67,15 @@ export class NetworkService {
    */
   isNetworkResource(harEntry: HARFormatEntry) {
     return harEntry.request.url && !harEntry.request.url.startsWith(PREFIX_URL_DATA);
+  }
+
+  isCacheCall(harEntry: HARFormatEntry) {
+    return harEntry._fromCache;
+  }
+
+  isAfter(harEntry: HARFormatEntry, date: Date) {
+    let reqDate = new Date(harEntry.startedDateTime);
+    return reqDate > date;
   }
 
   isRealUrl(url: string) {

@@ -45,6 +45,10 @@ export const gesTableHeaders = [
     translateKey: 'gesGrade',
   },
   {
+    id: 'gesUserZone',
+    translateKey: 'gesUserZone',
+  },
+  {
     id: 'gesZone',
     translateKey: 'gesZone',
   },

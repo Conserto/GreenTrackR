@@ -39,7 +39,7 @@
     </div>
     <div>
       <span class="data-label">{translate('nbRequest')}</span>
-      <span class="data-value">{measure.networkMeasure.nbRequest}</span>
+      <span class="data-value">{measure.networkMeasure.nbRequest} ({measure.networkMeasure.nbRequestCache})</span>
     </div>
 <!--    <div>
       <span class="data-label">Nb Req Ext</span>

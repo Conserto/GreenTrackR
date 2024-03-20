@@ -78,6 +78,7 @@ export const formatGesMeasuresForTable = (measures: Measure[]) => {
       content: measure.score.gradeLetter,
       style: `background-color: ${measure.score.color}; color: ${measure.score.textColor}`
     },
+    gesUserZone: { content: `${measure.userGES?.cityName}, ${measure.userGES?.countryName}` },
     gesZone: { content: `${measure.serverGES?.cityName}, ${measure.serverGES?.countryName}` },
     gesIntensity: { content: `${measure.serverGES?.carbonIntensity} ${Units.carbonIntensity}` }
   }));
@@ -154,6 +155,7 @@ export const createEmptyMeasure = (): Measure => {
     dom: 0,
     extensionMeasure: {
       nbRequest: 0,
+      nbRequestCache: 0,
       network: {
         size: 0,
         sizeUncompress: 0
@@ -161,6 +163,7 @@ export const createEmptyMeasure = (): Measure => {
     },
     networkMeasure: {
       nbRequest: 0,
+      nbRequestCache: 0,
       network: {
         size: 0,
         sizeUncompress: 0

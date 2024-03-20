@@ -16,6 +16,7 @@ const measure: Measure = {
   url: 'https://conserto.pro/',
   networkMeasure: {
     nbRequest: 21,
+    nbRequestCache: 2,
     network: { size: 39, sizeUncompress: 488000 }
   },
   ges: {
@@ -52,6 +53,7 @@ const measure: Measure = {
   },
   extensionMeasure: {
     nbRequest: 21,
+    nbRequestCache: 0,
     network: { size: 39, sizeUncompress: 488000 }
   }
 };
@@ -82,13 +84,10 @@ test('FormatGesMeasuresForTable function', async () => {
     {
       date: { content: formatDate(measure.date), style: 'font-weight:bold' },
       url: { content: measure.url },
-      compressedSizeTransferred: {
-        content: `${formatSize(measure.networkMeasure.network.size)} ${Units.pageSize}`
+      sizeTransferred: {
+        content: `${formatSize(measure.networkMeasure.network.size)} / ${formatSize(measure.networkMeasure.network.sizeUncompress)} ${Units.pageSize}`
       },
-      uncompressedSizeTransferred: {
-        content: `${formatSize(measure.networkMeasure.network.sizeUncompress)} ${Units.pageSize}`
-      },
-      nbRequest: { content: measure.networkMeasure.nbRequest },
+      nbRequest: { content: `${measure.networkMeasure.nbRequest}` },
       // TODO WHEN DOM COMPUTING IS OK
       // dom: { content: measure.dom },
       gesDataCenter: {
@@ -112,6 +111,7 @@ test('FormatGesMeasuresForTable function', async () => {
         style: `background-color: ${measure.score.color}; color: ${measure.score.textColor}`
       },
       gesZone: { content: `${measure.serverGES?.cityName}, ${measure.serverGES?.countryName}` },
+      gesUserZone: { content: `${measure.userGES?.cityName}, ${measure.userGES?.countryName}`},
       gesIntensity: { content: `${measure.serverGES?.carbonIntensity} ${Units.carbonIntensity}` }
     }
   ]);
@@ -151,6 +151,7 @@ test('CreateEmptyMeasure function', async () => {
     url: '',
     networkMeasure: {
       nbRequest: 0,
+      nbRequestCache: 0,
       network: {
         size: 0,
         sizeUncompress: 0
@@ -189,6 +190,7 @@ test('CreateEmptyMeasure function', async () => {
     },
     extensionMeasure: {
       nbRequest: 0,
+      nbRequestCache: 0,
       network: {
         size: 0,
         sizeUncompress: 0

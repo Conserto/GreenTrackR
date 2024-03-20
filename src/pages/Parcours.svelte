@@ -7,9 +7,11 @@
   import { JourneyResults } from 'src/components/GES/results';
   import { cleanCache } from 'src/utils/chrome.utils';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
+  import { logInfo } from '../utils/log';
 
   let onGoingAnalysis = false;
   let resultsAvailable = false;
+  let measureAcquisition = new MeasureAcquisition();
 
   let results: Measure[] = [];
 
@@ -29,8 +31,15 @@
   /**
    * Called when the page document is fully loaded
    */
-  const onPageLoaded = async (details) => {
-    const measureAcquisition = new MeasureAcquisition();
+  const onPageLoaded = () => {
+    logInfo("Page Loaded");
+    window.addEventListener("scroll", onActionSave());
+    onActionSave();
+  };
+
+  // TODO
+  const onActionSave = async () => {
+    logInfo("Save");
     await measureAcquisition.getNetworkMeasure(false);
     const measure = await measureAcquisition.getGESMeasure('auto', 'auto');
     if (measure) {

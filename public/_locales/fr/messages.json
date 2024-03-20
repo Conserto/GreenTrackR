@@ -8,8 +8,16 @@
     "description": "Les premiers résultat de l'analyse ont été calculés"
   },
   "clearBrowserCacheButton": {
-    "message": "Réinitialiser les paramètres",
-    "description": "Clear Browser Cache Button"
+    "message": "Supprimer le cache",
+    "description": "Bouton nettoyage du cache"
+  },
+  "resetMeasure": {
+    "message": "Réinitialiser la mesure",
+    "description": "Remise à zéro du compteur"
+  },
+  "refresh": {
+    "message": "Recharger la page",
+    "description": "Recharger la page"
   },
   "csvColumnsLabel": {
     "message": "Date;Url;Taille decompressée(o);Taille compressée(Ko);DOM;GES Data Center(gCO2eq/kWh);GES Réseau(gCO2eq/kWh);GES Périphérique(gCO2eq/kWh);GES Total(gCO2eq/kWh); GES Score; Grade; Pays; IntensiteCarbon; NombreRequetes",
@@ -172,7 +180,7 @@
     "description": "Donne l'intensité carbon de l'utilisateur depuis elctrictymaps"
   },
   "nbRequest": {
-    "message": "Nombre de requêtes",
+    "message": "Nombre de requêtes hors extensions 'réel (cache)'",
     "description": "Nombre de requêtes effectuées par le site"
   },
   "infoMix": {

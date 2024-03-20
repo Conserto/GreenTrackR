@@ -1,17 +1,11 @@
 <script lang="ts">
   import { ButtonTypeEnum } from 'src/enum';
-  import { HistoricResults, GesResults } from 'src/components/GES/results';
-  import { Button, Modal, LoadingWheel, Histogram } from 'src/components';
+  import { GesResults, HistoricResults } from 'src/components/GES/results';
+  import { Button, Histogram, LoadingWheel, Modal } from 'src/components';
   import { ZoneSimulation } from 'src/components/GES';
-  import {
-    formatNumber,
-    getLocalStorageObject,
-    setLocalStorageObject,
-    toHistoFormattedDatas,
-    translate,
-  } from 'src/utils/utils';
+  import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { savedMeasures } from 'src/const';
-  import { cleanCache } from 'src/utils/chrome.utils';
+  import { cleanCache, reloadCurrentTab } from 'src/utils/chrome.utils';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
 
   enum TabType {
@@ -33,13 +27,26 @@
     currentMeasure = null;
     currentDisplayedTab = TabType.None;
     cleanCache();
+    measureAcquisition.applyLatest();
+  };
+
+  const onCleanCache = () => {
+    currentMeasure = null;
+    currentDisplayedTab = TabType.None;
+    cleanCache();
+  };
+
+  const onRefresh = () => {
+    currentMeasure = null;
+    currentDisplayedTab = TabType.None;
+    reloadCurrentTab();
   };
 
   const onSaveCurrentMeasure = () => {
     const lsMeasures = getLocalStorageObject(savedMeasures);
     setLocalStorageObject(
       savedMeasures,
-      lsMeasures ? [...lsMeasures, currentMeasure] : [currentMeasure],
+      lsMeasures ? [...lsMeasures, currentMeasure] : [currentMeasure]
     );
     showPopUp = true;
   };
@@ -47,9 +54,8 @@
   const handleRunAnalysis = async () => {
     currentDisplayedTab = TabType.ResultTab;
     loading = true;
-    await measureAcquisition.getNetworkMeasure();
+    await measureAcquisition.getNetworkMeasure(false);
     currentMeasure = await measureAcquisition.getGESMeasure('auto', 'auto');
-
     loading = false;
     histoDatas = toHistoFormattedDatas(currentMeasure);
   };
@@ -57,10 +63,10 @@
   const handleSimulation = async (event) => {
     loadGes = true;
     const { countryCodeSelected, userCountryCodeSelected } = event.detail;
-    await measureAcquisition.getNetworkMeasure();
+    await measureAcquisition.getNetworkMeasure(false);
     currentMeasure = await measureAcquisition.getGESMeasure(
       countryCodeSelected,
-      userCountryCodeSelected,
+      userCountryCodeSelected
     );
     histoDatas = toHistoFormattedDatas(currentMeasure);
     loadGes = false;
@@ -85,10 +91,21 @@
     translateKey="viewHistoryButton"
   />
   <Button
-    on:buttonClick={onResetMeasure}
+    on:buttonClick={onCleanCache}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="clearBrowserCacheButton"
     disabled={!currentMeasure}
+  />
+  <Button
+    on:buttonClick={onResetMeasure}
+    buttonType={ButtonTypeEnum.SECONDARY}
+    translateKey="resetMeasure"
+    disabled={!currentMeasure}
+  />
+  <Button
+    on:buttonClick={onRefresh}
+    buttonType={ButtonTypeEnum.SECONDARY}
+    translateKey="refresh"
   />
 </div>
 {#if currentDisplayedTab === TabType.ResultTab}
@@ -136,13 +153,16 @@
     align-items: center;
     text-align: center;
   }
+
   .loading-wheel {
     margin: var(--spacing--xl);
   }
+
   .loading-ges {
     $margin-y: var(--spacing--xxxl);
     margin: $margin-y 0 $margin-y 0;
   }
+
   .histo-container {
     width: 100%;
     overflow-x: auto;
