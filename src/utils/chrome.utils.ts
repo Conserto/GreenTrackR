@@ -1,4 +1,4 @@
-import { logDebug, logErr, logInfo } from './log';
+import { logDebug, logErr } from './log';
 
 export const cleanCache = () => {
   chrome.browsingData.remove(
@@ -21,8 +21,20 @@ export const cleanCache = () => {
 };
 
 export const sendChromeMsg = (payload: any) => {
-  chrome.tabs.sendMessage(getTabId(), payload)
-    .catch(reason => logErr(`Error when send chrome tab message: ${reason}`));
+  let id = getTabId();
+  let max = 100;
+  sendChromeMsgRetry(id, 0, max, payload);
+};
+
+const sendChromeMsgRetry = (id: number, cur: number, max: number, payload: any) => {
+  logDebug(`send Chrome Msg Retry ${cur}/${max}`);
+  chrome.tabs.sendMessage(id, payload).catch(reason => {
+    if (cur === max) {
+      logErr(`Error when send chrome tab message: ${reason}`);
+    } else {
+      sendChromeMsgRetry(id, cur + 1, max, payload);
+    }
+  });
 };
 
 export const getTabId = (): number => {

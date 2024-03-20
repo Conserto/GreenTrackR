@@ -5,12 +5,11 @@
   import { translate } from 'src/utils/utils';
   import type { Measure } from 'src/interface';
   import { JourneyResults } from 'src/components/GES/results';
-  import { cleanCache } from 'src/utils/chrome.utils';
+  import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
   import { logInfo } from '../utils/log';
 
   let onGoingAnalysis = false;
-  let resultsAvailable = false;
   let measureAcquisition = new MeasureAcquisition();
 
   let results: Measure[] = [];
@@ -18,11 +17,28 @@
   const handleAnalysis = () => {
     onGoingAnalysis = !onGoingAnalysis;
     if (onGoingAnalysis) {
+      logInfo('onCompleted add');
+      chrome.runtime.onMessage.addListener(handleRuntimeMsg);
+      measureAcquisition.applyLatest();
+      reloadCurrentTab();
       chrome.webNavigation.onCompleted.addListener(onPageLoaded);
     } else {
+      logInfo('onCompleted remove');
+      chrome.runtime.onMessage.removeListener(handleRuntimeMsg);
       chrome.webNavigation.onCompleted.removeListener(onPageLoaded);
     }
   };
+
+  const handleRuntimeMsg = async (message) => {
+    if (message.saveAnalysis) {
+      await onActionSave(message.component);
+    }
+  };
+
+  const handleClearCache = async (message) => {
+    cleanCache();
+  };
+
   const resetUserJourney = () => {
     results = [];
     cleanCache();
@@ -32,19 +48,23 @@
    * Called when the page document is fully loaded
    */
   const onPageLoaded = () => {
-    logInfo("Page Loaded");
-    window.addEventListener("scroll", onActionSave());
+    logInfo('Page Loaded');
     onActionSave();
+    sendChromeMsg({ action: 'listen-events' });
   };
 
   // TODO
-  const onActionSave = async () => {
-    logInfo("Save");
+  const onActionSave = async (component: string | undefined = undefined) => {
+    logInfo('Save ' + component);
     await measureAcquisition.getNetworkMeasure(false);
     const measure = await measureAcquisition.getGESMeasure('auto', 'auto');
+    if (component) {
+      measure.url += ` (${component})`;
+    }
     if (measure) {
       results = [...results, measure];
     }
+    measureAcquisition.applyLatest();
   };
 </script>
 
@@ -52,13 +72,18 @@
   <Button
     on:buttonClick={handleAnalysis}
     buttonType={ButtonTypeEnum.PRIMARY}
-    translateKey={onGoingAnalysis ? 'stopJourneyButton' : 'launchAnalysisButton'}
+    translateKey={onGoingAnalysis ? 'stopJourneyButton' : 'startJourneyButton'}
   />
   <Button
     disabled={onGoingAnalysis}
     on:buttonClick={resetUserJourney}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="resetJourneyButton"
+  />
+  <Button
+    on:buttonClick={handleClearCache}
+    buttonType={ButtonTypeEnum.SECONDARY}
+    translateKey="clearBrowserCacheButton"
   />
 </div>
 
