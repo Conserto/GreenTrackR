@@ -9,6 +9,7 @@
   import GesResults from 'src/components/GES/results/GesResults.svelte';
   import { PAGE_HEIGHT } from '../const/action.const';
   import { logInfo } from '../utils/log';
+  import { SEARCH_AUTO } from '../const/key.const';
 
   const scrollTypes = [
     { label: 'Px', value: ScrollInputType.PIXEL },
@@ -44,7 +45,7 @@
     } else if (message.autoScrollDone) {
       loading = true;
       await measureAcquisition.getNetworkMeasure(false);
-      currentMeasure = await measureAcquisition.getGESMeasure('auto', 'auto');
+      currentMeasure = await measureAcquisition.getGESMeasure(SEARCH_AUTO, SEARCH_AUTO);
       loading = false;
       histoDatas = toHistoFormattedDatas(currentMeasure);
     }

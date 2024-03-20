@@ -3,22 +3,49 @@ import { codeZone } from 'src/assets/data/codeZone';
 import { KWH_DEVICE, KWH_PER_BYTE_NETWORK, KWH_PER_REQUEST_DATA_CENTER } from 'src/const/measure.const';
 import type { CarbonData, CarbonDatas, EnergyMeasure, GES, GESTotals, NetworkResponse } from 'src/interface';
 import { logErr, logInfo } from '../utils/log';
+import { SEARCH_AUTO } from '../const/key.const';
 
 export class GESService {
+
+  private cacheGesByUrl: Map<String, GES>;
+  private cacheUserGes: GES | undefined;
+
   constructor() {
+    this.cacheGesByUrl = new Map<String, GES>();
+    this.cacheUserGes = undefined;
   }
 
   async computeGES(urlHost: URL | undefined, countryCodeSelected: string, userCountryCodeSelected: string) {
-    const zoneGES = await this.getGESServer(urlHost, countryCodeSelected);
-    const userGES = await this.getGESUser(userCountryCodeSelected);
+    let cacheSrvKey = (countryCodeSelected === SEARCH_AUTO && urlHost?.hostname) ? urlHost.hostname : undefined;
+    let userGesUseCacheUserGes = userCountryCodeSelected === SEARCH_AUTO && this.cacheUserGes;
+    let zoneGES: GES | undefined;
+    let userGES: GES | undefined;
+    if (cacheSrvKey && this.cacheGesByUrl.has(cacheSrvKey)) {
+      zoneGES = this.cacheGesByUrl.get(cacheSrvKey);
+    } else {
+      zoneGES = await this.getGESServer(urlHost, countryCodeSelected);
+      if (zoneGES && cacheSrvKey) {
+        this.cacheGesByUrl.set(cacheSrvKey, zoneGES);
+      }
+    }
+    if (userGesUseCacheUserGes) {
+      userGES = this.cacheUserGes;
+    } else {
+      userGES = await this.getGESUser(userCountryCodeSelected, userGesUseCacheUserGes);
+      if (userCountryCodeSelected === SEARCH_AUTO && userGES) {
+        this.cacheUserGes = userGES;
+      }
+    }
     return { zoneGES, userGES };
   }
 
   async getGESServer(url: URL | undefined, countryCodeSelected: string): Promise<GES | undefined> {
-    return this.getGES(url, true, countryCodeSelected);
+    logInfo('Call GES Server');
+    return await this.getGES(url, true, countryCodeSelected);
   }
 
   async getGESUser(userCountryCodeSelected: string): Promise<GES | undefined> {
+    logInfo('Call GES User');
     return this.getGES(undefined, false, userCountryCodeSelected);
   }
 
@@ -49,7 +76,7 @@ export class GESService {
       countryCode: ''
     };
     try {
-      if (countryCodeSelected !== 'auto') {
+      if (countryCodeSelected !== SEARCH_AUTO) {
         GES.carbonIntensity = await getCarbonIntensity(countryCodeSelected);
         GES.countryCode = countryCodeSelected;
         GES.countryName =
@@ -89,7 +116,7 @@ export class GESService {
     let data: CarbonData[] = [];
     let countryName: string = '';
     try {
-      if (countryCodeSelected == 'auto') {
+      if (countryCodeSelected == SEARCH_AUTO) {
         countryCodeSelected = 'FR';
       }
       // FIXME constante

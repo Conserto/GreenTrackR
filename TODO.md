@@ -13,6 +13,11 @@
 - Clean logs
 - TODO / FIXME
 - ~~Démarrer -> mesure à 0 + refresh +~~ 
+- ~~Trop dans delete cache~~
+- Scroll 25 par 25 error
+- ~~parcours -> Voir pour limite appel appli si mutualisable (cache)~~
+- ~~Parcours -> Click dbb et scroll scroll~~
+- tooltips
 
 ## Si le temps
 - Incorrect form label
@@ -22,4 +27,3 @@
 - Saisie de la key
 - Se passer du .env
 - Show extension
-- tooltips

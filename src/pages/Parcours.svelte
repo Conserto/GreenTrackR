@@ -8,6 +8,7 @@
   import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
   import { logInfo } from '../utils/log';
+  import { SEARCH_AUTO } from '../const/key.const';
 
   let onGoingAnalysis = false;
   let measureAcquisition = new MeasureAcquisition();
@@ -57,7 +58,7 @@
   const onActionSave = async (component: string | undefined = undefined) => {
     logInfo('Save ' + component);
     await measureAcquisition.getNetworkMeasure(false);
-    const measure = await measureAcquisition.getGESMeasure('auto', 'auto');
+    const measure = await measureAcquisition.getGESMeasure(SEARCH_AUTO, SEARCH_AUTO);
     if (component) {
       measure.url += ` (${component})`;
     }
