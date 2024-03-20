@@ -9,6 +9,7 @@
 - Saisie de la key
 - ~~Phrase px utile? -> delete ok~~
 - Show extension
-- Erreur dans l'affichage du tableau (logs)
-- Clean network via api 
+- ~~Erreur dans l'affichage du tableau (logs)~~
+- ~~Clean network via api -> Pas possible mais stockage date derniere request~~
 - Se passer du .env
+- ~~Clean cache + reinit param + refresh~~

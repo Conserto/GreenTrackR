@@ -8,8 +8,16 @@
     "description": "First analysis resulted have been computed."
   },
   "clearBrowserCacheButton": {
-    "message": "Reset settings",
+    "message": "Clear cache",
     "description": "Clear Browser Cache Button"
+  },
+  "resetMeasure": {
+    "message": "Reset measure",
+    "description": "Reset measure"
+  },
+  "refresh": {
+    "message": "Reload page",
+    "description": "Reload this page"
   },
   "csvColumnsLabel": {
     "message": "Date;Url;Uncompressed size(b);Compressed size(kb);DOM;GES Data Center(gCO2e);GES Network(gCO2e);GES Device(gCO2e);GES Total(gCO2e); GES Score; Grade; Country; CarbonIntensity; NumberRequest",
@@ -172,7 +180,7 @@
     "description": "Give user's carbon intensity from electricitymaps"
   },
   "nbRequest": {
-    "message": "Number of requests",
+    "message": "Number of requests without extentions 'real (cache)'",
     "description": "Number of request made by the website"
   },
   "infoMix": {

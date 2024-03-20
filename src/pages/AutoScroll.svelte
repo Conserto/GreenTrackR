@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Button, Input, LoadingWheel, Select } from 'src/components';
   import { ButtonTypeEnum, InputTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
-  import { cleanCache, sendChromeMsg, waitTest } from 'src/utils/chrome.utils';
+  import { cleanCache, sendChromeMsg } from 'src/utils/chrome.utils';
   import { toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { onDestroy, onMount } from 'svelte';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
@@ -43,8 +43,6 @@
       viewportPixels = message.viewportHeight;
     } else if (message.autoScrollDone) {
       loading = true;
-      // FIXME loop end of scroll
-      await waitTest(2000);
       await measureAcquisition.getNetworkMeasure(false);
       currentMeasure = await measureAcquisition.getGESMeasure('auto', 'auto');
       loading = false;
@@ -62,8 +60,10 @@
   };
 
   const handleResetData = () => {
+    sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
     cleanCache();
     currentMeasure = null;
+    measureAcquisition.latest = undefined;
   };
 </script>
 
@@ -97,6 +97,12 @@
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="backToTop"
   />
+  <!--  &lt;!&ndash; TODO DELETE &ndash;&gt;
+    <Button
+      on:buttonClick={() => logInfo("Latest= " + measureAcquisition.getLatest())}
+      buttonType={ButtonTypeEnum.SECONDARY}
+      translateKey="debug"
+    />-->
 </div>
 
 {#if currentMeasure && !loading}

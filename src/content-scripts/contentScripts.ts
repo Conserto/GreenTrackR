@@ -1,4 +1,4 @@
-import { logDebug, logErr, logInfo } from '../utils/log';
+import { logErr } from '../utils/log';
 import { RequestAction } from '../enum';
 import { DOM_INFOS, PAGE_HEIGHT } from '../const/action.const';
 import { getDomSizeWithoutSvg } from '../service';
@@ -6,14 +6,12 @@ import { scrollPrompt } from '../utils';
 
 const sentRuntimeMsg = (payload: any) => {
   chrome.runtime.sendMessage(payload).catch(reason => logErr(`Error when send message ${reason}`));
-  logInfo('LastErr -> ' + chrome.runtime.lastError);
 };
 
 /**
  * Catch devtools messages
  */
-chrome.runtime.onMessage.addListener(async function(request, sender, sendResponse) {
-  logDebug('OnMessage');
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request) {
     if (request.action === RequestAction.SCROLL_TO_TOP) {
       window.scrollTo({ top: 0 });
@@ -25,7 +23,7 @@ chrome.runtime.onMessage.addListener(async function(request, sender, sendRespons
         viewportHeight: window.innerHeight
       });
     } else if (request.action === RequestAction.SCROLL_TO && request.value) {
-      scrollPrompt(Math.floor(request.value), 0, 5000).then(() => {
+      scrollPrompt(Math.floor(request.value), 0, 5000).finally(() => {
         sentRuntimeMsg({ autoScrollDone: true });
       });
       /*      window.scrollTo({ top: 0 });

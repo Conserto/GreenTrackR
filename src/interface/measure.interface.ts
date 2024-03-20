@@ -16,6 +16,7 @@ export interface Measure {
 export interface NetworkMeasure {
   network: NetworkResponse;
   nbRequest: number;
+  nbRequestCache: number;
 }
 
 export interface EnergyMeasure {
