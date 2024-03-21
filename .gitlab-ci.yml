@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - package
 
 variables:
   SONAR_PROJECT_KEY: greentrackr-opensource
@@ -20,14 +21,13 @@ build:
   script:
     - yarn build
 
-build:source:
-  stage: build
+package:
+  stage: package
   image: node:21
   before_script:
     - yarn
   script:
-    - yarn build
-    - mv dist buildout
+    - yarn run build
   cache:
     paths:
       - node_modules
@@ -37,8 +37,8 @@ build:source:
   artifacts:
     name: "$CI_COMMIT_SHORT_SHA"
     paths:
-      - buildout/
-    expire_in: 1 hrs
+      - dist/
+    expire_in: 30 days
   rules:
     - if: '$CI_COMMIT_REF_NAME =~ /^(dev|master)$/ '
       when: on_success
