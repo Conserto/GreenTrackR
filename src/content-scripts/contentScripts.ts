@@ -11,7 +11,7 @@ const sentRuntimeMsg = (payload: any) => {
 /**
  * Catch devtools messages
  */
-chrome.runtime.onMessage.addListener(async function(request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request) {
     if (request.action === RequestAction.SCROLL_TO_TOP) {
       window.scrollTo({ top: 0 });
