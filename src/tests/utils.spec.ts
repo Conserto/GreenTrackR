@@ -73,7 +73,7 @@ test('FormatNumber function', async () => {
 test('FormatSize function', async () => {
   const bigSize = 456000;
   const smallSize = 456;
-  expect(formatSize(bigSize)).toBe(bigSize / 1000);
+  expect(formatSize(bigSize)).toBe((bigSize / 1000).toString());
   expect(formatSize(smallSize)).toBe('0.46');
 });
 
