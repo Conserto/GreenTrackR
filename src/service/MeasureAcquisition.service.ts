@@ -9,8 +9,8 @@ import { DOM_INFOS } from '../const/action.const';
 
 export class MeasureAcquisition {
   public measure: Measure;
-  public latest: Date | undefined;
-  public latestCheck: Date | undefined;
+  private latest?: Date;
+  private latestCheck?: Date;
   // FIXME Remise à zéro?
   private harRetryCount: number;
   private networkService: NetworkService;
@@ -27,13 +27,13 @@ export class MeasureAcquisition {
     this.measure = createEmptyMeasure();
   }
 
-  updateMeasureValues(zoneGES: GES | undefined, userGES: GES | undefined): void {
+  updateMeasureValues(zoneGES?: GES, userGES?: GES): void {
     // Energie total requetes (réseau, user, server)
     const { ges, energy } = this.gesService.getEnergyAndGES(
-      zoneGES,
-      userGES,
       this.measure.networkMeasure.network,
-      this.measure.networkMeasure.nbRequest
+      this.measure.networkMeasure.nbRequest,
+      zoneGES,
+      userGES
     );
 
     this.measure.ges = ges;
@@ -48,9 +48,9 @@ export class MeasureAcquisition {
     let urlHost = this.networkService.getUrl(this.measure.url);
     logDebug('Pass URL');
     const { zoneGES, userGES } = await this.gesService.computeGES(
-      urlHost,
       countryCodeSelected,
-      userCountryCodeSelected
+      userCountryCodeSelected,
+      urlHost
     );
     logDebug('Pass computeGes');
     this.updateMeasureValues(zoneGES, userGES);
@@ -60,7 +60,7 @@ export class MeasureAcquisition {
     return this.measure;
   }
 
-  async getNetworkMeasure(forceRefresh: boolean = true, inverseNew: boolean = false) {
+  async getNetworkMeasure(forceRefresh: boolean = true) {
     let har;
     if (this.harRetryCount === 0 && forceRefresh) {
       await this.retryGetNetworkMeasure(forceRefresh);
@@ -133,6 +133,7 @@ export class MeasureAcquisition {
     // FIXME check
     // FIXME compteur réinitialisé?
     if (this.harRetryCount < parseInt(import.meta.env.VITE_MAX_HAR_RETRIES)) {
+      // TODO check if undefined
       logInfo('Reload : ' + await getTabUrl());
       this.harRetryCount++;
       await reloadCurrentTab();

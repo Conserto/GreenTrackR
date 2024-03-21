@@ -1,5 +1,5 @@
 export interface TableData {
-  content: any;
+  content?: any;
   style?: string;
   action?: boolean;
 }

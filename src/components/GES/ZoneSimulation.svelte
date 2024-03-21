@@ -7,7 +7,7 @@
   import { ButtonTypeEnum } from 'src/enum';
   import { SEARCH_AUTO } from '../../const/key.const';
 
-  let zonesOptions, countryCodeSelected, userCountryCodeSelected;
+  let zonesOptions: any[], countryCodeSelected: string, userCountryCodeSelected: string;
   const dispatch = createEventDispatcher();
 
   onMount(async () => {

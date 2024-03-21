@@ -1,23 +1,25 @@
 <script lang="ts">
   import { translate } from 'src/utils/utils';
   import { CarIcon, PhoneIcon } from 'src/assets/icons';
-  import { NUMBER_OF_VISITS, CAR_AVERAGE_CO2, PHONE_AVERAGE_CO2 } from 'src/const/measure.const';
+  import { CAR_AVERAGE_CO2, NUMBER_OF_VISITS, PHONE_AVERAGE_CO2 } from 'src/const/measure.const';
   import { Input } from 'src/components';
   import { InputTypeEnum } from 'src/enum';
+  import type { Measure } from '../../interface';
 
-  export let measure: any;
+  export let measure: Measure | undefined;
 
   let visitsNumber = NUMBER_OF_VISITS >= 1 ? NUMBER_OF_VISITS : 1000;
+  let visitsNumberStr = visitsNumber.toString();
 
-  $: carEquivalent = ((measure.ges.pageTotal / CAR_AVERAGE_CO2) * visitsNumber).toFixed(2);
-  $: phoneEquivalent = ((measure.ges.pageTotal / PHONE_AVERAGE_CO2) * visitsNumber).toFixed(2);
+  $: carEquivalent = (((measure ? measure.ges.pageTotal : 0) / CAR_AVERAGE_CO2) * visitsNumber).toFixed(2);
+  $: phoneEquivalent = (((measure ? measure.ges.pageTotal : 0) / PHONE_AVERAGE_CO2) * visitsNumber).toFixed(2);
 </script>
 
 <div class="visit-eq-container">
   <Input
     type={InputTypeEnum.NUMBER}
     name="numberVisit"
-    bind:value={visitsNumber}
+    bind:value={visitsNumberStr}
     translateKey="eitherFor"
   />
   <p>{translate('visitEquivalent')}</p>

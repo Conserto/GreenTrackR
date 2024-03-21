@@ -14,14 +14,14 @@
 - TODO / FIXME
 - ~~Démarrer -> mesure à 0 + refresh +~~ 
 - ~~Trop dans delete cache~~
-- Scroll 25 par 25 error
+- ~~Scroll 25 par 25 error~~
 - ~~Warn rowHeader~~
 - ~~parcours -> Voir pour limite appel appli si mutualisable (cache)~~
 - ~~Parcours -> Click dbb et scroll scroll~~
-- tooltips
+- ~~tooltips~~
+- Incorrect form label
 
 ## Si le temps
-- Incorrect form label
 - Autscroll :
   - Dev option : activer le choix pourcentage du scroll
 - Gestion erreur si Api (electricity maps et ip geolocation ) down => prise de contact electricity maps

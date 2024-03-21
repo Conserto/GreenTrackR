@@ -11,6 +11,7 @@
   import { logInfo } from '../utils/log';
   import { SEARCH_AUTO } from '../const/key.const';
   import { Tooltip } from 'flowbite-svelte';
+  import type { HistoData, Measure } from '../interface';
 
   const scrollTypes = [
     { label: 'Px', value: ScrollInputType.PIXEL },
@@ -18,12 +19,13 @@
   ];
   let currentScrollType = ScrollInputType.PERCENT;
   let scrollValue = 100;
+  let scrollValueStr = scrollValue.toString();
   let viewportPixels = 0;
   let totalPagePixels = 0;
 
   let loading = false;
   let measureAcquisition = new MeasureAcquisition();
-  let currentMeasure: Measure = null;
+  let currentMeasure: Measure | null;
   let histoDatas: HistoData[] = [];
 
   onMount(() => {
@@ -39,7 +41,7 @@
     chrome.runtime.onMessage.removeListener(handleRuntimeMsg);
   });
 
-  const handleRuntimeMsg = async (message) => {
+  const handleRuntimeMsg = async (message: any) => {
     if (message.type === PAGE_HEIGHT) {
       totalPagePixels = message.totalHeight;
       viewportPixels = message.viewportHeight;
@@ -91,7 +93,7 @@
 </p>
 
 <div class="flex-center input-container">
-  <Input type={InputTypeEnum.NUMBER} name="scrollValue" bind:value={scrollValue} />
+  <Input type={InputTypeEnum.NUMBER} name="scrollValue" bind:value={scrollValueStr} />
   <Select bind:selectedValue={currentScrollType} selectValues={scrollTypes} />
 </div>
 

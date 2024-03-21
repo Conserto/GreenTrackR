@@ -41,9 +41,7 @@ export class ScoreService {
     }
   }
 
-  static getScoreForGrade(score: number) {
-    let result = '';
-    result += Math.round(score) + '/100';
-    return result;
+  static getScoreForGrade(score?: number) {
+    return score ? `${Math.round(score)}/100` : '-';
   }
 }

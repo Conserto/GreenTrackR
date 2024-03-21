@@ -4,8 +4,8 @@
 
   export let name: string;
   export let value: string;
-  export let translateKey: string = undefined;
-  export let type: InputType;
+  export let translateKey: string | undefined = undefined;
+  export let type: InputTypeEnum;
 </script>
 
 <div class="input-wrapper">

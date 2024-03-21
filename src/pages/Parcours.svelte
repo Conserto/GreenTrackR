@@ -31,13 +31,13 @@
     }
   };
 
-  const handleRuntimeMsg = async (message) => {
+  const handleRuntimeMsg = async (message: any) => {
     if (message.saveAnalysis) {
       await onActionSave(message.component);
     }
   };
 
-  const handleClearCache = async (message) => {
+  const handleClearCache = async () => {
     cleanCache();
   };
 
@@ -56,7 +56,7 @@
   };
 
   // TODO
-  const onActionSave = async (component: string | undefined = undefined) => {
+  const onActionSave = async (component?: string) => {
     logInfo('Save ' + component);
     await measureAcquisition.getNetworkMeasure(false);
     const measure = await measureAcquisition.getGESMeasure(SEARCH_AUTO, SEARCH_AUTO);

@@ -3,16 +3,16 @@
   import type { Measure } from 'src/interface';
   import { translate } from 'src/utils/utils';
 
-  export let measure: Measure;
+  export let measure: Measure | undefined;
 </script>
 
 <div class="ges-equivalent">
   <span>{translate('greenhouseGasesEmission')} :</span>
   <span
     class="ges-equivalent_value"
-    style:color={measure.score.textColor}
-    style:background-color={measure.score.color}
-    >{measure.ges.pageTotal.toFixed(2)} {Units.carbonEmissions}</span
+    style:color={measure?.score.textColor}
+    style:background-color={measure?.score.color}
+    >{measure?.ges.pageTotal.toFixed(2)} {Units.carbonEmissions}</span
   >
 </div>
 

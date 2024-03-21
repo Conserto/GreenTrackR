@@ -2,7 +2,7 @@
   import { SEARCH_AUTO } from '../const/key.const';
 
   export let selectedValue = SEARCH_AUTO;
-  export let selectValues = [];
+  export let selectValues: any[] = [];
 </script>
 
 <select class="generic-input" bind:value={selectedValue}>

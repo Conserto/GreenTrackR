@@ -15,6 +15,7 @@
   import { cleanCache, reloadCurrentTab } from 'src/utils/chrome.utils';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
   import { SEARCH_AUTO } from '../const/key.const';
+  import type { HistoData, Measure } from '../interface';
 
   enum TabType {
     ResultTab,
@@ -28,7 +29,7 @@
   let loading = false;
   let loadGes = false;
   let measureAcquisition = new MeasureAcquisition();
-  let currentMeasure: Measure = null;
+  let currentMeasure: Measure | null;
   let histoDatas: HistoData[] = [];
 
   const onResetMeasure = () => {
@@ -68,7 +69,7 @@
     histoDatas = toHistoFormattedDatas(currentMeasure);
   };
 
-  const handleSimulation = async (event) => {
+  const handleSimulation = async (event: any) => {
     loadGes = true;
     const { countryCodeSelected, userCountryCodeSelected } = event.detail;
     await measureAcquisition.getNetworkMeasure(false);

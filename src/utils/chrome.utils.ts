@@ -37,9 +37,9 @@ export const getTabId = (): number => {
   return tabId;
 };
 
-export const getTabUrl = async (): Promise<string> => {
+export const getTabUrl = async (): Promise<string | undefined> => {
   const tab = await chrome.tabs.get(getTabId());
-  return tab.url;
+  return tab?.url;
 };
 
 export const reloadCurrentTab = async (): Promise<void> => {

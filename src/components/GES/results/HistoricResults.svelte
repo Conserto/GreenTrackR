@@ -5,27 +5,25 @@
   import { export_data } from 'src/service';
   import { formatGesMeasuresForTable, getLocalStorageObject, setLocalStorageObject, translate } from 'src/utils/utils';
   import { onMount } from 'svelte';
+  import type { Measure, TableData } from '../../../interface';
 
-  let formattedData: TableData[] = [];
-  let measures: Measures[] = [];
+  let formattedData: Map<string, TableData>[];
+  let measures: Measure[] = [];
   let showPopUp = false;
 
   onMount(() => {
     measures = getLocalStorageObject(savedMeasures) ?? [];
-    formattedData = formatGesMeasuresForTable(measures).map((measure) => ({
-      ...measure,
-      action: {
-        content: 'deleteButton',
-        action: true
-      }
-    }));
+    formattedData = formatGesMeasuresForTable(measures);
+    let btn = new Map<string, TableData>;
+    btn.set('action', { content: 'deleteButton', action: true });
+    formattedData.push(btn);
   });
 
   const handleExport = () => {
     export_data(measures);
   };
 
-  const handleDeleteMeasure = (event) => {
+  const handleDeleteMeasure = (event: any) => {
     const data = event.detail.data;
     formattedData = formattedData.filter((d) => d !== data);
     measures = measures.filter((m) => m.date !== data.date.content);
@@ -50,13 +48,13 @@
     on:buttonClick={handleExport}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="exportButton"
-    disabled={!formattedData.length}
+    disabled={!formattedData?.length}
   />
   <Button
     on:buttonClick={() => (showPopUp = true)}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="deleteAllButton"
-    disabled={!formattedData.length}
+    disabled={!formattedData?.length}
   />
 </div>
 

@@ -1,6 +1,6 @@
 export interface HistoData {
   label: string;
-  value: string;
-  value2: string;
+  value: number;
+  value2: number;
   color: string;
 }

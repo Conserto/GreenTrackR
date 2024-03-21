@@ -1,13 +1,13 @@
-import type { Measure } from 'src/interface';
-import { Units } from 'src/const/units.const';
+import type { Measure, TableData } from 'src/interface';
 import { logInfo, logWarn } from './log';
+import { Units } from '../const';
 
 export const getAverageValue = (data: number[]) => {
   let sum = data.reduce((partialSum: number, a) => partialSum + a, 0);
   return sum / data.length;
 };
 
-export const translate = (translateKey: string) => {
+export const translate = (translateKey?: string) => {
   let translatedLabel = '';
   if (translateKey) {
     try {
@@ -37,17 +37,20 @@ export const formatDate = (date: Date) => {
   return date.toLocaleString();
 };
 
-export const formatNumber = (value: number) => {
+export const formatNumber = (value: number): string => {
   return value.toFixed(2);
 };
 
-export const formatSize = (value: number) => {
-  const koValue = value / 1000;
-  if (koValue < 1) {
-    return formatNumber(koValue);
-  } else {
-    return Math.round(value / 1000);
+export const formatSize = (value?: number): string => {
+  if (value) {
+    const koValue = value / 1000;
+    if (koValue < 1) {
+      return formatNumber(koValue);
+    } else {
+      return Math.round(value / 1000).toString();
+    }
   }
+  return '0';
 };
 
 export const getLocalStorageObject = (key: string) => {
@@ -63,38 +66,32 @@ export const setLocalStorageObject = (key: string, value: any) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
-export const formatGesMeasuresForTable = (measures: Measure[]) => {
-  return measures.map((measure) => ({
-    date: { content: formatDate(measure.date), style: 'font-weight:bold' },
-    url: { content: measure.url },
-    sizeTransferred: { content: `${formatSize(measure.networkMeasure.network.size)} / ${formatSize(measure.networkMeasure.network.sizeUncompress)} ${Units.pageSize}` },
-    nbRequest: { content: `${measure.networkMeasure.nbRequest} (${measure.networkMeasure.nbRequestCache})` },
-    // TODO WHEN DOM COMPUTING IS OK
-    // dom: { content: measure.dom },
-    gesDataCenter: {
-      content: `${formatNumber(measure.ges.dataCenterTotal)} ${Units.carbonEmissions}`
-    },
-    gesNetwork: {
-      content: `${formatNumber(measure.ges.networkTotal)} ${Units.carbonEmissions}`
-    },
-    gesDevice: {
-      content: `${formatNumber(measure.ges.deviceTotal)} ${Units.carbonEmissions}`
-    },
-    gesTotal: {
-      content: `${formatNumber(measure.ges.pageTotal)} ${Units.carbonEmissions}`
-    },
-    gesScore: {
+export const formatGesMeasuresForTable = (measures: Measure[]): Map<string, TableData>[] => {
+  return measures.map((measure): Map<string, TableData> => {
+    let data: Map<any, TableData> = new Map<any, TableData>;
+    data.set('date', { content: formatDate(measure.date), style: 'font-weight:bold' });
+    data.set('url', { content: measure.url });
+    data.set('sizeTransferred', {
+      content: `${formatSize(measure.networkMeasure.network.size)} / ${formatSize(measure.networkMeasure.network.sizeUncompress)} ${Units.pageSize}`
+    });
+    data.set('nbRequest', { content: `${measure.networkMeasure.nbRequest} (${measure.networkMeasure.nbRequestCache})` });
+    data.set('gesDataCenter', { content: `${formatNumber(measure.ges.dataCenterTotal)} ${Units.carbonEmissions}` });
+    data.set('gesNetwork', { content: `${formatNumber(measure.ges.networkTotal)} ${Units.carbonEmissions}` });
+    data.set('gesDevice', { content: `${formatNumber(measure.ges.deviceTotal)} ${Units.carbonEmissions}` });
+    data.set('gesTotal', { content: `${formatNumber(measure.ges.pageTotal)} ${Units.carbonEmissions}` });
+    data.set('gesScore', {
       content: formatNumber(measure.score.value ?? -1),
       style: `background-color: ${measure.score.color}; color: ${measure.score.textColor}`
-    },
-    gesGrade: {
+    });
+    data.set('gesGrade', {
       content: measure.score.gradeLetter,
       style: `background-color: ${measure.score.color}; color: ${measure.score.textColor}`
-    },
-    gesUserZone: { content: `${measure.userGES?.cityName}, ${measure.userGES?.countryName}` },
-    gesZone: { content: `${measure.serverGES?.cityName}, ${measure.serverGES?.countryName}` },
-    gesIntensity: { content: `${measure.serverGES?.carbonIntensity} ${Units.carbonIntensity}` }
-  }));
+    });
+    data.set('gesUserZone', { content: `${measure.userGES?.cityName}, ${measure.userGES?.countryName}` });
+    data.set('gesZone', { content: `${measure.serverGES?.cityName}, ${measure.serverGES?.countryName}` });
+    data.set('gesIntensity', { content: `${measure.serverGES?.carbonIntensity} ${Units.carbonIntensity}` });
+    return data;
+  });
 };
 
 export const toHistoFormattedDatas = (measure: Measure) => {
@@ -102,26 +99,26 @@ export const toHistoFormattedDatas = (measure: Measure) => {
     return [
       {
         label: 'networkTotal',
-        value: formatNumber(measure.ges.networkTotal),
-        value2: formatNumber(measure.energy.kWhNetwork * 1000),
+        value: measure.ges.networkTotal,
+        value2: measure.energy.kWhNetwork * 1000,
         color: '#7b7aab'
       },
       {
         label: 'dataCenterTotal',
-        value: formatNumber(measure.ges.dataCenterTotal),
-        value2: formatNumber(measure.energy.kWhDataCenter * 1000),
+        value: measure.ges.dataCenterTotal,
+        value2: measure.energy.kWhDataCenter * 1000,
         color: '#86665f'
       },
       {
         label: 'deviceTotal',
-        value: formatNumber(measure.ges.deviceTotal),
-        value2: formatNumber(measure.energy.kWhDevice * 1000),
+        value: measure.ges.deviceTotal,
+        value2: measure.energy.kWhDevice * 1000,
         color: '#5e806d'
       },
       {
         label: 'pageTotal',
-        value: formatNumber(measure.ges.pageTotal),
-        value2: formatNumber(measure.energy.kWhPage * 1000),
+        value: measure.ges.pageTotal,
+        value2: measure.energy.kWhPage * 1000,
         color: '#535481'
       }
     ];
