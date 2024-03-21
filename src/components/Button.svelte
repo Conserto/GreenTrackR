@@ -19,8 +19,7 @@
   {disabled}
   class:primary={buttonType === ButtonTypeEnum.PRIMARY}
   class:secondary={buttonType === ButtonTypeEnum.SECONDARY}
-  class={'button'}>{translate(translateKey)}</button
->
+  class={'button'}>{translate(translateKey)}</button>
 
 <style lang="scss">
   /* Bootstrap Button Base Styles */
@@ -36,11 +35,10 @@
     font-size: var(--font-size--md);
     line-height: 1.5;
     border-radius: var(--border-radius--slight);
-    transition:
-      color 0.15s ease-in-out,
-      background-color 0.15s ease-in-out,
-      border-color 0.15s ease-in-out,
-      box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
     cursor: pointer;
 
     &:disabled {

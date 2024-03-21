@@ -2,7 +2,7 @@
   import { Button, Input, LoadingWheel, Select } from 'src/components';
   import { ButtonTypeEnum, InputTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
   import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
-  import { toHistoFormattedDatas, translate } from 'src/utils/utils';
+  import { toHistoFormattedDatas, translate, translateDescription } from 'src/utils/utils';
   import { onDestroy, onMount } from 'svelte';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
   import Histogram from 'src/components/Histogram.svelte';
@@ -10,6 +10,7 @@
   import { PAGE_HEIGHT } from '../const/action.const';
   import { logInfo } from '../utils/log';
   import { SEARCH_AUTO } from '../const/key.const';
+  import { Tooltip } from 'flowbite-svelte';
 
   const scrollTypes = [
     { label: 'Px', value: ScrollInputType.PIXEL },
@@ -100,26 +101,31 @@
     buttonType={ButtonTypeEnum.PRIMARY}
     translateKey={'launchAnalysisButtonWithAutoScrollButton'}
   />
+  <Tooltip>{translateDescription('launchAnalysisButtonWithAutoScrollButton')}</Tooltip>
   <Button
     on:buttonClick={handleCleanCache}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="clearBrowserCacheButton"
   />
+  <Tooltip>{translateDescription('clearBrowserCacheButton')}</Tooltip>
   <Button
     on:buttonClick={handleResetMeasure}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="resetMeasure"
   />
+  <Tooltip>{translateDescription('resetMeasure')}</Tooltip>
   <Button
     on:buttonClick={handleRefresh}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="refresh"
   />
+  <Tooltip>{translateDescription('refresh')}</Tooltip>
   <Button
     on:buttonClick={() => sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP })}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="backToTop"
   />
+  <Tooltip>{translateDescription('backToTop')}</Tooltip>
   <!--  &lt;!&ndash; TODO DELETE &ndash;&gt;
     <Button
       on:buttonClick={() => logInfo("Latest= " + measureAcquisition.getLatest())}
