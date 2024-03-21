@@ -53,7 +53,8 @@
   };
 
   const handleAutoScroll = () => {
-    loading = false;
+    currentMeasure = null;
+    loading = true;
     const value =
       currentScrollType === ScrollInputType.PIXEL
         ? scrollValue

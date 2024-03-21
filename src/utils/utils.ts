@@ -28,7 +28,7 @@ export const translateDescription = (translateKey: string) => {
     } catch (e) {
       logWarn('Warning ! You are trying to translate a null translateKey. -> ' + translateKey);
     }
-    translatedLabel = translatedLabel ? (translatedLabel.split('#')[1] ? translatedLabel.split('#')[1] : '' ) : '';
+    translatedLabel = translatedLabel ? (translatedLabel.split('#')[1] ? translatedLabel.split('#')[1] : '') : '';
   }
   return translatedLabel;
 };
@@ -185,30 +185,22 @@ export const createEmptyMeasure = (): Measure => {
   };
 };
 
-// FIXME
 export const scrollPrompt = (topPrompt: number, leftPrompt: number, timeout: number) => {
   logInfo(`Scroll ${topPrompt} / ${leftPrompt}`);
-  window.scrollBy({ left: leftPrompt, top: topPrompt, behavior: 'smooth' });
-  return new Promise((resolve, reject) => {
-    const failed = setTimeout(() => {
-      reject();
-    }, timeout);
-
-    const scrollHandler = () => {
-      if (self.scrollY === topPrompt) {
-        logInfo('Remove 1');
-        window.removeEventListener('scroll', scrollHandler);
+  const end = (document.body.scrollHeight - window.innerHeight) === window.scrollY;
+  if (!end) {
+    window.scrollBy({ left: leftPrompt, top: topPrompt, behavior: 'smooth' });
+    return new Promise<void>((resolve, reject) => {
+      const failed = setTimeout(() => {
+        reject();
+      }, timeout);
+      window.addEventListener('scrollend', () => {
         clearTimeout(failed);
         resolve();
-      }
-    };
-    if (self.scrollY === topPrompt) {
-      logInfo('Remove 2');
-      window.removeEventListener('scroll', scrollHandler);
-      clearTimeout(failed);
-      resolve();
-    } else {
-      window.addEventListener('scroll', scrollHandler);
-    }
-  });
+      });
+    });
+  } else {
+    logInfo('End Of Page');
+    return new Promise<void>((resolve, reject) => resolve());
+  }
 };
