@@ -44,17 +44,15 @@ export class MeasureAcquisition {
   }
 
   async getGESMeasure(countryCodeSelected: string, userCountryCodeSelected: string) {
-    logDebug('Enter getGESMeasure');
+    logDebug('getGESMeasure');
     let urlHost = this.networkService.getUrl(this.measure.url);
-    logDebug('Pass URL');
     const { zoneGES, userGES } = await this.gesService.computeGES(
       countryCodeSelected,
       userCountryCodeSelected,
       urlHost
     );
-    logDebug('Pass computeGes');
     this.updateMeasureValues(zoneGES, userGES);
-    logDebug('Pass update, wait Dom');
+    logDebug('Wait Dom');
     await this.waitForDomElements();
     logDebug('End getGESMeasure');
     return this.measure;
@@ -70,7 +68,6 @@ export class MeasureAcquisition {
       let entriesNew = this.networkService.filterNewerOnly(entriesNetwork, this.latestCheck);
       let [entriesExtension, entriesPage] = this.filterEntriesExtensionAndPage(entriesNew);
       if (entriesPage.length == 0 && entriesNetwork.length == 0) {
-        logDebug('entries_page.length == 0');
         await this.retryGetNetworkMeasure(forceRefresh);
       } else {
         this.measure = await this.getMeasureFromEntries(this.measure, entriesPage);
@@ -132,7 +129,7 @@ export class MeasureAcquisition {
 
   async retryGetNetworkMeasure(forceRefresh: boolean): Promise<void> {
     if (this.harRetryCount < VITE_MAX_HAR_RETRIES) {
-      logInfo('Reload');
+      logDebug('Reload');
       this.harRetryCount++;
       await reloadCurrentTab();
       //TODO: to delete, we'll have to implement this on service-worker so it can send message to svelte component
@@ -146,14 +143,12 @@ export class MeasureAcquisition {
   waitForDomElements() {
     return new Promise<void>((resolve) => {
       const handleRuntimeMsg = async (message: { type: string; value: any }) => {
-        logDebug('handleRuntimeMsg');
         if (message.type === DOM_INFOS) {
           chrome.runtime.onMessage.addListener(handleRuntimeMsg);
           this.measure.dom = message.value;
           resolve();
         }
       };
-
       chrome.runtime.onMessage.addListener(handleRuntimeMsg);
       sendChromeMsg({ action: RequestAction.GET_DOM_ELEMENTS });
     });

@@ -7,7 +7,6 @@
   import { JourneyResults } from 'src/components/GES/results';
   import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
-  import { logInfo } from '../utils/log';
   import { SEARCH_AUTO } from '../const/key.const';
   import { Tooltip } from 'flowbite-svelte';
 
@@ -19,13 +18,13 @@
   const handleAnalysis = () => {
     onGoingAnalysis = !onGoingAnalysis;
     if (onGoingAnalysis) {
-      logInfo('onCompleted add');
+      logDebug('onCompleted add');
       chrome.runtime.onMessage.addListener(handleRuntimeMsg);
       measureAcquisition.applyLatest();
       reloadCurrentTab();
       chrome.webNavigation.onCompleted.addListener(onPageLoaded);
     } else {
-      logInfo('onCompleted remove');
+      logDebug('onCompleted remove');
       chrome.runtime.onMessage.removeListener(handleRuntimeMsg);
       chrome.webNavigation.onCompleted.removeListener(onPageLoaded);
     }
@@ -50,13 +49,13 @@
    * Called when the page document is fully loaded
    */
   const onPageLoaded = () => {
-    logInfo('Page Loaded');
+    logDebug('Page Loaded');
     onActionSave();
     sendChromeMsg({ action: RequestAction.LISTEN_EVENT });
   };
 
   const onActionSave = async (component?: string) => {
-    logInfo('Save ' + component);
+    logDebug('Save ' + component);
     await measureAcquisition.getNetworkMeasure(false);
     const measure = await measureAcquisition.getGESMeasure(SEARCH_AUTO, SEARCH_AUTO);
     if (component) {

@@ -1,5 +1,5 @@
 import { PREFIX_URL_DATA, PREFIX_URL_EXTENSION } from '../const';
-import { logInfo, logWarn } from '../utils/log';
+import { logDebug, logWarn } from '../utils/log';
 import { getTabUrl } from '../utils';
 
 export class NetworkService {
@@ -18,7 +18,7 @@ export class NetworkService {
     } else {
       logWarn('No url found');
     }
-    logInfo(`return url ${formattedUrl}`);
+    logDebug(`return url ${formattedUrl}`);
     return formattedUrl;
   }
 
@@ -46,7 +46,7 @@ export class NetworkService {
 
   async getMotherUrl() {
     const url = await getTabUrl();
-    logInfo(`Mother url: ${url}`);
+    logDebug(`Mother url: ${url}`);
     return url;
   }
 
