@@ -6,7 +6,7 @@
   import { createEventDispatcher } from 'svelte';
 
   export let columnHeaders: TableHeader[];
-  export let rowHeaders: TableHeader[];
+  export let rowHeaders: TableHeader[] = null;
   export let datas: TableData[];
 
   const dispatch = createEventDispatcher();

@@ -1,402 +1,302 @@
 {
   "analysisInProgress": {
-    "message": "Analysis in progress. Start browsing on the current tab, then come back here to get stats !",
-    "description": "Analysis in progress message"
+    "message": "Analysis in progress. Start browsing on the current tab, then come back here to get stats !#Analysis in progress message"
   },
   "firstResults": {
-    "message": "First results received !",
-    "description": "First analysis resulted have been computed."
+    "message": "First results received !#First analysis resulted have been computed."
   },
   "clearBrowserCacheButton": {
-    "message": "Clear cache",
-    "description": "Clear Browser Cache Button"
+    "message": "Clear cache#Clear Browser Cache Button"
   },
   "resetMeasure": {
-    "message": "Reset measure",
-    "description": "Reset measure"
+    "message": "Reset measure#Reset measure"
   },
   "refresh": {
-    "message": "Reload page",
-    "description": "Reload this page"
+    "message": "Reload page#Reload this page"
   },
   "csvColumnsLabel": {
-    "message": "Date;Url;Uncompressed size(b);Compressed size(kb);DOM;GES Data Center(gCO2e);GES Network(gCO2e);GES Device(gCO2e);GES Total(gCO2e); GES Score; Grade; Country; CarbonIntensity; NumberRequest",
-    "description": "csvColumnsLabel"
+    "message": "Date;Url;Uncompressed size(b);Compressed size(kb);DOM;GES Data Center(gCO2e);GES Network(gCO2e);GES Device(gCO2e);GES Total(gCO2e); GES Score; Grade; Country; CarbonIntensity; NumberRequest#csvColumnsLabel"
   },
   "date": {
-    "message": "Date",
-    "description": "Date"
+    "message": "Date#Date"
   },
   "deleteAllButton": {
-    "message": "Delete All",
-    "description": "Delete All Button"
+    "message": "Delete All#Delete All Button"
   },
   "deleteAllConfirmMessage": {
-    "message": "Do you really want to delete all history ?",
-    "description": "Delete All Confirm Message"
+    "message": "Do you really want to delete all history ?#Delete All Confirm Message"
   },
   "deleteButton": {
-    "message": "Delete",
-    "description": "Delete Button"
+    "message": "Delete#Delete Button"
   },
   "exportButton": {
-    "message": "Export",
-    "description": "Export Button"
+    "message": "Export#Export Button"
   },
   "cancelButton": {
-    "message": "Cancel",
-    "description": "Cancel"
+    "message": "Cancel#Cancel"
   },
   "greenhouseGasesEmission": {
-    "message": "GES",
-    "description": "Greenhouse Gases Emission (gCO2eq)"
+    "message": "GES#Greenhouse Gases Emission (gCO2eq)"
   },
   "greenhouseGasesEmissionDefault": {
-    "message": "GES (gCO2eq)",
-    "description": "Greenhouse Gases Emission (gCO2e), default"
+    "message": "GES (gCO2eq)#Greenhouse Gases Emission (gCO2e), default"
   },
   "energyDefault": {
-    "message": "Energy (Wh)",
-    "description": "Energy used, default"
+    "message": "Energy (Wh)#Energy used, default"
   },
   "gesDataCenter": {
-    "message": "GES Data Center",
-    "description": "GES Data Center"
+    "message": "GES Data Center#GES Data Center"
   },
   "gesNetwork": {
-    "message": "GES Network",
-    "description": "GES Network"
+    "message": "GES Network#GES Network"
   },
   "gesDevice": {
-    "message": "GES Device",
-    "description": "GES Device"
+    "message": "GES Device#GES Device"
   },
   "gesTotal": {
-    "message": "GES Total",
-    "description": "GES Total"
+    "message": "GES Total#GES Total"
   },
   "gesScore": {
-    "message": "Score",
-    "description": "Score"
+    "message": "Score#Score"
   },
   "gesGrade": {
-    "message": "Grade",
-    "description": "Grade"
+    "message": "Grade#Grade"
   },
   "historyButton": {
-    "message": "History",
-    "description": "History Button"
+    "message": "History#History Button"
   },
   "launchAnalysisButton": {
-    "message": "Analysis",
-    "description": "Launch Analysis"
+    "message": "Analysis#Launch Analysis"
   },
   "startJourneyButton": {
-    "message": "Start recorder",
-    "description": "Start recorder"
+    "message": "Start recorder#Start recorder"
   },
   "launchAnalysisButtonWithAutoScrollButton": {
-    "message": "Auto Scrolling",
-    "description": "Launch Analysis with auto scroll"
+    "message": "Auto Scrolling#Launch Analysis with auto scroll"
   },
   "menuText": {
-    "message": "GreenTrackr V1.0.2 is install in your browser and accessible via the devtool panel (F12 or CMD + ALT + i sur Mac",
-    "description": "Text when you click on the plugin's icone"
+    "message": "GreenTrackr V1.0.2 is install in your browser and accessible via the devtool panel (F12 or CMD + ALT + i sur Mac#Text when you click on the plugin's icone"
   },
   "resetJourneyButton": {
-    "message": "Reset journey",
-    "description": "Reset Journey Analysis"
+    "message": "Reset journey#Reset Journey Analysis"
   },
   "receivedResults": {
-    "message": "Results received",
-    "description": "Received user journey results"
+    "message": "Results received#Received user journey results"
   },
   "saveAnalysisButton": {
-    "message": "Save assessment",
-    "description": "Save Analyse Button"
+    "message": "Save assessment#Save Analyse Button"
   },
   "sizeTransferred": {
-    "message": "Page size",
-    "description": "Transferred size (KB)"
+    "message": "Page size#Transferred size (KB)"
   },
   "sizeTransferredBytesCompressed": {
-    "message": "Compressed page size",
-    "description": "Compressed transferred size (KB)"
+    "message": "Compressed page size#Compressed transferred size (KB)"
   },
   "sizeTransferredBytesUncompressed": {
-    "message": "Uncompressed page size",
-    "description": "Uncompressed transferred size (KB)"
+    "message": "Uncompressed page size#Uncompressed transferred size (KB)"
   },
   "sizeTransferredBytes": {
-    "message": "Page size (compress / uncompress)",
-    "description": "Transferred size (KB)"
+    "message": "Page size (compress / uncompress)#Transferred size (KB)"
   },
   "stopJourneyButton": {
-    "message": "Stop saving",
-    "description": "Stop Journey Analysis"
+    "message": "Stop saving#Stop Journey Analysis"
   },
   "tabEvaluation": {
-    "message": "Assessment/Page",
-    "description": "GES analysis tab"
+    "message": "Assessment/Page#GES analysis tab"
   },
   "tabAutoScroll": {
-    "message": "Auto Scroll/Page",
-    "description": "GES auto scroll analysis tab"
+    "message": "Auto Scroll/Page#GES auto scroll analysis tab"
   },
   "tabJourney": {
-    "message": "User Journey",
-    "description": "User Journey tab"
+    "message": "User Journey#User Journey tab"
   },
   "tabHelp": {
-    "message": "Help",
-    "description": "Help tab"
+    "message": "Help#Help tab"
   },
   "url": {
-    "message": "Url",
-    "description": "Url"
+    "message": "Url#Url"
   },
   "viewHistoryButton": {
-    "message": "View History",
-    "description": "View History Button"
+    "message": "View History#View History Button"
   },
   "backToTop": {
-    "message": "Back to top",
-    "description": "Back to top"
+    "message": "Back to top#Back to top"
   },
   "gesZone": {
-    "message": "Server location",
-    "description": "Give the country where the server of the website is localized"
+    "message": "Server location#Give the country where the server of the website is localized"
   },
   "gesUserZone": {
-    "message": "User location",
-    "description": "Give the country where the user of the website is localized"
+    "message": "User location#Give the country where the user of the website is localized"
   },
   "gesIntensity": {
-    "message": "Servers carbon intensity",
-    "description": "Give server's carbon intensity from electricitymaps"
+    "message": "Servers carbon intensity#Give server's carbon intensity from electricitymaps"
   },
   "gesUserIntensity": {
-    "message": "Users carbon intensity",
-    "description": "Give user's carbon intensity from electricitymaps"
+    "message": "Users carbon intensity#Give user's carbon intensity from electricitymaps"
   },
   "nbRequest": {
-    "message": "Number of requests without extentions 'real (cache)'",
-    "description": "Number of request made by the website"
+    "message": "Number of requests without extentions 'real (cache)'#Number of request made by the website"
   },
   "infoMix": {
-    "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season:",
-    "description": "Infos pour comprendre l'impact du mix énergétiques"
+    "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season:#Infos pour comprendre l'impact du mix énergétiques"
   },
   "betaMessage": {
-    "message": "This feature is a beta version, errors may occur.",
-    "description": "Message to warn the user that not all features are present"
+    "message": "This feature is a beta version, errors may occur.#Message to warn the user that not all features are present"
   },
   "saveAnalysis": {
-    "message": "Analysis successfully saved.",
-    "description": "Popup message"
+    "message": "Analysis successfully saved.#Popup message"
   },
   "closePopup": {
-    "message": "Close",
-    "description": "close popup content"
+    "message": "Close#close popup content"
   },
   "nocontentPhrase": {
-    "message": "Estimate the carbon footprint of your website",
-    "description": "Message when you arrive on the auto-scroll page and the analysis is not yet launched"
+    "message": "Estimate the carbon footprint of your website#Message when you arrive on the auto-scroll page and the analysis is not yet launched"
   },
   "noContentPhraseEvaluation": {
-    "message": "Estimate the carbon footprint of your website",
-    "description": "Message when you arrive on the evaluation page and the analysis is not yet launched"
+    "message": "Estimate the carbon footprint of your website#Message when you arrive on the evaluation page and the analysis is not yet launched"
   },
   "serverRegionLabel": {
-    "message": "Simulate server localization in an other zone : ",
-    "description": "Label for select"
+    "message": "Simulate server localization in an other zone : #Label for select"
   },
   "serverUserLabel": {
-    "message": "Simulate user localization in an other zone : ",
-    "description": "Label for select"
+    "message": "Simulate user localization in an other zone : #Label for select"
   },
   "eitherFor": {
-    "message": "Either for ",
-    "description": "Label for informations about visits part. 1"
+    "message": "Either for #Label for informations about visits part. 1"
   },
   "visitEquivalent": {
-    "message": "visit(s) the equivalent of : ",
-    "description": "Label for informations about visits part. 2"
+    "message": "visit(s) the equivalent of : #Label for informations about visits part. 2"
   },
   "smartphoneIndicator": {
-    "message": "Charged smartphones ",
-    "description": "Label for smartphone indicator"
+    "message": "Charged smartphones #Label for smartphone indicator"
   },
   "carIndicator": {
-    "message": "Km by car",
-    "description": "Label for car indicator"
+    "message": "Km by car#Label for car indicator"
   },
   "numberVisit": {
-    "message": "Number of visits",
-    "description": "Label for visit indicator"
+    "message": "Number of visits#Label for visit indicator"
   },
   "messageResultsAnalysis": {
-    "message": "Analysis results",
-    "description": "Résultat de l'analyse"
+    "message": "Analysis results#Résultat de l'analyse"
   },
   "messageResults": {
-    "message": "Results of journey's analysis",
-    "description": "Analysis results"
+    "message": "Results of journey's analysis#Analysis results"
   },
   "validateRegionButton": {
-    "message": "Confirm",
-    "description": "Confirm Region"
+    "message": "Confirm#Confirm Region"
   },
   "help_test_extension": {
-    "message": "Test the extension",
-    "description": "Test the extension"
+    "message": "Test the extension#Test the extension"
   },
   "help_prerequisite_field": {
-    "message": "Please note: This version of the extension is only compatible with Manifest V3 (Chromium). A specific version for Firefox / Manifest V2 will be available separately.",
-    "description": "Please note: This version of the extension is only compatible with Manifest V3 (Chromium). A specific version for Firefox / Manifest V2 will be available separately."
+    "message": "Please note: This version of the extension is only compatible with Manifest V3 (Chromium). A specific version for Firefox / Manifest V2 will be available separately.#Please note: This version of the extension is only compatible with Manifest V3 (Chromium). A specific version for Firefox / Manifest V2 will be available separately."
   },
   "help_use_extension": {
-    "message": "Use the extension",
-    "description": "Use the extension"
+    "message": "Use the extension#Use the extension"
   },
   "help_use_extension_nav_tools": {
-    "message": "Open the devtools in your browser.",
-    "description": "Open the devtools in your browser."
+    "message": "Open the devtools in your browser.#Open the devtools in your browser."
   },
   "help_use_extension_eval_page": {
-    "message": "Go to the 'Assessment/Page' tab.",
-    "description": "Go to the 'Assessment/Page' tab."
+    "message": "Go to the 'Assessment/Page' tab.#Go to the 'Assessment/Page' tab."
   },
   "help_use_extension_analyze": {
-    "message": "In the browser, go to the page to be analyzed.",
-    "description": "In the browser, go to the page to be analyzed."
+    "message": "In the browser, go to the page to be analyzed.#In the browser, go to the page to be analyzed."
   },
   "help_use_extension_start_analysis": {
-    "message": "In the 'Assessment/Page'  tab of the devtools, click on the 'Start analysis' button.",
-    "description": "In the 'Assessment/Page'  tab of the devtools, click on the 'Start analysis' button."
+    "message": "In the 'Assessment/Page'  tab of the devtools, click on the 'Start analysis' button.#In the 'Assessment/Page'  tab of the devtools, click on the 'Start analysis' button."
   },
   "help_use_extension_results": {
-    "message": "The results are displayed.",
-    "description": "The results are displayed."
+    "message": "The results are displayed.#The results are displayed."
   },
   "help_use_extension_save": {
-    "message": "You can save this result in a history (only the indicators are saved) via the 'Save assessment' button.",
-    "description": "You can save this result in a history (only the indicators are saved) via the 'Save assessment' button."
+    "message": "You can save this result in a history (only the indicators are saved) via the 'Save assessment' button.#You can save this result in a history (only the indicators are saved) via the 'Save assessment' button."
   },
   "help_use_extension_saved_results": {
-    "message": "The history of saved results is available via the 'View history' button.",
-    "description": "The history of saved results is available via the 'View history' button."
+    "message": "The history of saved results is available via the 'View history' button.#The history of saved results is available via the 'View history' button."
   },
   "help_warnings": {
-    "message": "The main points to watch",
-    "description": "The main points to watch"
+    "message": "The main points to watch#The main points to watch"
   },
   "help_warnings_no_requests": {
-    "message": "If the number of requests is zero, it's probably you haven't loaded the page with the devtools running. You should therefore consider reloading the page.",
-    "description": "If the number of requests is zero, it's probably you haven't loaded the page with the devtools running. You should therefore consider reloading the page."
+    "message": "If the number of requests is zero, it's probably you haven't loaded the page with the devtools running. You should therefore consider reloading the page.#If the number of requests is zero, it's probably you haven't loaded the page with the devtools running. You should therefore consider reloading the page."
   },
   "help_warnings_correct_eval": {
-    "message": "To obtain the right assessment, you need to clear your browser's cache (otherwise, the size transferred will be reduced if you have already consulted the site being assessed). To avoid having to go into the browser menus, a 'Reset settings' button is provided for this purpose in the extension.",
-    "description": "To obtain the right assessment, you need to clear your browser's cache (otherwise, the size transferred will be reduced if you have already consulted the site being assessed). To avoid having to go into the browser menus, a 'Reset settings' button is provided for this purpose in the extension."
+    "message": "To obtain the right assessment, you need to clear your browser's cache (otherwise, the size transferred will be reduced if you have already consulted the site being assessed). To avoid having to go into the browser menus, a 'Reset settings' button is provided for this purpose in the extension.#To obtain the right assessment, you need to clear your browser's cache (otherwise, the size transferred will be reduced if you have already consulted the site being assessed). To avoid having to go into the browser menus, a 'Reset settings' button is provided for this purpose in the extension."
   },
   "help_warnings_ad_block": {
-    "message": "The use of an ad blocker or other filter has an influence on the result.",
-    "description": "The use of an ad blocker or other filter has an influence on the result."
+    "message": "The use of an ad blocker or other filter has an influence on the result.#The use of an ad blocker or other filter has an influence on the result."
   },
   "help_warnings_diff_results": {
-    "message": "Different results between two analyses may be caused by:",
-    "description": "Different results between two analyses may be caused by:"
+    "message": "Different results between two analyses may be caused by:#Different results between two analyses may be caused by:"
   },
   "help_warnings_continuous_update": {
-    "message": "Continuous updating processes (Even if the site appears to have loaded, other elements may still be loading when the analysis is launched. The volume of data downloaded and the number of requests therefore depend on when you click on the 'Start analysis' button). The same effect applies if you launch the analysis before the site has finished loading.",
-    "description": "Continuous updating processes (Even if the site appears to have loaded, other elements may still be loading when the analysis is launched. The volume of data downloaded and the number of requests therefore depend on when you click on the 'Start analysis' button). The same effect applies if you launch the analysis before the site has finished loading."
+    "message": "Continuous updating processes (Even if the site appears to have loaded, other elements may still be loading when the analysis is launched. The volume of data downloaded and the number of requests therefore depend on when you click on the 'Start analysis' button). The same effect applies if you launch the analysis before the site has finished loading.#Continuous updating processes (Even if the site appears to have loaded, other elements may still be loading when the analysis is launched. The volume of data downloaded and the number of requests therefore depend on when you click on the 'Start analysis' button). The same effect applies if you launch the analysis before the site has finished loading."
   },
   "help_warnings_ads": {
-    "message": "Ads that may change between two analyses (location, time of day, previous browser visits and many other parameters taken into account by retargeting specialists will result in the cascading loading of different *.js libraries and the display of different advertising content).",
-    "description": "Ads that may change between two analyses (location, time of day, previous browser visits and many other parameters taken into account by retargeting specialists will result in the cascading loading of different *.js libraries and the display of different advertising content)."
+    "message": "Ads that may change between two analyses (location, time of day, previous browser visits and many other parameters taken into account by retargeting specialists will result in the cascading loading of different *.js libraries and the display of different advertising content).#Ads that may change between two analyses (location, time of day, previous browser visits and many other parameters taken into account by retargeting specialists will result in the cascading loading of different *.js libraries and the display of different advertising content)."
   },
   "help_warnings_scrolling": {
-    "message": "Scrolling: if you scroll through the data during analysis, you run the risk of launching loads of data that would have not normally been taken into account.",
-    "description": "Scrolling: if you scroll through the data during analysis, you run the risk of launching loads of data that would have not normally been taken into account."
+    "message": "Scrolling: if you scroll through the data during analysis, you run the risk of launching loads of data that would have not normally been taken into account.#Scrolling: if you scroll through the data during analysis, you run the risk of launching loads of data that would have not normally been taken into account."
   },
   "help_warnings_privacy": {
-    "message": "The level of 'privacy' which, depending on the level set and the browser, will also induce side effects.",
-    "description": "The level of 'privacy' which, depending on the level set and the browser, will also induce side effects."
+    "message": "The level of 'privacy' which, depending on the level set and the browser, will also induce side effects.#The level of 'privacy' which, depending on the level set and the browser, will also induce side effects."
   },
   "help_warnings_cache": {
-    "message": "Cache effects.",
-    "description": "Cache effects."
+    "message": "Cache effects.#Cache effects."
   },
   "help_warnings_user_path": {
-    "message": "User journey saving:",
-    "description": "User journey saving:"
+    "message": "User journey saving:#User journey saving:"
   },
   "help_warnings_env_impacts": {
-    "message": "You can quantify the carbon footprint of a user journey by going to the 'User Journey' tab. When you start the analysis by clicking on the 'Start saving user journey' button, the extension will save the results for each visited URL. Once the journey is complete, click on the 'Stop saving' button. That will display the results table for each URL, as well as the different totals. The button 'Reset journey' allows you to empty the locally stored results and to restart a journey from scratch.",
-    "description": "You can quantify the carbon footprint of a user journey by going to the 'User Journey' tab. When you start the analysis by clicking on the 'Start saving user journey' button, the extension will save the results for each visited URL. Once the journey is complete, click on the 'Stop saving' button. That will display the results table for each URL, as well as the different totals. The button 'Reset journey' allows you to empty the locally stored results and to restart a journey from scratch."
+    "message": "You can quantify the carbon footprint of a user journey by going to the 'User Journey' tab. When you start the analysis by clicking on the 'Start saving user journey' button, the extension will save the results for each visited URL. Once the journey is complete, click on the 'Stop saving' button. That will display the results table for each URL, as well as the different totals. The button 'Reset journey' allows you to empty the locally stored results and to restart a journey from scratch.#You can quantify the carbon footprint of a user journey by going to the 'User Journey' tab. When you start the analysis by clicking on the 'Start saving user journey' button, the extension will save the results for each visited URL. Once the journey is complete, click on the 'Stop saving' button. That will display the results table for each URL, as well as the different totals. The button 'Reset journey' allows you to empty the locally stored results and to restart a journey from scratch."
   },
   "help_warnings_permissions": {
-    "message": "Extension permissions:",
-    "description": "Extension permissions:"
+    "message": "Extension permissions:#Extension permissions:"
   },
   "help_warnings_permissions_use": {
-    "message": "To work properly, the extension requires the following permissions:",
-    "description": "To work properly, the extension requires the following permissions:"
+    "message": "To work properly, the extension requires the following permissions:#To work properly, the extension requires the following permissions:"
   },
   "help_warnings_activeTab": {
-    "message": "activeTab, tabs: used to display the saved analyses page and to access the contents of the pages for analysis.",
-    "description": "activeTab, tabs: used to display the saved analyses page and to access the contents of the pages for analysis."
+    "message": "activeTab, tabs: used to display the saved analyses page and to access the contents of the pages for analysis.#activeTab, tabs: used to display the saved analyses page and to access the contents of the pages for analysis."
   },
   "help_warnings_all_urls": {
-    "message": "<all_urls>: used to access URLs for analysis.",
-    "description": "<all_urls>: used to access URLs for analysis."
+    "message": "<all_urls>: used to access URLs for analysis.#<all_urls>: used to access URLs for analysis."
   },
   "help_warnings_browsing_data": {
-    "message": "browsingData: used to clear the browser cache.",
-    "description": "browsingData: used to clear the browser cache."
+    "message": "browsingData: used to clear the browser cache.#browsingData: used to clear the browser cache."
   },
   "help_warnings_storage": {
-    "message": "Storage: used to store the different assessments.",
-    "description": "Storage: used to store the different assessments."
+    "message": "Storage: used to store the different assessments.#Storage: used to store the different assessments."
   },
   "help_warnings_web_nav": {
-    "message": "Web Navigation: used to detect when the analyzed page has finished loading.",
-    "description": "Web Navigation: used to detect when the analyzed page has finished loading."
+    "message": "Web Navigation: used to detect when the analyzed page has finished loading.#Web Navigation: used to detect when the analyzed page has finished loading."
   },
   "carbonIntensity": {
-    "message": "Carbon intensity (CO2eq/Kwh)",
-    "description": "Carbon intensity (gCO2eq/Kwh)"
+    "message": "Carbon intensity (CO2eq/Kwh)#Carbon intensity (gCO2eq/Kwh)"
   },
   "dataCenterTotal": {
-    "message": "Data center",
-    "description": "Total GES emissions of data center"
+    "message": "Data center#Total GES emissions of data center"
   },
   "networkTotal": {
-    "message": "Network",
-    "description": "Total GES emissions of network"
+    "message": "Network#Total GES emissions of network"
   },
   "deviceTotal": {
-    "message": "Devices",
-    "description": "Total GES emissions of devices"
+    "message": "Devices#Total GES emissions of devices"
   },
   "pageTotal": {
-    "message": "Page total",
-    "description": "Total GES emissions of website"
+    "message": "Page total#Total GES emissions of website"
   },
   "pixelDisplayed": {
-    "message": "This tab displays a height of",
-    "description": "Display viewport pixels number"
+    "message": "This tab displays a height of#Display viewport pixels number"
   },
   "autoscrollPxInput": {
-    "message": "Enter pixels number to scroll for page's analysis",
-    "description": "Enter pixels number to scroll"
+    "message": "Enter pixels number to scroll for page's analysis#Enter pixels number to scroll"
   },
   "autoscrollPercentInput": {
-    "message": "Enter % to scroll for page's analysis",
-    "description": "Enter % to scroll"
+    "message": "Enter % to scroll for page's analysis#Enter % to scroll"
   },
   "errorNoToken": {
-    "message": "No CO2 token found, the extension may not work",
-    "description": "Env variable not found"
+    "message": "No CO2 token found, the extension may not work#Env variable not found"
   }
 }

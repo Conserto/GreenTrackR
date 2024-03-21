@@ -2,13 +2,14 @@
   import { Button, LoadingWheel } from 'src/components';
   import { ButtonTypeEnum } from 'src/enum';
   import { CheckIcon } from 'src/assets/icons';
-  import { translate } from 'src/utils/utils';
+  import { translate, translateDescription } from 'src/utils/utils';
   import type { Measure } from 'src/interface';
   import { JourneyResults } from 'src/components/GES/results';
   import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
   import { logInfo } from '../utils/log';
   import { SEARCH_AUTO } from '../const/key.const';
+  import { Tooltip } from 'flowbite-svelte';
 
   let onGoingAnalysis = false;
   let measureAcquisition = new MeasureAcquisition();
@@ -75,17 +76,20 @@
     buttonType={ButtonTypeEnum.PRIMARY}
     translateKey={onGoingAnalysis ? 'stopJourneyButton' : 'startJourneyButton'}
   />
+  <Tooltip>{translateDescription(onGoingAnalysis ? 'stopJourneyButton' : 'startJourneyButton')}</Tooltip>
   <Button
     disabled={onGoingAnalysis}
     on:buttonClick={resetUserJourney}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="resetJourneyButton"
   />
+  <Tooltip>{translateDescription('resetJourneyButton')}</Tooltip>
   <Button
     on:buttonClick={handleClearCache}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="clearBrowserCacheButton"
   />
+  <Tooltip>{translateDescription('clearBrowserCacheButton')}</Tooltip>
 </div>
 
 {#if onGoingAnalysis}
