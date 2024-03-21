@@ -7,12 +7,12 @@ import { SEARCH_AUTO } from '../const/key.const';
 
 export class GESService {
 
-  private cacheGesByUrl: Map<String, GES>;
+  private cacheGesByUrl: Map<string, GES>;
   private cacheUserGes?: GES;
   private carbonFile = 'src/assets/data/data_carbon.json';
 
   constructor() {
-    this.cacheGesByUrl = new Map<String, GES>();
+    this.cacheGesByUrl = new Map<string, GES>();
   }
 
   async computeGES(countryCodeSelected: string, userCountryCodeSelected: string, urlHost?: URL) {
