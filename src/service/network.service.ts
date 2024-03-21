@@ -9,7 +9,6 @@ export class NetworkService {
     if (url && this.isRealUrl(url)) {
       try {
         formattedUrl = new URL(url);
-        // FIXME pourquoi en dur, quel est le but d'ajouter www si 0 ou 1 ou 2?
         if (formattedUrl.host.split('.').length <= 2) {
           formattedUrl.host = 'www.' + formattedUrl.host;
         }

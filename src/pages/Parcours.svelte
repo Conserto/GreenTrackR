@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Button, LoadingWheel } from 'src/components';
-  import { ButtonTypeEnum } from 'src/enum';
+  import { ButtonTypeEnum, RequestAction } from 'src/enum';
   import { CheckIcon } from 'src/assets/icons';
   import { translate, translateDescription } from 'src/utils/utils';
   import type { Measure } from 'src/interface';
@@ -52,10 +52,9 @@
   const onPageLoaded = () => {
     logInfo('Page Loaded');
     onActionSave();
-    sendChromeMsg({ action: 'listen-events' });
+    sendChromeMsg({ action: RequestAction.LISTEN_EVENT });
   };
 
-  // TODO
   const onActionSave = async (component?: string) => {
     logInfo('Save ' + component);
     await measureAcquisition.getNetworkMeasure(false);

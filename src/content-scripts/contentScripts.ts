@@ -1,4 +1,4 @@
-import { logErr, logInfo } from '../utils/log';
+import { logErr } from '../utils/log';
 import { RequestAction } from '../enum';
 import { DOM_INFOS, PAGE_HEIGHT } from '../const/action.const';
 import { getDomSizeWithoutSvg } from '../service';
@@ -26,10 +26,9 @@ chrome.runtime.onMessage.addListener(async function(request, sender, sendRespons
       scrollPrompt(Math.floor(request.value), 0, 5000).finally(() => {
         sentRuntimeMsg({ autoScrollDone: true });
       });
-    } else if (request.action === "listen-events") {
-      // TODO Const
-      window.addEventListener("click", () => sentRuntimeMsg({ saveAnalysis: true, component: "click" }));
-      window.addEventListener("scrollend", () => sentRuntimeMsg({ saveAnalysis: true, component: "scroll" }));
+    } else if (request.action === RequestAction.LISTEN_EVENT) {
+      window.addEventListener('click', () => sentRuntimeMsg({ saveAnalysis: true, component: 'click' }));
+      window.addEventListener('scrollend', () => sentRuntimeMsg({ saveAnalysis: true, component: 'scroll' }));
     } else if (request.action === RequestAction.GET_DOM_ELEMENTS) {
       sentRuntimeMsg({ type: DOM_INFOS, value: getDomSizeWithoutSvg() });
     }

@@ -9,6 +9,7 @@ export class GESService {
 
   private cacheGesByUrl: Map<String, GES>;
   private cacheUserGes?: GES;
+  private carbonFile = 'src/assets/data/data_carbon.json';
 
   constructor() {
     this.cacheGesByUrl = new Map<String, GES>();
@@ -118,17 +119,14 @@ export class GESService {
       if (countryCodeSelected == SEARCH_AUTO) {
         countryCodeSelected = 'FR';
       }
-      // FIXME constante
-      let response: any = await import('src/assets/data/data_carbon.json');
+      let response: any = await import(this.carbonFile);
       countryName = response[countryCodeSelected]?.[0].country_name;
-
       data = this.getSortedDayGESReport(response, countryCodeSelected);
     } catch (error: any) {
-      throw new Error(
+      logErr(
         'There has been a problem when trying to get GES emissions from Local file : ' + error
       );
     }
-
     return { data, countryName };
   }
 

@@ -38,24 +38,6 @@
       <span class="data-label">{translate('nbRequest')}</span>
       <span class="data-value">{measure?.networkMeasure.nbRequest} ({measure?.networkMeasure.nbRequestCache})</span>
     </div>
-    <!--    <div>
-          <span class="data-label">Nb Req Ext</span>
-          <span class="data-value">{measure?.extensionmeasure?.nbRequest}</span>
-        </div>
-        <div>
-          <span class="data-label">Taille Req Ext</span>
-          <span class="data-value">{formatSize(measure?.extensionmeasure?.network.size)} {Units.pageSize} / {formatSize(measure?.extensionmeasure?.network.sizeUncompress)} {Units.pageSize}</span>
-        </div>-->
-    <!-- TODO WHEN SIZE COMPRESSED IS USED
-    <div>
-      <span class="data-label">{translate('sizeTransferredBytesCompressed')}</span>
-      <span class="data-value">{formatSize(measure?.network.size)} {Units.pageSize}</span>
-    </div> -->
-    <!-- TODO WHEN DOM COMPUTING IS OK
-    <div>
-      <span class="data-label">{translate('DOM')}</span>
-      <span class="data-value">{measure?.dom}</span>
-    </div> -->
   </div>
 </div>
 

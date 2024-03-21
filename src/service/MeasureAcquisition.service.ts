@@ -2,16 +2,16 @@ import { RequestAction } from 'src/enum';
 import type { GES, Measure, NetworkMeasure } from '../interface';
 
 import { GESService, NetworkService, ScoreService } from '.';
-import { createEmptyMeasure, getTabUrl, reloadCurrentTab, sendChromeMsg } from 'src/utils';
+import { createEmptyMeasure, reloadCurrentTab, sendChromeMsg } from 'src/utils';
 import { PREFIX_URL_EXTENSION } from '../const';
 import { logDebug, logInfo } from '../utils/log';
 import { DOM_INFOS } from '../const/action.const';
+import { VITE_MAX_HAR_RETRIES } from '../const/config.const';
 
 export class MeasureAcquisition {
   public measure: Measure;
   private latest?: Date;
   private latestCheck?: Date;
-  // FIXME Remise à zéro?
   private harRetryCount: number;
   private networkService: NetworkService;
   private gesService: GESService;
@@ -82,6 +82,7 @@ export class MeasureAcquisition {
           ` / size(compress/uncompress)=${this.measure.extensionMeasure.network.size}/${this.measure.extensionMeasure.network.size} KB`);
       }
     }
+    this.harRetryCount = 0;
   }
 
   filterEntriesExtensionAndPage(entries: HARFormatEntry[]): [HARFormatEntry[], HARFormatEntry[]] {
@@ -130,14 +131,10 @@ export class MeasureAcquisition {
   }
 
   async retryGetNetworkMeasure(forceRefresh: boolean): Promise<void> {
-    // FIXME check
-    // FIXME compteur réinitialisé?
-    if (this.harRetryCount < parseInt(import.meta.env.VITE_MAX_HAR_RETRIES)) {
-      // TODO check if undefined
-      logInfo('Reload : ' + await getTabUrl());
+    if (this.harRetryCount < VITE_MAX_HAR_RETRIES) {
+      logInfo('Reload');
       this.harRetryCount++;
       await reloadCurrentTab();
-
       //TODO: to delete, we'll have to implement this on service-worker so it can send message to svelte component
       // wen new entries are loaded -> Replace it by chrome?webNavigation.onCompleted on service-worker.ts (see this file)
       await this.waitTabUpdate();
@@ -162,12 +159,12 @@ export class MeasureAcquisition {
     });
   }
 
-  //TODO: to delete, we'll have to implement this on service-worker so it can send message to svelte component
+  // FIXME Timeout
+  // TODO: to delete, we'll have to implement this on service-worker so it can send message to svelte component
   // wen new entries are loaded
   waitTabUpdate() {
     return new Promise((resolve) => {
       function onTabUpdated(updatedTabId: number, info: any) {
-        // FIXME constante
         if (info.status === 'complete') {
           chrome.tabs.onUpdated.removeListener(onTabUpdated); // Remove the listener
           resolve(updatedTabId);
