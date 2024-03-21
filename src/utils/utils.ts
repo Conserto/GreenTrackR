@@ -1,5 +1,5 @@
 import type { Measure, TableData } from 'src/interface';
-import { logInfo, logWarn } from './log';
+import { logDebug, logWarn } from './log';
 import { Units } from '../const';
 
 export const getAverageValue = (data: number[]) => {
@@ -183,7 +183,7 @@ export const createEmptyMeasure = (): Measure => {
 };
 
 export const scrollPrompt = (topPrompt: number, leftPrompt: number, timeout: number) => {
-  logInfo(`Scroll ${topPrompt} / ${leftPrompt}`);
+  logDebug(`Scroll ${topPrompt} / ${leftPrompt}`);
   const end = (document.body.scrollHeight - window.innerHeight) === window.scrollY;
   if (!end) {
     window.scrollBy({ left: leftPrompt, top: topPrompt, behavior: 'smooth' });
@@ -197,7 +197,7 @@ export const scrollPrompt = (topPrompt: number, leftPrompt: number, timeout: num
       });
     });
   } else {
-    logInfo('End Of Page');
+    logDebug('End Of Page');
     return new Promise<void>((resolve, reject) => resolve());
   }
 };

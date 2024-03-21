@@ -8,7 +8,6 @@
   import Histogram from 'src/components/Histogram.svelte';
   import GesResults from 'src/components/GES/results/GesResults.svelte';
   import { PAGE_HEIGHT } from '../const/action.const';
-  import { logInfo } from '../utils/log';
   import { SEARCH_AUTO } from '../const/key.const';
   import { Tooltip } from 'flowbite-svelte';
   import type { HistoData, Measure } from '../interface';
@@ -29,7 +28,6 @@
   let histoDatas: HistoData[] = [];
 
   onMount(() => {
-    logInfo('onMount');
     chrome.runtime.onMessage.addListener(handleRuntimeMsg);
     sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
     cleanCache();
@@ -37,7 +35,6 @@
   });
 
   onDestroy(() => {
-    logInfo('onDestroy');
     chrome.runtime.onMessage.removeListener(handleRuntimeMsg);
   });
 

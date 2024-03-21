@@ -2,7 +2,7 @@ import { getCarbonIntensity, getCurrentZone, getServerZone } from 'src/api';
 import { codeZone } from 'src/assets/data/codeZone';
 import { KWH_DEVICE, KWH_PER_BYTE_NETWORK, KWH_PER_REQUEST_DATA_CENTER } from 'src/const/measure.const';
 import type { CarbonData, CarbonDatas, EnergyMeasure, GES, GESTotals, NetworkResponse } from 'src/interface';
-import { logErr, logInfo } from '../utils/log';
+import { logDebug, logErr } from '../utils/log';
 import { SEARCH_AUTO } from '../const/key.const';
 
 export class GESService {
@@ -40,12 +40,12 @@ export class GESService {
   }
 
   async getGESServer(url: URL | undefined, countryCodeSelected: string): Promise<GES | undefined> {
-    logInfo('Call GES Server');
+    logDebug('Call GES Server');
     return await this.getGES(url, true, countryCodeSelected);
   }
 
   async getGESUser(userCountryCodeSelected: string): Promise<GES | undefined> {
-    logInfo('Call GES User');
+    logDebug('Call GES User');
     return this.getGES(undefined, false, userCountryCodeSelected);
   }
 
@@ -64,7 +64,7 @@ export class GESService {
         logErr(`There has been a problem when trying to get GES Emissions : ${error} from distant API and local file`);
       }
     }
-    logInfo(`Return GES ${GES?.cityName} / ${GES?.carbonIntensity}`);
+    logDebug(`Return GES ${GES?.cityName} / ${GES?.carbonIntensity}`);
     return GES;
   }
 
@@ -83,7 +83,7 @@ export class GESService {
           codeZone.find((zoneObj) => zoneObj.zone === countryCodeSelected)?.countryName ?? '';
       } else {
         const location = serverType ? await getServerZone(urlHost) : await getCurrentZone();
-        logInfo(`Location: ${location.cityName}`);
+        logDebug(`Location: ${location.cityName}`);
         GES.carbonIntensity = await getCarbonIntensity(location);
         GES.countryCode = location.countryCode;
         GES.countryName = location.countryName;

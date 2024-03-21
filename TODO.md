@@ -10,7 +10,7 @@
 - ~~Clean cache + reinit param + refresh~~
 - ~~Intensity carbon > 0 si nb request 0?~~
 - Histo resilience
-- Clean logs
+- ~~Clean logs~~
 - TODO / FIXME
 - ~~Démarrer -> mesure à 0 + refresh +~~ 
 - ~~Trop dans delete cache~~
