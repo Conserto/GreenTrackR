@@ -1,59 +1,54 @@
 export const gesTableHeaders = [
   {
     id: 'date',
-    translateKey: 'Date',
+    translateKey: 'Date'
   },
   {
     id: 'url',
-    translateKey: 'Url',
+    translateKey: 'Url'
   },
   {
     id: 'sizeTransferred',
-    translateKey: 'sizeTransferredBytes',
+    translateKey: 'sizeTransferredBytes'
   },
-  // TODO WHEN DOM COMPUTING IS OK
-  // {
-  //   id: 'dom',
-  //   translateKey: 'DOM',
-  // },
   {
     id: 'nbRequest',
-    translateKey: 'nbRequest',
+    translateKey: 'nbRequest'
   },
   {
     id: 'gesDataCenter',
-    translateKey: 'gesDataCenter',
+    translateKey: 'gesDataCenter'
   },
   {
     id: 'gesNetwork',
-    translateKey: 'gesNetwork',
+    translateKey: 'gesNetwork'
   },
   {
     id: 'gesDevice',
-    translateKey: 'gesDevice',
+    translateKey: 'gesDevice'
   },
   {
     id: 'gesTotal',
-    translateKey: 'gesTotal',
+    translateKey: 'gesTotal'
   },
   {
     id: 'gesScore',
-    translateKey: 'gesScore',
+    translateKey: 'gesScore'
   },
   {
     id: 'gesGrade',
-    translateKey: 'gesGrade',
+    translateKey: 'gesGrade'
   },
   {
     id: 'gesUserZone',
-    translateKey: 'gesUserZone',
+    translateKey: 'gesUserZone'
   },
   {
     id: 'gesZone',
-    translateKey: 'gesZone',
+    translateKey: 'gesZone'
   },
   {
     id: 'gesIntensity',
-    translateKey: 'gesIntensity',
-  },
+    translateKey: 'gesIntensity'
+  }
 ];

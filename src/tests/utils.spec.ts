@@ -1,9 +1,7 @@
-import { Units } from 'src/const';
 import type { Measure } from 'src/interface';
 import {
   createEmptyMeasure,
   formatDate,
-  formatGesMeasuresForTable,
   formatNumber,
   formatSize,
   getAverageValue,
@@ -88,8 +86,6 @@ test('FormatSize function', async () => {
         content: `${formatSize(measure.networkMeasure.network.size)} / ${formatSize(measure.networkMeasure.network.sizeUncompress)} ${Units.pageSize}`
       },
       nbRequest: { content: `${measure.networkMeasure.nbRequest} (${measure.networkMeasure.nbRequestCache})` },
-      // TODO WHEN DOM COMPUTING IS OK
-      // dom: { content: measure.dom },
       gesDataCenter: {
         content: `${formatNumber(measure.ges.dataCenterTotal)} ${Units.carbonEmissions}`
       },

@@ -129,12 +129,6 @@
     translateKey="backToTop"
   />
   <Tooltip>{translateDescription('backToTop')}</Tooltip>
-  <!--  &lt;!&ndash; TODO DELETE &ndash;&gt;
-    <Button
-      on:buttonClick={() => logInfo("Latest= " + measureAcquisition.getLatest())}
-      buttonType={ButtonTypeEnum.SECONDARY}
-      translateKey="debug"
-    />-->
 </div>
 
 {#if currentMeasure && !loading}
