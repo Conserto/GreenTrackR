@@ -1,14 +1,12 @@
 <script lang="ts">
   import { translate } from 'src/utils/utils';
-  import { Footer } from 'src/components';
-  import logo from '/images/logo.png';
 
   const { version } = chrome.runtime.getManifest();
 </script>
 
 <h3 class="version-title">V{version}</h3>
 
-<h2 c>
+<h2>
   {translate('help_test_extension')}
 </h2>
 

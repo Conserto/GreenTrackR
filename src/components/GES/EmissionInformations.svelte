@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { formatNumber, formatSize, translate } from 'src/utils/utils';
+  import { formatSize, translate } from 'src/utils/utils';
   import type { Measure } from 'src/interface';
   import { Units } from 'src/const';
 
-  export let measure: Measure;
+  export let measure: Measure | undefined;
 </script>
 
 <div class="emissions-infos">
@@ -11,53 +11,50 @@
   <div class="emissions-infos_data">
     <div>
       <span class="data-label">{translate('gesZone')}</span>
-      <span class="data-value"
-        >{measure.serverGES.cityName
-          ? `${measure.serverGES.cityName}, ${measure.serverGES.countryName}`
-          : measure.serverGES.countryName}</span
-      >
+      <span class="data-value">{measure?.serverGES?.cityName
+        ? `${measure?.serverGES.cityName}, ${measure?.serverGES.countryName}`
+        : measure?.serverGES?.countryName}</span>
     </div>
     <div>
       <span class="data-label">{translate('gesUserZone')}</span>
-      <span class="data-value"
-        >{measure.userGES.cityName
-          ? `${measure.userGES.cityName}, ${measure.userGES.countryName}`
-          : measure.userGES.countryName}</span
-      >
+      <span class="data-value">{measure?.userGES?.cityName
+        ? `${measure?.userGES.cityName}, ${measure?.userGES.countryName}`
+        : measure?.userGES?.countryName}</span>
     </div>
     <div>
       <span class="data-label">{translate('sizeTransferredBytes')}</span>
-      <span class="data-value">{formatSize(measure.networkMeasure.network.size)} {Units.pageSize} / {formatSize(measure.networkMeasure.network.sizeUncompress)} {Units.pageSize}</span>
+      <span class="data-value">{formatSize(measure?.networkMeasure.network.size)} {Units.pageSize}
+        / {formatSize(measure?.networkMeasure.network.sizeUncompress)} {Units.pageSize}</span>
     </div>
     <div>
       <span class="data-label">{translate('gesIntensity')}</span>
-      <span class="data-value">{measure.serverGES.carbonIntensity} {Units.carbonIntensity}</span>
+      <span class="data-value">{measure?.serverGES?.carbonIntensity} {Units.carbonIntensity}</span>
     </div>
     <div>
       <span class="data-label">{translate('gesUserIntensity')}</span>
-      <span class="data-value">{measure.userGES.carbonIntensity} {Units.carbonIntensity}</span>
+      <span class="data-value">{measure?.userGES?.carbonIntensity} {Units.carbonIntensity}</span>
     </div>
     <div>
       <span class="data-label">{translate('nbRequest')}</span>
-      <span class="data-value">{measure.networkMeasure.nbRequest} ({measure.networkMeasure.nbRequestCache})</span>
+      <span class="data-value">{measure?.networkMeasure.nbRequest} ({measure?.networkMeasure.nbRequestCache})</span>
     </div>
-<!--    <div>
-      <span class="data-label">Nb Req Ext</span>
-      <span class="data-value">{measure.extensionMeasure.nbRequest}</span>
-    </div>
-    <div>
-      <span class="data-label">Taille Req Ext</span>
-      <span class="data-value">{formatSize(measure.extensionMeasure.network.size)} {Units.pageSize} / {formatSize(measure.extensionMeasure.network.sizeUncompress)} {Units.pageSize}</span>
-    </div>-->
+    <!--    <div>
+          <span class="data-label">Nb Req Ext</span>
+          <span class="data-value">{measure?.extensionmeasure?.nbRequest}</span>
+        </div>
+        <div>
+          <span class="data-label">Taille Req Ext</span>
+          <span class="data-value">{formatSize(measure?.extensionmeasure?.network.size)} {Units.pageSize} / {formatSize(measure?.extensionmeasure?.network.sizeUncompress)} {Units.pageSize}</span>
+        </div>-->
     <!-- TODO WHEN SIZE COMPRESSED IS USED
     <div>
       <span class="data-label">{translate('sizeTransferredBytesCompressed')}</span>
-      <span class="data-value">{formatSize(measure.network.size)} {Units.pageSize}</span>
+      <span class="data-value">{formatSize(measure?.network.size)} {Units.pageSize}</span>
     </div> -->
     <!-- TODO WHEN DOM COMPUTING IS OK
     <div>
       <span class="data-label">{translate('DOM')}</span>
-      <span class="data-value">{measure.dom}</span>
+      <span class="data-value">{measure?.dom}</span>
     </div> -->
   </div>
 </div>
@@ -66,6 +63,7 @@
   .emissions-infos {
     grid-column: span 2;
     padding: var(--spacing--xl);
+
     &_data {
       display: grid;
       gap: var(--spacing--lg);
@@ -75,9 +73,11 @@
       // grid-template-columns: auto auto auto auto;
     }
   }
+
   .info-mix {
     text-align: center;
   }
+
   .data-label {
     font-weight: var(--font-weight--bold);
     margin-bottom: var(--spacing--sm);

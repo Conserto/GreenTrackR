@@ -4,7 +4,7 @@ import { getTabUrl } from '../utils';
 
 export class NetworkService {
 
-  getUrl(url: string | undefined) {
+  getUrl(url?: string) {
     let formattedUrl: URL | undefined = undefined;
     if (url && this.isRealUrl(url)) {
       try {
@@ -37,7 +37,7 @@ export class NetworkService {
     return entries.filter((harEntry: HARFormatEntry) => this.isCacheCall(harEntry)).length;
   }
 
-  filterNewerOnly(entries: HARFormatEntry[], latest: Date | undefined) {
+  filterNewerOnly(entries: HARFormatEntry[], latest?: Date) {
     if (latest) {
       return entries.filter((harEntry: HARFormatEntry) => this.isAfter(harEntry, latest));
     } else {

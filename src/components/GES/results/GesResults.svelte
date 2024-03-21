@@ -1,15 +1,14 @@
 <script lang="ts">
-  import { translate } from 'src/utils/utils';
   import type { Measure } from 'src/interface';
-  import { ScoreTag, EmissionInformations, CO2Equivalent } from 'src/components/GES';
+  import { CO2Equivalent, EmissionInformations, ScoreTag } from 'src/components/GES';
   import VisitsEquivalent from '../VisitsEquivalent.svelte';
 
-  export let measure: Measure = null;
+  export let measure: Measure | undefined;
 </script>
 
 <div class="results-container">
   <div class="score-container">
-    <ScoreTag score={measure.score} />
+    <ScoreTag score={measure?.score} />
     <CO2Equivalent {measure} />
     <VisitsEquivalent {measure} />
   </div>

@@ -2,13 +2,13 @@ import type { GES, GESTotals, NetworkResponse, Score } from '.';
 
 export interface Measure {
   date: Date;
-  url: string | undefined;
+  url?: string;
   ges: GESTotals;
   energy: EnergyMeasure;
   score: Score;
   dom: number;
-  userGES: GES | undefined;
-  serverGES: GES | undefined;
+  userGES?: GES;
+  serverGES?: GES;
   networkMeasure: NetworkMeasure;
   extensionMeasure: NetworkMeasure;
 }

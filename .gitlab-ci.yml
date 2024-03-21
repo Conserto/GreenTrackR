@@ -51,14 +51,19 @@ test:
   script:
     - yarn test
 
+check:
+  stage: test
+  script:
+    - yarn check
+
 # Analysis of source code
 sonarqube:
   stage: test
   interruptible: true
   image:
     name: sonarsource/sonar-scanner-cli:latest
-    entrypoint: [""]
-  before_script: [""]
+    entrypoint: [ "" ]
+  before_script: [ "" ]
   variables:
     GIT_DEPTH: 0
   script:

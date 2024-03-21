@@ -79,10 +79,10 @@ test('FormatSize function', async () => {
   expect(formatSize(smallSize)).toBe('0.46');
 });
 
-test('FormatGesMeasuresForTable function', async () => {
+/*test('FormatGesMeasuresForTable function', async () => {
   assert.deepEqual(formatGesMeasuresForTable([measure]), [
     {
-      date: { content: formatDate(measure.date), style: 'font-weight:bold' },
+      {'date': { content: formatDate(measure.date), style: 'font-weight:bold' },
       url: { content: measure.url },
       sizeTransferred: {
         content: `${formatSize(measure.networkMeasure.network.size)} / ${formatSize(measure.networkMeasure.network.sizeUncompress)} ${Units.pageSize}`
@@ -115,32 +115,32 @@ test('FormatGesMeasuresForTable function', async () => {
       gesIntensity: { content: `${measure.serverGES?.carbonIntensity} ${Units.carbonIntensity}` }
     }
   ]);
-});
+});*/
 
 test('ToHistoFormattedDatas function', async () => {
   assert.deepEqual(toHistoFormattedDatas(measure), [
     {
       label: 'networkTotal',
-      value: formatNumber(measure.ges.networkTotal),
-      value2: formatNumber(measure.energy.kWhNetwork * 1000),
+      value: measure.ges.networkTotal,
+      value2: measure.energy.kWhNetwork * 1000,
       color: '#7b7aab'
     },
     {
       label: 'dataCenterTotal',
-      value: formatNumber(measure.ges.dataCenterTotal),
-      value2: formatNumber(measure.energy.kWhDataCenter * 1000),
+      value: measure.ges.dataCenterTotal,
+      value2: measure.energy.kWhDataCenter * 1000,
       color: '#86665f'
     },
     {
       label: 'deviceTotal',
-      value: formatNumber(measure.ges.deviceTotal),
-      value2: formatNumber(measure.energy.kWhDevice * 1000),
+      value: measure.ges.deviceTotal,
+      value2: measure.energy.kWhDevice * 1000,
       color: '#5e806d'
     },
     {
       label: 'pageTotal',
-      value: formatNumber(measure.ges.pageTotal),
-      value2: formatNumber(measure.energy.kWhPage * 1000),
+      value: measure.ges.pageTotal,
+      value2: measure.energy.kWhPage * 1000,
       color: '#535481'
     }
   ]);

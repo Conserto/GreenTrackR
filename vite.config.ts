@@ -7,7 +7,7 @@ const viteManifestHackIssue846: any & { renderCrxManifest: (manifest: any, bundl
   {
     // Workaround from https://github.com/crxjs/chrome-extension-tools/issues/846#issuecomment-1861880919.
     name: 'manifestHackIssue846',
-    renderCrxManifest(_manifest, bundle) {
+    renderCrxManifest(_manifest: any, bundle: { [x: string]: any; }) {
       bundle['manifest.json'] = bundle['.vite/manifest.json'];
       bundle['manifest.json'].fileName = 'manifest.json';
       delete bundle['.vite/manifest.json'];

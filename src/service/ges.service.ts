@@ -8,14 +8,13 @@ import { SEARCH_AUTO } from '../const/key.const';
 export class GESService {
 
   private cacheGesByUrl: Map<String, GES>;
-  private cacheUserGes: GES | undefined;
+  private cacheUserGes?: GES;
 
   constructor() {
     this.cacheGesByUrl = new Map<String, GES>();
-    this.cacheUserGes = undefined;
   }
 
-  async computeGES(urlHost: URL | undefined, countryCodeSelected: string, userCountryCodeSelected: string) {
+  async computeGES(countryCodeSelected: string, userCountryCodeSelected: string, urlHost?: URL) {
     let cacheSrvKey = (countryCodeSelected === SEARCH_AUTO && urlHost?.hostname) ? urlHost.hostname : undefined;
     let userGesUseCacheUserGes = userCountryCodeSelected === SEARCH_AUTO && this.cacheUserGes;
     let zoneGES: GES | undefined;
@@ -31,7 +30,7 @@ export class GESService {
     if (userGesUseCacheUserGes) {
       userGES = this.cacheUserGes;
     } else {
-      userGES = await this.getGESUser(userCountryCodeSelected, userGesUseCacheUserGes);
+      userGES = await this.getGESUser(userCountryCodeSelected);
       if (userCountryCodeSelected === SEARCH_AUTO && userGES) {
         this.cacheUserGes = userGES;
       }
@@ -159,7 +158,7 @@ export class GESService {
       }));
   }
 
-  getEnergyAndGES(zoneGES: GES | undefined, userGES: GES | undefined, network: NetworkResponse, nbRequest: number): {
+  getEnergyAndGES(network: NetworkResponse, nbRequest: number, zoneGES?: GES, userGES?: GES): {
     ges: GESTotals;
     energy: EnergyMeasure
   } {

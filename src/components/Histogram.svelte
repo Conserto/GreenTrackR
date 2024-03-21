@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { formatNumber, translate } from 'src/utils/utils';
+  import { translate } from 'src/utils/utils';
   import type { HistoData } from 'src/interface';
 
   export let datas: HistoData[];
   export let yLabel: string;
-  export let yLabel2: string = null;
+  export let yLabel2: string | null = null;
 
   const svgHeight = 300;
   const margin = { top: 40, right: 20, bottom: 40, left: 40 };
@@ -18,7 +18,7 @@
   $: maxDatasValue = Math.max(...datas.map((d) => d.value));
   $: maxDatasValue2 = Math.max(...datas.map((d) => d.value2));
 
-  function calculateBarHeight(value, max) {
+  function calculateBarHeight(value: number, max: number) {
     const yScale = height / max;
     return value * yScale;
   }
@@ -33,13 +33,11 @@
           x={(i * width) / datasLength + margin.left}
           y={svgHeight - calculateBarHeight(value, maxDatasValue) - margin.bottom}
           width={width / datasLength - 5}
-          height={calculateBarHeight(value, maxDatasValue)}
-        />
+          height={calculateBarHeight(value, maxDatasValue)} />
         <text
           x={(i * width) / datasLength + margin.left + width / (2 * datasLength)}
           y={svgHeight - calculateBarHeight(value, maxDatasValue) - margin.bottom - 5}
-          text-anchor="middle">{value}</text
-        >
+          text-anchor="middle">{value.toFixed(2)}</text>
       </g>
       {#if yLabel2}
         <g>
@@ -53,7 +51,7 @@
           <text
             x={(i * width) / datasLength + margin.left + width / (2 * datasLength) + svgWidth}
             y={svgHeight - calculateBarHeight(value2, maxDatasValue2) - margin.bottom - 5}
-            text-anchor="middle">{value2}</text
+            text-anchor="middle">{value2.toFixed(2)}</text
           >
         </g>
       {/if}
@@ -70,7 +68,7 @@
     >
     <text
       transform={`rotate(-90) translate(${-svgHeight / 2},${margin.left + svgWidth - 15})`}
-      text-anchor="middle">{translate(yLabel2)}</text
+      text-anchor="middle">{yLabel2 ? translate(yLabel2) : ""}</text
     >
   </svg>
 </div>

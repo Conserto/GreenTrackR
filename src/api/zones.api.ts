@@ -14,7 +14,7 @@ const getIpAddress = async () => {
   }
 };
 
-export const getCurrentZone = async (url: string | undefined = undefined): Promise<DetailedGeoLoc> => {
+export const getCurrentZone = async (url?: string): Promise<DetailedGeoLoc> => {
   const origin = url ? url : await getIpAddress();
   // FIXME si null pas traiter, continuable si erreur?
   try {
@@ -29,8 +29,7 @@ export const getCurrentZone = async (url: string | undefined = undefined): Promi
   }
 };
 
-export const getServerZone = (urlHost: URL | undefined): Promise<DetailedGeoLoc> => {
+export const getServerZone = (urlHost?: URL): Promise<DetailedGeoLoc> => {
   // FIXME slice 4? Pourquoi pas un regex ou replace?
-  const url = urlHost ? urlHost.host.slice(4) : null; // Remove www.
-  return getCurrentZone(url);
+  return getCurrentZone(urlHost ? urlHost.host.slice(4) : urlHost); // Remove www.
 };

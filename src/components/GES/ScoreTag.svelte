@@ -5,23 +5,22 @@
   import { ScoreService } from 'src/service';
   import { translate } from 'src/utils/utils';
 
-  export let score: Score;
+  export let score: Score | undefined;
 
-  $: resScore = ScoreService.getScoreForGrade(score.value);
+  $: resScore = ScoreService.getScoreForGrade(score?.value);
 </script>
 
 <div class="scores-tag">
   <p class="score-label">{translate('gesScore')} :</p>
   {#each ALL_SCORES as scoreLevel}
-    <div class="score {scoreLevel.class}" style:background-color={scoreLevel.color}>
+    <div class="score" style:background-color={scoreLevel.color}>
       <span
-        class:active={scoreLevel.gradeLetter === score.gradeLetter}
+        class:active={scoreLevel.gradeLetter === score?.gradeLetter}
         class="score-letter"
-        style:color={scoreLevel.gradeLetter === score.gradeLetter
+        style:color={scoreLevel.gradeLetter === score?.gradeLetter
           ? scoreLevel.textColor
-          : 'transparent'}>{scoreLevel.gradeLetter}</span
-      >
-      {#if scoreLevel.gradeLetter === score.gradeLetter}
+          : 'transparent'}>{scoreLevel.gradeLetter}</span>
+      {#if scoreLevel.gradeLetter === score?.gradeLetter}
         <p class="score-number">
           {resScore}
         </p>{/if}
@@ -37,10 +36,12 @@
     width: 100%;
     max-width: 280px;
   }
+
   .score-label {
     margin-right: var(--spacing--xxl);
     font-weight: var(--font-weight--bold);
   }
+
   .score {
     width: 10%;
     height: 2.5rem;
@@ -49,6 +50,7 @@
     justify-content: center;
     color: var(--color--white);
   }
+
   .score-letter {
     color: transparent;
 
@@ -68,6 +70,7 @@
       line-height: 2;
     }
   }
+
   .score-number {
     display: flex;
     color: var(--color--dark);
