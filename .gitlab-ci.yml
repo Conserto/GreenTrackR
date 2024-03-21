@@ -49,12 +49,12 @@ build:source:
 test:
   stage: test
   script:
-    - yarn test
+    - yarn run test
 
 check:
   stage: test
   script:
-    - yarn check
+    - yarn run check
 
 # Analysis of source code
 sonarqube:
