@@ -1,60 +1,61 @@
-# GreenTrackr 1.0.4 for Manifest V3
+# GreenTrackr V2.0.0 
 
-<descriptif de l'extension>
+GreenTrackr est une extension navigateur eco-conçue qui vous permet de calculer l’empreinte carbone de votre site web en un clic. L'évaluation se base sur l'estimation de la consommation énergétique (Wh) de trois paramètres qui représentent chaque tiers de l'architecture d'un service numérique : 
+- L’**utilisateur** : les données reçues (**taille de la page décompressée**)
+- Le **réseau** : les données transférées (**taille de la page compressée**)
+- Le **serveur** : le nombre de requêtes (**HTTP**) 
 
-### Tester l'extension
+GreenTrackr interagisse avec deux **API** externe pour déterminer le mix énergétique du pays qui héberge le site et celui dans lequel se trouve l'utilisateur : 
+**CO2signal d’Electricity Map** et **IP Geolocation**.
 
-**Attention :** Cette version de l'extension n'est compatible qu'avec _Manifest V3 (Chromium)_. Une version spécifique pour _Firefox / Manifest V2_ sera disponible séparément.
+Pour les informations concernant les calculs de GreenTrackr, se référer à https://conserto.pro/greentrackr/
 
-- Chrome >
-  [Installation de l'extension](https://developer.chrome.com/docs/extensions/mv3/tut_debugging/)
+## Tutoriel
 
-- Edge >
-  [Installation de l'extension](https://learn.microsoft.com/en-us/microsoft-edge/extensions-chromium/getting-started/extension-sideloading)
+### Mode développement
 
-### Build l'extension
-
-IL a été décidé de développer cette extension à l'aide de plusieurs technologies :
-
-- Vite, pour builder notre application rapidement
-- Svelte, pour disposer d'un framework orienté composants rapide, léger et de sa complémentarité avec Typescript et Vite. A la différence de beaucoup de "framework" comme React, il n'utilise pas le shadowDom et la réactivité est essentiellement
-
-Pour build l'extension, il suffira d'executer la commande "yarn run build".
-
-Ceci étant une extension chrome, nous avons du utiliser crxjs pour permettre à vite de build correctement le projet.
-En effet, le point d'entrée d'une extension chrome est le fichier manifest.json. Celui ci va, entre autres, chargé le fichier devtools-page.html, fichier qui va permettre de créer notre devtools page (c'est-à-dire un onglet dans l'inspecteur) grâce au fichier devtools-page.ts appelé par le fichier html.
-
-Le devtools-page.ts va donc créer le tab devtools, et appelé le fichier index.html, qui sera finalement pour notre code le point d'entrée. 
+- **Cloner** le projet
+- **Copier/coller** le fichier ```src/.env.template``` et le rennomer en ```.env``` puis renseigner les variables suivantes:
+  - ```VITE_MAX_HAR_RETRIES``` : Nombre d'essais pour analyser les requêtes du site courant
+  - ```VITE_CO2_SIGNAL_TOKEN``` : Token nécessaire à l'utilisation de l'API d'electricity map. Il peut être récupéré à l'adresse suivante https://api-portal.electricitymaps.com/
+    <br>**Attention !** L'extension ne peut fonctionner sans ce **token**.
+- Lancer la commande  ```yarn install``` pour installer les dépendances
+- Lancer ```yarn dev``` pour lancer l'app.
+- Importer le plugin dans ```chrome://extensions/ > Mode développeur > Charger l'extension non empaquetée > importer le contenu du dossier ./dist/```
+  <br>**Attention :** Cette version de l'extension n'est compatible qu'avec **_Manifest V3 (Chromium)_** et sur toutes les versions de navigateurs basés sur chromium.
 
 ### Utiliser l'extension
 
-- Ouvrir les outils de développement du navigateur.
-- Aller dans l'onglet "Evaluation/Page".
-- Dans le navigateur, aller sur la page à analyser.
-- Dans l'onglet "Evaluation/Page" des outils de développement, cliquer sur le bouton "Démarrer l'analyse".
+- Ouvrir les outils de développement du navigateur (DevTools) : ```Ctrl+Shift+I```
+- Quatre côtés d'épinglage de la Devtools possible (appuyez sur les trois dots verticals $\vdots$ pour choisir un)
+  - nous vous recommandons de la détacher sur une **fenêtre distincte**
+- Dans l'onglet **Réseau** de la DevTools décocher la case **Désactiver le cache**
+- Dans le navigateur, aller sur le site Web à analyser et accéder à l'extension GreenTrackr dans les onglets de la DevTools
+- GreenTrackr propose 3 options : **Evaluation/Page**, **Auto scroll/Page**, **Parcours Utilisateur**
+
+#### Evaluation/Page
+- Deux types d'évaluation : **avec cache** et **sans cache** 
+  - **Evaluation avec cache** : cliquer directement sur le bouton "**Analyser**"
+  - **Evaluation sans cache** : cliquer sur le bouton "**supprimer le cache**" ensuite sur le bouton "**Analyser**" 
 - Les résultats s'affichent.
-- Vous pouvez sauvegarder ce résultat dans un historique (seuls les indicateurs sont enregistrés) via le bouton "Enregistrer l'évaluation".
-- L'historique des résultats sauvegardés est disponible via le bouton "Voir l'historique".
+- Vous pouvez sauvegarder ce résultat dans un historique via le bouton "**Enregistrer l'évaluation**".
+- L'historique des résultats sauvegardés est disponible via le bouton "**Voir l'historique**".
+- Le bouton "**Réinitialiser la mesure**" permet de remettre à zero les compteurs de calcul
 
-Quelques points de vigilance
 
-- Si le nombre de requêtes est à zéro, c'est probablement parce que vous n'avez pas chargé la page avec les outils de développement démarrés. Il faut donc penser à faire un rechargement de la page.
-- Pour avoir des évaluations correctes, il faut préalablement vider le cache du navigateur (Dans le cas contraire, le volume transféré va être réduit si vous avez déjà consulté le site mesuré). Pour vous éviter d'aller dans les menus du navigateur, un bouton est prévu à cet effet dans l'extension "Réinitialiser les paramètres".
+#### Auto scroll/Page
+
+Vous pouvez analyser avec précisions la page web en saisissant un pourcentage pourcentage (**%**), les résultats sont obtenus suivant le même processe que l'option **Evaluation/Page**.
+
+#### Parcours Utilisateur
+
+Vous pouvez calculer l'empreinte carbone d'un parcours utilisateur en allant sur l'onglet "**Parcours Utilisateur**". En démarrant l'analyse, en cliquant sur le bouton "**Démarrer l'enregistrement**", l'extension enregistrera le parcours effectué. Une fois le parcours terminé, l'appui sur le bouton "**Stopper l'enregistrement**" permet d'afficher le tableau des résultats pour chaque action effectuée : "**(scroll)**" et/ou "**(click)**" sur les pages visitées. Les boutons "**Réinitialiser le parcours**" et "**Supprimer le cache**" permet de vider les résultats stockés en local et ainsi de redémarrer un parcours à zéro.
+
+### Points à noter
+
+- Le choix d'épinglage de la DevTools a une influence sur le résultat : chargement des ressources est différent (nombre de requêtes, taille de la page, ...) 
+- Penser à faire un rechargement de la page
 - L'utilisation d'un bloqueur de publicité ou autre filtre a une influence sur le résultat.
-
-### Résultats différents entre deux analyses
-
-Le plugin effectue son analyse sur la base des données fournies par l'API du navigateur et, ce faisant, témoigne de la réalité constatée au moment de l'analyse dans le navigateur qui l'exécute. Lorsque l'on fait deux fois l'analyse d'un même site, le résultat peut être différent. Parmi les causes possibles, on notera par exemple:
-
-- Les mécanismes de mise à jour en continu (Même si le site semble avoir chargé, le chargement d’autres éléments peut toujours être en cours au lancement de l’analyse. Le volume de données téléchargées et le nombre de requêtes dépendent donc du moment où vous cliquez sur le bouton "Démarrer l'analyse"). Le même effet s’applique si vous lancez l’analyse avant la fin de chargement du site.
-- Les publicités qui peuvent changer entre deux analyses (la localisation, l'heure de la journée, visites précédentes avec son navigateur et bien d'autres paramètres qui sont pris en compte par les spécialistes du retargeting vont se traduire par le chargement en cascade de librairies \*.js différentes et de l'affichage de contenus publicitaires différents).
-- Le scrolling : si vous réalisez un scrolling au moment de l'analyse, vous risquez de lancer des chargements de données qui n’auraient normalement pas eu lieu.
-- Le niveau de "privacy" qui, selon le niveau paramétré et selon le navigateur, induira lui aussi des effets de bord.
-- Les effets de cache.
-
-### Enregistrement du parcours utilisateur
-
-Vous pouvez quantifier les impacts environnementaux d'un parcours utilisateur en allant sur l'onglet "Parcours Utilisateur". En démarrant l'analyse, en cliquant sur le bouton "Démarrer l'enregistrement d'un parcours", l'extension enregistrera les résultats pour chaque URL visitée. Une fois le parcours terminé, l'appui sur le bouton "Stopper l'enregistrement" permet d'afficher le tableau des résultats pour chaque URL, ainsi que les différents totaux. "Réinitialiser le parcours" permet de vider les résultats stockés en local et ainsi de redémarrer un parcours à zéro.
 
 ### Permissions de l'extension
 
