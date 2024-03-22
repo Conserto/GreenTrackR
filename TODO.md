@@ -22,6 +22,8 @@
 - TODO / FIXME
 - Incorrect form label
 - Pb doublon
+- Saisie de la key
+- Se passer du .env
 
 ## Si le temps
 - Autscroll :
