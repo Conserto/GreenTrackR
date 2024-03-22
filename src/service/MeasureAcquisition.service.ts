@@ -139,13 +139,16 @@ export class MeasureAcquisition {
     }
   }
 
-  // FIXME Timeout
   waitForDomElements() {
-    return new Promise<void>((resolve) => {
+    return new Promise<void>((resolve, reject) => {
+      const failed = setTimeout(() => {
+        reject();
+      }, 8000);
       const handleRuntimeMsg = async (message: { type: string; value: any }) => {
         if (message.type === DOM_INFOS) {
           chrome.runtime.onMessage.addListener(handleRuntimeMsg);
           this.measure.dom = message.value;
+          clearTimeout(failed);
           resolve();
         }
       };
@@ -154,14 +157,18 @@ export class MeasureAcquisition {
     });
   }
 
-  // FIXME Timeout
   // TODO: to delete, we'll have to implement this on service-worker so it can send message to svelte component
   // wen new entries are loaded
   waitTabUpdate() {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+      const failed = setTimeout(() => {
+        reject();
+      }, 8000);
+
       function onTabUpdated(updatedTabId: number, info: any) {
         if (info.status === 'complete') {
           chrome.tabs.onUpdated.removeListener(onTabUpdated); // Remove the listener
+          clearTimeout(failed);
           resolve(updatedTabId);
         }
       }

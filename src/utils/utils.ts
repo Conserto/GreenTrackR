@@ -198,6 +198,6 @@ export const scrollPrompt = (topPrompt: number, leftPrompt: number, timeout: num
     });
   } else {
     logDebug('End Of Page');
-    return new Promise<void>((resolve, reject) => resolve());
+    return new Promise<void>((resolve) => resolve());
   }
 };
