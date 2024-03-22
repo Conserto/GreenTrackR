@@ -31,7 +31,10 @@ Pour les informations concernant les calculs de GreenTrackr, se référer à htt
   - nous vous recommandons de la détacher sur une **fenêtre distincte**
 - Dans l'onglet **Réseau** de la DevTools décocher la case **Désactiver le cache**
 - Dans le navigateur, aller sur le site Web à analyser et accéder à l'extension GreenTrackr dans les onglets de la DevTools
-- GreenTrackr propose 3 options : **Evaluation/Page**, **Auto scroll/Page**, **Parcours Utilisateur**
+- Configurer GreenTrackr dans l'onglet **Paramètre**, deux paramètres nécessaires :
+  - Un token d'accès de l'API 'CO2signal' de 'Electricity Maps', suivre le lien puis aller sur '**Go to api portal**' ->  https://www.co2signal.com/
+  - Le nombre d'essais pour analyser les requêtes de la page courante
+- GreenTrackr propose 3 options (onglets) : **Evaluation/Page**, **Auto scroll/Page**, **Parcours Utilisateur**
 
 #### Evaluation/Page
 - Deux types d'évaluation : **avec cache** et **sans cache** 

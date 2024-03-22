@@ -66,7 +66,7 @@
     "message": "Historique#History Button"
   },
   "launchAnalysisButton": {
-    "message": "Analyser#Lancer l'analyse de l'existant"
+    "message": "Analyser#Le lancement de l'analyse ne prend pas en compte la partie de l'écran occultée par la devtools"
   },
   "startJourneyButton": {
     "message": "Démarrer l'enregistrement#Lancer l'enregistrement"
@@ -309,7 +309,7 @@
     "message": "Token API CO2signal"
   },
   "paramRetryDescription": {
-    "message": "Pour éviter les erreurs du calcul des requêtes HTTP pour les sites que vous souhaitez analyser, sélectionnez le nombre maximum d'essais."
+    "message": "Saisissez le nombre maximal d'essais afin d'éviter les erreurs de calcul des requêtes HTTP pour les sites que vous souhaitez analyser."
   },
   "paramNbRetryLabel": {
     "message": "Nombre d'essais"
