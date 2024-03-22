@@ -15,7 +15,7 @@ export class MeasureAcquisition {
   private networkService: NetworkService;
   private gesService: GESService;
   private scoreService: ScoreService;
-  private readonly nbRetry?: number;
+  private readonly nbRetry: number;
 
   constructor() {
     this.harRetryCount = 0;

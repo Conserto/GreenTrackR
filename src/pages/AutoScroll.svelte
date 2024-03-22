@@ -91,7 +91,7 @@
 
 <div class="flex-center input-container">
   <Input type={InputTypeEnum.NUMBER} name="scrollValue" bind:value={scrollValueStr} />
-  <Select bind:selectedValue={currentScrollType} selectValues={scrollTypes} />
+  <Select bind:selectedValue={currentScrollType} selectValues={scrollTypes} name="scroll-value"/>
 </div>
 
 <div class="flex-center buttons-container">
