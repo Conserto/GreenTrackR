@@ -22,7 +22,7 @@
     "src/**/*.js",
     "src/**/*.svelte",
     "src/service-worker.ts",
-    "src/content-scripts/autoScroll.ts",
+    "src/content-scripts/contentScripts.ts",
     "src/devtoolsjts",
     "vite.config.ts",
     "manifest.json",

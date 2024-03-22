@@ -1,14 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "GreenTrackr-test",
-  "description": "Extension d'évaluation des impacts environnementaux d'un site Web",
-  "version": "1.0.5",
+  "name": "GreenTrackr",
+  "description": "Evaluez l'empreinte environnementale de votre site Web",
+  "version": "2.0.0",
   "icons": {
-    "64": "icons/128.png"
-  },
-  "background": {
-    "service_worker": "src/service-worker.ts",
-    "type": "module"
+    "64": "images/logo.png"
   },
   "default_locale": "fr",
   "permissions": [
@@ -16,7 +12,8 @@
     "tabs",
     "browsingData",
     "storage",
-    "webNavigation"
+    "webNavigation",
+    "webRequest"
   ],
   "content_scripts": [
     {
@@ -24,12 +21,12 @@
         "<all_urls>"
       ],
       "js": [
-        "src/content-scripts/autoScroll.ts"
+        "src/content-scripts/contentScripts.ts"
       ]
     }
   ],
   "host_permissions": [
-    "*://*/*"
+    "<all_urls>"
   ],
   "externally_connectable": {
     "matches": [
@@ -38,7 +35,7 @@
   },
   "devtools_page": "extension/devtools-page.html",
   "action": {
-    "default_icon": "icons/128.png",
+    "default_icon": "images/logo.png",
     "default_title": "GreenTrackr",
     "default_popup": "extension/menu.html"
   },

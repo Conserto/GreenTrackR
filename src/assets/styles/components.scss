@@ -1,0 +1,45 @@
+.flex-center {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+}
+
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.generic-input {
+  background-color: var(--color--white);
+  color: var(--color--dark-grey);
+  border: var(--border-width--normal) solid #d1d5db;
+  border-radius: var(--border-radius--strong);
+  padding: var(--spacing--sm);
+  text-align: center;
+  font-weight: bold;
+
+  &:focus {
+    border-color: var(--color--green);
+    outline: none;
+  }
+}
+
+a {
+  color: var(--color--green);
+  font-weight: var(--font-weight--medium);
+  text-decoration: inherit;
+
+  &:hover {
+    color: #535bf2;
+  }
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}

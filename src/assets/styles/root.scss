@@ -1,0 +1,46 @@
+:root {
+  --color--white: #ffffff;
+  --color--light: #f9fafb;
+  --color--dark: #000000;
+
+  --color--grey: #6c757d;
+  --color--light-grey: #eff0f1;
+  --color--dark-grey: #5c636a;
+
+  --color--green: #60806c;
+  --color-dark-green: #4d6c59;
+
+  --border-radius--slight: 0.25rem;
+  --border-radius--mark: 0.5rem;
+  --border-radius--strong: 0.75rem;
+  --border-radius--round: 2rem;
+
+  --box-shadow--sm: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --box-shadow--md: rgba(0, 0, 0, 0.35) 0 5px 15px;
+
+  --spacing--xs: 0.25rem; /* équivalent à 4px (par exemple) */
+  --spacing--sm: 0.5rem; /* équivalent à 8px (par exemple) */
+  --spacing--md: 0.75rem; /* équivalent à 12px (par exemple) */
+  --spacing--lg: 1rem; /* équivalent à 16px (par exemple) */
+  --spacing--xl: 1.5rem; /* équivalent à 24px (par exemple) */
+  --spacing--xxl: 2rem; /* équivalent à 32px (par exemple) */
+  --spacing--xxxl: 3rem; /* équivalent à 48px (par exemple) */
+
+  --font-size--xs: 0.75rem; /* équivalent à 12px (par exemple) */
+  --font-size--sm: 0.875rem; /* équivalent à 14px (par exemple) */
+  --font-size--md: 1rem; /* équivalent à 16px (par exemple) */
+  --font-size--lg: 1.125rem; /* équivalent à 18px (par exemple) */
+  --font-size--xl: 1.5rem; /* équivalent à 24px (par exemple) */
+  --font-size--xxl: 2rem; /* équivalent à 32px (par exemple) */
+
+  --font-weight--light: 300;
+  --font-weight--normal: 400;
+  --font-weight--medium: 500;
+  --font-weight--bold: 700;
+
+  --border-width--thin: 1px;
+  --border-width--normal: 2px;
+  --border-width--thick: 4px;
+
+  --img_icon_size--size: 1.5rem;
+}

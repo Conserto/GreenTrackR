@@ -1,12 +1,13 @@
-import './assets/styles/app.css';
+import './assets/styles/app.scss';
+import './assets/styles/components.scss';
+import './assets/styles/root.scss';
 import App from './App.svelte';
+
 const targetElement = window.document.getElementById('app');
 
 if (targetElement) {
   const app = new App({
     target: targetElement,
-    props: {
-      // vous pouvez passer des propriétés initiales ici
-    },
+    props: {},
   });
 }
