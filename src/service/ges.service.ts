@@ -9,7 +9,6 @@ export class GESService {
 
   private cacheGesByUrl: Map<string, GES>;
   private cacheUserGes?: GES;
-  private carbonFile = 'src/assets/data/data_carbon.json';
 
   constructor() {
     this.cacheGesByUrl = new Map<string, GES>();
@@ -119,7 +118,7 @@ export class GESService {
       if (countryCodeSelected == SEARCH_AUTO) {
         countryCodeSelected = 'FR';
       }
-      let response: any = await import(this.carbonFile);
+      let response: any = await import('src/assets/data/data_carbon.json');
       countryName = response[countryCodeSelected]?.[0].country_name;
       data = this.getSortedDayGESReport(response, countryCodeSelected);
     } catch (error: any) {
