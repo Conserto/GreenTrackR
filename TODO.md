@@ -18,15 +18,15 @@
 - ~~Parcours -> Click dbb et scroll scroll~~
 - ~~tooltips~~
 - ~~Qualité~~
-- Histo resilience
-- TODO / FIXME
-- Incorrect form label
-- Pb doublon
+- ~~Histo resilience~~
+- ~~TODO / FIXME~~
+- ~~Incorrect form label~~
+- ~~Pb doublon~~
 - Saisie de la key
 - Se passer du .env
 
 ## Si le temps
-- Autscroll :
+- Autoscroll :
   - Dev option : activer le choix pourcentage du scroll
 - Gestion erreur si Api (electricity maps et ip geolocation ) down => prise de contact electricity maps
 - Saisie de la key
