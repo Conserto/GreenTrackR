@@ -24,8 +24,8 @@
 - ~~Pb doublon~~
 - ~~Saisie de la key~~
 - ~~Se passer du .env~~
-- ~~MAJ DOC pour boubou~~
-- ~~Translate pour boubou (onglet paramètre)~~
+- ~~MAJ DOC pour ~~
+- ~~Translate (onglet paramètre)~~
 
 ## Si le temps
 - Autoscroll :

@@ -303,7 +303,7 @@
     "message": "Paramètres"
   },
   "paramTokenCo2Description": {
-    "message": "GreenTrackR utilise l'API 'CO2signal' de 'Electricity Maps', afin de pouvoir utiliser cette API il vous faut un token d'accès, suivre le lien puis aller sur 'Go to api portal' -> #https://www.co2signal.com/"
+    "message": "GreenTrackR utilise l'API 'CO2signal' de 'Electricity Maps', afin de pouvoir utiliser cette API il vous faut un token d'accès, cliquez sur le lien puis sur 'Go to api portal' -> #https://www.co2signal.com/"
   },
   "paramCo2TokenLabel": {
     "message": "Token API CO2signal"
