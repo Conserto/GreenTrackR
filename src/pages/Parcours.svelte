@@ -9,6 +9,7 @@
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
   import { SEARCH_AUTO } from '../const/key.const';
   import { Tooltip } from 'flowbite-svelte';
+  import { logDebug } from '../utils/log';
 
   let onGoingAnalysis = false;
   let measureAcquisition = new MeasureAcquisition();

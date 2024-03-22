@@ -9,9 +9,7 @@
 - ~~Clean network via api -> Pas possible mais stockage date derniere request~~
 - ~~Clean cache + reinit param + refresh~~
 - ~~Intensity carbon > 0 si nb request 0?~~
-- Histo resilience
 - ~~Clean logs~~
-- TODO / FIXME
 - ~~Démarrer -> mesure à 0 + refresh +~~ 
 - ~~Trop dans delete cache~~
 - ~~Scroll 25 par 25 error~~
@@ -19,7 +17,11 @@
 - ~~parcours -> Voir pour limite appel appli si mutualisable (cache)~~
 - ~~Parcours -> Click dbb et scroll scroll~~
 - ~~tooltips~~
+- ~~Qualité~~
+- Histo resilience
+- TODO / FIXME
 - Incorrect form label
+- Pb doublon
 
 ## Si le temps
 - Autscroll :
