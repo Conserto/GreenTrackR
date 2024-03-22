@@ -1,9 +1,10 @@
 <script lang="ts">
   import logo from '/images/logo.png';
-  import { AutoScroll, Evaluation, Parcours, Help } from 'src/pages';
+  import { AutoScroll, Evaluation, Parcours, Help, Parameter } from 'src/pages';
   import { Alert, Tab, Footer } from 'src/components';
-  import { translate } from './utils';
+  import { getLocalStorageObject, translate } from './utils';
   import { AlertTypeEnum } from './enum';
+  import { paramTokenCo2 } from './const';
 
   export let tabs = [
     {
@@ -32,6 +33,12 @@
       id: 'help-tab',
       component: Help,
     },
+    {
+      translateKey: 'tabParameter',
+      name: 'Parameter',
+      id: 'parameter-tab',
+      component: Parameter,
+    },
   ];
   export let activeTabId = 'evaluation-tab';
 
@@ -42,7 +49,7 @@
 
 <header class="flex-col-center">
   <img src={logo} alt="Logo green tracker" />
-  {#if !import.meta.env.VITE_CO2_SIGNAL_TOKEN}
+  {#if !getLocalStorageObject(paramTokenCo2)}
     <div>
       <Alert message="errorNoToken" alertType={AlertTypeEnum.ERROR} />
     </div>
@@ -61,13 +68,13 @@
 </header>
 
 <div class="app-container">
-  {#if activeTabId !== 'help-tab'}
+  {#if activeTabId !== 'help-tab' && activeTabId !== 'parameter-tab' }
     <h1 class="plugin-title">{translate('noContentPhraseEvaluation')}</h1>
   {/if}
   {#each tabs as tab}
     {#if activeTabId === tab.id}
       {#if tab.beta}
-        <Alert message="betaMessage" />
+        <Alert message="betaMessage"/>
       {/if}
       <div class="tab-panel" role="tabpanel" aria-labelledby={`${tab.name} tab content`}>
         <svelte:component this={tab.component} />

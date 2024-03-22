@@ -55,7 +55,8 @@ export const formatSize = (value?: number): string => {
 
 export const getLocalStorageObject = (key: string) => {
   const stringValue = localStorage.getItem(key);
-  if (stringValue) {
+  logDebug(`Value for ${key}: ${stringValue}`);
+  if (stringValue && stringValue.length > 0) {
     return JSON.parse(stringValue);
   } else {
     return null;
@@ -63,6 +64,7 @@ export const getLocalStorageObject = (key: string) => {
 };
 
 export const setLocalStorageObject = (key: string, value: any) => {
+  logDebug(`Save ${key} -> ${value}`);
   localStorage.setItem(key, JSON.stringify(value));
 };
 

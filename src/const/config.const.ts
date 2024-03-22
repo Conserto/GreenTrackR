@@ -1,1 +1,1 @@
-export const VITE_MAX_HAR_RETRIES = 2;
+export const VITE_MAX_HAR_RETRIES_DEFAULT = 2;
