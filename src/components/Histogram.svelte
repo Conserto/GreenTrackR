@@ -25,7 +25,7 @@
 </script>
 
 <div>
-  <svg width={svgWidth} height={svgHeight + 75} aria-describedby="title">
+  <svg width={fullSvgWidth} height={svgHeight + 75} aria-describedby="title">
   <title id="title">Histogramme des valeurs GES</title>
   {#each datas as { label, value, value2, color }, i}
       <g>
