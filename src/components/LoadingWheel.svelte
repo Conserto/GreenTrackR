@@ -1,4 +1,4 @@
-<span class="loader"></span>
+<span class="loader" aria-label="Roue de chargement"></span>
 
 <style>
   .loader {
