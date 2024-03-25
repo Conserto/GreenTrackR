@@ -17,8 +17,11 @@ export const getCarbonIntensity = async (location: string | GeoLocation | undefi
   let requestUrl = CO2_API;
   if (typeof location === 'string') {
     requestUrl += `countryCode=${location}`;
-  } else {
+  } else if (location.lon !==0 && location.lat !==0){
     requestUrl += `lon=${location.lon}&lat=${location.lat}`;
+  } else{
+    logWarn('Carbon intensity not check because location not valid');
+    return -1;
   }
   const { data } = await fetch(requestUrl, {
     headers: { 'auth-token': `${token}` }
