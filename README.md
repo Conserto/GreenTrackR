@@ -15,6 +15,7 @@ Pour les informations concernant les calculs de GreenTrackr, se référer à htt
 ### Utiliser l'extension
 
 - Ouvrir les outils de développement du navigateur (DevTools) : ```Ctrl+Shift+I```
+  - **Attention** : cette version de l'extension n'est compatible qu'avec Manifest V3 (chromium et les versions navigateurs basés sur chromium) 
 - Quatre côtés d'épinglage de la Devtools possible (appuyez sur les trois dots verticals $\vdots$ pour choisir un)
   - nous vous recommandons de la détacher sur une **fenêtre distincte**
 - Dans l'onglet **Réseau** de la DevTools décocher la case **Désactiver le cache**
