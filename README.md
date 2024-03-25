@@ -15,7 +15,6 @@ Pour les informations concernant les calculs de GreenTrackr, se référer à htt
 ### Utiliser l'extension
 
 - Ouvrir les outils de développement du navigateur (DevTools) : ```Ctrl+Shift+I```
-  - **Attention** : cette version de l'extension n'est compatible qu'avec Manifest V3 (chromium et les versions navigateurs basés sur chromium) 
 - Quatre côtés d'épinglage de la Devtools possible (appuyez sur les trois dots verticals $\vdots$ pour choisir un)
   - nous vous recommandons de la détacher sur une **fenêtre distincte**
 - Dans l'onglet **Réseau** de la DevTools décocher la case **Désactiver le cache**
@@ -45,6 +44,7 @@ Vous pouvez calculer l'empreinte carbone d'un parcours utilisateur en allant sur
 
 ### Points à noter
 
+- Cette version de l'extension n'est compatible qu'avec Manifest V3 (chromium et les versions navigateurs basés sur chromium) 
 - Le choix d'épinglage de la DevTools a une influence sur le résultat : chargement des ressources est différent (nombre de requêtes, taille de la page, ...) 
 - Penser à faire un rechargement de la page
 - L'utilisation d'un bloqueur de publicité ou autre filtre a une influence sur le résultat.
