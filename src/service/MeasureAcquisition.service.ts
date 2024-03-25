@@ -2,11 +2,11 @@ import { RequestAction } from 'src/enum';
 import type { GES, Measure, NetworkMeasure } from '../interface';
 
 import { GESService, NetworkService, ScoreService } from '.';
-import { createEmptyMeasure, reloadCurrentTab, sendChromeMsg } from 'src/utils';
-import { PREFIX_URL_EXTENSION } from '../const';
+import { createEmptyMeasure, getLocalStorageObject, reloadCurrentTab, sendChromeMsg } from 'src/utils';
+import { paramRetry, PREFIX_URL_EXTENSION } from '../const';
 import { logDebug, logInfo } from '../utils/log';
 import { DOM_INFOS } from '../const/action.const';
-import { VITE_MAX_HAR_RETRIES } from '../const/config.const';
+import { VITE_MAX_HAR_RETRIES_DEFAULT } from '../const/config.const';
 
 export class MeasureAcquisition {
   public measure: Measure;
@@ -16,6 +16,7 @@ export class MeasureAcquisition {
   private networkService: NetworkService;
   private gesService: GESService;
   private scoreService: ScoreService;
+  private readonly nbRetry: number;
 
   constructor() {
     this.harRetryCount = 0;
@@ -25,6 +26,7 @@ export class MeasureAcquisition {
     this.gesService = new GESService();
     this.scoreService = new ScoreService();
     this.measure = createEmptyMeasure();
+    this.nbRetry = getLocalStorageObject(paramRetry) ?? VITE_MAX_HAR_RETRIES_DEFAULT;
   }
 
   updateMeasureValues(zoneGES?: GES, userGES?: GES): void {
@@ -128,7 +130,7 @@ export class MeasureAcquisition {
   }
 
   async retryGetNetworkMeasure(forceRefresh: boolean): Promise<void> {
-    if (this.harRetryCount < VITE_MAX_HAR_RETRIES) {
+    if (this.harRetryCount <= this.nbRetry) {
       logDebug('Reload');
       this.harRetryCount++;
       await reloadCurrentTab();

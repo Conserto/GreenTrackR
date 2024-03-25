@@ -22,13 +22,13 @@
 - ~~TODO / FIXME~~
 - ~~Incorrect form label~~
 - ~~Pb doublon~~
-- Saisie de la key
-- Se passer du .env
+- ~~Saisie de la key~~
+- ~~Se passer du .env~~
+- ~~MAJ DOC pour ~~
+- ~~Translate (onglet paramètre)~~
 
 ## Si le temps
 - Autoscroll :
   - Dev option : activer le choix pourcentage du scroll
 - Gestion erreur si Api (electricity maps et ip geolocation ) down => prise de contact electricity maps
-- Saisie de la key
-- Se passer du .env
 - Show extension

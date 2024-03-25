@@ -7,9 +7,10 @@
   width="32"
   height="32"
   role="img"
-  aria-label="Check icon"
   class="check-icon"
+  aria-describedby="title"
 >
+  <title id="title">Icon check box</title>
   <path
     stroke-linecap="round"
     stroke-linejoin="round"

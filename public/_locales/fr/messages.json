@@ -66,7 +66,7 @@
     "message": "Historique#History Button"
   },
   "launchAnalysisButton": {
-    "message": "Analyser#Lancer l'analyse de l'existant"
+    "message": "Analyser#Le lancement de l'analyse ne prend pas en compte la partie de l'écran occultée par la devtools"
   },
   "startJourneyButton": {
     "message": "Démarrer l'enregistrement#Lancer l'enregistrement"
@@ -295,5 +295,26 @@
   },
   "errorNoToken": {
     "message": "Aucun token CO2 trouvé, l'extension pourrait ne pas fonctionner#Variable d'environnement inconnue"
+  },
+  "paramTabTitle": {
+    "message": "Paramétrage"
+  },
+  "tabParameter": {
+    "message": "Paramètres"
+  },
+  "paramTokenCo2Description": {
+    "message": "GreenTrackR utilise l'API 'CO2signal' de 'Electricity Maps', afin de pouvoir utiliser cette API il vous faut un token d'accès, cliquez sur le lien puis sur 'Go to api portal' -> #https://www.co2signal.com/"
+  },
+  "paramCo2TokenLabel": {
+    "message": "Token API CO2signal"
+  },
+  "paramRetryDescription": {
+    "message": "Saisissez le nombre maximal d'essais afin d'éviter les erreurs de calcul des requêtes HTTP pour les sites que vous souhaitez analyser."
+  },
+  "paramNbRetryLabel": {
+    "message": "Nombre d'essais"
+  },
+  "paramBtnSave": {
+    "message": "Sauvegarder"
   }
 }

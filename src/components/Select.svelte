@@ -3,9 +3,10 @@
 
   export let selectedValue = SEARCH_AUTO;
   export let selectValues: any[] = [];
+  export let name: string;
 </script>
 
-<select class="generic-input" bind:value={selectedValue}>
+<select class="generic-input" {name} bind:value={selectedValue}>
   {#each selectValues as selectValue}
     <option value={selectValue.value}>
       {selectValue.label}

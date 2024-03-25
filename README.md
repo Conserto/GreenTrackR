@@ -12,18 +12,6 @@ Pour les informations concernant les calculs de GreenTrackr, se référer à htt
 
 ## Tutoriel
 
-### Mode développement
-
-- **Cloner** le projet
-- **Copier/coller** le fichier ```src/.env.template``` et le rennomer en ```.env``` puis renseigner les variables suivantes:
-  - ```VITE_MAX_HAR_RETRIES``` : Nombre d'essais pour analyser les requêtes du site courant
-  - ```VITE_CO2_SIGNAL_TOKEN``` : Token nécessaire à l'utilisation de l'API d'electricity map. Il peut être récupéré à l'adresse suivante https://api-portal.electricitymaps.com/
-    <br>**Attention !** L'extension ne peut fonctionner sans ce **token**.
-- Lancer la commande  ```yarn install``` pour installer les dépendances
-- Lancer ```yarn dev``` pour lancer l'app.
-- Importer le plugin dans ```chrome://extensions/ > Mode développeur > Charger l'extension non empaquetée > importer le contenu du dossier ./dist/```
-  <br>**Attention :** Cette version de l'extension n'est compatible qu'avec **_Manifest V3 (Chromium)_** et sur toutes les versions de navigateurs basés sur chromium.
-
 ### Utiliser l'extension
 
 - Ouvrir les outils de développement du navigateur (DevTools) : ```Ctrl+Shift+I```
@@ -31,7 +19,10 @@ Pour les informations concernant les calculs de GreenTrackr, se référer à htt
   - nous vous recommandons de la détacher sur une **fenêtre distincte**
 - Dans l'onglet **Réseau** de la DevTools décocher la case **Désactiver le cache**
 - Dans le navigateur, aller sur le site Web à analyser et accéder à l'extension GreenTrackr dans les onglets de la DevTools
-- GreenTrackr propose 3 options : **Evaluation/Page**, **Auto scroll/Page**, **Parcours Utilisateur**
+- Deux paramètres sont nécessaires pour configurer GreenTrackr dans l'onglet **Paramètre** :
+  - Un token d'accès à l'API 'CO2signal' de 'Electricity Maps', cliquez sur le lien puis sur '**Go to api portal**' ->  https://www.co2signal.com/
+  - Le nombre d'essais pour analyser les requêtes de la page courante
+- GreenTrackr propose 3 options (onglets) : **Evaluation/Page**, **Auto scroll/Page**, **Parcours Utilisateur**
 
 #### Evaluation/Page
 - Deux types d'évaluation : **avec cache** et **sans cache** 

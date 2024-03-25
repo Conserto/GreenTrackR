@@ -298,5 +298,26 @@
   },
   "errorNoToken": {
     "message": "No CO2 token found, the extension may not work#Env variable not found"
+  },
+  "paramTabTitle": {
+    "message": "Setting"
+  },
+  "tabParameter": {
+    "message": "Parameters"
+  },
+  "paramTokenCo2Description": {
+    "message": "GreenTrackR uses the 'CO2signal' API from Electricity Maps. To use this API, you need an access token, you can get it on the following link 'Go to api portal' -> #https://www.co2signal.com/"
+  },
+  "paramCo2TokenLabel": {
+    "message": "Token CO2signal API"
+  },
+  "paramRetryDescription": {
+    "message": "Set the maximum number of attempts to avoid errors in computing HTTP requests for the websites you want to analyze."
+  },
+  "paramNbRetryLabel": {
+    "message": "Number of tests"
+  },
+  "paramBtnSave": {
+    "message": "Save"
   }
 }
