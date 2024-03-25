@@ -36,7 +36,7 @@ Pour les informations concernant les calculs de GreenTrackr, se référer à htt
 
 #### Auto scroll/Page
 
-Vous pouvez analyser avec précisions la page web en saisissant un pourcentage pourcentage (**%**), les résultats sont obtenus suivant le même processe que l'option **Evaluation/Page**.
+Vous pouvez analyser avec précisions la page web en saisissant un pourcentage (**%**), les résultats sont obtenus suivant le même processe que l'option **Evaluation/Page**.
 
 #### Parcours Utilisateur
 
