@@ -24,7 +24,7 @@
 - ~~Pb doublon~~
 - ~~Saisie de la key~~
 - ~~Se passer du .env~~
-- ~~MAJ DOC pour ~~
+- ~~MAJ DOC pour~~
 - ~~Translate (onglet paramètre)~~
 
 ## Si le temps
