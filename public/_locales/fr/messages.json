@@ -110,9 +110,6 @@
   "tabJourney": {
     "message": "Parcours Utilisateur#User Journey tab"
   },
-  "tabHelp": {
-    "message": "Aide#Aide tab"
-  },
   "url": {
     "message": "Url#Url"
   },
@@ -184,93 +181,6 @@
   },
   "validateRegionButton": {
     "message": "Valider#Valider Région"
-  },
-  "help_test_extension": {
-    "message": "Tester l'extension#Tester l'extension"
-  },
-  "help_prerequisite_field": {
-    "message": "Attention : Cette version de l'extension n'est compatible qu'avec Manifest V3 (Chromium). Une version spécifique pour Firefox / Manifest V2 sera disponible séparément.#Attention : Cette version de l'extension n'est compatible qu'avec Manifest V3 (Chromium). Une version spécifique pour Firefox / Manifest V2 sera disponible séparément."
-  },
-  "help_use_extension": {
-    "message": "Utiliser l'extension#Utiliser l'extension"
-  },
-  "help_use_extension_nav_tools": {
-    "message": "Ouvrir les outils de développement du navigateur.#Ouvrir les outils de développement du navigateur."
-  },
-  "help_use_extension_eval_page": {
-    "message": "Aller dans l'onglet 'Evaluation/Page'.#Aller dans l'onglet 'Evaluation/Page'."
-  },
-  "help_use_extension_analyze": {
-    "message": "Dans le navigateur, aller sur la page à analyser.#Dans le navigateur, aller sur la page à analyser."
-  },
-  "help_use_extension_start_analysis": {
-    "message": "Dans l'onglet 'Evaluation/Page' des outils de développement, cliquer sur le bouton 'Démarrer l'analyse'.#Dans l'onglet 'Evaluation/Page' des outils de développement, cliquer sur le bouton 'Démarrer l'analyse'."
-  },
-  "help_use_extension_results": {
-    "message": "Les résultats s'affichent.#Les résultats s'affichent."
-  },
-  "help_use_extension_save": {
-    "message": "Vous pouvez sauvegarder ce résultat dans un historique (seuls les indicateurs sont enregistrés) via le bouton 'Enregistrer l'évaluation'.#Vous pouvez sauvegarder ce résultat dans un historique (seuls les indicateurs sont enregistrés) via le bouton 'Enregistrer l'évaluation'."
-  },
-  "help_use_extension_saved_results": {
-    "message": "L'historique des résultats sauvegardés est disponible via le bouton 'Voir l'historique'.#L'historique des résultats sauvegardés est disponible via le bouton 'Voir l'historique'."
-  },
-  "help_warnings": {
-    "message": "Quelques points de vigilance#Quelques points de vigilance"
-  },
-  "help_warnings_no_requests": {
-    "message": "Si le nombre de requêtes est à zéro, c'est probablement parce que vous n'avez pas chargé la page avec les outils de développement démarrés. Il faut donc penser à faire un rechargement de la page.#Si le nombre de requêtes est à zéro, c'est probablement parce que vous n'avez pas chargé la page avec les outils de développement démarrés. Il faut donc penser à faire un rechargement de la page."
-  },
-  "help_warnings_correct_eval": {
-    "message": "Pour avoir des évaluations correctes, il faut préalablement vider le cache du navigateur (Dans le cas contraire, le volume transféré va être réduit si vous avez déjà consulté le site mesuré). Pour vous éviter d'aller dans les menus du navigateur, un bouton est prévu à cet effet dans l'extension 'Réinitialiser les paramètres'.#Pour avoir des évaluations correctes, il faut préalablement vider le cache du navigateur (Dans le cas contraire, le volume transféré va être réduit si vous avez déjà consulté le site mesuré). Pour vous éviter d'aller dans les menus du navigateur, un bouton est prévu à cet effet dans l'extension 'Réinitialiser les paramètres'."
-  },
-  "help_warnings_ad_block": {
-    "message": "L'utilisation d'un bloqueur de publicité ou autre filtre a une influence sur le résultat.#L'utilisation d'un bloqueur de publicité ou autre filtre a une influence sur le résultat."
-  },
-  "help_warnings_diff_results": {
-    "message": "Résultats différents entre deux analyses :#Résultats différents entre deux analyses :"
-  },
-  "help_warnings_continuous_update": {
-    "message": "Les mécanismes de mise à jour en continu (Même si le site semble avoir chargé, le chargement d’autres éléments peut toujours être en cours au lancement de l’analyse. Le volume de données téléchargées et le nombre de requêtes dépendent donc du moment où vous cliquez sur le bouton 'Démarrer l'analyse'). Le même effet s’applique si vous lancez l’analyse avant la fin de chargement du site.#Les mécanismes de mise à jour en continu (Même si le site semble avoir chargé, le chargement d’autres éléments peut toujours être en cours au lancement de l’analyse. Le volume de données téléchargées et le nombre de requêtes dépendent donc du moment où vous cliquez sur le bouton 'Démarrer l'analyse'). Le même effet s’applique si vous lancez l’analyse avant la fin de chargement du site."
-  },
-  "help_warnings_ads": {
-    "message": "Les publicités qui peuvent changer entre deux analyses (la localisation, l'heure de la journée, visites précédentes avec son navigateur et bien d'autres paramètres qui sont pris en compte par les spécialistes du retargeting vont se traduire par le chargement en cascade de librairies *.js différentes et de l'affichage de contenus publicitaires différents).#Les publicités qui peuvent changer entre deux analyses (la localisation, l'heure de la journée, visites précédentes avec son navigateur et bien d'autres paramètres qui sont pris en compte par les spécialistes du retargeting vont se traduire par le chargement en cascade de librairies *.js différentes et de l'affichage de contenus publicitaires différents)."
-  },
-  "help_warnings_scrolling": {
-    "message": "Le scrolling :  si vous réalisez un scrolling au moment de l'analyse, vous risquez de lancer des chargements de données qui n’auraient normalement pas eu lieu.#Le scrolling :  si vous réalisez un scrolling au moment de l'analyse, vous risquez de lancer des chargements de données qui n’auraient normalement pas eu lieu."
-  },
-  "help_warnings_privacy": {
-    "message": "Le niveau de 'privacy' qui, selon le niveau paramétré et selon le navigateur, induira lui aussi des effets de bord.#Le niveau de 'privacy' qui, selon le niveau paramétré et selon le navigateur, induira lui aussi des effets de bord."
-  },
-  "help_warnings_cache": {
-    "message": "Les effets de cache.#Les effets de cache."
-  },
-  "help_warnings_user_path": {
-    "message": "Enregistrement du parcours utilisateur :#Enregistrement du parcours utilisateur :"
-  },
-  "help_warnings_env_impacts": {
-    "message": "Vous pouvez quantifier les impacts environnementaux d'un parcours utilisateur en allant sur l'onglet 'Parcours Utilisateur'. En démarrant l'analyse, en cliquant sur le bouton 'Démarrer l'enregistrement d'un parcours', l'extension enregistrera les résultats pour chaque URL visitée. Une fois le parcours terminé, l'appui sur le bouton 'Stopper l'enregistrement' permet d'afficher le tableau des résultats pour chaque URL, ainsi que les différents totaux. 'Réinitialiser le parcours' permet de vider les résultats stockés en local et ainsi de redémarrer un parcours à zéro.#Vous pouvez quantifier les impacts environnementaux d'un parcours utilisateur en allant sur l'onglet 'Parcours Utilisateur'. En démarrant l'analyse, en cliquant sur le bouton 'Démarrer l'enregistrement d'un parcours', l'extension enregistrera les résultats pour chaque URL visitée. Une fois le parcours terminé, l'appui sur le bouton 'Stopper l'enregistrement' permet d'afficher le tableau des résultats pour chaque URL, ainsi que les différents totaux. 'Réinitialiser le parcours' permet de vider les résultats stockés en local et ainsi de redémarrer un parcours à zéro."
-  },
-  "help_warnings_permissions": {
-    "message": "Permissions de l'extension :#Permissions de l'extension :"
-  },
-  "help_warnings_permissions_use": {
-    "message": "Pour fonctionner, l'extension utilise les permissions suivantes :#Pour fonctionner, l'extension utilise les permissions suivantes :"
-  },
-  "help_warnings_activeTab": {
-    "message": "activeTab, tabs : utilisée pour afficher la page des analyses sauvegardées et pour accéder aux contenus des pages pour l'analyse.#activeTab, tabs : utilisée pour afficher la page des analyses sauvegardées et pour accéder aux contenus des pages pour l'analyse."
-  },
-  "help_warnings_all_urls": {
-    "message": "<all_urls> : utilisée pour accéder aux URLs pour l'analyse.#<all_urls> : utilisée pour accéder aux URLs pour l'analyse."
-  },
-  "help_warnings_browsing_data": {
-    "message": "browsingData : utilisée pour vider le cache du navigateur.#browsingData : utilisée pour vider le cache du navigateur."
-  },
-  "help_warnings_storage": {
-    "message": "storage : utilisée pour stocker les différentes mesures.#storage : utilisée pour stocker les différentes mesures."
-  },
-  "help_warnings_web_nav": {
-    "message": "web Navigation : utilisée pour détecter la fin du chargement de la page analysée.#web Navigation : utilisée pour détecter la fin du chargement de la page analysée."
   },
   "dataCenterTotal": {
     "message": "Centre de données#Emissions GES totales des centres de données"

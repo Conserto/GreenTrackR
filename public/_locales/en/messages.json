@@ -110,9 +110,6 @@
   "tabJourney": {
     "message": "User Journey#User Journey tab"
   },
-  "tabHelp": {
-    "message": "Help#Help tab"
-  },
   "url": {
     "message": "Url#Url"
   },
@@ -184,93 +181,6 @@
   },
   "validateRegionButton": {
     "message": "Confirm#Confirm Region"
-  },
-  "help_test_extension": {
-    "message": "Test the extension#Test the extension"
-  },
-  "help_prerequisite_field": {
-    "message": "Please note: This version of the extension is only compatible with Manifest V3 (Chromium). A specific version for Firefox / Manifest V2 will be available separately.#Please note: This version of the extension is only compatible with Manifest V3 (Chromium). A specific version for Firefox / Manifest V2 will be available separately."
-  },
-  "help_use_extension": {
-    "message": "Use the extension#Use the extension"
-  },
-  "help_use_extension_nav_tools": {
-    "message": "Open the devtools in your browser.#Open the devtools in your browser."
-  },
-  "help_use_extension_eval_page": {
-    "message": "Go to the 'Assessment/Page' tab.#Go to the 'Assessment/Page' tab."
-  },
-  "help_use_extension_analyze": {
-    "message": "In the browser, go to the page to be analyzed.#In the browser, go to the page to be analyzed."
-  },
-  "help_use_extension_start_analysis": {
-    "message": "In the 'Assessment/Page'  tab of the devtools, click on the 'Start analysis' button.#In the 'Assessment/Page'  tab of the devtools, click on the 'Start analysis' button."
-  },
-  "help_use_extension_results": {
-    "message": "The results are displayed.#The results are displayed."
-  },
-  "help_use_extension_save": {
-    "message": "You can save this result in a history (only the indicators are saved) via the 'Save assessment' button.#You can save this result in a history (only the indicators are saved) via the 'Save assessment' button."
-  },
-  "help_use_extension_saved_results": {
-    "message": "The history of saved results is available via the 'View history' button.#The history of saved results is available via the 'View history' button."
-  },
-  "help_warnings": {
-    "message": "The main points to watch#The main points to watch"
-  },
-  "help_warnings_no_requests": {
-    "message": "If the number of requests is zero, it's probably you haven't loaded the page with the devtools running. You should therefore consider reloading the page.#If the number of requests is zero, it's probably you haven't loaded the page with the devtools running. You should therefore consider reloading the page."
-  },
-  "help_warnings_correct_eval": {
-    "message": "To obtain the right assessment, you need to clear your browser's cache (otherwise, the size transferred will be reduced if you have already consulted the site being assessed). To avoid having to go into the browser menus, a 'Reset settings' button is provided for this purpose in the extension.#To obtain the right assessment, you need to clear your browser's cache (otherwise, the size transferred will be reduced if you have already consulted the site being assessed). To avoid having to go into the browser menus, a 'Reset settings' button is provided for this purpose in the extension."
-  },
-  "help_warnings_ad_block": {
-    "message": "The use of an ad blocker or other filter has an influence on the result.#The use of an ad blocker or other filter has an influence on the result."
-  },
-  "help_warnings_diff_results": {
-    "message": "Different results between two analyses may be caused by:#Different results between two analyses may be caused by:"
-  },
-  "help_warnings_continuous_update": {
-    "message": "Continuous updating processes (Even if the site appears to have loaded, other elements may still be loading when the analysis is launched. The volume of data downloaded and the number of requests therefore depend on when you click on the 'Start analysis' button). The same effect applies if you launch the analysis before the site has finished loading.#Continuous updating processes (Even if the site appears to have loaded, other elements may still be loading when the analysis is launched. The volume of data downloaded and the number of requests therefore depend on when you click on the 'Start analysis' button). The same effect applies if you launch the analysis before the site has finished loading."
-  },
-  "help_warnings_ads": {
-    "message": "Ads that may change between two analyses (location, time of day, previous browser visits and many other parameters taken into account by retargeting specialists will result in the cascading loading of different *.js libraries and the display of different advertising content).#Ads that may change between two analyses (location, time of day, previous browser visits and many other parameters taken into account by retargeting specialists will result in the cascading loading of different *.js libraries and the display of different advertising content)."
-  },
-  "help_warnings_scrolling": {
-    "message": "Scrolling: if you scroll through the data during analysis, you run the risk of launching loads of data that would have not normally been taken into account.#Scrolling: if you scroll through the data during analysis, you run the risk of launching loads of data that would have not normally been taken into account."
-  },
-  "help_warnings_privacy": {
-    "message": "The level of 'privacy' which, depending on the level set and the browser, will also induce side effects.#The level of 'privacy' which, depending on the level set and the browser, will also induce side effects."
-  },
-  "help_warnings_cache": {
-    "message": "Cache effects.#Cache effects."
-  },
-  "help_warnings_user_path": {
-    "message": "User journey saving:#User journey saving:"
-  },
-  "help_warnings_env_impacts": {
-    "message": "You can quantify the carbon footprint of a user journey by going to the 'User Journey' tab. When you start the analysis by clicking on the 'Start saving user journey' button, the extension will save the results for each visited URL. Once the journey is complete, click on the 'Stop saving' button. That will display the results table for each URL, as well as the different totals. The button 'Reset journey' allows you to empty the locally stored results and to restart a journey from scratch.#You can quantify the carbon footprint of a user journey by going to the 'User Journey' tab. When you start the analysis by clicking on the 'Start saving user journey' button, the extension will save the results for each visited URL. Once the journey is complete, click on the 'Stop saving' button. That will display the results table for each URL, as well as the different totals. The button 'Reset journey' allows you to empty the locally stored results and to restart a journey from scratch."
-  },
-  "help_warnings_permissions": {
-    "message": "Extension permissions:#Extension permissions:"
-  },
-  "help_warnings_permissions_use": {
-    "message": "To work properly, the extension requires the following permissions:#To work properly, the extension requires the following permissions:"
-  },
-  "help_warnings_activeTab": {
-    "message": "activeTab, tabs: used to display the saved analyses page and to access the contents of the pages for analysis.#activeTab, tabs: used to display the saved analyses page and to access the contents of the pages for analysis."
-  },
-  "help_warnings_all_urls": {
-    "message": "<all_urls>: used to access URLs for analysis.#<all_urls>: used to access URLs for analysis."
-  },
-  "help_warnings_browsing_data": {
-    "message": "browsingData: used to clear the browser cache.#browsingData: used to clear the browser cache."
-  },
-  "help_warnings_storage": {
-    "message": "Storage: used to store the different assessments.#Storage: used to store the different assessments."
-  },
-  "help_warnings_web_nav": {
-    "message": "Web Navigation: used to detect when the analyzed page has finished loading.#Web Navigation: used to detect when the analyzed page has finished loading."
   },
   "carbonIntensity": {
     "message": "Carbon intensity (CO2eq/Kwh)#Carbon intensity (gCO2eq/Kwh)"
