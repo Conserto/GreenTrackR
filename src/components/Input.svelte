@@ -3,7 +3,7 @@
   import { translate } from 'src/utils/utils';
 
   export let name: string;
-  export let value: string;
+  export let value: number | string;
   export let translateKey: string | undefined = undefined;
   export let type: InputTypeEnum;
 </script>

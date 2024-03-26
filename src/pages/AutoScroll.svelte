@@ -18,7 +18,6 @@
   ];
   let currentScrollType = ScrollInputType.PERCENT;
   let scrollValue = 100;
-  let scrollValueStr = scrollValue.toString();
   let viewportPixels = 0;
   let totalPagePixels = 0;
 
@@ -90,7 +89,7 @@
 </p>
 
 <div class="flex-center input-container">
-  <Input type={InputTypeEnum.NUMBER} name="scrollValue" bind:value={scrollValueStr} />
+  <Input type={InputTypeEnum.NUMBER} name="scrollValue" bind:value={scrollValue} />
   <Select bind:selectedValue={currentScrollType} selectValues={scrollTypes} name="scroll-value"/>
 </div>
 
