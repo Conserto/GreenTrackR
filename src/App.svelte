@@ -1,6 +1,6 @@
 <script lang="ts">
   import logo from '/images/logo.png';
-  import { AutoScroll, Evaluation, Parcours, Help, Parameter } from 'src/pages';
+  import { AutoScroll, Evaluation, Parcours, Parameter } from 'src/pages';
   import { Alert, Tab, Footer } from 'src/components';
   import { getLocalStorageObject, translate } from './utils';
   import { AlertTypeEnum } from './enum';
@@ -26,12 +26,6 @@
       id: 'journey-tab',
       component: Parcours,
       beta: true,
-    },
-    {
-      translateKey: 'tabHelp',
-      name: 'Help',
-      id: 'help-tab',
-      component: Help,
     },
     {
       translateKey: 'tabParameter',
@@ -68,7 +62,7 @@
 </header>
 
 <div class="app-container">
-  {#if activeTabId !== 'help-tab' && activeTabId !== 'parameter-tab' }
+  {#if activeTabId !== 'parameter-tab' }
     <h1 class="plugin-title">{translate('noContentPhraseEvaluation')}</h1>
   {/if}
   {#each tabs as tab}
