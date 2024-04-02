@@ -20,7 +20,7 @@ export class GESService {
     let zoneGES: GES | undefined;
     let userGES: GES | undefined;
     if (cacheSrvKey && this.cacheGesByUrl.has(cacheSrvKey)) {
-      logDebug("cache for Server");
+      logDebug('cache for Server');
       zoneGES = this.cacheGesByUrl.get(cacheSrvKey);
     } else {
       zoneGES = await this.getGESServer(urlHost, countryCodeSelected);
@@ -29,7 +29,7 @@ export class GESService {
       }
     }
     if (userGesUseCacheUserGes) {
-      logDebug("cache for user");
+      logDebug('cache for user');
       userGES = this.cacheUserGes;
     } else {
       userGES = await this.getGESUser(userCountryCodeSelected);
@@ -74,19 +74,19 @@ export class GESService {
     try {
       if (countryCodeSelected !== SEARCH_AUTO) {
         ges = {
-          carbonIntensity : await getCarbonIntensity(countryCodeSelected),
-          countryCode : countryCodeSelected,
-          countryName : codeZone.find((zoneObj) => zoneObj.zone === countryCodeSelected)?.countryName ?? ''
+          carbonIntensity: await getCarbonIntensity(countryCodeSelected),
+          countryCode: countryCodeSelected,
+          countryName: codeZone.find((zoneObj) => zoneObj.zone === countryCodeSelected)?.countryName ?? ''
         };
       } else {
         const location = serverType ? await getServerZone(urlHost) : await getCurrentZone();
         logDebug(`Location ${location}`);
         if (location) {
           ges = {
-            carbonIntensity : await getCarbonIntensity(location),
-            countryCode : location.countryCode,
-            countryName : location.countryName,
-            cityName : location.cityName
+            carbonIntensity: await getCarbonIntensity(location),
+            countryCode: location.countryCode,
+            countryName: location.countryName,
+            cityName: location.cityName
           };
         }
       }
@@ -165,10 +165,10 @@ export class GESService {
     let kWhNetwork = network.size * KWH_PER_BYTE_NETWORK;
     let kWhDevice = network.sizeUncompress * KWH_DEVICE;
 
-    const dataCenterTotal = zoneGES ? kWhDataCenter * zoneGES.carbonIntensity : -1;
-    const networkTotal = zoneGES ? kWhNetwork * zoneGES.carbonIntensity : -1;
-    const deviceTotal = userGES ? kWhDevice * userGES.carbonIntensity : -1;
-    const pageTotal = dataCenterTotal + networkTotal + deviceTotal;
+    const dataCenterTotal = zoneGES?.carbonIntensity ? kWhDataCenter * zoneGES.carbonIntensity : undefined;
+    const networkTotal = zoneGES?.carbonIntensity ? kWhNetwork * zoneGES.carbonIntensity : undefined;
+    const deviceTotal = userGES?.carbonIntensity ? kWhDevice * userGES.carbonIntensity : undefined;
+    const pageTotal = (dataCenterTotal ? dataCenterTotal : 0) + (networkTotal ? networkTotal : 0) + (deviceTotal ? deviceTotal : 0);
 
     return {
       ges: { dataCenterTotal, networkTotal, deviceTotal, pageTotal },

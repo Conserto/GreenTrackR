@@ -32,7 +32,6 @@
     "vitest": "^1.4.0"
   },
   "dependencies": {
-    "flowbite-svelte": "^0.44.24",
     "save-dev": "^0.0.1-security"
   }
 }

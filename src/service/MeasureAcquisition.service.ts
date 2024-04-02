@@ -42,9 +42,11 @@ export class MeasureAcquisition {
     this.measure.energy = energy;
     this.measure.userGES = userGES;
     this.measure.serverGES = zoneGES;
-    this.measure.complete = zoneGES && userGES;
-    if (this.measure.ges.pageTotal) {
+    this.measure.complete = !!(zoneGES && userGES);
+    if (this.measure.ges?.pageTotal) {
       this.measure.score = this.scoreService.getScore(this.measure.ges.pageTotal);
+    } else {
+      this.measure.score = undefined;
     }
   }
 
