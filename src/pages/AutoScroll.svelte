@@ -11,6 +11,7 @@
   import { SEARCH_AUTO } from '../const/key.const';
   import { Tooltip } from 'flowbite-svelte';
   import type { HistoData, Measure } from '../interface';
+  import { ZoneSimulation } from '../components/GES';
 
   const scrollTypes = [
     { label: 'Px', value: ScrollInputType.PIXEL },
@@ -20,6 +21,8 @@
   let scrollValue = 100;
   let viewportPixels = 0;
   let totalPagePixels = 0;
+  let serverSearch = SEARCH_AUTO;
+  let userSearch = SEARCH_AUTO;
 
   let loading = false;
   let measureAcquisition = new MeasureAcquisition();
@@ -44,7 +47,7 @@
     } else if (message.autoScrollDone) {
       loading = true;
       await measureAcquisition.getNetworkMeasure(false);
-      currentMeasure = await measureAcquisition.getGESMeasure(SEARCH_AUTO, SEARCH_AUTO);
+      currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
       loading = false;
       histoDatas = toHistoFormattedDatas(currentMeasure);
     }
@@ -78,6 +81,12 @@
     currentMeasure = null;
     reloadCurrentTab();
   };
+
+  const handleSimulation = async (event: any) => {
+    const { countryCodeSelected, userCountryCodeSelected } = event.detail;
+    serverSearch = countryCodeSelected;
+    userSearch = userCountryCodeSelected;
+  };
 </script>
 
 <p class="input-label">
@@ -90,7 +99,7 @@
 
 <div class="flex-center input-container">
   <Input type={InputTypeEnum.NUMBER} name="scrollValue" bind:value={scrollValue} />
-  <Select bind:selectedValue={currentScrollType} selectValues={scrollTypes} name="scroll-value"/>
+  <Select bind:selectedValue={currentScrollType} selectValues={scrollTypes} name="scroll-value" />
 </div>
 
 <div class="flex-center buttons-container">
@@ -126,11 +135,14 @@
   />
   <Tooltip>{translateDescription('backToTop')}</Tooltip>
 </div>
+<ZoneSimulation btnValid={false} on:submitSimulation={handleSimulation} />
 
 {#if currentMeasure && !loading}
   <GesResults measure={currentMeasure} />
   <div class="histo-container">
-    <Histogram datas={histoDatas} yLabel="greenhouseGasesEmissionDefault" yLabel2="energyDefault" />
+    {#if currentMeasure?.complete}
+      <Histogram datas={histoDatas} yLabel="greenhouseGasesEmissionDefault" yLabel2="energyDefault" />
+    {/if}
   </div>
 {/if}
 {#if loading === true}

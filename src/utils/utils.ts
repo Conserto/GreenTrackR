@@ -164,6 +164,7 @@ export const createEmptyMeasure = (): Measure => {
       cityName: '',
       countryCode: ''
     },
+    complete: false,
     dom: 0,
     extensionMeasure: {
       nbRequest: 0,

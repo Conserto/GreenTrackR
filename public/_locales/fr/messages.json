@@ -226,5 +226,8 @@
   },
   "paramBtnSave": {
     "message": "Sauvegarder"
+  },
+  "noFullData": {
+    "message": "Localisation (Serveur ou Utilisateur) non déterminée, utiliser le simulateur pour accéder aux résultats"
   }
 }

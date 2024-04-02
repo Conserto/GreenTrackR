@@ -29,12 +29,12 @@
     <div>
       <span class="data-label">{translate('gesIntensity')}</span>
       <span
-        class="data-value">{measure?.serverGES ? measure?.serverGES?.carbonIntensity : '-' } {Units.carbonIntensity}</span>
+        class="data-value">{measure?.serverGES?.carbonIntensity ? measure?.serverGES?.carbonIntensity : '-' } {Units.carbonIntensity}</span>
     </div>
     <div>
       <span class="data-label">{translate('gesUserIntensity')}</span>
       <span
-        class="data-value">{measure?.userGES ? measure?.userGES?.carbonIntensity : '-' } {Units.carbonIntensity}</span>
+        class="data-value">{measure?.userGES?.carbonIntensity ? measure?.userGES?.carbonIntensity : '-' } {Units.carbonIntensity}</span>
     </div>
     <div>
       <span class="data-label">{translate('nbRequest')}</span>

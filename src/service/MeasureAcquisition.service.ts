@@ -43,7 +43,9 @@ export class MeasureAcquisition {
     this.measure.userGES = userGES;
     this.measure.serverGES = zoneGES;
     this.measure.complete = zoneGES && userGES;
-    this.measure.score = this.scoreService.getScore(this.measure.ges.pageTotal);
+    if (this.measure.ges.pageTotal) {
+      this.measure.score = this.scoreService.getScore(this.measure.ges.pageTotal);
+    }
   }
 
   async getGESMeasure(countryCodeSelected: string, userCountryCodeSelected: string) {

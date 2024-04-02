@@ -1,5 +1,6 @@
 import type { Score } from 'src/interface/score.interface';
 import { ALL_SCORES } from 'src/const';
+import { logDebug } from '../utils/log';
 
 export class ScoreService {
   constructor() {
