@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { translate } from 'src/utils/utils';
+  import { translate, translateDescription } from 'src/utils/utils';
   import type { TableData, TableHeader } from 'src/interface/table.interface';
   import Button from './Button.svelte';
   import { ButtonTypeEnum } from 'src/enum';
@@ -18,7 +18,10 @@
     <tr>
       {#if columnHeaders.length > 0}
         {#each columnHeaders as columnHeader}
-          <th scope="col">{translate(columnHeader.translateKey)}</th>
+          <!--<th scope="col">{translate(columnHeader.translateKey)}</th>-->
+          <th scope="col">
+            <Tooltip value={translate(columnHeader.translateKey)}
+            tooltipValue={translateDescription(columnHeader.translateKey)} /></th>
         {/each}
       {/if}
     </tr>

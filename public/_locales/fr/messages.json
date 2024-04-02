@@ -18,7 +18,7 @@
     "message": "Date;Url;Taille decompressée(o);Taille compressée(Ko);DOM;GES Data Center(gCO2eq/kWh);GES Réseau(gCO2eq/kWh);GES Périphérique(gCO2eq/kWh);GES Total(gCO2eq/kWh); GES Score; Grade; Pays; IntensiteCarbon; NombreRequetes#csvColumnsLabel"
   },
   "date": {
-    "message": "Date#Date"
+    "message": "Date#Date de l'action"
   },
   "deleteAllButton": {
     "message": "Effacer tout#Delete All Button"
@@ -45,16 +45,16 @@
     "message": "Energie (Wh)#Energy used, default"
   },
   "gesDataCenter": {
-    "message": "GES Data Center#GES Data Center"
+    "message": "GES Data#GES Data Center en gCO2eq"
   },
   "gesNetwork": {
-    "message": "GES Réseau#GES Network"
+    "message": "GES Réseau#GES réseau en gCO2eq"
   },
   "gesDevice": {
-    "message": "GES Périphérique#GES Device"
+    "message": "GES Périph#GES Périphérique en gCO2eq"
   },
   "gesTotal": {
-    "message": "GES Total#GES Total"
+    "message": "GES Total#GES Total en gCO2eq"
   },
   "gesScore": {
     "message": "Score#Score"
@@ -99,7 +99,7 @@
     "message": "Taille de la page décompressée#Uncompressed transferred size (KB)"
   },
   "sizeTransferredBytes": {
-    "message": "Taille de la page (compressée / décompressée)#Transferred size (KB)"
+    "message": "Taille page#Taille de la page (compressée / décompressée) en KB"
   },
   "tabEvaluation": {
     "message": "Evaluation/Page#GES analysis tab"
@@ -111,10 +111,10 @@
     "message": "Parcours Utilisateur#User Journey tab"
   },
   "url": {
-    "message": "Url#Url"
+    "message": "Url#Url de la page"
   },
   "urlAction": {
-    "message": "Action"
+    "message": "Action#Action effectuée durant le parcours"
   },
   "viewHistoryButton": {
     "message": "Voir l'historique#View History Button"
@@ -123,19 +123,19 @@
     "message": "Remonter la page#Remonter la page"
   },
   "gesZone": {
-    "message": "Localisation serveur#Donne le pays où l'ip du serveur se trouve"
+    "message": "Serveur#Pays où l'ip du serveur se trouve"
   },
   "gesUserZone": {
-    "message": "Localisation utilisateur#Donne le pays où l'ip de l'utilisateur se trouve"
+    "message": "Client#Pays où l'ip de l'utilisateur se trouve"
   },
   "gesIntensity": {
-    "message": "Intensité carbone serveur#Donne l'intensité carbon du serveur depuis elctrictymaps"
+    "message": "I. Carbone serveur#Intensité carbon, en gCO2eq/Kwh, du serveur depuis elctrictymaps"
   },
   "gesUserIntensity": {
-    "message": "Intensité carbone utilisateur#Donne l'intensité carbon de l'utilisateur depuis elctrictymaps"
+    "message": "I. Carbone client#Intensité carbon, en gCO2eq/Kwh, de l'utilisateur depuis elctrictymaps"
   },
   "nbRequest": {
-    "message": "Nombre de requêtes hors extensions 'réel (cache)'#Nombre de requêtes effectuées par le site"
+    "message": "Requêtes#Nombre de requêtes hors extensions 'réel (cache)'"
   },
   "infoMix": {
     "message": "Vos émissions dépendent du mix énergétique du pays dans lequel vous vous trouvez, et dans lequel le site est hébergé. Ce mix énergétique peut varier d'heure en heure et au gré des saisons :#Infos pour comprendre l'impact du mix énergétiques"

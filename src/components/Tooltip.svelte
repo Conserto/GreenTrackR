@@ -31,9 +31,10 @@
       border-radius: 6px;
       position: absolute;
       z-index: 1;
-      bottom: 100%;
+      top: 100%;
       left: 50%;
       margin-left: -60px;
+      text-transform: none;
     }
 
   }

@@ -1,4 +1,4 @@
-import type { GES, Measure, TableData } from 'src/interface';
+import type { GES, Measure, NetworkMeasure, TableData } from 'src/interface';
 import { logDebug, logWarn } from './log';
 
 export const getAverageValue = (data: number[]) => {
@@ -30,6 +30,46 @@ export const translateDescription = (translateKey: string) => {
     translatedLabel = translatedLabel ? (translatedLabel.split('#')[1] ? translatedLabel.split('#')[1] : '') : '';
   }
   return translatedLabel;
+};
+
+export const filterMeasure = (measures: Measure[], filter: string) => {
+  if (measures) {
+    return measures.filter((mes) => {
+      return mes.action && mes.action === filter;
+    });
+  } else {
+    return [];
+  }
+};
+
+export const filterMeasurePage = (measures: Measure[]) => {
+  if (measures) {
+    return measures.filter((value, index, self) => {
+      return self.findIndex(m => m.url === value.url) === index;
+    });
+  } else {
+    return [];
+  }
+};
+
+export const sumRequest = (measures: Measure[]) => {
+  let netMes: NetworkMeasure = {
+    nbRequest: 0,
+    nbRequestCache: 0,
+    network: {
+      size: 0,
+      sizeUncompress: 0
+    }
+  };
+  if (measures) {
+    measures.map(m => m.networkMeasure).forEach(n => {
+      netMes.nbRequest += n.nbRequest;
+      netMes.nbRequestCache += n.nbRequestCache;
+      netMes.network.size += n.network.size;
+      netMes.network.sizeUncompress += n.network.sizeUncompress;
+    });
+  }
+  return netMes;
 };
 
 export const formatDate = (date: Date) => {
@@ -75,8 +115,8 @@ export const formatGesMeasuresForTable = (measures: Measure[]): Map<string, Tabl
   return measures.map((measure): Map<string, TableData> => {
     let data: Map<any, TableData> = new Map<any, TableData>;
     data.set('date', { content: formatDate(measure.date), style: 'font-weight:bold' });
-    data.set('url', { content: formatShortUrl(measure.url), detail: formatUrl(measure.url) });
-    data.set('urlAction', { content: formatAction(measure.url) });
+    data.set('url', { content: formatShortUrl(measure.url), detail: measure.url });
+    data.set('urlAction', { content: measure.action });
     data.set('sizeTransferred', {
       content: formatSizeTransferred(measure.networkMeasure.network.size, measure.networkMeasure.network.sizeUncompress)
     });
@@ -101,29 +141,11 @@ export const formatGesMeasuresForTable = (measures: Measure[]): Map<string, Tabl
   });
 };
 
-export const formatAction = (url: string | undefined) => {
-  let formatted = '';
-  if (url) {
-    let act = url.match(/\((.*?)\)/);
-    if (act && act[1]) {
-      formatted = act[1];
-    }
-  }
-  return formatted;
-};
-
-export const formatUrl = (url: string | undefined) => {
-  let formatted = '';
-  if (url) {
-    formatted = url.replace(/\(.*?\)/, '');
-  }
-  return formatted;
-};
-
 export const formatShortUrl = (url: string | undefined) => {
   let formatted = '';
   if (url) {
-    formatted = formatUrl(url).replace(/(^\w+:|^)\/\//, '').slice(0, 25);
+    formatted = url.replace(/(^\w+:|^)\/\//, '');
+    formatted = formatted.length > 23 ? `${formatted.slice(0, 23)}...` : formatted;
   }
   return formatted;
 };

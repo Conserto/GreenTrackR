@@ -8,3 +8,4 @@ export { default as Modal } from './Modal.svelte';
 export { default as Alert } from './Alert.svelte';
 export { default as Footer } from './Footer.svelte';
 export { default as Histogram } from './Histogram.svelte';
+export { default as Synthese } from './Synthese.svelte';
