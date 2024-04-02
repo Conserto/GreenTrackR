@@ -1,5 +1,5 @@
 export interface GES {
-  carbonIntensity: number;
+  carbonIntensity?: number;
   countryName: string;
   cityName: string;
   countryCode: string;

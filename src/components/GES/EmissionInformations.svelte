@@ -11,15 +11,15 @@
   <div class="emissions-infos_data">
     <div>
       <span class="data-label">{translate('gesZone')}</span>
-      <span class="data-value">{measure?.serverGES?.cityName
+      <span class="data-value">{measure?.serverGES ? (measure?.serverGES?.cityName
         ? `${measure?.serverGES.cityName}, ${measure?.serverGES.countryName}`
-        : measure?.serverGES?.countryName}</span>
+        : measure?.serverGES?.countryName) : '-'}</span>
     </div>
     <div>
       <span class="data-label">{translate('gesUserZone')}</span>
-      <span class="data-value">{measure?.userGES?.cityName
+      <span class="data-value">{measure?.userGES ? (measure?.userGES?.cityName
         ? `${measure?.userGES.cityName}, ${measure?.userGES.countryName}`
-        : measure?.userGES?.countryName}</span>
+        : measure?.userGES?.countryName) : '-'}</span>
     </div>
     <div>
       <span class="data-label">{translate('sizeTransferredBytes')}</span>
@@ -28,11 +28,13 @@
     </div>
     <div>
       <span class="data-label">{translate('gesIntensity')}</span>
-      <span class="data-value">{measure?.serverGES?.carbonIntensity} {Units.carbonIntensity}</span>
+      <span
+        class="data-value">{measure?.serverGES ? measure?.serverGES?.carbonIntensity : '-' } {Units.carbonIntensity}</span>
     </div>
     <div>
       <span class="data-label">{translate('gesUserIntensity')}</span>
-      <span class="data-value">{measure?.userGES?.carbonIntensity} {Units.carbonIntensity}</span>
+      <span
+        class="data-value">{measure?.userGES ? measure?.userGES?.carbonIntensity : '-' } {Units.carbonIntensity}</span>
     </div>
     <div>
       <span class="data-label">{translate('nbRequest')}</span>

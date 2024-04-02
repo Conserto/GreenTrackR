@@ -42,6 +42,7 @@ export class MeasureAcquisition {
     this.measure.energy = energy;
     this.measure.userGES = userGES;
     this.measure.serverGES = zoneGES;
+    this.measure.complete = zoneGES && userGES;
     this.measure.score = this.scoreService.getScore(this.measure.ges.pageTotal);
   }
 

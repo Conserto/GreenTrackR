@@ -11,6 +11,7 @@ export interface Measure {
   serverGES?: GES;
   networkMeasure: NetworkMeasure;
   extensionMeasure: NetworkMeasure;
+  complete: boolean;
 }
 
 export interface NetworkMeasure {

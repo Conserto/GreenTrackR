@@ -8,9 +8,13 @@
 
 <div class="results-container">
   <div class="score-container">
-    <ScoreTag score={measure?.score} />
-    <CO2Equivalent {measure} />
-    <VisitsEquivalent {measure} />
+    {#if measure?.complete}
+      <ScoreTag score={measure?.score} />
+      <CO2Equivalent {measure} />
+      <VisitsEquivalent {measure} />
+    {:else}
+      <div>TODO MESSAGE</div>
+    {/if}
   </div>
   <div class="ges-infos">
     <EmissionInformations {measure} />
@@ -31,6 +35,7 @@
     box-shadow: var(--box-shadow--md);
     padding-top: var(--spacing--xxl);
   }
+
   .score-container {
     display: flex;
     justify-content: center;
@@ -38,6 +43,7 @@
     flex-wrap: wrap;
     gap: var(--spacing--xl);
   }
+
   .ges-infos {
     display: grid;
     grid-template-rows: auto auto;

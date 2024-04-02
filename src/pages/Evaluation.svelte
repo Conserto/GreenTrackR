@@ -131,7 +131,7 @@
         <div class="loading-ges">
           <LoadingWheel />
         </div>
-      {:else}
+      {:else if (currentMeasure?.complete)}
         <Histogram
           datas={histoDatas}
           yLabel="greenhouseGasesEmissionDefault"

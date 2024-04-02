@@ -4,27 +4,27 @@ import { logDebug, logErr, logWarn } from '../utils/log';
 import { getLocalStorageObject } from '../utils';
 import { paramTokenCo2 } from '../const';
 
-export const getCarbonIntensity = async (location: string | GeoLocation | undefined) => {
+export const getCarbonIntensity = async (location: string | GeoLocation | undefined): Promise<number | undefined> => {
   let token = getLocalStorageObject(paramTokenCo2);
   if (!location) {
     logWarn('Carbon intensity not check because no location');
-    return -1;
+    return undefined;
   } else if (!token) {
     logWarn('Carbon intensity not check because no Token');
-    return -1;
+    return undefined;
   }
-  logDebug("Call Carbon intensity");
+  logDebug('Call Carbon intensity');
   let requestUrl = CO2_API;
   if (typeof location === 'string') {
     requestUrl += `countryCode=${location}`;
-  } else if (location.lon !==0 && location.lat !==0){
+  } else if (location.lon !== 0 && location.lat !== 0) {
     requestUrl += `lon=${location.lon}&lat=${location.lat}`;
-  } else{
+  } else {
     logWarn('Carbon intensity not check because location not valid');
-    return -1;
+    return undefined;
   }
   const { data } = await fetch(requestUrl, {
     headers: { 'auth-token': `${token}` }
   }).then((res) => res.json()).catch(reason => logErr('Error getting carbon intensity: ' + reason));
-  return data ? data.carbonIntensity : -1;
+  return data ? data.carbonIntensity : undefined;
 };
