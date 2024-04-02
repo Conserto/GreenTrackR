@@ -20,6 +20,7 @@ export class GESService {
     let zoneGES: GES | undefined;
     let userGES: GES | undefined;
     if (cacheSrvKey && this.cacheGesByUrl.has(cacheSrvKey)) {
+      logDebug('cache for Server');
       zoneGES = this.cacheGesByUrl.get(cacheSrvKey);
     } else {
       zoneGES = await this.getGESServer(urlHost, countryCodeSelected);
@@ -28,6 +29,7 @@ export class GESService {
       }
     }
     if (userGesUseCacheUserGes) {
+      logDebug('cache for user');
       userGES = this.cacheUserGes;
     } else {
       userGES = await this.getGESUser(userCountryCodeSelected);
@@ -67,34 +69,34 @@ export class GESService {
     return GES;
   }
 
-  async getGESFromApi(urlHost: URL | undefined, serverType: boolean, countryCodeSelected: string): Promise<GES> {
-    const GES = {
-      carbonIntensity: 0,
-      countryName: '',
-      cityName: '',
-      countryCode: ''
-    };
+  async getGESFromApi(urlHost: URL | undefined, serverType: boolean, countryCodeSelected: string): Promise<GES | undefined> {
+    let ges: GES | undefined;
     try {
       if (countryCodeSelected !== SEARCH_AUTO) {
-        GES.carbonIntensity = await getCarbonIntensity(countryCodeSelected);
-        GES.countryCode = countryCodeSelected;
-        GES.countryName =
-          codeZone.find((zoneObj) => zoneObj.zone === countryCodeSelected)?.countryName ?? '';
+        ges = {
+          carbonIntensity: await getCarbonIntensity(countryCodeSelected),
+          countryCode: countryCodeSelected,
+          countryName: codeZone.find((zoneObj) => zoneObj.zone === countryCodeSelected)?.countryName ?? ''
+        };
       } else {
         const location = serverType ? await getServerZone(urlHost) : await getCurrentZone();
-        logDebug(`Location: ${location.cityName}`);
-        GES.carbonIntensity = await getCarbonIntensity(location);
-        GES.countryCode = location.countryCode;
-        GES.countryName = location.countryName;
-        GES.cityName = location.cityName;
+        logDebug(`Location ${location}`);
+        if (location) {
+          ges = {
+            carbonIntensity: await getCarbonIntensity(location),
+            countryCode: location.countryCode,
+            countryName: location.countryName,
+            cityName: location.cityName
+          };
+        }
       }
     } catch (error: any) {
       throw new Error(`There has been a problem when trying to get GES emissions from API : ${error}`);
     }
-    return GES;
+    return ges;
   }
 
-  async getGESFromLocalFile(countryCodeSelected: string): Promise<GES> {
+  async getGESFromLocalFile(countryCodeSelected: string): Promise<GES | undefined> {
     let lastReportOnDate;
     const { data: carbonData, countryName } =
     (await this.parseCarbonFile(countryCodeSelected)) || [];
@@ -104,7 +106,7 @@ export class GESService {
     }
 
     return {
-      carbonIntensity: lastReportOnDate?.carbonIntensity ?? 0,
+      carbonIntensity: lastReportOnDate?.carbonIntensity ?? undefined,
       countryName: countryName,
       cityName: '',
       countryCode: countryCodeSelected
@@ -163,10 +165,10 @@ export class GESService {
     let kWhNetwork = network.size * KWH_PER_BYTE_NETWORK;
     let kWhDevice = network.sizeUncompress * KWH_DEVICE;
 
-    const dataCenterTotal = zoneGES ? kWhDataCenter * zoneGES.carbonIntensity : -1;
-    const networkTotal = zoneGES ? kWhNetwork * zoneGES.carbonIntensity : -1;
-    const deviceTotal = userGES ? kWhDevice * userGES.carbonIntensity : -1;
-    const pageTotal = dataCenterTotal + networkTotal + deviceTotal;
+    const dataCenterTotal = zoneGES?.carbonIntensity ? kWhDataCenter * zoneGES.carbonIntensity : undefined;
+    const networkTotal = zoneGES?.carbonIntensity ? kWhNetwork * zoneGES.carbonIntensity : undefined;
+    const deviceTotal = userGES?.carbonIntensity ? kWhDevice * userGES.carbonIntensity : undefined;
+    const pageTotal = (dataCenterTotal ? dataCenterTotal : 0) + (networkTotal ? networkTotal : 0) + (deviceTotal ? deviceTotal : 0);
 
     return {
       ges: { dataCenterTotal, networkTotal, deviceTotal, pageTotal },

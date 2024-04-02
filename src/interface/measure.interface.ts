@@ -3,14 +3,16 @@ import type { GES, GESTotals, NetworkResponse, Score } from '.';
 export interface Measure {
   date: Date;
   url?: string;
-  ges: GESTotals;
+  action?: string;
+  ges?: GESTotals;
   energy: EnergyMeasure;
-  score: Score;
+  score?: Score;
   dom: number;
   userGES?: GES;
   serverGES?: GES;
   networkMeasure: NetworkMeasure;
   extensionMeasure: NetworkMeasure;
+  complete: boolean;
 }
 
 export interface NetworkMeasure {

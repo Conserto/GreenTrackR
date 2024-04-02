@@ -8,6 +8,10 @@ export const gesTableHeaders = [
     translateKey: 'Url'
   },
   {
+    id: 'urlAction',
+    translateKey: 'urlAction'
+  },
+  {
     id: 'sizeTransferred',
     translateKey: 'sizeTransferredBytes'
   },
@@ -42,6 +46,10 @@ export const gesTableHeaders = [
   {
     id: 'gesUserZone',
     translateKey: 'gesUserZone'
+  },
+  {
+    id: "gesUserIntensity",
+    translateKey: "gesUserIntensity"
   },
   {
     id: 'gesZone',

@@ -1,11 +1,12 @@
 <script lang="ts">
   import { ButtonTypeEnum } from 'src/enum';
   import { createEventDispatcher } from 'svelte';
-  import { translate } from 'src/utils/utils';
+  import { translate, translateDescription } from 'src/utils/utils';
 
   export let translateKey: string;
   export let buttonType: ButtonTypeEnum;
   export let disabled: boolean = false;
+  export let tooltip: boolean = false;
 
   const dispatch = createEventDispatcher();
 
@@ -19,7 +20,11 @@
   {disabled}
   class:primary={buttonType === ButtonTypeEnum.PRIMARY}
   class:secondary={buttonType === ButtonTypeEnum.SECONDARY}
-  class={'button'}>{translate(translateKey)}</button>
+  class={'button'}>{translate(translateKey)}
+  {#if (tooltip)}
+    <span class="tooltipbtn">{translateDescription(translateKey)}</span>
+  {/if}
+</button>
 
 <style lang="scss">
   /* Bootstrap Button Base Styles */
@@ -40,6 +45,14 @@
     border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
     cursor: pointer;
+    position: relative;
+    display: inline-block;
+
+    &:hover {
+      .tooltipbtn {
+        visibility: visible;
+      }
+    }
 
     &:disabled {
       cursor: default;
@@ -64,5 +77,20 @@
         background-color: var(--color--dark-grey);
       }
     }
+
+    .tooltipbtn {
+      visibility: hidden;
+      color: var(--color--white);
+      background-color: var(--color--grey);
+      text-align: center;
+      padding: 5px;
+      border-radius: 6px;
+      position: absolute;
+      z-index: 1;
+      bottom: 110%;
+      left: 50%;
+      margin-left: -60px;
+    }
+
   }
 </style>

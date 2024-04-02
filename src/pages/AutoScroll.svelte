@@ -2,15 +2,15 @@
   import { Button, Input, LoadingWheel, Select } from 'src/components';
   import { ButtonTypeEnum, InputTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
   import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
-  import { toHistoFormattedDatas, translate, translateDescription } from 'src/utils/utils';
+  import { toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { onDestroy, onMount } from 'svelte';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
   import Histogram from 'src/components/Histogram.svelte';
   import GesResults from 'src/components/GES/results/GesResults.svelte';
   import { PAGE_HEIGHT } from '../const/action.const';
   import { SEARCH_AUTO } from '../const/key.const';
-  import { Tooltip } from 'flowbite-svelte';
   import type { HistoData, Measure } from '../interface';
+  import { ZoneSimulation } from '../components/GES';
 
   const scrollTypes = [
     { label: 'Px', value: ScrollInputType.PIXEL },
@@ -20,6 +20,8 @@
   let scrollValue = 100;
   let viewportPixels = 0;
   let totalPagePixels = 0;
+  let serverSearch = SEARCH_AUTO;
+  let userSearch = SEARCH_AUTO;
 
   let loading = false;
   let measureAcquisition = new MeasureAcquisition();
@@ -44,7 +46,7 @@
     } else if (message.autoScrollDone) {
       loading = true;
       await measureAcquisition.getNetworkMeasure(false);
-      currentMeasure = await measureAcquisition.getGESMeasure(SEARCH_AUTO, SEARCH_AUTO);
+      currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
       loading = false;
       histoDatas = toHistoFormattedDatas(currentMeasure);
     }
@@ -78,6 +80,12 @@
     currentMeasure = null;
     reloadCurrentTab();
   };
+
+  const handleSimulation = async (event: any) => {
+    const { countryCodeSelected, userCountryCodeSelected } = event.detail;
+    serverSearch = countryCodeSelected;
+    userSearch = userCountryCodeSelected;
+  };
 </script>
 
 <p class="input-label">
@@ -90,7 +98,7 @@
 
 <div class="flex-center input-container">
   <Input type={InputTypeEnum.NUMBER} name="scrollValue" bind:value={scrollValue} />
-  <Select bind:selectedValue={currentScrollType} selectValues={scrollTypes} name="scroll-value"/>
+  <Select bind:selectedValue={currentScrollType} selectValues={scrollTypes} name="scroll-value" />
 </div>
 
 <div class="flex-center buttons-container">
@@ -99,38 +107,41 @@
     on:buttonClick={handleAutoScroll}
     buttonType={ButtonTypeEnum.PRIMARY}
     translateKey={'launchAnalysisButtonWithAutoScrollButton'}
+    tooltip={true}
   />
-  <Tooltip>{translateDescription('launchAnalysisButtonWithAutoScrollButton')}</Tooltip>
   <Button
     on:buttonClick={handleCleanCache}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="clearBrowserCacheButton"
+    tooltip={true}
   />
-  <Tooltip>{translateDescription('clearBrowserCacheButton')}</Tooltip>
   <Button
     on:buttonClick={handleResetMeasure}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="resetMeasure"
+    tooltip={true}
   />
-  <Tooltip>{translateDescription('resetMeasure')}</Tooltip>
   <Button
     on:buttonClick={handleRefresh}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="refresh"
+    tooltip={true}
   />
-  <Tooltip>{translateDescription('refresh')}</Tooltip>
   <Button
     on:buttonClick={() => sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP })}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="backToTop"
+    tooltip={true}
   />
-  <Tooltip>{translateDescription('backToTop')}</Tooltip>
 </div>
+<ZoneSimulation btnValid={false} on:submitSimulation={handleSimulation} />
 
 {#if currentMeasure && !loading}
   <GesResults measure={currentMeasure} />
   <div class="histo-container">
-    <Histogram datas={histoDatas} yLabel="greenhouseGasesEmissionDefault" yLabel2="energyDefault" />
+    {#if currentMeasure?.complete}
+      <Histogram datas={histoDatas} yLabel="greenhouseGasesEmissionDefault" yLabel2="energyDefault" />
+    {/if}
   </div>
 {/if}
 {#if loading === true}

@@ -49,6 +49,7 @@ const measure: Measure = {
     cityName: 'Nantes',
     carbonIntensity: 371
   },
+  complete: false,
   extensionMeasure: {
     nbRequest: 21,
     nbRequestCache: 0,
@@ -117,25 +118,25 @@ test('ToHistoFormattedDatas function', async () => {
   assert.deepEqual(toHistoFormattedDatas(measure), [
     {
       label: 'networkTotal',
-      value: measure.ges.networkTotal,
+      value: measure.ges?.networkTotal,
       value2: measure.energy.kWhNetwork * 1000,
       color: '#7b7aab'
     },
     {
       label: 'dataCenterTotal',
-      value: measure.ges.dataCenterTotal,
+      value: measure.ges?.dataCenterTotal,
       value2: measure.energy.kWhDataCenter * 1000,
       color: '#86665f'
     },
     {
       label: 'deviceTotal',
-      value: measure.ges.deviceTotal,
+      value: measure.ges?.deviceTotal,
       value2: measure.energy.kWhDevice * 1000,
       color: '#5e806d'
     },
     {
       label: 'pageTotal',
-      value: measure.ges.pageTotal,
+      value: measure.ges?.pageTotal,
       value2: measure.energy.kWhPage * 1000,
       color: '#535481'
     }
@@ -184,6 +185,7 @@ test('CreateEmptyMeasure function', async () => {
       cityName: '',
       countryCode: ''
     },
+    complete: false,
     extensionMeasure: {
       nbRequest: 0,
       nbRequestCache: 0,

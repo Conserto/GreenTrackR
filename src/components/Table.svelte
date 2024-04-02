@@ -4,9 +4,10 @@
   import Button from './Button.svelte';
   import { ButtonTypeEnum } from 'src/enum';
   import { createEventDispatcher } from 'svelte';
+  import Tooltip from './Tooltip.svelte';
 
   export let columnHeaders: TableHeader[] = [];
-  export let datas: Map<string,TableData>[] = [];
+  export let datas: Map<string, TableData>[] = [];
 
   const dispatch = createEventDispatcher();
 </script>
@@ -35,13 +36,17 @@
                   buttonType={ButtonTypeEnum.SECONDARY}
                   translateKey={data.get(header.id)?.content ?? ""}
                 />
+              {:else if data.get(header.id)?.detail}
+                <Tooltip
+                  value={data.get(header.id)?.content}
+                  tooltipValue={data.get(header.id)?.detail} />
               {:else}
                 {translate(data.get(header.id)?.content)}
               {/if}
             </td>
           {/each}
-<!--        {:else}
-          <td style={data.?.style}>{translate(data.get(index)?.content)}</td>-->
+          <!--        {:else}
+                    <td style={data.?.style}>{translate(data.get(index)?.content)}</td>-->
         {/if}
       </tr>
     {/each}

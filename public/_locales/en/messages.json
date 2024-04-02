@@ -113,6 +113,9 @@
   "url": {
     "message": "Url#Url"
   },
+  "urlAction": {
+    "message": "Action"
+  },
   "viewHistoryButton": {
     "message": "View History#View History Button"
   },
@@ -228,6 +231,9 @@
     "message": "Number of tests"
   },
   "paramBtnSave": {
-    "message": "Save"
+    "message": "Save#Save configuration"
+  },
+  "noFullData": {
+    "message": "Localisation (Server ou User) non déterminée, utiliser le simulateur pour accéder aux résultats"
   }
 }

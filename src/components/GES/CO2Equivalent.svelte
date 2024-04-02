@@ -10,9 +10,9 @@
   <span>{translate('greenhouseGasesEmission')} :</span>
   <span
     class="ges-equivalent_value"
-    style:color={measure?.score.textColor}
-    style:background-color={measure?.score.color}
-    >{measure?.ges.pageTotal.toFixed(2)} {Units.carbonEmissions}</span
+    style:color={measure?.score?.textColor}
+    style:background-color={measure?.score?.color}
+    >{measure?.ges?.pageTotal?.toFixed(2)} {Units.carbonEmissions}</span
   >
 </div>
 

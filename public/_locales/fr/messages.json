@@ -113,6 +113,9 @@
   "url": {
     "message": "Url#Url"
   },
+  "urlAction": {
+    "message": "Action"
+  },
   "viewHistoryButton": {
     "message": "Voir l'historique#View History Button"
   },
@@ -225,6 +228,9 @@
     "message": "Nombre d'essais"
   },
   "paramBtnSave": {
-    "message": "Sauvegarder"
+    "message": "Sauvegarder#Sauvegarder la configuration"
+  },
+  "noFullData": {
+    "message": "Localisation (Serveur ou Utilisateur) non déterminée, utiliser le simulateur pour accéder aux résultats"
   }
 }

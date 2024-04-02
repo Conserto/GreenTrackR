@@ -1,4 +1,4 @@
-import { logErr } from '../utils/log';
+import { logDebug, logErr } from '../utils/log';
 import { RequestAction } from '../enum';
 import { DOM_INFOS, PAGE_HEIGHT } from '../const/action.const';
 import { getDomSizeWithoutSvg } from '../service';
@@ -22,7 +22,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         totalHeight: document.body.scrollHeight,
         viewportHeight: window.innerHeight
       });
-    } else if (request.action === RequestAction.SCROLL_TO && request.value) {
+    } else if (request.action === RequestAction.SCROLL_TO && request.value >= 0) {
+      logDebug(`Receive scroll to ${request.value}`);
       scrollPrompt(Math.floor(request.value), 0, 5000).finally(() => {
         sentRuntimeMsg({ autoScrollDone: true });
       });
@@ -31,6 +32,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       window.addEventListener('scrollend', () => sentRuntimeMsg({ saveAnalysis: true, component: 'scroll' }));
     } else if (request.action === RequestAction.GET_DOM_ELEMENTS) {
       sentRuntimeMsg({ type: DOM_INFOS, value: getDomSizeWithoutSvg() });
+    } else {
+      logDebug(`No conditions match`);
     }
   }
 });
