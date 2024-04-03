@@ -1,59 +1,64 @@
 # GreenTrackr V2.0.0 
 
-GreenTrackr est une extension navigateur eco-conçue qui vous permet de calculer l’empreinte carbone de votre site web en un clic. L'évaluation se base sur l'estimation de la consommation énergétique (Wh) de trois paramètres qui représentent chaque tiers de l'architecture d'un service numérique : 
-- L’**utilisateur** : les données reçues (**taille de la page décompressée**)
-- Le **réseau** : les données transférées (**taille de la page compressée**)
-- Le **serveur** : le nombre de requêtes (**HTTP**) 
+GreenTrackr is an eco-designed browser extension that lets you assess your website's carbon footprint in plug and play. The assessment is based on the estimated energy consumption (Wh) of three parameters which represent each third of the architecture of a digital service : 
 
-GreenTrackr interagisse avec deux **API** externe pour déterminer le mix énergétique du pays qui héberge le site et celui dans lequel se trouve l'utilisateur : 
-**CO2signal d’Electricity Map** et **IP Geolocation**.
+- The **user**: downloaded data (**uncompressed page size**) 
+- The **network**: transferred data (**compressed page size**)
+- The **server**: number of requests (**HTTP**)
 
-Pour les informations concernant les calculs de GreenTrackr, se référer à https://conserto.pro/greentrackr/
+GreenTrackr uses two external **APIs** (**Electricity Map's CO2signal** and **IP Geolocation**) to identify the energy mix of the country hosting the website and the country in which the user is located.
 
-## Tutoriel
+For more information on GreenTrackr calculations, please refer to https://conserto.pro/greentrackr/
 
-### Utiliser l'extension
+## Install and setup
 
-- Ouvrir les outils de développement du navigateur (DevTools) : ```Ctrl+Shift+I```
-- Quatre côtés d'épinglage de la Devtools possible (appuyez sur les trois dots verticals $\vdots$ pour choisir un)
-  - nous vous recommandons de la détacher sur une **fenêtre distincte**
-- Dans l'onglet **Réseau** de la DevTools décocher la case **Désactiver le cache**
-- Dans le navigateur, aller sur le site Web à analyser et accéder à l'extension GreenTrackr dans les onglets de la DevTools
-- Deux paramètres sont nécessaires pour configurer GreenTrackr dans l'onglet **Paramètre** :
-  - Un token d'accès à l'API 'CO2signal' de 'Electricity Maps', cliquez sur le lien puis sur '**Go to api portal**' ->  https://www.co2signal.com/
-  - Le nombre d'essais pour analyser les requêtes de la page courante
-- GreenTrackr propose 3 options (onglets) : **Evaluation/Page**, **Auto scroll/Page**, **Parcours Utilisateur**
+- Add GreenTrackr to Chrome (the plugin is available on Chrome Web Store) 
+- Open the browser dev tools (DevTools): ```Ctrl+Shift+I```
+  - Check if GreenTrackr tab is added on the DevTools 
+    - Four tabs are available : **Assessment/Page**, **Auto scroll/Page**, **User journey** and **Settings**
+  - Two parameters are required to activate GreenTrackr in the **Settings** tab of the extension
+    - A **token** to access the 'CO2signal' API of 'Electricity Maps': click on the link and then on '**Go to api portal**' -> https://www.co2signal.com/
+    - Number of retries to analyze requests for the current page
+- Click on the three vertical dots ($\vdots$) to customize and control DevTools
+  - We recommend you undock it in a **separate window**
+- Uncheck the **Disable cache** box, in the DevTools Network tab
+- Type the **url** of the website to be analyzed on chrome search bar. 
 
-#### Evaluation/Page
-- Deux types d'évaluation : **avec cache** et **sans cache** 
-  - **Evaluation avec cache** : cliquer directement sur le bouton "**Analyser**"
-  - **Evaluation sans cache** : cliquer sur le bouton "**supprimer le cache**" ensuite sur le bouton "**Analyser**" 
-- Les résultats s'affichent.
-- Vous pouvez sauvegarder ce résultat dans un historique via le bouton "**Enregistrer l'évaluation**".
-- L'historique des résultats sauvegardés est disponible via le bouton "**Voir l'historique**".
-- Le bouton "**Réinitialiser la mesure**" permet de remettre à zero les compteurs de calcul
+### Note
 
+- This version of the extension is only compatible with Manifest V3 (chromium and chromium-based browser versions). A specific version for Firefox/Manifest V2 will be available separately.
+- Remember to refresh the page
+- The use of an ad blocker or other filter has an impact on the result
 
-#### Auto scroll/Page
+## Tutorial
 
-Vous pouvez analyser avec précisions la page web en saisissant un pourcentage pourcentage (**%**), les résultats sont obtenus suivant le même processe que l'option **Evaluation/Page**.
+### Evaluation/Page
 
-#### Parcours Utilisateur
+- Two ways to evaluate: **with cache** and **without cache**
+  - **Evaluation with cache**: click on the "**Analyze**" button 
+  - **Evaluation without cache**: click on the "**Remove cache**" button, then on the "**Analyze**" button 
+- The results are displayed
+- You can **save** this result in a history via the "**Save assessment**" button
+- The saved results history is available via the "**View history**" button
+- The "**Reset measurement**" button resets the measurement
 
-Vous pouvez calculer l'empreinte carbone d'un parcours utilisateur en allant sur l'onglet "**Parcours Utilisateur**". En démarrant l'analyse, en cliquant sur le bouton "**Démarrer l'enregistrement**", l'extension enregistrera le parcours effectué. Une fois le parcours terminé, l'appui sur le bouton "**Stopper l'enregistrement**" permet d'afficher le tableau des résultats pour chaque action effectuée : "**(scroll)**" et/ou "**(click)**" sur les pages visitées. Les boutons "**Réinitialiser le parcours**" et "**Supprimer le cache**" permet de vider les résultats stockés en local et ainsi de redémarrer un parcours à zéro.
+### Auto scroll/Page
 
-### Points à noter
+You can accurately analyze the web page by percentage (**%**) to Auto scroll. The results are obtained following the same process as the **Evaluation/Page** option.
 
-- Le choix d'épinglage de la DevTools a une influence sur le résultat : chargement des ressources est différent (nombre de requêtes, taille de la page, ...) 
-- Penser à faire un rechargement de la page
-- L'utilisation d'un bloqueur de publicité ou autre filtre a une influence sur le résultat.
+### User journey
 
-### Permissions de l'extension
+You can assess the carbon footprint of a user journey into the "**User journey**" tab. When you start the analysis, by clicking on the "**Start recording**" button, the extension will record your user journey. Once the journey has been completed, click on the "**Stop recording**" button to display the results table for each action performed: "**(scroll)**" and/or "**(click)**" $\dots$ on the visited pages. The "**Reset journey**" and "**Clear cache**" buttons allow you to empty the locally stored results, thus restarting a journey from scratch.
 
-Pour fonctionner, l'extension utilise les permissions suivantes :
+## Extension permissions
 
-- activeTab, tabs : utilisée pour afficher la page des analyses sauvegardées et pour accéder aux contenus des pages pour l'analyse.
-- <all_urls> : utilisée pour accéder aux Urls pour l'analyse.
-- browsingData : utilisée pour vider le cache du navigateur.
-- storage : utilisée pour stocker les différentes mesures.
-- webNavigation: utilisée pour détecter la fin du chargement de la page analysée.
+To work properly, the extension requires the following permissions:
+
+- **activeTab**, **tabs**: used to display the saved analysis page and to access the contents of the pages for analysis
+- **<all_urls>**: used to access URLs for analysis
+- **browsingData**: used to clear the browser cache
+- **Storage**: used to store the different assessments
+- **Web Navigation**: used to detect when the analyzed page has finished loading
+
+## License
+[GNU Affero General Public License v3.0](./LICENSE)
