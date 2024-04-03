@@ -5,7 +5,7 @@ export interface Synthesis {
   total: SynthesisBase;
 }
 
-export interface SynthesisLine extends SynthesisBase{
+export interface SynthesisLine extends SynthesisBase {
   url: string;
   shortUrl: string;
 }
@@ -22,5 +22,5 @@ export interface SynthesisCommon {
   ges: GESTotals;
   carbonSrv: GES;
   carbonUsr: GES;
-  score: Score;
+  score?: Score;
 }

@@ -75,7 +75,10 @@
     "message": "Grade#Grade"
   },
   "gesIntensity": {
-    "message": "Servers carbon intensity#Give server's carbon intensity from electricitymaps"
+    "message": "Server carbon intensity#Give server's carbon intensity from electricitymaps"
+  },
+  "gesIntensityShort": {
+    "message": "Srv carbon i.#Give server's carbon intensity from electricitymaps"
   },
   "gesNetwork": {
     "message": "GES Network#GES Network"
@@ -88,6 +91,9 @@
   },
   "gesUserIntensity": {
     "message": "Users carbon intensity#Give user's carbon intensity from electricitymaps"
+  },
+  "gesUserIntensityShort": {
+    "message": "Usr carbon i.#Give user's carbon intensity from electricitymaps"
   },
   "gesUserZone": {
     "message": "User location#Give the country where the user of the website is localized"

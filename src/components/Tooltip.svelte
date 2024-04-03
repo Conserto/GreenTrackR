@@ -2,9 +2,9 @@
 
   import { translate, translateDescription } from '../utils';
 
-  export let translateKey: string | undefined;
-  export let value: string | undefined;
-  export let tooltipValue: string | undefined;
+  export let translateKey: string | undefined = undefined;
+  export let value: string | undefined = undefined;
+  export let tooltipValue: string | undefined = undefined;
   export let top: boolean = false;
   let sclass = top ? 'top' : '';
 </script>

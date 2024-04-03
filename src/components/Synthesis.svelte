@@ -1,13 +1,27 @@
 <script lang="ts">
   import type { Measure } from '../interface';
   import Tooltip from './Tooltip.svelte';
-  import { formatNbRequest, formatNumber, formatSizeTransferred, translate, translateDescription } from '../utils';
+  import { formatNbRequest, formatNumber, formatSizeTransferred } from '../utils';
   import { SynthesisSrv } from '../service/synthesis.service';
 
   export let datas: Measure[];
 
   let srv = new SynthesisSrv();
   const synthesis = srv.getSynthesis(datas);
+
+  const heads = [
+    {
+      classe: 'scroll',
+      count: true
+    },
+    {
+      classe: 'click',
+      count: true
+    },
+    {
+      classe: 'page'
+    }
+  ];
 
 </script>
 
@@ -31,57 +45,28 @@
       <th scope="col" colspan="1">
         <Tooltip translateKey='synTabHeadUrl' />
       </th>
-      <th class="scroll" scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadCount' />
-      </th>
-      <th class="scroll" scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadSize' />
-      </th>
-      <th class="scroll" scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadRequest' />
-      </th>
-      <th class="scroll" scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadGes' />
-      </th>
-      <th class="scroll" scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadScore' />
-      </th>
-      <th class="scroll" scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadGrade' />
-      </th>
-      <th scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadCount' />
-      </th>
-      <th scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadSize' />
-      </th>
-      <th scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadRequest' />
-      </th>
-      <th scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadGes' />
-      </th>
-      <th scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadScore' />
-      </th>
-      <th scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadGrade' />
-      </th>
-      <th class="page" scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadSize' />
-      </th>
-      <th class="page" scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadRequest' />
-      </th>
-      <th class="page" scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadGes' />
-      </th>
-      <th class="page" scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadScore' />
-      </th>
-      <th class="page" scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadGrade' />
-      </th>
+      {#each heads as head}
+        {#if (head.count)}
+          <th class="{head.classe}" scope="col" colspan="1">
+            <Tooltip translateKey='synTabHeadCount' />
+          </th>
+        {/if}
+        <th class="{head.classe}" scope="col" colspan="1">
+          <Tooltip translateKey='synTabHeadSize' />
+        </th>
+        <th class="{head.classe}" scope="col" colspan="1">
+          <Tooltip translateKey='synTabHeadRequest' />
+        </th>
+        <th class="{head.classe}" scope="col" colspan="1">
+          <Tooltip translateKey='synTabHeadGes' />
+        </th>
+        <th class="{head.classe}" scope="col" colspan="1">
+          <Tooltip translateKey='synTabHeadScore' />
+        </th>
+        <th class="{head.classe}" scope="col" colspan="1">
+          <Tooltip translateKey='synTabHeadGrade' />
+        </th>
+      {/each}
     </tr>
     </thead>
     <tbody>

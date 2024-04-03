@@ -13,17 +13,20 @@ export class SynthesisSrv {
 
   getSynthesis(measures: Measure[]): Synthesis {
     let syntLine: SynthesisLine[] = [];
-    const filterByPage = Object.groupBy(measures, ({ url }) => url);
+    const filterByPage = Object.groupBy(measures, ({ url }) => url ?? '');
     for (let index in Object.entries(filterByPage)) {
-      const { calScroll, calClick, calPage } = this.getSyntCommon(Object.values(filterByPage)[index]);
-      const url = Object.keys(filterByPage)[index];
-      syntLine.push({
-        sScroll: calScroll,
-        sClick: calClick,
-        sPage: calPage,
-        url: url,
-        shortUrl: formatShortUrl(url)
-      });
+      const mes: Measure[] | undefined = Object.values(filterByPage)[index];
+      if (mes) {
+        const { calScroll, calClick, calPage } = this.getSyntCommon(mes);
+        const url = Object.keys(filterByPage)[index];
+        syntLine.push({
+          sScroll: calScroll,
+          sClick: calClick,
+          sPage: calPage,
+          url: url,
+          shortUrl: formatShortUrl(url)
+        });
+      }
     }
     const { calScroll, calClick, calPage } = this.getSyntCommon(measures);
     return {

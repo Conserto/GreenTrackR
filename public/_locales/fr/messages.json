@@ -72,7 +72,10 @@
     "message": "Grade#Grade"
   },
   "gesIntensity": {
-    "message": "I. Carb. serveur#Intensité carbon, en gCO2eq/Kwh, du serveur depuis elctrictymaps"
+    "message": "Intensité Carbone serveur#Intensité carbone, en gCO2eq/Kwh, du serveur depuis elctrictymaps"
+  },
+  "gesIntensityShort": {
+    "message": "I. Carb. serveur#Intensité carbone, en gCO2eq/Kwh, du serveur depuis elctrictymaps"
   },
   "gesNetwork": {
     "message": "GES Réseau#GES réseau en gCO2eq"
@@ -84,7 +87,10 @@
     "message": "GES Total#GES Total en gCO2eq"
   },
   "gesUserIntensity": {
-    "message": "I. Carb. client#Intensité carbon, en gCO2eq/Kwh, de l'utilisateur depuis elctrictymaps"
+    "message": "Intensité Carbone client#Intensité carbone, en gCO2eq/Kwh, de l'utilisateur depuis elctrictymaps"
+  },
+  "gesUserIntensityShort": {
+    "message": "I. Carb. client#Intensité carbone, en gCO2eq/Kwh, de l'utilisateur depuis elctrictymaps"
   },
   "gesUserZone": {
     "message": "Client#Pays où l'ip de l'utilisateur se trouve"
