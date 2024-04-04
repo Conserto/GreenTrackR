@@ -3,13 +3,11 @@
   import { translate } from 'src/utils/utils';
   import { codeZone } from 'src/assets/data/codeZone';
 
-  import { Button, Select } from 'src/components';
-  import { ButtonTypeEnum } from 'src/enum';
+  import { Select } from 'src/components';
   import { SEARCH_AUTO } from '../../const/key.const';
 
   let zonesOptions: any[], countryCodeSelected: string, userCountryCodeSelected: string;
   const dispatch = createEventDispatcher();
-  export let btnValid: boolean = true;
 
   onMount(async () => {
     zonesOptions = [
@@ -26,34 +24,19 @@
   }
 </script>
 
-{#if btnValid}
-  <form class="zone-simulation" on:submit|preventDefault={handleSubmitSimulation}>
-    <div class="simulation-select simulation-region">
-      <span class="simulation-select__label">{translate('serverRegionLabel')}</span>
-      <Select bind:selectedValue={countryCodeSelected} selectValues={zonesOptions}
-              name="simulation-server-region-label" />
-    </div>
-    <div class="simulation-select simulation-user">
-      <span class="simulation-select__label">{translate('serverUserLabel')}</span>
-      <Select bind:selectedValue={userCountryCodeSelected} selectValues={zonesOptions}
-              name="simulation-user-region-label" />
-    </div>
-    <Button translateKey="validateRegionButton" buttonType={ButtonTypeEnum.SECONDARY}></Button>
-  </form>
-{:else }
-  <form class="zone-simulation">
-    <div class="simulation-select simulation-region">
-      <span class="simulation-select__label">{translate('serverRegionLabel')}</span>
-      <Select bind:selectedValue={countryCodeSelected} selectValues={zonesOptions}
-              name="simulation-server-region-label" on:selectChange={handleSubmitSimulation}/>
-    </div>
-    <div class="simulation-select simulation-user">
-      <span class="simulation-select__label">{translate('serverUserLabel')}</span>
-      <Select bind:selectedValue={userCountryCodeSelected} selectValues={zonesOptions}
-              name="simulation-user-region-label" on:selectChange={handleSubmitSimulation}/>
-    </div>
-  </form>
-{/if}
+
+<form class="zone-simulation">
+  <div class="simulation-select simulation-region">
+    <span class="simulation-select__label">{translate('serverRegionLabel')}</span>
+    <Select bind:selectedValue={countryCodeSelected} selectValues={zonesOptions}
+            name="simulation-server-region-label" on:selectChange={handleSubmitSimulation} />
+  </div>
+  <div class="simulation-select simulation-user">
+    <span class="simulation-select__label">{translate('serverUserLabel')}</span>
+    <Select bind:selectedValue={userCountryCodeSelected} selectValues={zonesOptions}
+            name="simulation-user-region-label" on:selectChange={handleSubmitSimulation} />
+  </div>
+</form>
 
 
 <style lang="scss">

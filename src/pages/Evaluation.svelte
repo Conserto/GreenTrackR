@@ -25,6 +25,9 @@
   let currentMeasure: Measure | null;
   let histoDatas: HistoData[] = [];
 
+  let serverSearch = SEARCH_AUTO;
+  let userSearch = SEARCH_AUTO;
+
   const onResetMeasure = () => {
     currentMeasure = null;
     currentDisplayedTab = TabType.None;
@@ -57,21 +60,15 @@
     currentDisplayedTab = TabType.ResultTab;
     loading = true;
     await measureAcquisition.getNetworkMeasure(false);
-    currentMeasure = await measureAcquisition.getGESMeasure(SEARCH_AUTO, SEARCH_AUTO);
+    currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
     loading = false;
     histoDatas = toHistoFormattedDatas(currentMeasure);
   };
 
   const handleSimulation = async (event: any) => {
-    loadGes = true;
     const { countryCodeSelected, userCountryCodeSelected } = event.detail;
-    await measureAcquisition.getNetworkMeasure(false);
-    currentMeasure = await measureAcquisition.getGESMeasure(
-      countryCodeSelected,
-      userCountryCodeSelected
-    );
-    histoDatas = toHistoFormattedDatas(currentMeasure);
-    loadGes = false;
+    serverSearch = countryCodeSelected;
+    userSearch = userCountryCodeSelected;
   };
 </script>
 
@@ -115,10 +112,10 @@
     tooltip={true}
   />
 </div>
+<ZoneSimulation on:submitSimulation={handleSimulation} />
 {#if currentDisplayedTab === TabType.ResultTab}
   {#if currentMeasure && !loading}
     <GesResults measure={currentMeasure} />
-    <ZoneSimulation on:submitSimulation={handleSimulation} />
     <div class="histo-container">
       {#if loadGes}
         <div class="loading-ges">
