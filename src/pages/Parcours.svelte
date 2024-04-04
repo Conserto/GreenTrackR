@@ -99,7 +99,7 @@
     tooltip={true}
   />
 </div>
-<ZoneSimulation btnValid={false} on:submitSimulation={handleSimulation} />
+<ZoneSimulation on:submitSimulation={handleSimulation} />
 
 {#if onGoingAnalysis}
   <LoadingWheel />
