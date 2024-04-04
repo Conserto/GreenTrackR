@@ -70,8 +70,8 @@
 
   const handleResetMeasure = () => {
     sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
-    cleanCache();
     currentMeasure = null;
+    cleanCache();
     measureAcquisition.applyLatest();
   };
 

@@ -2,20 +2,38 @@
   "analysisInProgress": {
     "message": "Analysis in progress. Start browsing on the current tab, then come back here to get stats !#Analysis in progress message"
   },
-  "firstResults": {
-    "message": "First results received !#First analysis resulted have been computed."
+  "autoscrollPercentInput": {
+    "message": "Enter % to scroll for page's analysis#Enter % to scroll"
+  },
+  "autoscrollPxInput": {
+    "message": "Enter pixels number to scroll for page's analysis#Enter pixels number to scroll"
+  },
+  "backToTop": {
+    "message": "Back to top#Back to top"
+  },
+  "betaMessage": {
+    "message": "This feature is a beta version, errors may occur.#Message to warn the user that not all features are present"
+  },
+  "cancelButton": {
+    "message": "Cancel#Cancel"
+  },
+  "carbonIntensity": {
+    "message": "Carbon intensity (CO2eq/Kwh)#Carbon intensity (gCO2eq/Kwh)"
+  },
+  "carIndicator": {
+    "message": "Km by car#Label for car indicator"
   },
   "clearBrowserCacheButton": {
     "message": "Clear cache#Clear Browser Cache Button"
   },
-  "resetMeasure": {
-    "message": "Reset measure#Reset measure"
-  },
-  "refresh": {
-    "message": "Reload page#Reload this page"
+  "closePopup": {
+    "message": "Close#close popup content"
   },
   "csvColumnsLabel": {
     "message": "Date;Url;Uncompressed size(b);Compressed size(kb);DOM;GES Data Center(gCO2e);GES Network(gCO2e);GES Device(gCO2e);GES Total(gCO2e); GES Score; Grade; Country; CarbonIntensity; NumberRequest#csvColumnsLabel"
+  },
+  "dataCenterTotal": {
+    "message": "Data center#Total GES emissions of data center"
   },
   "date": {
     "message": "Date#Date"
@@ -29,11 +47,59 @@
   "deleteButton": {
     "message": "Delete#Delete Button"
   },
+  "deviceTotal": {
+    "message": "Devices#Total GES emissions of devices"
+  },
+  "eitherFor": {
+    "message": "Either for #Label for informations about visits part. 1"
+  },
+  "energyDefault": {
+    "message": "Energy (Wh)#Energy used, default"
+  },
+  "errorNoToken": {
+    "message": "No CO2 token found, the extension may not work#Env variable not found"
+  },
   "exportButton": {
     "message": "Export#Export Button"
   },
-  "cancelButton": {
-    "message": "Cancel#Cancel"
+  "firstResults": {
+    "message": "First results received !#First analysis resulted have been computed."
+  },
+  "gesDataCenter": {
+    "message": "GES Data Center#GES Data Center"
+  },
+  "gesDevice": {
+    "message": "GES Device#GES Device"
+  },
+  "gesGrade": {
+    "message": "Grade#Grade"
+  },
+  "gesIntensity": {
+    "message": "Server carbon intensity#Give server's carbon intensity from electricitymaps"
+  },
+  "gesIntensityShort": {
+    "message": "Srv carbon i.#Give server's carbon intensity from electricitymaps"
+  },
+  "gesNetwork": {
+    "message": "GES Network#GES Network"
+  },
+  "gesScore": {
+    "message": "Score#Score"
+  },
+  "gesTotal": {
+    "message": "GES Total#GES Total"
+  },
+  "gesUserIntensity": {
+    "message": "Users carbon intensity#Give user's carbon intensity from electricitymaps"
+  },
+  "gesUserIntensityShort": {
+    "message": "Usr carbon i.#Give user's carbon intensity from electricitymaps"
+  },
+  "gesUserZone": {
+    "message": "User location#Give the country where the user of the website is localized"
+  },
+  "gesZone": {
+    "message": "Server location#Give the country where the server of the website is localized"
   },
   "greenhouseGasesEmission": {
     "message": "GES#Greenhouse Gases Emission (gCO2eq)"
@@ -41,35 +107,14 @@
   "greenhouseGasesEmissionDefault": {
     "message": "GES (gCO2eq)#Greenhouse Gases Emission (gCO2e), default"
   },
-  "energyDefault": {
-    "message": "Energy (Wh)#Energy used, default"
-  },
-  "gesDataCenter": {
-    "message": "GES Data Center#GES Data Center"
-  },
-  "gesNetwork": {
-    "message": "GES Network#GES Network"
-  },
-  "gesDevice": {
-    "message": "GES Device#GES Device"
-  },
-  "gesTotal": {
-    "message": "GES Total#GES Total"
-  },
-  "gesScore": {
-    "message": "Score#Score"
-  },
-  "gesGrade": {
-    "message": "Grade#Grade"
-  },
   "historyButton": {
     "message": "History#History Button"
   },
+  "infoMix": {
+    "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season:#Infos pour comprendre l'impact du mix énergétiques"
+  },
   "launchAnalysisButton": {
     "message": "Analysis#Launch Analysis"
-  },
-  "startJourneyButton": {
-    "message": "Start recorder#Start recorder"
   },
   "launchAnalysisButtonWithAutoScrollButton": {
     "message": "Auto Scrolling#Launch Analysis with auto scroll"
@@ -77,77 +122,20 @@
   "menuText": {
     "message": "GreenTrackr V1.0.2 is install in your browser and accessible via the devtool panel (F12 or CMD + ALT + i sur Mac#Text when you click on the plugin's icone"
   },
-  "resetJourneyButton": {
-    "message": "Reset journey#Reset Journey Analysis"
+  "messageResults": {
+    "message": "Resume of journey's analysis"
   },
-  "receivedResults": {
-    "message": "Results received#Received user journey results"
+  "messageResultsAnalysis": {
+    "message": "Analysis results#Résultat de l'analyse"
   },
-  "saveAnalysisButton": {
-    "message": "Save assessment#Save Analyse Button"
-  },
-  "sizeTransferred": {
-    "message": "Page size#Transferred size (KB)"
-  },
-  "sizeTransferredBytesCompressed": {
-    "message": "Compressed page size#Compressed transferred size (KB)"
-  },
-  "sizeTransferredBytesUncompressed": {
-    "message": "Uncompressed page size#Uncompressed transferred size (KB)"
-  },
-  "sizeTransferredBytes": {
-    "message": "Page size (compress / uncompress)#Transferred size (KB)"
-  },
-  "stopJourneyButton": {
-    "message": "Stop saving#Stop Journey Analysis"
-  },
-  "tabEvaluation": {
-    "message": "Assessment/Page#GES analysis tab"
-  },
-  "tabAutoScroll": {
-    "message": "Auto Scroll/Page#GES auto scroll analysis tab"
-  },
-  "tabJourney": {
-    "message": "User Journey#User Journey tab"
-  },
-  "url": {
-    "message": "Url#Url"
-  },
-  "urlAction": {
-    "message": "Action"
-  },
-  "viewHistoryButton": {
-    "message": "View History#View History Button"
-  },
-  "backToTop": {
-    "message": "Back to top#Back to top"
-  },
-  "gesZone": {
-    "message": "Server location#Give the country where the server of the website is localized"
-  },
-  "gesUserZone": {
-    "message": "User location#Give the country where the user of the website is localized"
-  },
-  "gesIntensity": {
-    "message": "Servers carbon intensity#Give server's carbon intensity from electricitymaps"
-  },
-  "gesUserIntensity": {
-    "message": "Users carbon intensity#Give user's carbon intensity from electricitymaps"
+  "messageResultsDetail": {
+    "message": "Detail results of journey's analysis"
   },
   "nbRequest": {
     "message": "Number of requests without extentions 'real (cache)'#Number of request made by the website"
   },
-  "infoMix": {
-    "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season:#Infos pour comprendre l'impact du mix énergétiques"
-  },
-  "betaMessage": {
-    "message": "This feature is a beta version, errors may occur.#Message to warn the user that not all features are present"
-  },
-  "saveAnalysis": {
-    "message": "Analysis successfully saved.#Popup message"
-  },
-  "closePopup": {
-    "message": "Close#close popup content"
+  "networkTotal": {
+    "message": "Network#Total GES emissions of network"
   },
   "nocontentPhrase": {
     "message": "Estimate the carbon footprint of your website#Message when you arrive on the auto-scroll page and the analysis is not yet launched"
@@ -155,85 +143,139 @@
   "noContentPhraseEvaluation": {
     "message": "Estimate the carbon footprint of your website#Message when you arrive on the evaluation page and the analysis is not yet launched"
   },
+  "noFullData": {
+    "message": "Localisation (Server ou User) undefined, use simulator for show results"
+  },
+  "numberVisit": {
+    "message": "Number of visits#Label for visit indicator"
+  },
+  "pageTotal": {
+    "message": "Page total#Total GES emissions of website"
+  },
+  "paramBtnSave": {
+    "message": "Save#Save configuration"
+  },
+  "paramCo2TokenLabel": {
+    "message": "Token CO2signal API"
+  },
+  "paramNbRetryLabel": {
+    "message": "Number of tests"
+  },
+  "paramRetryDescription": {
+    "message": "Set the maximum number of attempts to avoid errors in computing HTTP requests for the websites you want to analyze."
+  },
+  "paramTabTitle": {
+    "message": "Setting"
+  },
+  "paramTokenCo2Description": {
+    "message": "GreenTrackR uses the 'CO2signal' API from Electricity Maps. To use this API, you need an access token, you can get it on the following link 'Go to api portal' -> #https://www.co2signal.com/"
+  },
+  "pixelDisplayed": {
+    "message": "This tab displays a height of#Display viewport pixels number"
+  },
+  "receivedResults": {
+    "message": "Results received#Received user journey results"
+  },
+  "refresh": {
+    "message": "Reload page#Reload this page"
+  },
+  "resetJourneyButton": {
+    "message": "Reset journey#Reset Journey Analysis"
+  },
+  "resetMeasure": {
+    "message": "Reset measure#Reset measure"
+  },
+  "saveAnalysis": {
+    "message": "Analysis successfully saved.#Popup message"
+  },
+  "saveAnalysisButton": {
+    "message": "Save assessment#Save Analyse Button"
+  },
   "serverRegionLabel": {
     "message": "Simulate server localization in an other zone : #Label for select"
   },
   "serverUserLabel": {
     "message": "Simulate user localization in an other zone : #Label for select"
   },
-  "eitherFor": {
-    "message": "Either for #Label for informations about visits part. 1"
+  "sizeTransferred": {
+    "message": "Page size#Transferred size (KB)"
   },
-  "visitEquivalent": {
-    "message": "visit(s) the equivalent of : #Label for informations about visits part. 2"
+  "sizeTransferredBytes": {
+    "message": "Page size (compress / uncompress)#Transferred size (KB)"
+  },
+  "sizeTransferredBytesCompressed": {
+    "message": "Compressed page size#Compressed transferred size (KB)"
+  },
+  "sizeTransferredBytesUncompressed": {
+    "message": "Uncompressed page size#Uncompressed transferred size (KB)"
   },
   "smartphoneIndicator": {
     "message": "Charged smartphones #Label for smartphone indicator"
   },
-  "carIndicator": {
-    "message": "Km by car#Label for car indicator"
+  "startJourneyButton": {
+    "message": "Start recorder#Start recorder"
   },
-  "numberVisit": {
-    "message": "Number of visits#Label for visit indicator"
+  "stopJourneyButton": {
+    "message": "Stop saving#Stop Journey Analysis"
   },
-  "messageResultsAnalysis": {
-    "message": "Analysis results#Résultat de l'analyse"
+  "synTabFootTotal": {
+    "message": "Total#Total cumulé du parcours"
   },
-  "messageResults": {
-    "message": "Results of journey's analysis#Analysis results"
+  "synTabHeadClick": {
+    "message": "Clique#Action de selection dans la page"
   },
-  "validateRegionButton": {
-    "message": "Confirm#Confirm Region"
+  "synTabHeadCount": {
+    "message": "Hit#Nombre d'actions"
   },
-  "carbonIntensity": {
-    "message": "Carbon intensity (CO2eq/Kwh)#Carbon intensity (gCO2eq/Kwh)"
+  "synTabHeadGes": {
+    "message": "GES#GES Total de l'action"
   },
-  "dataCenterTotal": {
-    "message": "Data center#Total GES emissions of data center"
+  "synTabHeadGrade": {
+    "message": "Grade#Lettre du Grade (A -> F)"
   },
-  "networkTotal": {
-    "message": "Network#Total GES emissions of network"
+  "synTabHeadPage": {
+    "message": "Page#Toutes actions confondues"
   },
-  "deviceTotal": {
-    "message": "Devices#Total GES emissions of devices"
+  "synTabHeadRequest": {
+    "message": "Requête#Nombre de requetes, hors extension, forme : 'requête (cache)'"
   },
-  "pageTotal": {
-    "message": "Page total#Total GES emissions of website"
+  "synTabHeadScore": {
+    "message": "Score#Score de l'action"
   },
-  "pixelDisplayed": {
-    "message": "This tab displays a height of#Display viewport pixels number"
+  "synTabHeadScroll": {
+    "message": "Scroll#Action de défilement de la page"
   },
-  "autoscrollPxInput": {
-    "message": "Enter pixels number to scroll for page's analysis#Enter pixels number to scroll"
+  "synTabHeadSize": {
+    "message": "Taille#Taille des données (compressées/décompressées)"
   },
-  "autoscrollPercentInput": {
-    "message": "Enter % to scroll for page's analysis#Enter % to scroll"
+  "synTabHeadUrl": {
+    "message": "Url#Url de la page"
   },
-  "errorNoToken": {
-    "message": "No CO2 token found, the extension may not work#Env variable not found"
+  "tabAutoScroll": {
+    "message": "Auto Scroll/Page#GES auto scroll analysis tab"
   },
-  "paramTabTitle": {
-    "message": "Setting"
+  "tabEvaluation": {
+    "message": "Assessment/Page#GES analysis tab"
+  },
+  "tabJourney": {
+    "message": "User Journey#User Journey tab"
   },
   "tabParameter": {
     "message": "Parameters"
   },
-  "paramTokenCo2Description": {
-    "message": "GreenTrackR uses the 'CO2signal' API from Electricity Maps. To use this API, you need an access token, you can get it on the following link 'Go to api portal' -> #https://www.co2signal.com/"
+  "url": {
+    "message": "Url#Url"
   },
-  "paramCo2TokenLabel": {
-    "message": "Token CO2signal API"
+  "urlAction": {
+    "message": "Action"
   },
-  "paramRetryDescription": {
-    "message": "Set the maximum number of attempts to avoid errors in computing HTTP requests for the websites you want to analyze."
+  "validateRegionButton": {
+    "message": "Confirm#Confirm Region"
   },
-  "paramNbRetryLabel": {
-    "message": "Number of tests"
+  "viewHistoryButton": {
+    "message": "View History#View History Button"
   },
-  "paramBtnSave": {
-    "message": "Save#Save configuration"
-  },
-  "noFullData": {
-    "message": "Localisation (Server ou User) non déterminée, utiliser le simulateur pour accéder aux résultats"
+  "visitEquivalent": {
+    "message": "visit(s) the equivalent of : #Label for informations about visits part. 2"
   }
 }

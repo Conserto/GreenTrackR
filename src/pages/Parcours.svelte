@@ -62,7 +62,7 @@
     await measureAcquisition.getNetworkMeasure(false);
     const measure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
     if (component) {
-      measure.url += ` (${component})`;
+      measure.action = component;
     }
     if (measure) {
       results = [...results, measure];

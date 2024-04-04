@@ -1,17 +1,28 @@
 <script lang="ts">
 
-  export let value: string;
-  export let tooltipValue: string | undefined;
+  import { translate, translateDescription } from '../utils';
+
+  export let translateKey: string | undefined = undefined;
+  export let value: string | undefined = undefined;
+  export let tooltipValue: string | undefined = undefined;
+  export let top: boolean = false;
+  let sclass = top ? 'top' : '';
 </script>
 
-<div class="tooltip">{value}
-  {#if tooltipValue}
-    <span class="tooltiptext">{tooltipValue}</span>
-  {/if}
-</div>
+{#if translateKey}
+  <div class="tooltip">{translate(translateKey)}
+    <span class="tooltiptext {sclass}">{translateDescription(translateKey)}</span>
+  </div>
+{:else }
+  <div class="tooltip">{value}
+    {#if tooltipValue}
+      <span class="tooltiptext {sclass}">{tooltipValue}</span>
+    {/if}
+  </div>
+{/if}
 
 <style lang="scss">
-  /* Tooltip container */
+
   .tooltip {
     position: relative;
     display: inline-block;
@@ -31,11 +42,16 @@
       border-radius: 6px;
       position: absolute;
       z-index: 1;
-      bottom: 100%;
+      top: 100%;
       left: 50%;
       margin-left: -60px;
-    }
+      text-transform: none;
 
+      &.top {
+        bottom: 100%;
+        top: auto;
+      }
+    }
   }
 
 </style>

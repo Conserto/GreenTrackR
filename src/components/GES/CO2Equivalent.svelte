@@ -12,8 +12,7 @@
     class="ges-equivalent_value"
     style:color={measure?.score?.textColor}
     style:background-color={measure?.score?.color}
-    >{measure?.ges?.pageTotal?.toFixed(2)} {Units.carbonEmissions}</span
-  >
+    >{measure?.ges?.pageTotal?.toFixed(2)} {Units.carbonEmissions}</span>
 </div>
 
 <style lang="scss">

@@ -49,7 +49,7 @@ export const gesTableHeaders = [
   },
   {
     id: "gesUserIntensity",
-    translateKey: "gesUserIntensity"
+    translateKey: "gesUserIntensityShort"
   },
   {
     id: 'gesZone',
@@ -57,6 +57,6 @@ export const gesTableHeaders = [
   },
   {
     id: 'gesIntensity',
-    translateKey: 'gesIntensity'
+    translateKey: 'gesIntensityShort'
   }
 ];
