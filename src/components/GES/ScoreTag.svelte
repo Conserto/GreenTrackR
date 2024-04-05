@@ -3,7 +3,7 @@
   import { ALL_SCORES } from 'src/const';
   import type { Score } from 'src/interface';
   import { ScoreService } from 'src/service';
-  import { translate } from 'src/utils/utils';
+  import Tooltip from '../Tooltip.svelte';
 
   export let score: Score | undefined;
 
@@ -11,7 +11,10 @@
 </script>
 
 <div class="scores-tag">
-  <p class="score-label">{translate('gesScore')} :</p>
+  <p class="grade-label">
+    <span><Tooltip translateKey="gesGrade" /> :</span>
+    <span class="score-label"><Tooltip translateKey="gesScore" /> :</span>
+  </p>
   {#each ALL_SCORES as scoreLevel}
     <div class="score" style:background-color={scoreLevel.color}>
       <span
@@ -37,7 +40,7 @@
     max-width: 280px;
   }
 
-  .score-label {
+  .grade-label {
     margin-right: var(--spacing--xxl);
     font-weight: var(--font-weight--bold);
   }
@@ -76,6 +79,15 @@
     color: var(--color--dark);
     position: relative;
     top: 3rem;
+    font-weight: var(--font-weight--bold);
+    font-size: var(--font-size--sm);
+  }
+
+  .score-label {
+    display: flex;
+    color: var(--color--dark);
+    position: relative;
+    top: 1rem;
     font-weight: var(--font-weight--bold);
     font-size: var(--font-size--sm);
   }
