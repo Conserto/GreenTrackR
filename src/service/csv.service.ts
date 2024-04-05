@@ -18,17 +18,17 @@ const create_csv = (measureHistory: Measure[]) => {
       ';' +
       measure.dom +
       ';' +
-      formatNumber(measure.ges.dataCenterTotal) +
+      formatNumber(measure.ges?.dataCenterTotal) +
       ';' +
-      formatNumber(measure.ges.networkTotal) +
+      formatNumber(measure.ges?.networkTotal) +
       ';' +
-      formatNumber(measure.ges.deviceTotal) +
+      formatNumber(measure.ges?.deviceTotal) +
       ';' +
-      formatNumber(measure.ges.pageTotal) +
+      formatNumber(measure.ges?.pageTotal) +
       ';' +
-      formatNumber(measure.score.value ?? -1) +
+      formatNumber(measure.score?.value) +
       ';' +
-      measure.score.gradeLetter +
+      measure.score?.gradeLetter +
       ';' +
       measure.serverGES?.countryName +
       ';' +

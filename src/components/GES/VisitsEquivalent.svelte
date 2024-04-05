@@ -9,17 +9,16 @@
   export let measure: Measure | undefined;
 
   let visitsNumber = NUMBER_OF_VISITS >= 1 ? NUMBER_OF_VISITS : 1000;
-  let visitsNumberStr = visitsNumber.toString();
 
-  $: carEquivalent = (((measure ? measure.ges.pageTotal : 0) / CAR_AVERAGE_CO2) * visitsNumber).toFixed(2);
-  $: phoneEquivalent = (((measure ? measure.ges.pageTotal : 0) / PHONE_AVERAGE_CO2) * visitsNumber).toFixed(2);
+  $: carEquivalent = (((measure?.ges?.pageTotal ? measure.ges.pageTotal : 0) / CAR_AVERAGE_CO2) * visitsNumber).toFixed(2);
+  $: phoneEquivalent = (((measure?.ges?.pageTotal ? measure.ges.pageTotal : 0) / PHONE_AVERAGE_CO2) * visitsNumber).toFixed(2);
 </script>
 
 <div class="visit-eq-container">
   <Input
     type={InputTypeEnum.NUMBER}
     name="numberVisit"
-    bind:value={visitsNumberStr}
+    bind:value={visitsNumber}
     translateKey="eitherFor"
   />
   <p>{translate('visitEquivalent')}</p>

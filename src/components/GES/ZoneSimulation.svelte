@@ -3,8 +3,7 @@
   import { translate } from 'src/utils/utils';
   import { codeZone } from 'src/assets/data/codeZone';
 
-  import { Button, Select } from 'src/components';
-  import { ButtonTypeEnum } from 'src/enum';
+  import { Select } from 'src/components';
   import { SEARCH_AUTO } from '../../const/key.const';
 
   let zonesOptions: any[], countryCodeSelected: string, userCountryCodeSelected: string;
@@ -25,17 +24,20 @@
   }
 </script>
 
-<form class="zone-simulation" on:submit|preventDefault={handleSubmitSimulation}>
+
+<form class="zone-simulation">
   <div class="simulation-select simulation-region">
     <span class="simulation-select__label">{translate('serverRegionLabel')}</span>
-    <Select bind:selectedValue={countryCodeSelected} selectValues={zonesOptions} name="simulation-server-region-label" />
+    <Select bind:selectedValue={countryCodeSelected} selectValues={zonesOptions}
+            name="simulation-server-region-label" on:selectChange={handleSubmitSimulation} />
   </div>
   <div class="simulation-select simulation-user">
     <span class="simulation-select__label">{translate('serverUserLabel')}</span>
-    <Select bind:selectedValue={userCountryCodeSelected} selectValues={zonesOptions} name="simulation-user-region-label" />
+    <Select bind:selectedValue={userCountryCodeSelected} selectValues={zonesOptions}
+            name="simulation-user-region-label" on:selectChange={handleSubmitSimulation} />
   </div>
-  <Button translateKey="validateRegionButton" buttonType={ButtonTypeEnum.SECONDARY}></Button>
 </form>
+
 
 <style lang="scss">
   .zone-simulation {

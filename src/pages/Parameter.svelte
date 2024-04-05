@@ -57,6 +57,7 @@
   on:buttonClick={onSaveParameters}
   buttonType={ButtonTypeEnum.PRIMARY}
   translateKey="paramBtnSave"
+  tooltip={true}
 />
 
 <style lang="scss">

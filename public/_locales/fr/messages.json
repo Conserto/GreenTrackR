@@ -2,38 +2,101 @@
   "analysisInProgress": {
     "message": "Analyse en cours. Naviguez sur l'onglet actif puis revenez ici pour les résultats.#Message analyse en cours"
   },
-  "firstResults": {
-    "message": "Premiers résultats reçus !#Les premiers résultat de l'analyse ont été calculés"
+  "autoscrollPercentInput": {
+    "message": "Saisir le % de la page à scroller pour l'analyse"
   },
-  "clearBrowserCacheButton": {
-    "message": "Supprimer le cache#Bouton nettoyage du cache"
+  "autoscrollPxInput": {
+    "message": "Saisir le nombre de pixels à scroller pour l'analyse"
   },
-  "resetMeasure": {
-    "message": "Réinitialiser la mesure#Remise à zéro du compteur"
+  "backToTop": {
+    "message": "Remonter la page#Remonter la page jusqu'au début"
   },
-  "refresh": {
-    "message": "Recharger la page#Recharger la page"
-  },
-  "csvColumnsLabel": {
-    "message": "Date;Url;Taille decompressée(o);Taille compressée(Ko);DOM;GES Data Center(gCO2eq/kWh);GES Réseau(gCO2eq/kWh);GES Périphérique(gCO2eq/kWh);GES Total(gCO2eq/kWh); GES Score; Grade; Pays; IntensiteCarbon; NombreRequetes#csvColumnsLabel"
-  },
-  "date": {
-    "message": "Date#Date"
-  },
-  "deleteAllButton": {
-    "message": "Effacer tout#Delete All Button"
-  },
-  "deleteAllConfirmMessage": {
-    "message": "Voulez vous vraiment supprimer tout l'historique ?#Delete All Confirm Message"
-  },
-  "deleteButton": {
-    "message": "Effacer#Delete Button"
-  },
-  "exportButton": {
-    "message": "Exporter#Export Button"
+  "betaMessage": {
+    "message": "Cette fonctionnalité est une version bêta, des erreurs peuvent survenir."
   },
   "cancelButton": {
     "message": "Annuler#Annuler"
+  },
+  "carIndicator": {
+    "message": "Km en voiture"
+  },
+  "clearBrowserCacheButton": {
+    "message": "Supprimer le cache#Nettoyage du cache pour ce site"
+  },
+  "closePopup": {
+    "message": "Fermer#Fermer la popup"
+  },
+  "csvColumnsLabel": {
+    "message": "Date;Url;Taille decompressée(o);Taille compressée(Ko);DOM;GES Data Center(gCO2eq/kWh);GES Réseau(gCO2eq/kWh);GES Périphérique(gCO2eq/kWh);GES Total(gCO2eq/kWh); GES Score; Grade; Pays; IntensiteCarbon; NombreRequetes"
+  },
+  "dataCenterTotal": {
+    "message": "Centre de données#Emissions GES totales des centres de données"
+  },
+  "date": {
+    "message": "Date#Date de l'action"
+  },
+  "deleteAllButton": {
+    "message": "Effacer tout#Effacer tout"
+  },
+  "deleteAllConfirmMessage": {
+    "message": "Voulez vous vraiment supprimer tout l'historique ?"
+  },
+  "deleteButton": {
+    "message": "Effacer#Effacer"
+  },
+  "deviceTotal": {
+    "message": "Appareils#Emissions GES totales des appareils electroniques"
+  },
+  "eitherFor": {
+    "message": "Soit pour "
+  },
+  "energyDefault": {
+    "message": "Energie (Wh)"
+  },
+  "errorNoToken": {
+    "message": "Aucun token CO2 trouvé, l'extension pourrait ne pas fonctionner"
+  },
+  "exportButton": {
+    "message": "Exporter#Exporter les données"
+  },
+  "firstResults": {
+    "message": "Premiers résultats reçus !"
+  },
+  "gesDataCenter": {
+    "message": "GES Data#GES Data Center en gCO2eq"
+  },
+  "gesDevice": {
+    "message": "GES Périph#GES Périphérique en gCO2eq"
+  },
+  "gesGrade": {
+    "message": "Grade#Grade"
+  },
+  "gesIntensity": {
+    "message": "Intensité Carbone serveur#Intensité carbone, en gCO2eq/Kwh, du serveur depuis elctrictymaps"
+  },
+  "gesIntensityShort": {
+    "message": "I. Carb. serveur#Intensité carbone, en gCO2eq/Kwh, du serveur depuis elctrictymaps"
+  },
+  "gesNetwork": {
+    "message": "GES Réseau#GES réseau en gCO2eq"
+  },
+  "gesScore": {
+    "message": "Score#Score"
+  },
+  "gesTotal": {
+    "message": "GES Total#GES Total en gCO2eq"
+  },
+  "gesUserIntensity": {
+    "message": "Intensité Carbone client#Intensité carbone, en gCO2eq/Kwh, de l'utilisateur depuis elctrictymaps"
+  },
+  "gesUserIntensityShort": {
+    "message": "I. Carb. client#Intensité carbone, en gCO2eq/Kwh, de l'utilisateur depuis elctrictymaps"
+  },
+  "gesUserZone": {
+    "message": "Client#Pays où l'ip de l'utilisateur se trouve"
+  },
+  "gesZone": {
+    "message": "Serveur#Pays où l'ip du serveur se trouve"
   },
   "greenhouseGasesEmission": {
     "message": "GES#Greenhouse Gases Emission (gCO2eq)"
@@ -41,35 +104,14 @@
   "greenhouseGasesEmissionDefault": {
     "message": "GES (gCO2eq)#Greenhouse Gases Emission (gCO2eq), default"
   },
-  "energyDefault": {
-    "message": "Energie (Wh)#Energy used, default"
-  },
-  "gesDataCenter": {
-    "message": "GES Data Center#GES Data Center"
-  },
-  "gesNetwork": {
-    "message": "GES Réseau#GES Network"
-  },
-  "gesDevice": {
-    "message": "GES Périphérique#GES Device"
-  },
-  "gesTotal": {
-    "message": "GES Total#GES Total"
-  },
-  "gesScore": {
-    "message": "Score#Score"
-  },
-  "gesGrade": {
-    "message": "Grade#Grade"
-  },
   "historyButton": {
-    "message": "Historique#History Button"
+    "message": "Historique#Affichier l'historique"
+  },
+  "infoMix": {
+    "message": "Vos émissions dépendent du mix énergétique du pays dans lequel vous vous trouvez, et dans lequel le site est hébergé. Ce mix énergétique peut varier d'heure en heure et au gré des saisons :#Infos pour comprendre l'impact du mix énergétiques"
   },
   "launchAnalysisButton": {
     "message": "Analyser#Le lancement de l'analyse ne prend pas en compte la partie de l'écran occultée par la devtools"
-  },
-  "startJourneyButton": {
-    "message": "Démarrer l'enregistrement#Lancer l'enregistrement"
   },
   "launchAnalysisButtonWithAutoScrollButton": {
     "message": "Auto Scroller#Lancer l'analyse avec scroll auto"
@@ -77,77 +119,20 @@
   "menuText": {
     "message": "GreenTrackr V1.0.2 est installé et accessible via le panneau développeur (F12 ou CMD + ALT + i sur Mac) #Text when you click on the plugin's icone"
   },
-  "resetJourneyButton": {
-    "message": "Réinitialiser le parcours#Réinitialiser le parcours"
+  "messageResults": {
+    "message": "Résumé l'analyse du parcours effectué"
   },
-  "receivedResults": {
-    "message": "Résultats reçus#Received user journey results"
+  "messageResultsAnalysis": {
+    "message": "Résultat de l'analyse#Résultat de l'analyse"
   },
-  "saveAnalysisButton": {
-    "message": "Enregistrer l'évaluation#Save Analysis Button"
-  },
-  "stopJourneyButton": {
-    "message": "Stopper l'enregistrement#Stop Journey Analysis"
-  },
-  "sizeTransferred": {
-    "message": "Taille de la page#Transferred size (KB)"
-  },
-  "sizeTransferredBytesCompressed": {
-    "message": "Taille de la page compressée#Compressed transferred size (KB)"
-  },
-  "sizeTransferredBytesUncompressed": {
-    "message": "Taille de la page décompressée#Uncompressed transferred size (KB)"
-  },
-  "sizeTransferredBytes": {
-    "message": "Taille de la page (compressée / décompressée)#Transferred size (KB)"
-  },
-  "tabEvaluation": {
-    "message": "Evaluation/Page#GES analysis tab"
-  },
-  "tabAutoScroll": {
-    "message": "Auto Scroll/Page#GES auto scroll analysis tab"
-  },
-  "tabJourney": {
-    "message": "Parcours Utilisateur#User Journey tab"
-  },
-  "tabHelp": {
-    "message": "Aide#Aide tab"
-  },
-  "url": {
-    "message": "Url#Url"
-  },
-  "viewHistoryButton": {
-    "message": "Voir l'historique#View History Button"
-  },
-  "backToTop": {
-    "message": "Remonter la page#Remonter la page"
-  },
-  "gesZone": {
-    "message": "Localisation serveur#Donne le pays où l'ip du serveur se trouve"
-  },
-  "gesUserZone": {
-    "message": "Localisation utilisateur#Donne le pays où l'ip de l'utilisateur se trouve"
-  },
-  "gesIntensity": {
-    "message": "Intensité carbone serveur#Donne l'intensité carbon du serveur depuis elctrictymaps"
-  },
-  "gesUserIntensity": {
-    "message": "Intensité carbone utilisateur#Donne l'intensité carbon de l'utilisateur depuis elctrictymaps"
+  "messageResultsDetail": {
+    "message": "Résultat détaillé de l'analyse du parcours effectué"
   },
   "nbRequest": {
-    "message": "Nombre de requêtes hors extensions 'réel (cache)'#Nombre de requêtes effectuées par le site"
+    "message": "Requêtes#Nombre de requêtes hors extensions 'réel (cache)'"
   },
-  "infoMix": {
-    "message": "Vos émissions dépendent du mix énergétique du pays dans lequel vous vous trouvez, et dans lequel le site est hébergé. Ce mix énergétique peut varier d'heure en heure et au gré des saisons :#Infos pour comprendre l'impact du mix énergétiques"
-  },
-  "betaMessage": {
-    "message": "Cette fonctionnalité est une version bêta, des erreurs peuvent survenir.#Message pour prévenir l'utilisateur que toutes les fonctionnalités ne sont pas présentes"
-  },
-  "saveAnalysis": {
-    "message": "L'évaluation a bien été enregistrée.#Message de popup"
-  },
-  "closePopup": {
-    "message": "Fermer#Texte pour fermer la popup"
+  "networkTotal": {
+    "message": "Réseau#Emissions GES totales du réseau"
   },
   "nocontentPhrase": {
     "message": "Estimez l'empreinte carbone de votre site web#message quand on arrive sur la page auto-scroll et que l'analyse n'est pas encore lancée"
@@ -155,166 +140,139 @@
   "noContentPhraseEvaluation": {
     "message": "Estimez l'empreinte carbone de votre site web#message quand on arrive sur la page évaluation d'impact et que l'analyse n'est pas encore lancée"
   },
+  "noFullData": {
+    "message": "Localisation (Serveur ou Utilisateur) non déterminée, utiliser le simulateur pour accéder aux résultats"
+  },
+  "numberVisit": {
+    "message": "Nombre de visites#Label pour l'indicateur visite"
+  },
+  "pageTotal": {
+    "message": "Total page#Emissions GES totales du site"
+  },
+  "paramBtnSave": {
+    "message": "Sauvegarder#Sauvegarder la configuration"
+  },
+  "paramCo2TokenLabel": {
+    "message": "Token API CO2signal"
+  },
+  "paramNbRetryLabel": {
+    "message": "Nombre d'essais"
+  },
+  "paramRetryDescription": {
+    "message": "Saisissez le nombre maximal d'essais afin d'éviter les erreurs de calcul des requêtes HTTP pour les sites que vous souhaitez analyser."
+  },
+  "paramTabTitle": {
+    "message": "Paramétrage"
+  },
+  "paramTokenCo2Description": {
+    "message": "GreenTrackR utilise l'API 'CO2signal' de 'Electricity Maps', afin de pouvoir utiliser cette API il vous faut un token d'accès, cliquez sur le lien puis sur 'Go to api portal' -> #https://www.co2signal.com/"
+  },
+  "pixelDisplayed": {
+    "message": "Cet onglet affiche une hauteur de #Nombre de pixel du viewport"
+  },
+  "receivedResults": {
+    "message": "Résultats reçus#Received user journey results"
+  },
+  "refresh": {
+    "message": "Recharger la page#Recharger la page"
+  },
+  "resetJourneyButton": {
+    "message": "Réinitialiser le parcours#Réinitialiser le parcours"
+  },
+  "resetMeasure": {
+    "message": "Réinitialiser la mesure#Remise à zéro du compteur"
+  },
+  "saveAnalysis": {
+    "message": "L'évaluation a bien été enregistrée.#Message de popup"
+  },
+  "saveAnalysisButton": {
+    "message": "Enregistrer l'évaluation#Save Analysis Button"
+  },
   "serverRegionLabel": {
     "message": "Simuler la localisation du serveur dans une autre zone : #Label pour la selection"
   },
   "serverUserLabel": {
     "message": "Simuler la localisation de l'utilisateur dans une autre zone : #Label pour la selection"
   },
-  "eitherFor": {
-    "message": "Soit pour #Label l'information sur les visites part. 1"
+  "sizeTransferred": {
+    "message": "Taille de la page#Transferred size (KB)"
   },
-  "visitEquivalent": {
-    "message": "visite(s) l'équivalent de : #Label l'information sur les visites part. 2"
+  "sizeTransferredBytes": {
+    "message": "Taille page#Taille de la page (compressée / décompressée) en KB"
+  },
+  "sizeTransferredBytesCompressed": {
+    "message": "Taille de la page compressée#Compressed transferred size (KB)"
+  },
+  "sizeTransferredBytesUncompressed": {
+    "message": "Taille de la page décompressée#Uncompressed transferred size (KB)"
   },
   "smartphoneIndicator": {
     "message": "Smartphones chargés#Label pour l'indicateur smartphone"
   },
-  "carIndicator": {
-    "message": "Km en voiture#Label pour l'indicateur voiture"
+  "startJourneyButton": {
+    "message": "Démarrer l'enregistrement#Lancer l'enregistrement"
   },
-  "numberVisit": {
-    "message": "Nombre de visites#Label pour l'indicateur visite"
+  "stopJourneyButton": {
+    "message": "Stopper l'enregistrement#Stop Journey Analysis"
   },
-  "messageResultsAnalysis": {
-    "message": "Résultat de l'analyse#Résultat de l'analyse"
+  "synTabFootTotal": {
+    "message": "Total#Total cumulé du parcours"
   },
-  "messageResults": {
-    "message": "Résultat de l'analyse du parcours effectué#Résultat de l'analyse"
+  "synTabHeadClick": {
+    "message": "Clique#Action de selection dans la page"
   },
-  "validateRegionButton": {
-    "message": "Valider#Valider Région"
+  "synTabHeadCount": {
+    "message": "Hit#Nombre d'actions"
   },
-  "help_test_extension": {
-    "message": "Tester l'extension#Tester l'extension"
+  "synTabHeadGes": {
+    "message": "GES#GES Total de l'action"
   },
-  "help_prerequisite_field": {
-    "message": "Attention : Cette version de l'extension n'est compatible qu'avec Manifest V3 (Chromium). Une version spécifique pour Firefox / Manifest V2 sera disponible séparément.#Attention : Cette version de l'extension n'est compatible qu'avec Manifest V3 (Chromium). Une version spécifique pour Firefox / Manifest V2 sera disponible séparément."
+  "synTabHeadGrade": {
+    "message": "Grade#Lettre du Grade (A -> F)"
   },
-  "help_use_extension": {
-    "message": "Utiliser l'extension#Utiliser l'extension"
+  "synTabHeadPage": {
+    "message": "Page#Toutes actions confondues"
   },
-  "help_use_extension_nav_tools": {
-    "message": "Ouvrir les outils de développement du navigateur.#Ouvrir les outils de développement du navigateur."
+  "synTabHeadRequest": {
+    "message": "Requête#Nombre de requête, hors extension, forme : 'requête (cache)'"
   },
-  "help_use_extension_eval_page": {
-    "message": "Aller dans l'onglet 'Evaluation/Page'.#Aller dans l'onglet 'Evaluation/Page'."
+  "synTabHeadScore": {
+    "message": "Score#Score de l'action"
   },
-  "help_use_extension_analyze": {
-    "message": "Dans le navigateur, aller sur la page à analyser.#Dans le navigateur, aller sur la page à analyser."
+  "synTabHeadScroll": {
+    "message": "Scroll#Action de défilement de la page"
   },
-  "help_use_extension_start_analysis": {
-    "message": "Dans l'onglet 'Evaluation/Page' des outils de développement, cliquer sur le bouton 'Démarrer l'analyse'.#Dans l'onglet 'Evaluation/Page' des outils de développement, cliquer sur le bouton 'Démarrer l'analyse'."
+  "synTabHeadSize": {
+    "message": "Taille#Taille des données (compressées/décompressées)"
   },
-  "help_use_extension_results": {
-    "message": "Les résultats s'affichent.#Les résultats s'affichent."
+  "synTabHeadUrl": {
+    "message": "Url#Url de la page"
   },
-  "help_use_extension_save": {
-    "message": "Vous pouvez sauvegarder ce résultat dans un historique (seuls les indicateurs sont enregistrés) via le bouton 'Enregistrer l'évaluation'.#Vous pouvez sauvegarder ce résultat dans un historique (seuls les indicateurs sont enregistrés) via le bouton 'Enregistrer l'évaluation'."
+  "tabAutoScroll": {
+    "message": "Auto Scroll/Page#GES auto scroll analysis tab"
   },
-  "help_use_extension_saved_results": {
-    "message": "L'historique des résultats sauvegardés est disponible via le bouton 'Voir l'historique'.#L'historique des résultats sauvegardés est disponible via le bouton 'Voir l'historique'."
+  "tabEvaluation": {
+    "message": "Evaluation/Page#GES analysis tab"
   },
-  "help_warnings": {
-    "message": "Quelques points de vigilance#Quelques points de vigilance"
-  },
-  "help_warnings_no_requests": {
-    "message": "Si le nombre de requêtes est à zéro, c'est probablement parce que vous n'avez pas chargé la page avec les outils de développement démarrés. Il faut donc penser à faire un rechargement de la page.#Si le nombre de requêtes est à zéro, c'est probablement parce que vous n'avez pas chargé la page avec les outils de développement démarrés. Il faut donc penser à faire un rechargement de la page."
-  },
-  "help_warnings_correct_eval": {
-    "message": "Pour avoir des évaluations correctes, il faut préalablement vider le cache du navigateur (Dans le cas contraire, le volume transféré va être réduit si vous avez déjà consulté le site mesuré). Pour vous éviter d'aller dans les menus du navigateur, un bouton est prévu à cet effet dans l'extension 'Réinitialiser les paramètres'.#Pour avoir des évaluations correctes, il faut préalablement vider le cache du navigateur (Dans le cas contraire, le volume transféré va être réduit si vous avez déjà consulté le site mesuré). Pour vous éviter d'aller dans les menus du navigateur, un bouton est prévu à cet effet dans l'extension 'Réinitialiser les paramètres'."
-  },
-  "help_warnings_ad_block": {
-    "message": "L'utilisation d'un bloqueur de publicité ou autre filtre a une influence sur le résultat.#L'utilisation d'un bloqueur de publicité ou autre filtre a une influence sur le résultat."
-  },
-  "help_warnings_diff_results": {
-    "message": "Résultats différents entre deux analyses :#Résultats différents entre deux analyses :"
-  },
-  "help_warnings_continuous_update": {
-    "message": "Les mécanismes de mise à jour en continu (Même si le site semble avoir chargé, le chargement d’autres éléments peut toujours être en cours au lancement de l’analyse. Le volume de données téléchargées et le nombre de requêtes dépendent donc du moment où vous cliquez sur le bouton 'Démarrer l'analyse'). Le même effet s’applique si vous lancez l’analyse avant la fin de chargement du site.#Les mécanismes de mise à jour en continu (Même si le site semble avoir chargé, le chargement d’autres éléments peut toujours être en cours au lancement de l’analyse. Le volume de données téléchargées et le nombre de requêtes dépendent donc du moment où vous cliquez sur le bouton 'Démarrer l'analyse'). Le même effet s’applique si vous lancez l’analyse avant la fin de chargement du site."
-  },
-  "help_warnings_ads": {
-    "message": "Les publicités qui peuvent changer entre deux analyses (la localisation, l'heure de la journée, visites précédentes avec son navigateur et bien d'autres paramètres qui sont pris en compte par les spécialistes du retargeting vont se traduire par le chargement en cascade de librairies *.js différentes et de l'affichage de contenus publicitaires différents).#Les publicités qui peuvent changer entre deux analyses (la localisation, l'heure de la journée, visites précédentes avec son navigateur et bien d'autres paramètres qui sont pris en compte par les spécialistes du retargeting vont se traduire par le chargement en cascade de librairies *.js différentes et de l'affichage de contenus publicitaires différents)."
-  },
-  "help_warnings_scrolling": {
-    "message": "Le scrolling :  si vous réalisez un scrolling au moment de l'analyse, vous risquez de lancer des chargements de données qui n’auraient normalement pas eu lieu.#Le scrolling :  si vous réalisez un scrolling au moment de l'analyse, vous risquez de lancer des chargements de données qui n’auraient normalement pas eu lieu."
-  },
-  "help_warnings_privacy": {
-    "message": "Le niveau de 'privacy' qui, selon le niveau paramétré et selon le navigateur, induira lui aussi des effets de bord.#Le niveau de 'privacy' qui, selon le niveau paramétré et selon le navigateur, induira lui aussi des effets de bord."
-  },
-  "help_warnings_cache": {
-    "message": "Les effets de cache.#Les effets de cache."
-  },
-  "help_warnings_user_path": {
-    "message": "Enregistrement du parcours utilisateur :#Enregistrement du parcours utilisateur :"
-  },
-  "help_warnings_env_impacts": {
-    "message": "Vous pouvez quantifier les impacts environnementaux d'un parcours utilisateur en allant sur l'onglet 'Parcours Utilisateur'. En démarrant l'analyse, en cliquant sur le bouton 'Démarrer l'enregistrement d'un parcours', l'extension enregistrera les résultats pour chaque URL visitée. Une fois le parcours terminé, l'appui sur le bouton 'Stopper l'enregistrement' permet d'afficher le tableau des résultats pour chaque URL, ainsi que les différents totaux. 'Réinitialiser le parcours' permet de vider les résultats stockés en local et ainsi de redémarrer un parcours à zéro.#Vous pouvez quantifier les impacts environnementaux d'un parcours utilisateur en allant sur l'onglet 'Parcours Utilisateur'. En démarrant l'analyse, en cliquant sur le bouton 'Démarrer l'enregistrement d'un parcours', l'extension enregistrera les résultats pour chaque URL visitée. Une fois le parcours terminé, l'appui sur le bouton 'Stopper l'enregistrement' permet d'afficher le tableau des résultats pour chaque URL, ainsi que les différents totaux. 'Réinitialiser le parcours' permet de vider les résultats stockés en local et ainsi de redémarrer un parcours à zéro."
-  },
-  "help_warnings_permissions": {
-    "message": "Permissions de l'extension :#Permissions de l'extension :"
-  },
-  "help_warnings_permissions_use": {
-    "message": "Pour fonctionner, l'extension utilise les permissions suivantes :#Pour fonctionner, l'extension utilise les permissions suivantes :"
-  },
-  "help_warnings_activeTab": {
-    "message": "activeTab, tabs : utilisée pour afficher la page des analyses sauvegardées et pour accéder aux contenus des pages pour l'analyse.#activeTab, tabs : utilisée pour afficher la page des analyses sauvegardées et pour accéder aux contenus des pages pour l'analyse."
-  },
-  "help_warnings_all_urls": {
-    "message": "<all_urls> : utilisée pour accéder aux URLs pour l'analyse.#<all_urls> : utilisée pour accéder aux URLs pour l'analyse."
-  },
-  "help_warnings_browsing_data": {
-    "message": "browsingData : utilisée pour vider le cache du navigateur.#browsingData : utilisée pour vider le cache du navigateur."
-  },
-  "help_warnings_storage": {
-    "message": "storage : utilisée pour stocker les différentes mesures.#storage : utilisée pour stocker les différentes mesures."
-  },
-  "help_warnings_web_nav": {
-    "message": "web Navigation : utilisée pour détecter la fin du chargement de la page analysée.#web Navigation : utilisée pour détecter la fin du chargement de la page analysée."
-  },
-  "dataCenterTotal": {
-    "message": "Centre de données#Emissions GES totales des centres de données"
-  },
-  "networkTotal": {
-    "message": "Réseau#Emissions GES totales du réseau"
-  },
-  "deviceTotal": {
-    "message": "Appareils#Emissions GES totales des appareils electroniques"
-  },
-  "pageTotal": {
-    "message": "Total page#Emissions GES totales du site"
-  },
-  "pixelDisplayed": {
-    "message": "Cet onglet affiche une hauteur de #Nombre de pixel du viewport"
-  },
-  "autoscrollPxInput": {
-    "message": "Saisir le nombre de pixels à scroller pour l'analyse#Nombre de pixels à scroller"
-  },
-  "autoscrollPercentInput": {
-    "message": "Saisir le % de la page à scroller pour l'analyse#% de la page à scroller"
-  },
-  "errorNoToken": {
-    "message": "Aucun token CO2 trouvé, l'extension pourrait ne pas fonctionner#Variable d'environnement inconnue"
-  },
-  "paramTabTitle": {
-    "message": "Paramétrage"
+  "tabJourney": {
+    "message": "Parcours Utilisateur#User Journey tab"
   },
   "tabParameter": {
     "message": "Paramètres"
   },
-  "paramTokenCo2Description": {
-    "message": "GreenTrackR utilise l'API 'CO2signal' de 'Electricity Maps', afin de pouvoir utiliser cette API il vous faut un token d'accès, cliquez sur le lien puis sur 'Go to api portal' -> #https://www.co2signal.com/"
+  "url": {
+    "message": "Url#Url de la page"
   },
-  "paramCo2TokenLabel": {
-    "message": "Token API CO2signal"
+  "urlAction": {
+    "message": "Action#Action effectuée durant le parcours"
   },
-  "paramRetryDescription": {
-    "message": "Saisissez le nombre maximal d'essais afin d'éviter les erreurs de calcul des requêtes HTTP pour les sites que vous souhaitez analyser."
+  "validateRegionButton": {
+    "message": "Valider#Valider Région"
   },
-  "paramNbRetryLabel": {
-    "message": "Nombre d'essais"
+  "viewHistoryButton": {
+    "message": "Voir l'historique#View History Button"
   },
-  "paramBtnSave": {
-    "message": "Sauvegarder"
+  "visitEquivalent": {
+    "message": "visite(s) l'équivalent de : #Label l'information sur les visites part. 2"
   }
 }

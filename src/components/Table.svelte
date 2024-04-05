@@ -1,12 +1,13 @@
 <script lang="ts">
-  import { translate } from 'src/utils/utils';
+  import { translate, translateDescription } from 'src/utils/utils';
   import type { TableData, TableHeader } from 'src/interface/table.interface';
   import Button from './Button.svelte';
   import { ButtonTypeEnum } from 'src/enum';
   import { createEventDispatcher } from 'svelte';
+  import Tooltip from './Tooltip.svelte';
 
   export let columnHeaders: TableHeader[] = [];
-  export let datas: Map<string,TableData>[] = [];
+  export let datas: Map<string, TableData>[] = [];
 
   const dispatch = createEventDispatcher();
 </script>
@@ -17,7 +18,9 @@
     <tr>
       {#if columnHeaders.length > 0}
         {#each columnHeaders as columnHeader}
-          <th scope="col">{translate(columnHeader.translateKey)}</th>
+          <th scope="col">
+            <Tooltip translateKey={columnHeader.translateKey} />
+          </th>
         {/each}
       {/if}
     </tr>
@@ -35,13 +38,18 @@
                   buttonType={ButtonTypeEnum.SECONDARY}
                   translateKey={data.get(header.id)?.content ?? ""}
                 />
+              {:else if data.get(header.id)?.detail}
+                <Tooltip
+                  top={true}
+                  value={data.get(header.id)?.content}
+                  tooltipValue={data.get(header.id)?.detail} />
               {:else}
                 {translate(data.get(header.id)?.content)}
               {/if}
             </td>
           {/each}
-<!--        {:else}
-          <td style={data.?.style}>{translate(data.get(index)?.content)}</td>-->
+          <!--        {:else}
+                    <td style={data.?.style}>{translate(data.get(index)?.content)}</td>-->
         {/if}
       </tr>
     {/each}

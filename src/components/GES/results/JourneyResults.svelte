@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Measure } from 'src/interface';
   import { formatGesMeasuresForTable, translate } from 'src/utils/utils';
-  import { Table } from 'src/components';
+  import { SynthesisTable, Table } from 'src/components';
   import { gesTableHeaders } from 'src/const';
 
   export let measures: Measure[];
@@ -10,6 +10,10 @@
 </script>
 
 <h4 class="table-caption">{translate('messageResults')}</h4>
+<SynthesisTable datas={measures} />
+<br/>
+<br/>
+<h4 class="table-caption">{translate('messageResultsDetail')}</h4>
 <Table columnHeaders={gesTableHeaders} datas={dataFormatted} />
 
 <style lang="scss">

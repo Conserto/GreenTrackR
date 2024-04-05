@@ -1,21 +1,21 @@
 import type { Score } from 'src/interface/score.interface';
 import { ALL_SCORES } from 'src/const';
+import { logErr } from '../utils/log';
 
 export class ScoreService {
   constructor() {
   }
 
-  getScore(gesValue: number): Score {
-    let scoreValue = 0;
-    if (gesValue > 0) {
-      scoreValue = this.getScoreValue(gesValue);
+  getScore(gesValue: number | undefined): Score | undefined {
+    if (gesValue && gesValue > 0) {
+      let scoreValue = this.getScoreValue(gesValue);
+      const score = ALL_SCORES.find((grade: Score) => gesValue <= grade.limit);
+      if (score) {
+        return { ...score, value: scoreValue };
+      }
     }
-    const score = ALL_SCORES.find((grade: Score) => gesValue <= grade.limit);
-    if (score) {
-      return { ...score, value: scoreValue };
-    } else {
-      throw 'Score not found';
-    }
+    logErr('No Score found');
+    return undefined;
   }
 
   getAllScoreGrade() {

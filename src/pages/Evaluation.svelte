@@ -2,15 +2,8 @@
   import { ButtonTypeEnum } from 'src/enum';
   import { GesResults, HistoricResults } from 'src/components/GES/results';
   import { Button, Histogram, LoadingWheel, Modal } from 'src/components';
-  import { Tooltip } from 'flowbite-svelte';
   import { ZoneSimulation } from 'src/components/GES';
-  import {
-    getLocalStorageObject,
-    setLocalStorageObject,
-    toHistoFormattedDatas,
-    translate,
-    translateDescription
-  } from 'src/utils/utils';
+  import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { savedMeasures } from 'src/const';
   import { cleanCache, reloadCurrentTab } from 'src/utils/chrome.utils';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
@@ -31,6 +24,9 @@
   let measureAcquisition = new MeasureAcquisition();
   let currentMeasure: Measure | null;
   let histoDatas: HistoData[] = [];
+
+  let serverSearch = SEARCH_AUTO;
+  let userSearch = SEARCH_AUTO;
 
   const onResetMeasure = () => {
     currentMeasure = null;
@@ -64,21 +60,15 @@
     currentDisplayedTab = TabType.ResultTab;
     loading = true;
     await measureAcquisition.getNetworkMeasure(false);
-    currentMeasure = await measureAcquisition.getGESMeasure(SEARCH_AUTO, SEARCH_AUTO);
+    currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
     loading = false;
     histoDatas = toHistoFormattedDatas(currentMeasure);
   };
 
   const handleSimulation = async (event: any) => {
-    loadGes = true;
     const { countryCodeSelected, userCountryCodeSelected } = event.detail;
-    await measureAcquisition.getNetworkMeasure(false);
-    currentMeasure = await measureAcquisition.getGESMeasure(
-      countryCodeSelected,
-      userCountryCodeSelected
-    );
-    histoDatas = toHistoFormattedDatas(currentMeasure);
-    loadGes = false;
+    serverSearch = countryCodeSelected;
+    userSearch = userCountryCodeSelected;
   };
 </script>
 
@@ -87,51 +77,51 @@
     on:buttonClick={handleRunAnalysis}
     buttonType={ButtonTypeEnum.PRIMARY}
     translateKey={'launchAnalysisButton'}
+    tooltip={true}
   />
-  <Tooltip>{translateDescription('launchAnalysisButton')}</Tooltip>
   <Button
     on:buttonClick={onSaveCurrentMeasure}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="saveAnalysisButton"
     disabled={!currentMeasure}
+    tooltip={true}
   />
-  <Tooltip>{translateDescription('saveAnalysisButton')}</Tooltip>
   <Button
     on:buttonClick={() => (currentDisplayedTab = TabType.HistoricTab)}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="viewHistoryButton"
+    tooltip={true}
   />
-  <Tooltip>{translateDescription('viewHistoryButton')}</Tooltip>
   <Button
     on:buttonClick={onCleanCache}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="clearBrowserCacheButton"
+    tooltip={true}
   />
-  <Tooltip>{translateDescription('clearBrowserCacheButton')}</Tooltip>
   <Button
     on:buttonClick={onResetMeasure}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="resetMeasure"
     disabled={!currentMeasure}
+    tooltip={true}
   />
-  <Tooltip>{translateDescription('resetMeasure')}</Tooltip>
   <Button
     on:buttonClick={onRefresh}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="refresh"
+    tooltip={true}
   />
-  <Tooltip>{translateDescription('refresh')}</Tooltip>
 </div>
+<ZoneSimulation on:submitSimulation={handleSimulation} />
 {#if currentDisplayedTab === TabType.ResultTab}
   {#if currentMeasure && !loading}
     <GesResults measure={currentMeasure} />
-    <ZoneSimulation on:submitSimulation={handleSimulation} />
     <div class="histo-container">
       {#if loadGes}
         <div class="loading-ges">
           <LoadingWheel />
         </div>
-      {:else}
+      {:else if currentMeasure?.complete}
         <Histogram
           datas={histoDatas}
           yLabel="greenhouseGasesEmissionDefault"

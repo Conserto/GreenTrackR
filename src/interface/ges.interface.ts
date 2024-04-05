@@ -1,15 +1,15 @@
 export interface GES {
-  carbonIntensity: number;
+  carbonIntensity?: number;
   countryName: string;
-  cityName: string;
+  cityName?: string;
   countryCode: string;
 }
 
 export interface GESTotals {
-  dataCenterTotal: number;
-  networkTotal: number;
-  deviceTotal: number;
-  pageTotal: number;
+  dataCenterTotal?: number;
+  networkTotal?: number;
+  deviceTotal?: number;
+  pageTotal?: number;
 }
 
 export interface CarbonDatas {

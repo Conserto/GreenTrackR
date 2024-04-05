@@ -2,17 +2,19 @@
   import { Button, LoadingWheel } from 'src/components';
   import { ButtonTypeEnum, RequestAction } from 'src/enum';
   import { CheckIcon } from 'src/assets/icons';
-  import { translate, translateDescription } from 'src/utils/utils';
+  import { translate } from 'src/utils/utils';
   import type { Measure } from 'src/interface';
   import { JourneyResults } from 'src/components/GES/results';
   import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
   import { SEARCH_AUTO } from '../const/key.const';
-  import { Tooltip } from 'flowbite-svelte';
   import { logDebug } from '../utils/log';
+  import { ZoneSimulation } from '../components/GES';
 
   let onGoingAnalysis = false;
   let measureAcquisition = new MeasureAcquisition();
+  let serverSearch = SEARCH_AUTO;
+  let userSearch = SEARCH_AUTO;
 
   let results: Measure[] = [];
 
@@ -58,14 +60,20 @@
   const onActionSave = async (component?: string) => {
     logDebug('Save ' + component);
     await measureAcquisition.getNetworkMeasure(false);
-    const measure = await measureAcquisition.getGESMeasure(SEARCH_AUTO, SEARCH_AUTO);
+    const measure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
     if (component) {
-      measure.url += ` (${component})`;
+      measure.action = component;
     }
     if (measure) {
       results = [...results, measure];
     }
     measureAcquisition.applyLatest();
+  };
+
+  const handleSimulation = async (event: any) => {
+    const { countryCodeSelected, userCountryCodeSelected } = event.detail;
+    serverSearch = countryCodeSelected;
+    userSearch = userCountryCodeSelected;
   };
 </script>
 
@@ -74,22 +82,24 @@
     on:buttonClick={handleAnalysis}
     buttonType={ButtonTypeEnum.PRIMARY}
     translateKey={onGoingAnalysis ? 'stopJourneyButton' : 'startJourneyButton'}
+    tooltip={true}
   />
-  <Tooltip>{translateDescription(onGoingAnalysis ? 'stopJourneyButton' : 'startJourneyButton')}</Tooltip>
+
   <Button
     disabled={onGoingAnalysis}
     on:buttonClick={resetUserJourney}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="resetJourneyButton"
+    tooltip={true}
   />
-  <Tooltip>{translateDescription('resetJourneyButton')}</Tooltip>
   <Button
     on:buttonClick={handleClearCache}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="clearBrowserCacheButton"
+    tooltip={true}
   />
-  <Tooltip>{translateDescription('clearBrowserCacheButton')}</Tooltip>
 </div>
+<ZoneSimulation on:submitSimulation={handleSimulation} />
 
 {#if onGoingAnalysis}
   <LoadingWheel />
