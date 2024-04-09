@@ -21,7 +21,7 @@
     "message": "Km en voiture"
   },
   "clearBrowserCacheButton": {
-    "message": "Supprimer le cache#Nettoyage du cache pour ce site"
+    "message": "Vider le cache#Le nettoyage du cache corrige certains problèmes, comme ceux liés au chargement ou au formatage des sites"
   },
   "closePopup": {
     "message": "Fermer#Fermer la popup"
@@ -33,7 +33,7 @@
     "message": "Centre de données#Emissions GES totales des centres de données"
   },
   "date": {
-    "message": "Date#Date de l'action"
+    "message": "Date#Date de l'évenement"
   },
   "deleteAllButton": {
     "message": "Effacer tout#Effacer tout"
@@ -63,43 +63,43 @@
     "message": "Premiers résultats reçus !"
   },
   "gesDataCenter": {
-    "message": "GES Data#GES Data Center en gCO2eq"
+    "message": "GES Serveur#GES serveur en gCO2eq"
   },
   "gesDevice": {
-    "message": "GES Périph#GES Périphérique en gCO2eq"
+    "message": "GES Client#GES client en gCO2eq"
   },
   "gesGrade": {
-    "message": "Grade#Grade"
+    "message": "Note#Une note de A->F (plus la note est élevée, meilleur est la page !)" 
   },
   "gesIntensity": {
-    "message": "Intensité Carbone serveur#Intensité carbone, en gCO2eq/Kwh, du serveur depuis elctrictymaps"
+    "message": "Mix énergétique serveur#Intensité carbone en gCO2eq/Kwh de l'électricité consommé de la localisation du serveur"
   },
   "gesIntensityShort": {
-    "message": "I. Carb. serveur#Intensité carbone, en gCO2eq/Kwh, du serveur depuis elctrictymaps"
+    "message": "I.serveur#Intensité carbone en gCO2eq/Kwh de l'électricité consommé de la localisation du serveur"
   },
   "gesNetwork": {
     "message": "GES Réseau#GES réseau en gCO2eq"
   },
   "gesScore": {
-    "message": "Score#Score"
+    "message": "Score#Plus le score est élevé (proche de 100), meilleur est la page !"
   },
   "gesTotal": {
     "message": "GES Total#GES Total en gCO2eq"
   },
   "gesUserIntensity": {
-    "message": "Intensité Carbone client#Intensité carbone, en gCO2eq/Kwh, de l'utilisateur depuis elctrictymaps"
+    "message": "Mix énergétique client#Intensité carbone en gCO2eq/Kwh de l'électricité consommé de la localisation du client"
   },
   "gesUserIntensityShort": {
-    "message": "I. Carb. client#Intensité carbone, en gCO2eq/Kwh, de l'utilisateur depuis elctrictymaps"
+    "message": "I.client#Intensité carbone en gCO2eq/Kwh de l'électricité consommé de la localisation du client"
   },
   "gesUserZone": {
-    "message": "Client#Pays où l'ip de l'utilisateur se trouve"
+    "message": "Client#Localisation de l'adresse IP de l'utilisateur"
   },
   "gesZone": {
-    "message": "Serveur#Pays où l'ip du serveur se trouve"
+    "message": "Serveur#Localisation de l'adresse IP du serveur"
   },
   "greenhouseGasesEmission": {
-    "message": "GES#Greenhouse Gases Emission (gCO2eq)"
+    "message": "GES#La valeur des émissions de gaz à effet de serre (gCO2eq)"
   },
   "greenhouseGasesEmissionDefault": {
     "message": "GES (gCO2eq)#Greenhouse Gases Emission (gCO2eq), default"
@@ -120,16 +120,16 @@
     "message": "GreenTrackr V1.0.2 est installé et accessible via le panneau développeur (F12 ou CMD + ALT + i sur Mac) #Text when you click on the plugin's icone"
   },
   "messageResults": {
-    "message": "Résumé l'analyse du parcours effectué"
+    "message": "Tableau récapitulatif du parcours utilisateur"
   },
   "messageResultsAnalysis": {
     "message": "Résultat de l'analyse#Résultat de l'analyse"
   },
   "messageResultsDetail": {
-    "message": "Résultat détaillé de l'analyse du parcours effectué"
+    "message": "Tableau détaillé de l'analyse du parcours utilisateur"
   },
   "nbRequest": {
-    "message": "Requêtes#Nombre de requêtes hors extensions 'réel (cache)'"
+    "message": "Requêtes HTTP#Nombre de requête hors extension : 'sans cache (avec cache)'"
   },
   "networkTotal": {
     "message": "Réseau#Emissions GES totales du réseau"
@@ -174,19 +174,19 @@
     "message": "Résultats reçus#Received user journey results"
   },
   "refresh": {
-    "message": "Recharger la page#Recharger la page"
+    "message": "Recharger la page#Actualiser la page"
   },
   "resetJourneyButton": {
-    "message": "Réinitialiser le parcours#Réinitialiser le parcours"
+    "message": "Réinitialiser le parcours#Bouton pour réinitialiser le parcours (unité fonctionnelle)"
   },
   "resetMeasure": {
-    "message": "Réinitialiser la mesure#Remise à zéro du compteur"
+    "message": "Réinitialiser la mesure#Remise à zéro des calculs du modèle"
   },
   "saveAnalysis": {
     "message": "L'évaluation a bien été enregistrée.#Message de popup"
   },
   "saveAnalysisButton": {
-    "message": "Enregistrer l'évaluation#Save Analysis Button"
+    "message": "Enregistrer l'évaluation#Bouton pour enregistrer l'évaluation de la page"
   },
   "serverRegionLabel": {
     "message": "Simuler la localisation du serveur dans une autre zone : #Label pour la selection"
@@ -195,58 +195,58 @@
     "message": "Simuler la localisation de l'utilisateur dans une autre zone : #Label pour la selection"
   },
   "sizeTransferred": {
-    "message": "Taille de la page#Transferred size (KB)"
+    "message": "Poids page#Poids de la page transférées en KB (compressée / décompressée)"
   },
   "sizeTransferredBytes": {
-    "message": "Taille page#Taille de la page (compressée / décompressée) en KB"
+    "message": "Poids page#Poids de la page transférées en KB (compressée / décompressée)"
   },
   "sizeTransferredBytesCompressed": {
-    "message": "Taille de la page compressée#Compressed transferred size (KB)"
+    "message": "Poids de la page compressée#Poids de la page compressée transférée (KB)"
   },
   "sizeTransferredBytesUncompressed": {
-    "message": "Taille de la page décompressée#Uncompressed transferred size (KB)"
+    "message": "Poids de la page décompressée#Poids de la page décompressée transférée (KB)"
   },
   "smartphoneIndicator": {
     "message": "Smartphones chargés#Label pour l'indicateur smartphone"
   },
   "startJourneyButton": {
-    "message": "Démarrer l'enregistrement#Lancer l'enregistrement"
+    "message": "Démarrer l'enregistrement#Lancer l'enregistrement d'une unité fonctionnelle"
   },
   "stopJourneyButton": {
-    "message": "Stopper l'enregistrement#Stop Journey Analysis"
+    "message": "Stopper l'enregistrement#Arrêter l'annalyse du parcours"
   },
   "synTabFootTotal": {
-    "message": "Total#Total cumulé du parcours"
+    "message": "Total#Résultat total du parcours"
   },
   "synTabHeadClick": {
-    "message": "Clique#Action de selection dans la page"
+    "message": "Clique#Événement de sélection de page web"
   },
   "synTabHeadCount": {
-    "message": "Hit#Nombre d'actions"
+    "message": "Hit#Nombre d'évenements"
   },
   "synTabHeadGes": {
-    "message": "GES#GES Total de l'action"
+    "message": "GES#GES Total de l'évenement"
   },
   "synTabHeadGrade": {
-    "message": "Grade#Lettre du Grade (A -> F)"
+    "message": "Note#Une note de A -> F"
   },
   "synTabHeadPage": {
-    "message": "Page#Toutes actions confondues"
+    "message": "Page#Total d'évenements (scroll + clique)"
   },
   "synTabHeadRequest": {
-    "message": "Requête#Nombre de requête, hors extension, forme : 'requête (cache)'"
+    "message": "Requêtes#Nombre de requête hors extension : 'sans cache (avec cache)'"
   },
   "synTabHeadScore": {
-    "message": "Score#Score de l'action"
+    "message": "Score#Score de l'évenement"
   },
   "synTabHeadScroll": {
-    "message": "Scroll#Action de défilement de la page"
+    "message": "Scroll#Événement de défilement de la page"
   },
   "synTabHeadSize": {
-    "message": "Taille#Taille des données (compressées/décompressées)"
+    "message": "Poids#Poids de la page transférées en KB (compressée / décompressée)"
   },
   "synTabHeadUrl": {
-    "message": "Url#Url de la page"
+    "message": "Url#urls des pages web visitées"
   },
   "tabAutoScroll": {
     "message": "Auto Scroll/Page#GES auto scroll analysis tab"
@@ -261,16 +261,16 @@
     "message": "Paramètres"
   },
   "url": {
-    "message": "Url#Url de la page"
+    "message": "Url#urls des pages web visitées"
   },
   "urlAction": {
-    "message": "Action#Action effectuée durant le parcours"
+    "message": "Événement#Événements enregistrés durant le parcours (Scroll/clique)"
   },
   "validateRegionButton": {
     "message": "Valider#Valider Région"
   },
   "viewHistoryButton": {
-    "message": "Voir l'historique#View History Button"
+    "message": "Voir l'historique#Bouton pour afficher l'historique sauvegardé (option : exporter en .csv)"
   },
   "visitEquivalent": {
     "message": "visite(s) l'équivalent de : #Label l'information sur les visites part. 2"
