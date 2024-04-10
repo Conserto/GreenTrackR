@@ -2,12 +2,13 @@
   import { Units } from 'src/const';
   import type { Measure } from 'src/interface';
   import { translate } from 'src/utils/utils';
+  import Tooltip from '../Tooltip.svelte';
 
   export let measure: Measure | undefined;
 </script>
 
 <div class="ges-equivalent">
-  <span>{translate('greenhouseGasesEmission')} :</span>
+  <span><Tooltip translateKey="greenhouseGasesEmission" /> :</span>
   <span
     class="ges-equivalent_value"
     style:color={measure?.score?.textColor}

@@ -2,6 +2,7 @@
   import { formatSize, translate } from 'src/utils/utils';
   import type { Measure } from 'src/interface';
   import { Units } from 'src/const';
+  import Tooltip from '../Tooltip.svelte';
 
   export let measure: Measure | undefined;
 </script>
@@ -10,34 +11,34 @@
   <p class="info-mix">{translate('infoMix')}</p>
   <div class="emissions-infos_data">
     <div>
-      <span class="data-label">{translate('gesZone')}</span>
+      <span class="data-label"><Tooltip translateKey="gesZone" /></span>
       <span class="data-value">{measure?.serverGES ? (measure?.serverGES?.cityName
         ? `${measure?.serverGES.cityName}, ${measure?.serverGES.countryName}`
         : measure?.serverGES?.countryName) : '-'}</span>
     </div>
     <div>
-      <span class="data-label">{translate('gesUserZone')}</span>
+      <span class="data-label"><Tooltip translateKey="gesUserZone" /></span>
       <span class="data-value">{measure?.userGES ? (measure?.userGES?.cityName
         ? `${measure?.userGES.cityName}, ${measure?.userGES.countryName}`
         : measure?.userGES?.countryName) : '-'}</span>
     </div>
     <div>
-      <span class="data-label">{translate('sizeTransferredBytes')}</span>
+      <span class="data-label"><Tooltip translateKey="sizeTransferredBytes" /></span>
       <span class="data-value">{formatSize(measure?.networkMeasure.network.size)} {Units.pageSize}
         / {formatSize(measure?.networkMeasure.network.sizeUncompress)} {Units.pageSize}</span>
     </div>
     <div>
-      <span class="data-label">{translate('gesIntensity')}</span>
+      <span class="data-label"><Tooltip translateKey="gesIntensity" /></span>
       <span
         class="data-value">{measure?.serverGES?.carbonIntensity ? measure?.serverGES?.carbonIntensity : '-' } {Units.carbonIntensity}</span>
     </div>
     <div>
-      <span class="data-label">{translate('gesUserIntensity')}</span>
+      <span class="data-label"><Tooltip translateKey="gesUserIntensity" /></span>
       <span
         class="data-value">{measure?.userGES?.carbonIntensity ? measure?.userGES?.carbonIntensity : '-' } {Units.carbonIntensity}</span>
     </div>
     <div>
-      <span class="data-label">{translate('nbRequest')}</span>
+      <span class="data-label"><Tooltip translateKey="nbRequest" /></span>
       <span class="data-value">{measure?.networkMeasure.nbRequest} ({measure?.networkMeasure.nbRequestCache})</span>
     </div>
   </div>

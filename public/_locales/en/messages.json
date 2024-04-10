@@ -24,19 +24,19 @@
     "message": "Km by car#Label for car indicator"
   },
   "clearBrowserCacheButton": {
-    "message": "Clear cache#Clear Browser Cache Button"
+    "message": "Clear cache#Cache cleaning corrects certain errors, such as those related to website loading or formatting"
   },
   "closePopup": {
     "message": "Close#close popup content"
   },
   "csvColumnsLabel": {
-    "message": "Date;Url;Uncompressed size(b);Compressed size(kb);DOM;GES Data Center(gCO2e);GES Network(gCO2e);GES Device(gCO2e);GES Total(gCO2e); GES Score; Grade; Country; CarbonIntensity; NumberRequest#csvColumnsLabel"
+    "message": "Date;Url;Uncompressed size(b);Compressed size(kb);DOM;GES Data Center(gCO2e);GES Network(gCO2e);GES User(gCO2e);GES Total(gCO2e); GES Score; Grade; Country; CarbonIntensity; NumberRequest#csvColumnsLabel"
   },
   "dataCenterTotal": {
     "message": "Data center#Total GES emissions of data center"
   },
   "date": {
-    "message": "Date#Date"
+    "message": "Date#Date of event"
   },
   "deleteAllButton": {
     "message": "Delete All#Delete All Button"
@@ -66,43 +66,43 @@
     "message": "First results received !#First analysis resulted have been computed."
   },
   "gesDataCenter": {
-    "message": "GES Data Center#GES Data Center"
+    "message": "GES server#GES server in gCO2eq"
   },
   "gesDevice": {
-    "message": "GES Device#GES Device"
+    "message": "GES User#GES user in gCO2eq"
   },
   "gesGrade": {
-    "message": "Grade#Grade"
+    "message": "Grade#A grade of A->F (the higher the grade, the better the webpage!)"
   },
   "gesIntensity": {
-    "message": "Server carbon intensity#Give server's carbon intensity from electricitymaps"
+    "message": "Server energy mix#Carbon intensity in gCO2eq/Kwh of electricity consumed by server location"
   },
   "gesIntensityShort": {
-    "message": "Srv carbon i.#Give server's carbon intensity from electricitymaps"
+    "message": "Server.I#Carbon intensity in gCO2eq/Kwh of electricity consumed by server location"
   },
   "gesNetwork": {
-    "message": "GES Network#GES Network"
+    "message": "GES Network#GES Network in gCO2eq"
   },
   "gesScore": {
-    "message": "Score#Score"
+    "message": "Score#The higher the score (closer to 100), the better the webpage!"
   },
   "gesTotal": {
     "message": "GES Total#GES Total"
   },
   "gesUserIntensity": {
-    "message": "Users carbon intensity#Give user's carbon intensity from electricitymaps"
+    "message": "User energy mix#Carbon intensity in gCO2eq/Kwh of electricity consumed by user location"
   },
   "gesUserIntensityShort": {
-    "message": "Usr carbon i.#Give user's carbon intensity from electricitymaps"
+    "message": "User.I#Carbon intensity in gCO2eq/Kwh of electricity consumed by user location"
   },
   "gesUserZone": {
-    "message": "User location#Give the country where the user of the website is localized"
+    "message": "User#Locating the user's IP address"
   },
   "gesZone": {
-    "message": "Server location#Give the country where the server of the website is localized"
+    "message": "Server#Locating the server's IP address"
   },
   "greenhouseGasesEmission": {
-    "message": "GES#Greenhouse Gases Emission (gCO2eq)"
+    "message": "GES#Greenhouse gas emission values (gCO2eq)"
   },
   "greenhouseGasesEmissionDefault": {
     "message": "GES (gCO2eq)#Greenhouse Gases Emission (gCO2e), default"
@@ -114,7 +114,7 @@
     "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season:#Infos pour comprendre l'impact du mix énergétiques"
   },
   "launchAnalysisButton": {
-    "message": "Analysis#Launch Analysis"
+    "message": "Analysis#The analysis launch does not take into account the part of the screen hidden by the devtools"
   },
   "launchAnalysisButtonWithAutoScrollButton": {
     "message": "Auto Scrolling#Launch Analysis with auto scroll"
@@ -123,16 +123,16 @@
     "message": "GreenTrackr V1.0.2 is install in your browser and accessible via the devtool panel (F12 or CMD + ALT + i sur Mac#Text when you click on the plugin's icone"
   },
   "messageResults": {
-    "message": "Resume of journey's analysis"
+    "message": "User journey summary table"
   },
   "messageResultsAnalysis": {
     "message": "Analysis results#Résultat de l'analyse"
   },
   "messageResultsDetail": {
-    "message": "Detail results of journey's analysis"
+    "message": "Detailed table of user journey analysis"
   },
   "nbRequest": {
-    "message": "Number of requests without extentions 'real (cache)'#Number of request made by the website"
+    "message": "HTTP requests#Number of requests without extentions 'without cache (with cache)'"
   },
   "networkTotal": {
     "message": "Network#Total GES emissions of network"
@@ -177,19 +177,19 @@
     "message": "Results received#Received user journey results"
   },
   "refresh": {
-    "message": "Reload page#Reload this page"
+    "message": "Reload page#Refresh this webpage"
   },
   "resetJourneyButton": {
-    "message": "Reset journey#Reset Journey Analysis"
+    "message": "Reset journey#Button to reset journey (functional unit)"
   },
   "resetMeasure": {
-    "message": "Reset measure#Reset measure"
+    "message": "Reset measure#Resetting model calculations to zero"
   },
   "saveAnalysis": {
     "message": "Analysis successfully saved.#Popup message"
   },
   "saveAnalysisButton": {
-    "message": "Save assessment#Save Analyse Button"
+    "message": "Save assessment#Button to save web page evaluation"
   },
   "serverRegionLabel": {
     "message": "Simulate server localization in an other zone : #Label for select"
@@ -198,58 +198,58 @@
     "message": "Simulate user localization in an other zone : #Label for select"
   },
   "sizeTransferred": {
-    "message": "Page size#Transferred size (KB)"
+    "message": "Webpage size#Transferred webpage size in KB (compressed/Uncompressed)"
   },
   "sizeTransferredBytes": {
-    "message": "Page size (compress / uncompress)#Transferred size (KB)"
+    "message": "Webpage size#Transferred webpage size in KB (compressed/Uncompressed)"
   },
   "sizeTransferredBytesCompressed": {
-    "message": "Compressed page size#Compressed transferred size (KB)"
+    "message": "Compressed webpage size#Compressed transferred size (KB)"
   },
   "sizeTransferredBytesUncompressed": {
-    "message": "Uncompressed page size#Uncompressed transferred size (KB)"
+    "message": "Uncompressed webpage size#Uncompressed transferred size (KB)"
   },
   "smartphoneIndicator": {
     "message": "Charged smartphones #Label for smartphone indicator"
   },
   "startJourneyButton": {
-    "message": "Start recorder#Start recorder"
+    "message": "Start recorder#Launch registration of a functional unit"
   },
   "stopJourneyButton": {
     "message": "Stop saving#Stop Journey Analysis"
   },
   "synTabFootTotal": {
-    "message": "Total#Total cumulé du parcours"
+    "message": "Total#Total result of the journey"
   },
   "synTabHeadClick": {
-    "message": "Clique#Action de selection dans la page"
+    "message": "Clique#Webpage selection event"
   },
   "synTabHeadCount": {
-    "message": "Hit#Nombre d'actions"
+    "message": "Hit#Number of events "
   },
   "synTabHeadGes": {
-    "message": "GES#GES Total de l'action"
+    "message": "GES#GES Total event"
   },
   "synTabHeadGrade": {
-    "message": "Grade#Lettre du Grade (A -> F)"
+    "message": "Grade#A grade of A->F"
   },
   "synTabHeadPage": {
-    "message": "Page#Toutes actions confondues"
+    "message": "Webpage#Total events (scroll + click)"
   },
   "synTabHeadRequest": {
-    "message": "Requête#Nombre de requetes, hors extension, forme : 'requête (cache)'"
+    "message": "Requests#Number of requests without extentions 'without cache (with cache)'"
   },
   "synTabHeadScore": {
-    "message": "Score#Score de l'action"
+    "message": "Score#Event score"
   },
   "synTabHeadScroll": {
-    "message": "Scroll#Action de défilement de la page"
+    "message": "Scroll#webPage scrolling event"
   },
   "synTabHeadSize": {
-    "message": "Taille#Taille des données (compressées/décompressées)"
+    "message": "Size#Size of data transferred in KB (compressed/uncompressed)"
   },
   "synTabHeadUrl": {
-    "message": "Url#Url de la page"
+    "message": "Url#urls of visited web pages"
   },
   "tabAutoScroll": {
     "message": "Auto Scroll/Page#GES auto scroll analysis tab"
@@ -264,16 +264,16 @@
     "message": "Parameters"
   },
   "url": {
-    "message": "Url#Url"
+    "message": "Url#urls of visited web page"
   },
   "urlAction": {
-    "message": "Action"
+    "message": "Event#Events recorded during the journey (scroll/click)"
   },
   "validateRegionButton": {
     "message": "Confirm#Confirm Region"
   },
   "viewHistoryButton": {
-    "message": "View History#View History Button"
+    "message": "View History#Button to show saved history (option: export to .csv)"
   },
   "visitEquivalent": {
     "message": "visit(s) the equivalent of : #Label for informations about visits part. 2"
