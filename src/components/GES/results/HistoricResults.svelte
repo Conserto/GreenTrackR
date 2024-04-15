@@ -13,14 +13,18 @@
   export let saveName: string;
 
   onMount(() => {
-    measures = getLocalStorageObject(saveName) ?? [];
-    let btn = new Map<string, TableData>;
-    btn.set('action', { content: 'deleteButton', action: true });
-    formattedData = formatGesMeasuresForTable(measures, btn);
+    updateHistory();
   });
 
   const handleExport = () => {
     export_data(measures);
+  };
+
+  export const updateHistory = () => {
+    measures = getLocalStorageObject(saveName) ?? [];
+    let btn = new Map<string, TableData>;
+    btn.set('action', { content: 'deleteButton', action: true });
+    formattedData = formatGesMeasuresForTable(measures, btn);
   };
 
   const handleDeleteMeasure = (event: any) => {
