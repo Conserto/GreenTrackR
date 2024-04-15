@@ -27,7 +27,7 @@
 
   let serverSearch = SEARCH_AUTO;
   let userSearch = SEARCH_AUTO;
-  let updateHistoryTab;
+  let updateHistoryTab: any;
 
   const onResetMeasure = () => {
     currentMeasure = null;

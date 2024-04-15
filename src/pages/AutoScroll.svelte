@@ -33,7 +33,7 @@
   let totalPagePixels = 0;
   let serverSearch = SEARCH_AUTO;
   let userSearch = SEARCH_AUTO;
-  let updateHistoryTab;
+  let updateHistoryTab: any;
 
   let loading = false;
   let measureAcquisition = new MeasureAcquisition();
