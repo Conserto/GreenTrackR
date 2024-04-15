@@ -135,7 +135,7 @@
     </div>
   {/if}
 {:else if currentDisplayedTab === TabType.HistoricTab}
-  <HistoricResults />
+  <HistoricResults saveName="{savedMeasures}" />
 {/if}
 {#if showPopUp}
   <Modal>
