@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { Button, Input, LoadingWheel, Select } from 'src/components';
+  import { Button, Input, LoadingWheel, Modal, Select } from 'src/components';
   import { ButtonTypeEnum, InputTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
   import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
-  import { toHistoFormattedDatas, translate } from 'src/utils/utils';
+  import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { onDestroy, onMount } from 'svelte';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
   import Histogram from 'src/components/Histogram.svelte';
@@ -11,6 +11,17 @@
   import { SEARCH_AUTO } from '../const/key.const';
   import type { HistoData, Measure } from '../interface';
   import { ZoneSimulation } from '../components/GES';
+  import { HistoricResults } from '../components/GES/results';
+  import { savedScrollMeasures } from '../const';
+
+  enum TabType {
+    ResultTab,
+    HistoricTab,
+    None,
+  }
+
+  let currentDisplayedTab = TabType.None;
+  let showPopUp = false;
 
   const scrollTypes = [
     { label: 'Px', value: ScrollInputType.PIXEL },
@@ -49,6 +60,7 @@
       currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
       loading = false;
       histoDatas = toHistoFormattedDatas(currentMeasure);
+      currentDisplayedTab = TabType.ResultTab;
     }
   };
 
@@ -65,12 +77,14 @@
   const handleCleanCache = () => {
     sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
     cleanCache();
+    currentDisplayedTab = TabType.None;
     currentMeasure = null;
   };
 
   const handleResetMeasure = () => {
     sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
     currentMeasure = null;
+    currentDisplayedTab = TabType.None;
     cleanCache();
     measureAcquisition.applyLatest();
   };
@@ -78,7 +92,17 @@
   const handleRefresh = () => {
     sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
     currentMeasure = null;
+    currentDisplayedTab = TabType.None;
     reloadCurrentTab();
+  };
+
+  const onSaveCurrentMeasure = () => {
+    const lsMeasures = getLocalStorageObject(savedScrollMeasures);
+    setLocalStorageObject(
+      savedScrollMeasures,
+      lsMeasures ? [...lsMeasures, currentMeasure] : [currentMeasure]
+    );
+    showPopUp = true;
   };
 
   const handleSimulation = async (event: any) => {
@@ -110,6 +134,19 @@
     tooltip={true}
   />
   <Button
+    on:buttonClick={onSaveCurrentMeasure}
+    buttonType={ButtonTypeEnum.SECONDARY}
+    translateKey="saveAnalysisButton"
+    disabled={!currentMeasure}
+    tooltip={true}
+  />
+  <Button
+    on:buttonClick={() => (currentDisplayedTab = TabType.HistoricTab)}
+    buttonType={ButtonTypeEnum.SECONDARY}
+    translateKey="viewHistoryButton"
+    tooltip={true}
+  />
+  <Button
     on:buttonClick={handleCleanCache}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="clearBrowserCacheButton"
@@ -135,17 +172,32 @@
   />
 </div>
 <ZoneSimulation on:submitSimulation={handleSimulation} />
-
-{#if currentMeasure && !loading}
-  <GesResults measure={currentMeasure} />
-  <div class="histo-container">
-    {#if currentMeasure?.complete}
-      <Histogram datas={histoDatas} yLabel="greenhouseGasesEmissionDefault" yLabel2="energyDefault" />
-    {/if}
-  </div>
+{#if currentDisplayedTab === TabType.ResultTab}
+  {#if currentMeasure && !loading}
+    <GesResults measure={currentMeasure} />
+    <div class="histo-container">
+      {#if currentMeasure?.complete}
+        <Histogram datas={histoDatas} yLabel="greenhouseGasesEmissionDefault" yLabel2="energyDefault" />
+      {/if}
+    </div>
+  {/if}
+  {#if loading === true}
+    <LoadingWheel />
+  {/if}
+{:else if currentDisplayedTab === TabType.HistoricTab}
+  <HistoricResults saveName="{savedScrollMeasures}" />
 {/if}
-{#if loading === true}
-  <LoadingWheel />
+{#if showPopUp}
+  <Modal>
+    <div class="modal">
+      <h2>{translate('saveAnalysis')}</h2>
+      <Button
+        on:buttonClick={() => (showPopUp = false)}
+        buttonType={ButtonTypeEnum.PRIMARY}
+        translateKey="closePopup"
+      />
+    </div>
+  </Modal>
 {/if}
 
 <style lang="scss">
