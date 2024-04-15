@@ -33,6 +33,7 @@
   let totalPagePixels = 0;
   let serverSearch = SEARCH_AUTO;
   let userSearch = SEARCH_AUTO;
+  let updateHistoryTab: any;
 
   let loading = false;
   let measureAcquisition = new MeasureAcquisition();
@@ -102,6 +103,9 @@
       savedScrollMeasures,
       lsMeasures ? [...lsMeasures, currentMeasure] : [currentMeasure]
     );
+    if (currentDisplayedTab === TabType.HistoricTab) {
+      updateHistoryTab();
+    }
     showPopUp = true;
   };
 
@@ -185,7 +189,7 @@
     <LoadingWheel />
   {/if}
 {:else if currentDisplayedTab === TabType.HistoricTab}
-  <HistoricResults saveName="{savedScrollMeasures}" />
+  <HistoricResults saveName="{savedScrollMeasures}" bind:updateHistory={updateHistoryTab} />
 {/if}
 {#if showPopUp}
   <Modal>
