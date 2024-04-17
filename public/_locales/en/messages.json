@@ -192,10 +192,10 @@
     "message": "Save assessment#Button to save web page evaluation"
   },
   "serverRegionLabel": {
-    "message": "Simulate server localization in an other zone : #Label for select"
+    "message": "Simulate server localization in an other zone #Label for select"
   },
   "serverUserLabel": {
-    "message": "Simulate user localization in an other zone : #Label for select"
+    "message": "Simulate user localization in an other zone #Label for select"
   },
   "sizeTransferred": {
     "message": "Webpage size#Transferred webpage size in KB (compressed/Uncompressed)"

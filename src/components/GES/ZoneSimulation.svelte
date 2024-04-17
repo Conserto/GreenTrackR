@@ -29,31 +29,33 @@
   <div class="simulation-select simulation-region">
     <span class="simulation-select__label">{translate('serverRegionLabel')}</span>
     <Select bind:selectedValue={countryCodeSelected} selectValues={zonesOptions}
-            name="simulation-server-region-label" on:selectChange={handleSubmitSimulation} />
+            name="simulation-server-region-label" style="max-width: 48%" on:selectChange={handleSubmitSimulation} />
   </div>
   <div class="simulation-select simulation-user">
     <span class="simulation-select__label">{translate('serverUserLabel')}</span>
     <Select bind:selectedValue={userCountryCodeSelected} selectValues={zonesOptions}
-            name="simulation-user-region-label" on:selectChange={handleSubmitSimulation} />
+            name="simulation-user-region-label" style="max-width: 48%" on:selectChange={handleSubmitSimulation} />
   </div>
 </form>
 
 
 <style lang="scss">
-  .zone-simulation {
-    display: grid;
-    justify-items: center;
+
+  #simulation-data-token {
+    display: none;
   }
 
   .simulation-select {
-    display: flex;
-    flex-wrap: wrap;
-    justify-self: stretch;
-    justify-content: space-around;
+    display: block;
+    width: 100%;
     margin: var(--spacing--md) 0;
 
     &__label {
-      margin-right: var(--spacing--xl);
+      display: inline-block;
+      width: 48%;
+      text-align: right;
+      padding-right: 1em;
     }
+
   }
 </style>
