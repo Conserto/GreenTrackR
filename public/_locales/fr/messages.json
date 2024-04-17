@@ -54,7 +54,7 @@
     "message": "Energie (Wh)"
   },
   "errorNoToken": {
-    "message": "Aucun token CO2 trouvé, l'extension pourrait ne pas fonctionner"
+    "message": "Aucun token CO2 trouvé, l'extension pourrait ne pas fonctionner, voir l'onglet Paramètres"
   },
   "exportButton": {
     "message": "Exporter#Exporter les données"

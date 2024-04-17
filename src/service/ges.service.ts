@@ -14,8 +14,9 @@ export class GESService {
     this.cacheGesByUrl = new Map<string, GES>();
   }
 
-  async computeGES(countryCodeSelected: string, userCountryCodeSelected: string, urlHost?: URL) {
-    let cacheSrvKey = (countryCodeSelected === SEARCH_AUTO && urlHost?.hostname) ? urlHost.hostname : undefined;
+  async computeGES(countryCodeSelected: string, userCountryCodeSelected: string, dataLive: boolean, urlHost?: URL) {
+    let cacheSrvKey = (countryCodeSelected === SEARCH_AUTO && urlHost?.hostname) ? urlHost.hostname + dataLive : undefined;
+    // TODO cache si dataLive différent
     let userGesUseCacheUserGes = userCountryCodeSelected === SEARCH_AUTO && this.cacheUserGes;
     let zoneGES: GES | undefined;
     let userGES: GES | undefined;

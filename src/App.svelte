@@ -43,11 +43,6 @@
 
 <header class="flex-col-center">
   <img src={logo} alt="Logo green tracker" />
-  {#if !getLocalStorageObject(paramTokenCo2)}
-    <div>
-      <Alert message="errorNoToken" alertType={AlertTypeEnum.ERROR} />
-    </div>
-  {/if}
   <div class="nav nav-tabs" id="myTab" role="tablist">
     {#each tabs as tab}
       <Tab

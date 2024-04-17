@@ -57,7 +57,7 @@
     "message": "Energy (Wh)#Energy used, default"
   },
   "errorNoToken": {
-    "message": "No CO2 token found, the extension may not work#Env variable not found"
+    "message": "No CO2 token found, the extension may not work, show parameter tab"
   },
   "exportButton": {
     "message": "Export#Export Button"

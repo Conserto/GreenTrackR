@@ -27,6 +27,7 @@
 
   let serverSearch = SEARCH_AUTO;
   let userSearch = SEARCH_AUTO;
+  let dataLive = false;
   let updateHistoryTab: any;
 
   const onResetMeasure = () => {
@@ -64,15 +65,16 @@
     currentDisplayedTab = TabType.ResultTab;
     loading = true;
     await measureAcquisition.getNetworkMeasure(false);
-    currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
+    currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch, dataLive);
     loading = false;
     histoDatas = toHistoFormattedDatas(currentMeasure);
   };
 
   const handleSimulation = async (event: any) => {
-    const { countryCodeSelected, userCountryCodeSelected } = event.detail;
+    const { countryCodeSelected, userCountryCodeSelected, checked } = event.detail;
     serverSearch = countryCodeSelected;
     userSearch = userCountryCodeSelected;
+    dataLive = checked;
   };
 </script>
 

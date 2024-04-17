@@ -50,12 +50,13 @@ export class MeasureAcquisition {
     }
   }
 
-  async getGESMeasure(countryCodeSelected: string, userCountryCodeSelected: string) {
+  async getGESMeasure(countryCodeSelected: string, userCountryCodeSelected: string, dataLive: boolean) {
     logDebug('getGESMeasure');
     let urlHost = this.networkService.getUrl(this.measure.url);
     const { zoneGES, userGES } = await this.gesService.computeGES(
       countryCodeSelected,
       userCountryCodeSelected,
+      dataLive,
       urlHost
     );
     this.updateMeasureValues(zoneGES, userGES);
