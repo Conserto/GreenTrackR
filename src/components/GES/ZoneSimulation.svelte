@@ -41,10 +41,6 @@
 
 <style lang="scss">
 
-  #simulation-data-token {
-    display: none;
-  }
-
   .simulation-select {
     display: block;
     width: 100%;

@@ -1,7 +1,7 @@
 import { getCarbonIntensity, getCurrentZone, getServerZone } from 'src/api';
 import { codeZone } from 'src/assets/data/codeZone';
 import { KWH_DEVICE, KWH_PER_BYTE_NETWORK, KWH_PER_REQUEST_DATA_CENTER } from 'src/const/measure.const';
-import type { CarbonData, CarbonDatas, EnergyMeasure, GES, GESTotals, NetworkResponse } from 'src/interface';
+import type { CarbonData, CarbonDatas, EnergyMeasure, GES, NetworkResponse, ResTotals } from 'src/interface';
 import { logDebug, logErr } from '../utils/log';
 import { SEARCH_AUTO } from '../const/key.const';
 
@@ -65,7 +65,13 @@ export class GESService {
         logErr(`There has been a problem when trying to get GES Emissions : ${error} from distant API and local file`);
       }
     }
-    logDebug(`Return GES ${GES?.cityName} / ${GES?.carbonIntensity}`);
+    const countryCode = countryCodeSelected !== SEARCH_AUTO ? countryCodeSelected : (GES && GES.countryCode ? GES.countryCode : undefined);
+    if (countryCode && GES) {
+      let datas = codeZone.find((line) => line.zone === countryCode);
+      GES.wu = datas?.wu ? datas.wu * 1000 : undefined;
+      GES.adpe = datas?.adpe ? datas.adpe * 1000 * 1000 : undefined;
+    }
+    logDebug(`Return GES ${GES?.cityName} / ${GES?.carbonIntensity} / ${GES?.wu} / ${GES?.adpe}`);
     return GES;
   }
 
@@ -157,27 +163,42 @@ export class GESService {
       }));
   }
 
-  getEnergyAndGES(network: NetworkResponse, nbRequest: number, zoneGES?: GES, userGES?: GES): {
-    ges: GESTotals;
+  getEnergyAndResources(network: NetworkResponse, nbRequest: number, zoneGES?: GES, userGES?: GES): {
+    ges: ResTotals;
+    wu: ResTotals;
+    adpe: ResTotals;
     energy: EnergyMeasure
   } {
-    let kWhDataCenter = nbRequest * KWH_PER_REQUEST_DATA_CENTER;
-    let kWhNetwork = network.size * KWH_PER_BYTE_NETWORK;
-    let kWhDevice = network.sizeUncompress * KWH_DEVICE;
+    const kWhDataCenter = nbRequest * KWH_PER_REQUEST_DATA_CENTER;
+    const kWhNetwork = network.size * KWH_PER_BYTE_NETWORK;
+    const kWhDevice = network.sizeUncompress * KWH_DEVICE;
 
-    const dataCenterTotal = zoneGES?.carbonIntensity ? kWhDataCenter * zoneGES.carbonIntensity : undefined;
-    const networkTotal = zoneGES?.carbonIntensity ? kWhNetwork * zoneGES.carbonIntensity : undefined;
-    const deviceTotal = userGES?.carbonIntensity ? kWhDevice * userGES.carbonIntensity : undefined;
-    const pageTotal = (dataCenterTotal ? dataCenterTotal : 0) + (networkTotal ? networkTotal : 0) + (deviceTotal ? deviceTotal : 0);
+    const enrgy: EnergyMeasure = {
+      kWhDataCenter,
+      kWhNetwork,
+      kWhDevice,
+      kWhPage: kWhDataCenter + kWhDevice + kWhNetwork
+    };
 
     return {
-      ges: { dataCenterTotal, networkTotal, deviceTotal, pageTotal },
-      energy: {
-        kWhDataCenter,
-        kWhNetwork,
-        kWhDevice,
-        kWhPage: kWhDataCenter + kWhDevice + kWhNetwork
-      }
+      ges: this.getResources(userGES?.carbonIntensity, zoneGES?.carbonIntensity, enrgy),
+      wu: this.getResources(userGES?.wu, zoneGES?.wu, enrgy),
+      adpe: this.getResources(userGES?.adpe, zoneGES?.adpe, enrgy),
+      energy: enrgy
     };
   }
+
+  getResources(usrResource: number | undefined, srvResource: number | undefined, energy: EnergyMeasure): ResTotals {
+    const dataCenterTotal = srvResource ? energy.kWhDataCenter * srvResource : undefined;
+    const networkTotal = srvResource ? energy.kWhNetwork * srvResource : undefined;
+    const deviceTotal = usrResource ? energy.kWhDevice * usrResource : undefined;
+    const pageTotal = (dataCenterTotal ? dataCenterTotal : 0) + (networkTotal ? networkTotal : 0) + (deviceTotal ? deviceTotal : 0);
+    return {
+      dataCenterTotal: dataCenterTotal,
+      networkTotal: networkTotal,
+      deviceTotal: deviceTotal,
+      pageTotal: pageTotal
+    };
+  }
+
 }

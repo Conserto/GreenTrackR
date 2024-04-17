@@ -239,6 +239,18 @@ export const createEmptyMeasure = (): Measure => {
       deviceTotal: 0,
       pageTotal: 0
     },
+    wu: {
+      dataCenterTotal: 0,
+      networkTotal: 0,
+      deviceTotal: 0,
+      pageTotal: 0
+    },
+    adpe: {
+      dataCenterTotal: 0,
+      networkTotal: 0,
+      deviceTotal: 0,
+      pageTotal: 0
+    },
     energy: {
       kWhDataCenter: 0,
       kWhNetwork: 0,
@@ -254,12 +266,16 @@ export const createEmptyMeasure = (): Measure => {
     },
     userGES: {
       carbonIntensity: 0,
+      wu: 0,
+      adpe: 0,
       countryName: '',
       cityName: '',
       countryCode: ''
     },
     serverGES: {
       carbonIntensity: 0,
+      wu: 0,
+      adpe: 0,
       countryName: '',
       cityName: '',
       countryCode: ''
