@@ -177,13 +177,29 @@ test('CreateEmptyMeasure function', async () => {
       carbonIntensity: 0,
       countryName: '',
       cityName: '',
-      countryCode: ''
+      countryCode: '',
+      wu: 0,
+      adpe: 0
     },
     serverGES: {
       carbonIntensity: 0,
       countryName: '',
       cityName: '',
-      countryCode: ''
+      countryCode: '',
+      wu: 0,
+      adpe: 0
+    },
+    adpe: {
+      dataCenterTotal: 0,
+      deviceTotal: 0,
+      networkTotal: 0,
+      pageTotal: 0
+    },
+    wu: {
+      dataCenterTotal: 0,
+      deviceTotal: 0,
+      networkTotal: 0,
+      pageTotal: 0
     },
     complete: false,
     extensionMeasure: {
