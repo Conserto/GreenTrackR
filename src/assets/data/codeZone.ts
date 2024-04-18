@@ -1,4 +1,4 @@
-// data of wu and adpe source : https://github.com/digital4better/data/tree/main
+// data of wu (unit: m^3) and adpe (unit: kgSbe) (source : https://github.com/digital4better/data/tree/main)
 export const codeZone = [
   { countryName: 'Argentina', zone: 'AR', wu: 0.0400685, adpe: 3.80678e-7 },
   { countryName: 'Australia_Cape Barren Island', zone: 'AU-TAS-CBI' },
