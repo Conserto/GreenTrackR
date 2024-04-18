@@ -1,11 +1,13 @@
 export interface GES {
   carbonIntensity?: number;
+  wu?: number;
+  adpe?: number;
   countryName: string;
   cityName?: string;
   countryCode: string;
 }
 
-export interface GESTotals {
+export interface ResTotals {
   dataCenterTotal?: number;
   networkTotal?: number;
   deviceTotal?: number;

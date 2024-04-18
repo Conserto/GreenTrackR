@@ -1,4 +1,7 @@
 {
+  "adpeEquivalent": {
+    "message": "Abiotique#Potentiel d'épuisement abiotique (utilisation des ressources, minéraux et métaux)"
+  },
   "analysisInProgress": {
     "message": "Analyse en cours. Naviguez sur l'onglet actif puis revenez ici pour les résultats.#Message analyse en cours"
   },
@@ -69,7 +72,7 @@
     "message": "GES Client#GES client en gCO2eq"
   },
   "gesGrade": {
-    "message": "Note#Une note de A->F (plus la note est élevée, meilleur est la page !)" 
+    "message": "Note#Une note de A->F (plus la note est élevée, meilleur est la page !)"
   },
   "gesIntensity": {
     "message": "Mix énergétique serveur#Intensité carbone en gCO2eq/Kwh de l'électricité consommé de la localisation du serveur"
@@ -274,5 +277,8 @@
   },
   "visitEquivalent": {
     "message": "visite(s) l'équivalent de : #Label l'information sur les visites part. 2"
+  },
+  "wuEquivalent": {
+    "message": "Eau#Eau douce utilisée"
   }
 }

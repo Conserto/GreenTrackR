@@ -1,10 +1,12 @@
-import type { GES, GESTotals, NetworkResponse, Score } from '.';
+import type { GES, ResTotals, NetworkResponse, Score } from '.';
 
 export interface Measure {
   date: Date;
   url?: string;
   action?: string;
-  ges?: GESTotals;
+  ges?: ResTotals;
+  wu?: ResTotals;
+  adpe?: ResTotals;
   energy: EnergyMeasure;
   score?: Score;
   dom: number;

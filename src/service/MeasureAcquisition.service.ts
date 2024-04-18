@@ -31,7 +31,7 @@ export class MeasureAcquisition {
 
   updateMeasureValues(zoneGES?: GES, userGES?: GES): void {
     // Energie total requetes (réseau, user, server)
-    const { ges, energy } = this.gesService.getEnergyAndGES(
+    const { ges, wu, adpe, energy } = this.gesService.getEnergyAndResources(
       this.measure.networkMeasure.network,
       this.measure.networkMeasure.nbRequest,
       zoneGES,
@@ -39,6 +39,8 @@ export class MeasureAcquisition {
     );
 
     this.measure.ges = ges;
+    this.measure.wu = wu;
+    this.measure.adpe = adpe;
     this.measure.energy = energy;
     this.measure.userGES = userGES;
     this.measure.serverGES = zoneGES;
