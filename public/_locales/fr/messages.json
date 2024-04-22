@@ -1,6 +1,6 @@
 {
   "adpeEquivalent": {
-    "message": "Abiotique#Potentiel d'épuisement abiotique (utilisation des ressources, minéraux et métaux)"
+    "message": "ADPE#Potentiel d'épuisement abiotique (utilisation des ressources, minéraux et métaux)"
   },
   "analysisInProgress": {
     "message": "Analyse en cours. Naviguez sur l'onglet actif puis revenez ici pour les résultats.#Message analyse en cours"
@@ -55,6 +55,9 @@
   },
   "energyDefault": {
     "message": "Energie (Wh)"
+  },
+  "energyEquivalent": {
+    "message": "ELEC#Todo"
   },
   "errorNoToken": {
     "message": "Aucun token CO2 trouvé, l'extension pourrait ne pas fonctionner"
@@ -279,6 +282,6 @@
     "message": "visite(s) l'équivalent de : #Label l'information sur les visites part. 2"
   },
   "wuEquivalent": {
-    "message": "Eau#Eau douce utilisée"
+    "message": "EAU#Eau douce utilisée"
   }
 }

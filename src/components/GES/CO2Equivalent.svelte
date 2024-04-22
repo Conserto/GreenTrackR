@@ -15,6 +15,12 @@
   >{measure?.ges?.pageTotal?.toFixed(2)} {Units.carbonEmissions}</span>
 </div>
 
+<div class="energy-equivalent">
+  <span><Tooltip translateKey="energyEquivalent" /> :</span>
+  <span class="energy-equivalent_value"
+  >{measure?.energy?.kWhPage?.toFixed(2)} {Units.energy}</span>
+</div>
+
 <div class="wu-equivalent">
   <span><Tooltip translateKey="wuEquivalent" /> :</span>
   <span class="wu-equivalent_value"
@@ -29,13 +35,18 @@
 
 <style lang="scss">
   .wu-equivalent_value {
-      background-color: #95d1e5;
-  }
-  .adpe-equivalent_value {
-      background-color: #ef893d;
+    background-color: #95d1e5;
   }
 
-  .ges-equivalent, .wu-equivalent, .adpe-equivalent {
+  .adpe-equivalent_value {
+    background-color: #ef893d;
+  }
+
+  .energy-equivalent_value {
+    background-color: #f1bb00;
+  }
+
+  .ges-equivalent, .wu-equivalent, .adpe-equivalent, .energy-equivalent {
     display: flex;
     align-items: center;
     font-weight: var(--font-weight--bold);
