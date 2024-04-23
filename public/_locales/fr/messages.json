@@ -236,6 +236,9 @@
   "synTabHeadGrade": {
     "message": "Note#Une note de A -> F"
   },
+  "synTabHeadKpi": {
+    "message": "KPI's#KPI"
+  },
   "synTabHeadPage": {
     "message": "Page#Total d'évenements (scroll + clique)"
   },

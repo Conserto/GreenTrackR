@@ -239,6 +239,9 @@
   "synTabHeadGrade": {
     "message": "Grade#A grade of A->F"
   },
+  "synTabHeadKpi": {
+    "message": "KPI's#KPI"
+  },
   "synTabHeadPage": {
     "message": "Webpage#Total events (scroll + click)"
   },
