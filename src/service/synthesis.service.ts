@@ -79,7 +79,7 @@ export class SynthesisSrv {
       countryName: 'none'
     };
     //     GES -> Calcul obligatoire -> besoin carbon, moyenne
-    const ges = this.gesService.getEnergyAndGES(
+    const ges = this.gesService.getEnergyAndResources(
       net.network,
       net.nbRequest,
       gesSrv,

@@ -27,6 +27,7 @@
 
   let serverSearch = SEARCH_AUTO;
   let userSearch = SEARCH_AUTO;
+  let updateHistoryTab: any;
 
   const onResetMeasure = () => {
     currentMeasure = null;
@@ -53,6 +54,9 @@
       savedMeasures,
       lsMeasures ? [...lsMeasures, currentMeasure] : [currentMeasure]
     );
+    if (currentDisplayedTab === TabType.HistoricTab) {
+      updateHistoryTab();
+    }
     showPopUp = true;
   };
 
@@ -135,7 +139,7 @@
     </div>
   {/if}
 {:else if currentDisplayedTab === TabType.HistoricTab}
-  <HistoricResults />
+  <HistoricResults saveName="{savedMeasures}" bind:updateHistory={updateHistoryTab} />
 {/if}
 {#if showPopUp}
   <Modal>

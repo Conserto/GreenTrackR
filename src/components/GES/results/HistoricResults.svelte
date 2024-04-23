@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { gesTableHeaders, savedMeasures } from 'src/const';
+  import { gesTableHeaders } from 'src/const';
   import { ButtonTypeEnum } from 'src/enum';
   import { Button, Modal, Table } from 'src/components';
   import { export_data } from 'src/service';
@@ -10,28 +10,32 @@
   let formattedData: Map<string, TableData>[];
   let measures: Measure[] = [];
   let showPopUp = false;
+  export let saveName: string;
 
   onMount(() => {
-    measures = getLocalStorageObject(savedMeasures) ?? [];
-    formattedData = formatGesMeasuresForTable(measures);
-    let btn = new Map<string, TableData>;
-    btn.set('action', { content: 'deleteButton', action: true });
-    formattedData.push(btn);
+    updateHistory();
   });
 
   const handleExport = () => {
     export_data(measures);
   };
 
+  export const updateHistory = () => {
+    measures = getLocalStorageObject(saveName) ?? [];
+    let btn = new Map<string, TableData>;
+    btn.set('action', { content: 'deleteButton', action: true });
+    formattedData = formatGesMeasuresForTable(measures, btn);
+  };
+
   const handleDeleteMeasure = (event: any) => {
     const data = event.detail.data;
     formattedData = formattedData.filter((d) => d !== data);
-    measures = measures.filter((m) => m.date !== data.date.content);
-    setLocalStorageObject(savedMeasures, measures);
+    measures = measures.filter((m) => m.date !== data.get('date').content);
+    setLocalStorageObject(saveName, measures);
   };
 
   const handleDeleteAll = () => {
-    localStorage.removeItem(savedMeasures);
+    localStorage.removeItem(saveName);
     formattedData = [];
     showPopUp = false;
   };
@@ -39,7 +43,7 @@
 
 <h4>{translate('messageResultsAnalysis')}</h4>
 <Table
-  columnHeaders={[...gesTableHeaders, { id: 'action', translateKey: '' }]}
+  columnHeaders={[...gesTableHeaders, { id: 'action', translateKey: 'action' }]}
   datas={formattedData}
   on:actionClicked={handleDeleteMeasure}
 />

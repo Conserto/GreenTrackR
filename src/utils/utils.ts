@@ -111,7 +111,7 @@ export const setLocalStorageObject = (key: string, value: any) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
-export const formatGesMeasuresForTable = (measures: Measure[]): Map<string, TableData>[] => {
+export const formatGesMeasuresForTable = (measures: Measure[], add?: Map<string, TableData>): Map<string, TableData>[] => {
   return measures.map((measure): Map<string, TableData> => {
     let data: Map<any, TableData> = new Map<any, TableData>;
     data.set('date', { content: formatDate(measure.date), style: 'font-weight:bold' });
@@ -137,6 +137,11 @@ export const formatGesMeasuresForTable = (measures: Measure[]): Map<string, Tabl
     data.set('gesUserIntensity', { content: formatIntensity(measure.userGES) });
     data.set('gesZone', { content: formatGes(measure.serverGES) });
     data.set('gesIntensity', { content: formatIntensity(measure.serverGES) });
+    if (add) {
+      add.forEach((value, key) => {
+        data.set(key, value);
+      });
+    }
     return data;
   });
 };
@@ -234,6 +239,18 @@ export const createEmptyMeasure = (): Measure => {
       deviceTotal: 0,
       pageTotal: 0
     },
+    wu: {
+      dataCenterTotal: 0,
+      networkTotal: 0,
+      deviceTotal: 0,
+      pageTotal: 0
+    },
+    adpe: {
+      dataCenterTotal: 0,
+      networkTotal: 0,
+      deviceTotal: 0,
+      pageTotal: 0
+    },
     energy: {
       kWhDataCenter: 0,
       kWhNetwork: 0,
@@ -249,12 +266,16 @@ export const createEmptyMeasure = (): Measure => {
     },
     userGES: {
       carbonIntensity: 0,
+      wu: 0,
+      adpe: 0,
       countryName: '',
       cityName: '',
       countryCode: ''
     },
     serverGES: {
       carbonIntensity: 0,
+      wu: 0,
+      adpe: 0,
       countryName: '',
       cityName: '',
       countryCode: ''
