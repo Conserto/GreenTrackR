@@ -1,6 +1,6 @@
 {
   "adpeEquivalent": {
-    "message": "Abiotc#Abiotic Depletion Potential (Resource use, minerals and metals)"
+    "message": "ADP#Abiotic Depletion Potential (use of natural resources, minerals and metals) in kg antimony equivalent (kg eq. SB)"
   },
   "analysisInProgress": {
     "message": "Analysis in progress. Start browsing on the current tab, then come back here to get stats !#Analysis in progress message"
@@ -58,6 +58,9 @@
   },
   "energyDefault": {
     "message": "Energy (Wh)#Energy used, default"
+  },
+  "energyEquivalent": {
+    "message": "ELEC#Electricity consumption in kWh"
   },
   "errorNoToken": {
     "message": "No CO2 token found, the extension may not work#Env variable not found"
@@ -282,6 +285,6 @@
     "message": "visit(s) the equivalent of : #Label for informations about visits part. 2"
   },
   "wuEquivalent": {
-    "message": "Water#Water Used"
+    "message": "WATER#Water used in liters"
   }
 }

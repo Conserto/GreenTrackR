@@ -3,5 +3,6 @@ export const Units = {
   carbonIntensity: 'gCO2eq/Kwh',
   carbonEmissions: 'gCO2eq',
   waterUse: 'l',
+  energy: 'kWh',
   adpeUnit: 'mgSbe',
 };
