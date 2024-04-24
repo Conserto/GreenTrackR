@@ -1,6 +1,6 @@
 # GreenTrackr V2.0.0 
 
-GreenTrackr is an eco-designed browser extension that lets you assess your website's carbon footprint in plug and play. The assessment is based on the estimated energy consumption (Wh) of three parameters which represent each third of the architecture of a digital service : 
+GreenTrackr is an eco-designed browser extension that lets you assess your website's environmental footprint in plug and play. The assessment is based on the estimated energy consumption (Wh) of three parameters which represent each third of the architecture of a digital service : 
 
 - The **user**: downloaded data (**uncompressed page size**) 
 - The **network**: transferred data (**compressed page size**)
@@ -48,7 +48,7 @@ You can accurately analyze the web page by percentage (**%**) to Auto scroll. Th
 
 ### User journey
 
-You can assess the carbon footprint of a user journey into the "**User journey**" tab. When you start the analysis, by clicking on the "**Start recording**" button, the extension will record your user journey. Once the journey has been completed, click on the "**Stop recording**" button to display the results table for each action performed: "**(scroll)**" and/or "**(click)**" $\dots$ on the visited pages. The "**Reset journey**" and "**Clear cache**" buttons allow you to empty the locally stored results, thus restarting a journey from scratch.
+You can assess the environmental footprint of a user journey into the "**User journey**" tab. When you start the analysis, by clicking on the "**Start recording**" button, the extension will record your user journey. Once the journey has been completed, click on the "**Stop recording**" button to display the results table for each action performed: "**(scroll)**" and/or "**(click)**" $\dots$ on the visited pages. The "**Reset journey**" and "**Clear cache**" buttons allow you to empty the locally stored results, thus restarting a journey from scratch.
 
 ## Extension permissions
 

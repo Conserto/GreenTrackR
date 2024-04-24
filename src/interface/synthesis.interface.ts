@@ -1,4 +1,4 @@
-import type { GES, ResTotals, NetworkMeasure, Score } from '.';
+import type { GES, ResTotals, NetworkMeasure, Score, EnergyMeasure } from '.';
 
 export interface Synthesis {
   pages: SynthesisLine[];
@@ -20,6 +20,9 @@ export interface SynthesisCommon {
   count: number;
   network: NetworkMeasure;
   ges: ResTotals;
+  wu: ResTotals;
+  adpe: ResTotals;
+  energy: EnergyMeasure;
   carbonSrv: GES;
   carbonUsr: GES;
   score?: Score;
