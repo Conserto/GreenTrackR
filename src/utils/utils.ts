@@ -1,4 +1,4 @@
-import type { GES, Measure, NetworkMeasure, TableData } from 'src/interface';
+import type { GES, Measure, NetworkMeasure, TableData, TableHeader, TableSurHeader } from 'src/interface';
 import { logDebug, logWarn } from './log';
 
 export const getAverageValue = (data: number[]) => {
@@ -133,6 +133,18 @@ export const formatGesMeasuresForTable = (measures: Measure[], add?: Map<string,
       content: measure.score?.gradeLetter,
       style: `background-color: ${measure.score?.color}; color: ${measure.score?.textColor}`
     });
+    data.set('wuDataCenter', { content: formatNumber(measure.wu?.dataCenterTotal) });
+    data.set('wuNetwork', { content: formatNumber(measure.wu?.networkTotal) });
+    data.set('wuDevice', { content: formatNumber(measure.wu?.deviceTotal) });
+    data.set('wuTotal', { content: formatNumber(measure.wu?.pageTotal) });
+    data.set('apdeDataCenter', { content: formatNumber(measure.adpe?.dataCenterTotal) });
+    data.set('adpeNetwork', { content: formatNumber(measure.adpe?.networkTotal) });
+    data.set('adpeDevice', { content: formatNumber(measure.adpe?.deviceTotal) });
+    data.set('adpeTotal', { content: formatNumber(measure.adpe?.pageTotal) });
+    data.set('elcDataCenter', { content: formatNumber(measure.energy?.kWhDataCenter) });
+    data.set('elcNetwork', { content: formatNumber(measure.energy?.kWhNetwork) });
+    data.set('elcDevice', { content: formatNumber(measure.energy?.kWhDevice) });
+    data.set('elcTotal', { content: formatNumber(measure.energy?.kWhPage) });
     data.set('gesUserZone', { content: formatGes(measure.userGES) });
     data.set('gesUserIntensity', { content: formatIntensity(measure.userGES) });
     data.set('gesZone', { content: formatGes(measure.serverGES) });
@@ -144,6 +156,32 @@ export const formatGesMeasuresForTable = (measures: Measure[], add?: Map<string,
     }
     return data;
   });
+};
+
+export const getSurHead = (tableHeaders: TableHeader[]): Map<string, TableSurHeader> => {
+  let result = new Map<string, TableSurHeader>();
+  tableHeaders.forEach(val => {
+    let head = val.groupHead ? val.groupHead : '';
+    let data = result.get(head);
+    if (data) {
+      result.set(head, {
+        colspan: data.colspan + 1,
+        id: data.id,
+        translateKey: head.length > 0 ? head : undefined,
+        icon: val.icon ? val.icon : data.icon,
+        class: val.class
+      });
+    } else {
+      result.set(head, {
+        colspan: 1,
+        id: head,
+        translateKey: head.length > 0 ? head : undefined,
+        icon: val.icon ? val.icon : undefined,
+        class: val.class
+      });
+    }
+  });
+  return result;
 };
 
 export const formatShortUrl = (url: string | undefined) => {

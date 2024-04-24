@@ -236,6 +236,9 @@
   "synTabHeadGrade": {
     "message": "Note#Une note de A -> F"
   },
+  "synTabHeadKpi": {
+    "message": "KPI's#KPI"
+  },
   "synTabHeadPage": {
     "message": "Page#Total d'évenements (scroll + clique)"
   },
@@ -262,6 +265,42 @@
   },
   "tabJourney": {
     "message": "Parcours Utilisateur#User Journey tab"
+  },
+  "tableAdpeSurHead": {
+    "message": "ADP#Potentiel d'épuisement abiotique (utilisation des ressources naturelles, minéraux et métaux) en kg équivalent antimoine (kg eq. SB)"
+  },
+  "tableClientSurHead": {
+    "message": "CLIENT#Localisation de l'adresse IP de l'utilisateur"
+  },
+  "tableElecSurHead": {
+    "message": "ELEC#La consommation d'électricité en kWh"
+  },
+  "tableGesSurHead": {
+    "message": "GES#La valeur des émissions de gaz à effet de serre (gCO2eq)"
+  },
+  "tableKpiDataCenter": {
+    "message": "Serveur#GES Emissions des centres de données"
+  },
+  "tableKpiDevice": {
+    "message": "Appareils#GES Emissions des appareils utilisés"
+  },
+  "tableKpiNetwork": {
+    "message": "Réseau#GES Emissions du réseau"
+  },
+  "tableKpiTotal": {
+    "message": "Total#GES Emissions totales"
+  },
+  "tableSrvSurHead": {
+    "message": "SERVEUR#Localisation de l'adresse IP du serveur"
+  },
+  "tableWuSurHead": {
+    "message": "EAU#Eau utilisée en litres"
+  },
+  "tableZoneIntensityShort": {
+    "message": "Intensity#Intensité carbone en gCO2eq/Kwh de l'électricité consommée"
+  },
+  "tableZoneIp": {
+    "message": "Zone#Localisation de l'adresse IP"
   },
   "tabParameter": {
     "message": "Paramètres"
