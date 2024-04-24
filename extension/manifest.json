@@ -8,12 +8,9 @@
   },
   "default_locale": "fr",
   "permissions": [
-    "activeTab",
     "tabs",
     "browsingData",
-    "storage",
-    "webNavigation",
-    "webRequest"
+    "webNavigation"
   ],
   "content_scripts": [
     {
