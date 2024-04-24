@@ -286,9 +286,7 @@
   },
   "wuEquivalent": {
     "message": "EAU#Eau utilisée en litres"
-  }
-
-  ,
+  },
   "tableGesSurHead": {
     "message": "GES#La valeur des émissions de gaz à effet de serre (gCO2eq)"
   },
@@ -302,27 +300,27 @@
     "message": "ELEC#La consommation d'électricité en kWh"
   },
   "tableClientSurHead": {
-    "message": "CLIENT#Données client"
+    "message": "CLIENT#Localisation de l'adresse IP de l'utilisateur"
   },
   "tableSrvSurHead": {
-    "message": "SERVEUR#Données serveur"
+    "message": "SERVEUR#Localisation de l'adresse IP du serveur"
   },
   "tableKpiDataCenter": {
-    "message": "Centre de données#Emissions des centres de données"
+    "message": "Serveur#GES Emissions des centres de données"
   },
   "tableKpiNetwork": {
-    "message": "Réseau#Emissions du réseau"
+    "message": "Réseau#GES Emissions du réseau"
   },
   "tableKpiDevice": {
-    "message": "Appareils#Emissions des appareils electroniques"
+    "message": "Appareils#GES Emissions des appareils utilisés"
   },
   "tableKpiTotal": {
-    "message": "Total#Emissions totales"
+    "message": "Total#GES Emissions totales"
   },
   "tableZoneIp": {
     "message": "Zone#Localisation de l'adresse IP"
   },
   "tableZoneIntensityShort": {
-    "message": "Intensité#Intensité carbone en gCO2eq/Kwh de l'électricité consommée"
+    "message": "Intensity#Intensité carbone en gCO2eq/Kwh de l'électricité consommée"
   }
 }

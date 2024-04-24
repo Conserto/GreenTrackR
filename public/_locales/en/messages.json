@@ -289,43 +289,41 @@
   },
   "wuEquivalent": {
     "message": "WATER#Water used in liters"
-  }
-
-  ,
+  },
   "tableGesSurHead": {
-    "message": "GES#La valeur des émissions de gaz à effet de serre (gCO2eq)"
+    "message": "GES#Greenhouse gas emission values (gCO2eq)"
   },
   "tableWuSurHead": {
-    "message": "EAU#Eau utilisée en litres"
+    "message": "WATER#Water used in liters"
   },
   "tableAdpeSurHead": {
-    "message": "ADP#Potentiel d'épuisement abiotique (utilisation des ressources naturelles, minéraux et métaux) en kg équivalent antimoine (kg eq. SB)"
+    "message": "ADP#Abiotic Depletion Potential (use of natural resources, minerals and metals) in kg antimony equivalent (kg eq. SB)"
   },
   "tableElecSurHead": {
-    "message": "ELEC#La consommation d'électricité en kWh"
+    "message": "ELEC#Electricity consumption in kWh"
   },
   "tableClientSurHead": {
-    "message": "CLIENT#Données client"
+    "message": "USER#Locating the user's IP address"
   },
   "tableSrvSurHead": {
-    "message": "SERVEUR#Données serveur"
+    "message": "SERVER#Locating the server's IP address"
   },
   "tableKpiDataCenter": {
-    "message": "Centre de données#Emissions des centres de données"
+    "message": "Server#GES emissions of data center"
   },
   "tableKpiNetwork": {
-    "message": "Réseau#Emissions du réseau"
+    "message": "Network#GES emissions of network"
   },
   "tableKpiDevice": {
-    "message": "Appareils#Emissions des appareils electroniques"
+    "message": "Devices#GES emissions of devices"
   },
   "tableKpiTotal": {
-    "message": "Total#Emissions totales"
+    "message": "GES Total#GES Total"
   },
   "tableZoneIp": {
-    "message": "Zone#Localisation de l'adresse IP"
+    "message": "Zone#Location of IP address"
   },
   "tableZoneIntensityShort": {
-    "message": "Intensité#Intensité carbone en gCO2eq/Kwh de l'électricité consommée"
+    "message": "Intensité#Carbon intensity in gCO2eq/Kwh of electricity consumed"
   }
 }
