@@ -33,6 +33,7 @@ export const gesTableHeaders = [
     id: 'gesDataCenter',
     translateKey: 'tableKpiDataCenter',
     groupHead: 'tableGesSurHead',
+    icon: 'GesIcon',
     class: 'bold'
   },
   {
@@ -69,6 +70,7 @@ export const gesTableHeaders = [
     id: 'wuDataCenter',
     translateKey: 'tableKpiDataCenter',
     groupHead: 'tableWuSurHead',
+    icon: 'EauIcon',
     class: 'light'
   },
   {
@@ -93,6 +95,7 @@ export const gesTableHeaders = [
     id: 'adpeDataCenter',
     translateKey: 'tableKpiDataCenter',
     groupHead: 'tableAdpeSurHead',
+    icon: 'AdpIcon',
     class: 'bold'
   },
   {
@@ -117,6 +120,7 @@ export const gesTableHeaders = [
     id: 'elcDataCenter',
     translateKey: 'tableKpiDataCenter',
     groupHead: 'tableElecSurHead',
+    icon: 'ElecIcon',
     class: 'light'
   },
   {

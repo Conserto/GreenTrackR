@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { formatGesMeasuresForTable, getSurHead, translate, translateDescription } from 'src/utils/utils';
+  import { getSurHead, translate } from 'src/utils/utils';
   import type { TableData, TableHeader } from 'src/interface/table.interface';
   import Button from './Button.svelte';
   import { ButtonTypeEnum } from 'src/enum';
   import { createEventDispatcher } from 'svelte';
   import Tooltip from './Tooltip.svelte';
+  import { AdpIcon, EauIcon, ElecIcon, GesIcon } from '../assets/icons';
 
   export let columnHeaders: TableHeader[] = [];
   export let datas: Map<string, TableData>[] = [];
@@ -17,11 +18,20 @@
   <table class="table">
     <thead>
     <tr>
-        {#each surHeads as [key, value]}
-          <th scope="col" colspan="{value.colspan}" class="{value.class}">
-            <Tooltip translateKey={value.translateKey} />
-          </th>
-        {/each}
+      {#each surHeads as [key, value]}
+        <th scope="col" colspan="{value.colspan}" class="{value.class}">
+          {#if ('AdpIcon' === value.icon)}
+            <img src="{AdpIcon}" alt="icon ADP" class="surHeadImg" />
+          {:else if ('EauIcon' === value.icon)}
+            <img src="{EauIcon}" alt="icon Water" class="surHeadImg" />
+          {:else if ('ElecIcon' === value.icon)}
+            <img src="{ElecIcon}" alt="icon Electricity" class="surHeadImg" />
+          {:else if ('GesIcon' === value.icon)}
+            <img src="{GesIcon}" alt="icon GES" class="surHeadImg" />
+          {/if}
+          <Tooltip translateKey={value.translateKey} />
+        </th>
+      {/each}
     </tr>
     <tr>
       {#if columnHeaders.length > 0}
@@ -90,6 +100,12 @@
 
         th {
           padding: var(--spacing--md) var(--spacing--xl);
+
+          img.surHeadImg {
+            height: 1.2em;
+            margin-right: 0.2em;
+          }
+
         }
       }
 

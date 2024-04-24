@@ -269,6 +269,42 @@
   "tabJourney": {
     "message": "User Journey#User Journey tab"
   },
+  "tableAdpeSurHead": {
+    "message": "ADP#Abiotic Depletion Potential (use of natural resources, minerals and metals) in kg antimony equivalent (kg eq. SB)"
+  },
+  "tableClientSurHead": {
+    "message": "USER#Locating the user's IP address"
+  },
+  "tableElecSurHead": {
+    "message": "ELEC#Electricity consumption in kWh"
+  },
+  "tableGesSurHead": {
+    "message": "GES#Greenhouse gas emission values (gCO2eq)"
+  },
+  "tableKpiDataCenter": {
+    "message": "Server#GES emissions of data center"
+  },
+  "tableKpiDevice": {
+    "message": "Devices#GES emissions of devices"
+  },
+  "tableKpiNetwork": {
+    "message": "Network#GES emissions of network"
+  },
+  "tableKpiTotal": {
+    "message": "GES Total#GES Total"
+  },
+  "tableSrvSurHead": {
+    "message": "SERVER#Locating the server's IP address"
+  },
+  "tableWuSurHead": {
+    "message": "WATER#Water used in liters"
+  },
+  "tableZoneIntensityShort": {
+    "message": "Intensité#Carbon intensity in gCO2eq/Kwh of electricity consumed"
+  },
+  "tableZoneIp": {
+    "message": "Zone#Location of IP address"
+  },
   "tabParameter": {
     "message": "Parameters"
   },
@@ -289,41 +325,5 @@
   },
   "wuEquivalent": {
     "message": "WATER#Water used in liters"
-  },
-  "tableGesSurHead": {
-    "message": "GES#Greenhouse gas emission values (gCO2eq)"
-  },
-  "tableWuSurHead": {
-    "message": "WATER#Water used in liters"
-  },
-  "tableAdpeSurHead": {
-    "message": "ADP#Abiotic Depletion Potential (use of natural resources, minerals and metals) in kg antimony equivalent (kg eq. SB)"
-  },
-  "tableElecSurHead": {
-    "message": "ELEC#Electricity consumption in kWh"
-  },
-  "tableClientSurHead": {
-    "message": "USER#Locating the user's IP address"
-  },
-  "tableSrvSurHead": {
-    "message": "SERVER#Locating the server's IP address"
-  },
-  "tableKpiDataCenter": {
-    "message": "Server#GES emissions of data center"
-  },
-  "tableKpiNetwork": {
-    "message": "Network#GES emissions of network"
-  },
-  "tableKpiDevice": {
-    "message": "Devices#GES emissions of devices"
-  },
-  "tableKpiTotal": {
-    "message": "GES Total#GES Total"
-  },
-  "tableZoneIp": {
-    "message": "Zone#Location of IP address"
-  },
-  "tableZoneIntensityShort": {
-    "message": "Intensité#Carbon intensity in gCO2eq/Kwh of electricity consumed"
   }
 }

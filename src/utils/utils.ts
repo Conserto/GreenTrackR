@@ -161,19 +161,22 @@ export const formatGesMeasuresForTable = (measures: Measure[], add?: Map<string,
 export const getSurHead = (tableHeaders: TableHeader[]): Map<string, TableSurHeader> => {
   let result = new Map<string, TableSurHeader>();
   tableHeaders.forEach(val => {
-    let data = result.get(val.groupHead);
+    let head = val.groupHead ? val.groupHead : '';
+    let data = result.get(head);
     if (data) {
-      result.set(val.groupHead, {
+      result.set(head, {
         colspan: data.colspan + 1,
         id: data.id,
-        translateKey: val.groupHead.length > 0 ? val.groupHead : undefined,
+        translateKey: head.length > 0 ? head : undefined,
+        icon: val.icon ? val.icon : data.icon,
         class: val.class
       });
     } else {
-      result.set(val.groupHead, {
+      result.set(head, {
         colspan: 1,
-        id: val.groupHead,
-        translateKey: val.groupHead.length > 0 ? val.groupHead : undefined,
+        id: head,
+        translateKey: head.length > 0 ? head : undefined,
+        icon: val.icon ? val.icon : undefined,
         class: val.class
       });
     }

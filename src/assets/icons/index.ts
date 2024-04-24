@@ -5,3 +5,4 @@ export { default as CarIcon } from './car.webp';
 export { default as EauIcon } from './goute.webp';
 export { default as ElecIcon } from './elec.webp';
 export { default as AdpIcon } from './adp.webp';
+export { default as GesIcon } from './ges.webp';
