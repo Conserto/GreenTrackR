@@ -3,7 +3,7 @@
   import Tooltip from './Tooltip.svelte';
   import { formatNbRequest, formatNumber, formatSizeTransferred, translate } from '../utils';
   import { SynthesisSrv } from '../service/synthesis.service';
-  import { AdpIcon, EauIcon, ElecIcon } from '../assets/icons';
+  import { AdpIcon, EauIcon, ElecIcon, GesIcon } from '../assets/icons';
 
   export let datas: Measure[];
 
@@ -83,7 +83,11 @@
         <td
           class="scroll">{formatSizeTransferred(page.sScroll.network.network.size, page.sScroll.network.network.sizeUncompress)}</td>
         <td class="scroll">{formatNbRequest(page.sScroll.network.nbRequest, page.sScroll.network.nbRequestCache)}</td>
-        <td class="scroll">{formatNumber(page.sScroll.ges.pageTotal)}</td>
+        <td class="scroll">
+          <div class="kpi">
+            <img src="{GesIcon}" class="icoGes" alt="ges_icon" />{formatNumber(page.sScroll.ges.pageTotal)}
+          </div>
+        </td>
         {#if page.sScroll.score?.value}
           <td class="scroll"
               style="background-color: {page.sScroll.score?.color}; color: {page.sScroll.score?.textColor}">{formatNumber(page.sScroll.score.value)}
@@ -112,7 +116,11 @@
         <td>{page.sClick.count}</td>
         <td>{formatSizeTransferred(page.sClick.network.network.size, page.sClick.network.network.sizeUncompress)}</td>
         <td>{formatNbRequest(page.sClick.network.nbRequest, page.sClick.network.nbRequestCache)}</td>
-        <td>{formatNumber(page.sClick.ges.pageTotal)}</td>
+        <td>
+          <div class="kpi">
+            <img src="{GesIcon}" class="icoGes" alt="ges_icon" />{formatNumber(page.sClick.ges.pageTotal)}
+          </div>
+        </td>
         {#if page.sClick.score?.value}
           <td
             style="background-color: {page.sClick.score?.color}; color: {page.sClick.score?.textColor}">{formatNumber(page.sClick.score.value)}
@@ -141,7 +149,11 @@
         <td
           class="page">{formatSizeTransferred(page.sPage.network.network.size, page.sPage.network.network.sizeUncompress)}</td>
         <td class="page">{formatNbRequest(page.sPage.network.nbRequest, page.sPage.network.nbRequestCache)}</td>
-        <td class="page">{formatNumber(page.sPage.ges.pageTotal)}</td>
+        <td class="page">
+          <div class="kpi">
+            <img src="{GesIcon}" class="icoGes" alt="ges_icon" />{formatNumber(page.sPage.ges.pageTotal)}
+          </div>
+        </td>
         {#if page.sPage.score?.value}
           <td class="page"
               style="background-color: {page.sPage.score?.color}; color: {page.sPage.score?.textColor}">{formatNumber(page.sPage.score.value)}
@@ -180,7 +192,11 @@
         class="scroll">{formatSizeTransferred(synthesis.total.sScroll.network.network.size, synthesis.total.sScroll.network.network.sizeUncompress)}</th>
       <th
         class="scroll">{formatNbRequest(synthesis.total.sScroll.network.nbRequest, synthesis.total.sScroll.network.nbRequestCache)}</th>
-      <th class="scroll">{formatNumber(synthesis.total.sScroll.ges.pageTotal)}</th>
+      <th class="scroll">
+        <div class="kpi">
+          <img src="{GesIcon}" class="icoGes" alt="ges_icon" />{formatNumber(synthesis.total.sScroll.ges.pageTotal)}
+        </div>
+      </th>
       {#if synthesis.total.sScroll.score?.value}
         <th class="scroll"
             style="background-color: {synthesis.total.sScroll.score?.color}; color: {synthesis.total.sScroll.score?.textColor}">{formatNumber(synthesis.total.sScroll.score.value)}
@@ -209,7 +225,11 @@
       <th>{synthesis.total.sClick.count}</th>
       <th>{formatSizeTransferred(synthesis.total.sClick.network.network.size, synthesis.total.sClick.network.network.sizeUncompress)}</th>
       <th>{formatNbRequest(synthesis.total.sClick.network.nbRequest, synthesis.total.sClick.network.nbRequestCache)}</th>
-      <th>{formatNumber(synthesis.total.sClick.ges.pageTotal)}</th>
+      <th>
+        <div class="kpi">
+          <img src="{GesIcon}" class="icoGes" alt="ges_icon" />{formatNumber(synthesis.total.sClick.ges.pageTotal)}
+        </div>
+      </th>
       {#if synthesis.total.sClick.score?.value}
         <th
           style="background-color: {synthesis.total.sClick.score?.color}; color: {synthesis.total.sClick.score?.textColor}">{formatNumber(synthesis.total.sClick.score.value)}
@@ -239,7 +259,11 @@
         class="page">{formatSizeTransferred(synthesis.total.sPage.network.network.size, synthesis.total.sPage.network.network.sizeUncompress)}</th>
       <th
         class="page">{formatNbRequest(synthesis.total.sPage.network.nbRequest, synthesis.total.sPage.network.nbRequestCache)}</th>
-      <th class="page">{formatNumber(synthesis.total.sPage.ges.pageTotal)}</th>
+      <th class="page">
+        <div class="kpi">
+          <img src="{GesIcon}" class="icoGes" alt="ges_icon" />{formatNumber(synthesis.total.sPage.ges.pageTotal)}
+        </div>
+      </th>
       {#if synthesis.total.sPage.score?.value}
         <th class="page"
             style="background-color: {synthesis.total.sPage.score?.color}; color: {synthesis.total.sPage.score?.textColor}">{formatNumber(synthesis.total.sPage.score.value)}
@@ -282,7 +306,7 @@
       white-space: nowrap;
 
       img {
-        &.icoWu, &.icoAdp, &.icoElec {
+        &.icoWu, &.icoAdp, &.icoElec, &.icoGes {
           width: 1em;
           margin-right: 0.2em;
         }
