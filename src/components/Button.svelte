@@ -88,8 +88,8 @@
       position: absolute;
       z-index: 1;
       bottom: 110%;
-      left: 50%;
-      margin-left: -60px;
+      left: -30%;
+      right: -30%;
       white-space: normal;
     }
 
