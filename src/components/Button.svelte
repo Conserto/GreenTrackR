@@ -90,6 +90,7 @@
       bottom: 110%;
       left: 50%;
       margin-left: -60px;
+      white-space: normal;
     }
 
   }

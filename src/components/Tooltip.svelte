@@ -9,7 +9,9 @@
   let sclass = top ? 'top' : '';
 </script>
 
-{#if translateKey}
+{#if !translateKey && !value && !tooltipValue}
+<div></div>
+{:else if translateKey}
   <div class="tooltip">{translate(translateKey)}
     <span class="tooltiptext {sclass}">{translateDescription(translateKey)}</span>
   </div>

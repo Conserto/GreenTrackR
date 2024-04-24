@@ -287,4 +287,42 @@
   "wuEquivalent": {
     "message": "EAU#Eau utilisée en litres"
   }
+
+  ,
+  "tableGesSurHead": {
+    "message": "GES#La valeur des émissions de gaz à effet de serre (gCO2eq)"
+  },
+  "tableWuSurHead": {
+    "message": "EAU#Eau utilisée en litres"
+  },
+  "tableAdpeSurHead": {
+    "message": "ADP#Potentiel d'épuisement abiotique (utilisation des ressources naturelles, minéraux et métaux) en kg équivalent antimoine (kg eq. SB)"
+  },
+  "tableElecSurHead": {
+    "message": "ELEC#La consommation d'électricité en kWh"
+  },
+  "tableClientSurHead": {
+    "message": "CLIENT#Données client"
+  },
+  "tableSrvSurHead": {
+    "message": "SERVEUR#Données serveur"
+  },
+  "tableKpiDataCenter": {
+    "message": "Centre de données#Emissions des centres de données"
+  },
+  "tableKpiNetwork": {
+    "message": "Réseau#Emissions du réseau"
+  },
+  "tableKpiDevice": {
+    "message": "Appareils#Emissions des appareils electroniques"
+  },
+  "tableKpiTotal": {
+    "message": "Total#Emissions totales"
+  },
+  "tableZoneIp": {
+    "message": "Zone#Localisation de l'adresse IP"
+  },
+  "tableZoneIntensityShort": {
+    "message": "Intensité#Intensité carbone en gCO2eq/Kwh de l'électricité consommée"
+  }
 }
