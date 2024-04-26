@@ -82,10 +82,12 @@ export class MeasureAcquisition {
         this.measure = await this.getMeasureFromEntries(this.measure, entriesPage);
         this.measure = {
           ...this.measure,
-          extensionMeasure: this.getNetworkAndRequestFromEntries(entriesExtension)
+          extensionMeasure: this.getNetworkAndRequestFromEntries(entriesExtension),
         };
         logInfo(`Extension request ignore, datas: requests=${this.measure.extensionMeasure.nbRequest}` +
           ` / size(compress/uncompress)=${this.measure.extensionMeasure.network.size}/${this.measure.extensionMeasure.network.size} KB`);
+        // console.log(this.measure.networkMeasure.detail);
+        // TODO nous avons ici la répartition des resources, un graph ça serait sympa
       }
     }
     this.harRetryCount = 0;
@@ -128,6 +130,7 @@ export class MeasureAcquisition {
     networkMeasure = {
       nbRequest: entries.length - nbCache,
       nbRequestCache: nbCache,
+      detail: this.networkService.calculateDetailResponseSizes(entries),
       network: {
         size: responsesSize,
         sizeUncompress: responsesSizeUncompress
