@@ -85,7 +85,7 @@
         <td class="scroll">{formatNbRequest(page.sScroll.network.nbRequest, page.sScroll.network.nbRequestCache)}</td>
         <td class="scroll">
           <div class="kpi">
-            <img src="{GesIcon}" class="icoGes" alt="ges_icon" />{formatNumber(page.sScroll.ges.pageTotal)}
+            <img src="{GesIcon}" class="icoGes" alt="" />{formatNumber(page.sScroll.ges.pageTotal)}
           </div>
         </td>
         {#if page.sScroll.score?.value}
@@ -100,15 +100,15 @@
           <!--<td class="scroll"></td>-->
         {/if}
         <td class="scroll">
-          <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="water_icon" />
+          <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="" />
             <Tooltip top="{true}" value="{formatNumber(page.sScroll.wu.pageTotal)}"
                      tooltipValue={translate("wuEquivalent")} />
           </div>
-          <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="adp_icon" />
+          <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="" />
             <Tooltip top="{true}" value="{formatNumber(page.sScroll.adpe.pageTotal)}"
                      tooltipValue={translate("adpeEquivalent")} />
           </div>
-          <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="elec_icon" />
+          <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="" />
             <Tooltip top="{true}" value="{formatNumber(page.sScroll.energy.kWhPage)}"
                      tooltipValue={translate("energyEquivalent")} />
           </div>
@@ -118,7 +118,7 @@
         <td>{formatNbRequest(page.sClick.network.nbRequest, page.sClick.network.nbRequestCache)}</td>
         <td>
           <div class="kpi">
-            <img src="{GesIcon}" class="icoGes" alt="ges_icon" />{formatNumber(page.sClick.ges.pageTotal)}
+            <img src="{GesIcon}" class="icoGes" alt="" />{formatNumber(page.sClick.ges.pageTotal)}
           </div>
         </td>
         {#if page.sClick.score?.value}
@@ -133,15 +133,15 @@
           <!--<td></td>-->
         {/if}
         <td>
-          <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="water_icon" />
+          <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="" />
             <Tooltip top="{true}" value="{formatNumber(page.sClick.wu.pageTotal)}"
                      tooltipValue={translate("wuEquivalent")} />
           </div>
-          <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="adp_icon" />
+          <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="" />
             <Tooltip top="{true}" value="{formatNumber(page.sClick.adpe.pageTotal)}"
                      tooltipValue={translate("adpeEquivalent")} />
           </div>
-          <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="elec_icon" />
+          <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="" />
             <Tooltip top="{true}" value="{formatNumber(page.sClick.energy.kWhPage)}"
                      tooltipValue={translate("energyEquivalent")} />
           </div>
@@ -151,7 +151,7 @@
         <td class="page">{formatNbRequest(page.sPage.network.nbRequest, page.sPage.network.nbRequestCache)}</td>
         <td class="page">
           <div class="kpi">
-            <img src="{GesIcon}" class="icoGes" alt="ges_icon" />{formatNumber(page.sPage.ges.pageTotal)}
+            <img src="{GesIcon}" class="icoGes" alt="" />{formatNumber(page.sPage.ges.pageTotal)}
           </div>
         </td>
         {#if page.sPage.score?.value}
@@ -166,15 +166,15 @@
           <!--<td class="page"></td>-->
         {/if}
         <td class="page">
-          <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="water_icon" />
+          <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="" />
             <Tooltip top="{true}" value="{formatNumber(page.sPage.wu.pageTotal)}"
                      tooltipValue={translate("wuEquivalent")} />
           </div>
-          <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="adp_icon" />
+          <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="" />
             <Tooltip top="{true}" value="{formatNumber(page.sPage.adpe.pageTotal)}"
                      tooltipValue={translate("adpeEquivalent")} />
           </div>
-          <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="elec_icon" />
+          <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="" />
             <Tooltip top="{true}" value="{formatNumber(page.sPage.energy.kWhPage)}"
                      tooltipValue={translate("energyEquivalent")} />
           </div>
@@ -194,7 +194,7 @@
         class="scroll">{formatNbRequest(synthesis.total.sScroll.network.nbRequest, synthesis.total.sScroll.network.nbRequestCache)}</th>
       <th class="scroll">
         <div class="kpi">
-          <img src="{GesIcon}" class="icoGes" alt="ges_icon" />{formatNumber(synthesis.total.sScroll.ges.pageTotal)}
+          <img src="{GesIcon}" class="icoGes" alt="" />{formatNumber(synthesis.total.sScroll.ges.pageTotal)}
         </div>
       </th>
       {#if synthesis.total.sScroll.score?.value}
@@ -209,15 +209,15 @@
         <!--<th class="scroll"></th>-->
       {/if}
       <th class="scroll">
-        <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="water_icon" />
+        <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="" />
           <Tooltip top="{true}" value="{formatNumber(synthesis.total.sScroll.wu.pageTotal)}"
                    tooltipValue={translate("wuEquivalent")} />
         </div>
-        <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="adp_icon" />
+        <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="" />
           <Tooltip top="{true}" value="{formatNumber(synthesis.total.sScroll.adpe.pageTotal)}"
                    tooltipValue={translate("adpeEquivalent")} />
         </div>
-        <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="elec_icon" />
+        <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="" />
           <Tooltip top="{true}" value="{formatNumber(synthesis.total.sScroll.energy.kWhPage)}"
                    tooltipValue={translate("energyEquivalent")} />
         </div>
@@ -242,15 +242,15 @@
         <!--<th></th>-->
       {/if}
       <th>
-        <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="water_icon" />
+        <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="" />
           <Tooltip top="{true}" value="{formatNumber(synthesis.total.sClick.wu.pageTotal)}"
                    tooltipValue={translate("wuEquivalent")} />
         </div>
-        <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="adp_icon" />
+        <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="" />
           <Tooltip top="{true}" value="{formatNumber(synthesis.total.sClick.adpe.pageTotal)}"
                    tooltipValue={translate("adpeEquivalent")} />
         </div>
-        <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="elec_icon" />
+        <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="" />
           <Tooltip top="{true}" value="{formatNumber(synthesis.total.sClick.energy.kWhPage)}"
                    tooltipValue={translate("energyEquivalent")} />
         </div>
@@ -261,7 +261,7 @@
         class="page">{formatNbRequest(synthesis.total.sPage.network.nbRequest, synthesis.total.sPage.network.nbRequestCache)}</th>
       <th class="page">
         <div class="kpi">
-          <img src="{GesIcon}" class="icoGes" alt="ges_icon" />{formatNumber(synthesis.total.sPage.ges.pageTotal)}
+          <img src="{GesIcon}" class="icoGes" alt="" />{formatNumber(synthesis.total.sPage.ges.pageTotal)}
         </div>
       </th>
       {#if synthesis.total.sPage.score?.value}
@@ -276,15 +276,15 @@
         <!--<th class="page"></th>-->
       {/if}
       <th class="scroll">
-        <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="water_icon" />
+        <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="" />
           <Tooltip top="{true}" value="{formatNumber(synthesis.total.sPage.wu.pageTotal)}"
                    tooltipValue={translate("wuEquivalent")} />
         </div>
-        <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="adp_icon" />
+        <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="" />
           <Tooltip top="{true}" value="{formatNumber(synthesis.total.sPage.adpe.pageTotal)}"
                    tooltipValue={translate("adpeEquivalent")} />
         </div>
-        <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="elec_icon" />
+        <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="" />
           <Tooltip top="{true}" value="{formatNumber(synthesis.total.sPage.energy.kWhPage)}"
                    tooltipValue={translate("energyEquivalent")} />
         </div>

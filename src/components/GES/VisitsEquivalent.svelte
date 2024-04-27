@@ -23,13 +23,13 @@
   />
   <p>{translate('visitEquivalent')}</p>
   <div class="equivalent-container">
-    <img class="car-icon" src={CarIcon} alt="car" loading="lazy" />
+    <img class="car-icon" src={CarIcon} alt="" loading="lazy" />
     <span>{carEquivalent} {translate('carIndicator')}</span>
   </div>
 
   <p>ou</p>
   <div class="equivalent-container">
-    <img class="phone-icon" src={PhoneIcon} alt="phone" loading="lazy" />
+    <img class="phone-icon" src={PhoneIcon} alt="" loading="lazy" />
     <span>{phoneEquivalent} {translate('smartphoneIndicator')}</span>
   </div>
 </div>
