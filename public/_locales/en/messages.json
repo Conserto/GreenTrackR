@@ -44,6 +44,9 @@
   "deleteAllButton": {
     "message": "Delete All#Delete All Button"
   },
+  "deleteAllTitle": {
+    "message": "Delete All#Delete All Button"
+  },
   "deleteAllConfirmMessage": {
     "message": "Do you really want to delete all history ?#Delete All Confirm Message"
   },
@@ -202,6 +205,9 @@
   },
   "saveAnalysis": {
     "message": "Analysis successfully saved.#Popup message"
+  },
+  "saveAnalysisTitle": {
+    "message": "Analysis Results."
   },
   "saveAnalysisButton": {
     "message": "Save assessment#Button to save web page evaluation"
