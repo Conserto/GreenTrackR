@@ -21,13 +21,13 @@
       {#each surHeads as [key, value]}
         <th scope="col" colspan="{value.colspan}" class="{value.class}">
           {#if ('AdpIcon' === value.icon)}
-            <img src="{AdpIcon}" alt="icon ADP" class="surHeadImg" />
+            <img src="{AdpIcon}" alt="" class="surHeadImg" />
           {:else if ('EauIcon' === value.icon)}
-            <img src="{EauIcon}" alt="icon Water" class="surHeadImg" />
+            <img src="{EauIcon}" alt="" class="surHeadImg" />
           {:else if ('ElecIcon' === value.icon)}
-            <img src="{ElecIcon}" alt="icon Electricity" class="surHeadImg" />
+            <img src="{ElecIcon}" alt="" class="surHeadImg" />
           {:else if ('GesIcon' === value.icon)}
-            <img src="{GesIcon}" alt="icon GES" class="surHeadImg" />
+            <img src="{GesIcon}" alt="" class="surHeadImg" />
           {/if}
           <Tooltip translateKey={value.translateKey} />
         </th>

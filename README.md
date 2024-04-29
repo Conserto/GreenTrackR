@@ -1,4 +1,11 @@
-# GreenTrackr V2.0.0 
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./public/images/logo.png">
+    <img alt="GreenTrackr" src="./public/images/logo.png">
+  </picture>
+</p>
+
+# GreenTrackr
 
 GreenTrackr is an eco-designed browser extension that lets you assess your website's environmental footprint in plug and play. The assessment is based on the estimated energy consumption (Wh) of three parameters which represent each third of the architecture of a digital service : 
 
@@ -10,7 +17,7 @@ GreenTrackr uses two external **APIs** (**Electricity Map's CO2signal** and **IP
 
 For more information on GreenTrackr calculations, please refer to https://conserto.pro/greentrackr/
 
-## Install and setup
+## ⚙️ Install and setup
 
 - Add GreenTrackr to Chrome (the plugin is available on Chrome Web Store) 
 - Open the browser dev tools (DevTools): ```Ctrl+Shift+I```
@@ -24,13 +31,13 @@ For more information on GreenTrackr calculations, please refer to https://conser
 - Uncheck the **Disable cache** box, in the DevTools Network tab
 - Type the **url** of the website to be analyzed on chrome search bar. 
 
-### Note
+### 📋 Note
 
 - This version of the extension is only compatible with Manifest V3 (chromium and chromium-based browser versions). A specific version for Firefox/Manifest V2 will be available separately.
 - Remember to refresh the page
 - The use of an ad blocker or other filter has an impact on the result
 
-## Tutorial
+## ✒️ Tutorial
 
 ### Evaluation/Page
 
@@ -50,7 +57,7 @@ You can accurately analyze the web page by percentage (**%**) to Auto scroll. Th
 
 You can assess the environmental footprint of a user journey into the "**User journey**" tab. When you start the analysis, by clicking on the "**Start recording**" button, the extension will record your user journey. Once the journey has been completed, click on the "**Stop recording**" button to display the results table for each action performed: "**(scroll)**" and/or "**(click)**" $\dots$ on the visited pages. The "**Reset journey**" and "**Clear cache**" buttons allow you to empty the locally stored results, thus restarting a journey from scratch.
 
-## Extension permissions
+## ✔️ Extension permissions
 
 To work properly, the extension requires the following permissions:
 
@@ -60,5 +67,5 @@ To work properly, the extension requires the following permissions:
 - **Storage**: used to store the different assessments
 - **Web Navigation**: used to detect when the analyzed page has finished loading
 
-## License
+## 📃 License
 [GNU Affero General Public License v3.0](./LICENSE)
