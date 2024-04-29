@@ -71,6 +71,9 @@
   "firstResults": {
     "message": "First results received !#First analysis resulted have been computed."
   },
+  "footRights": {
+    "message": "All rights reserved."
+  },
   "gesDataCenter": {
     "message": "GES server#GES server in gCO2eq"
   },
@@ -326,13 +329,10 @@
   "visitEquivalent": {
     "message": "visit(s) the equivalent of : #Label for informations about visits part. 2"
   },
-  "wuEquivalent": {
-    "message": "WATER#Water used in liters"
-  },
   "warning": {
     "message": "Warning"
   },
-  "footRights": {
-    "message": "All rights reserved."
+  "wuEquivalent": {
+    "message": "WATER#Water used in liters"
   }
 }
