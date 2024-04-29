@@ -328,5 +328,8 @@
   },
   "warning": {
     "message": "Avertissement"
+  },
+  "footRights": {
+    "message": "Tous droits réservés."
   }
 }
