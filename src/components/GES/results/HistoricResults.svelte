@@ -9,7 +9,7 @@
 
   let formattedData: Map<string, TableData>[];
   let measures: Measure[] = [];
-  let showPopUp = false;
+  let showModal = false;
   export let saveName: string;
 
   onMount(() => {
@@ -37,7 +37,7 @@
   const handleDeleteAll = () => {
     localStorage.removeItem(saveName);
     formattedData = [];
-    showPopUp = false;
+    showModal = false;
   };
 </script>
 
@@ -55,32 +55,28 @@
     disabled={!formattedData?.length}
   />
   <Button
-    on:buttonClick={() => (showPopUp = true)}
+    on:buttonClick={() => (showModal = true)}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="deleteAllButton"
     disabled={!formattedData?.length}
   />
 </div>
 
-{#if showPopUp}
-  <Modal>
-    <div class="flex-col-center">
-      <h2>{translate('deleteAllConfirmMessage')}</h2>
-      <div class="flex-center">
-        <Button
-          on:buttonClick={() => (showPopUp = false)}
-          buttonType={ButtonTypeEnum.SECONDARY}
-          translateKey="cancelButton"
-        />
-        <Button
-          on:buttonClick={handleDeleteAll}
-          buttonType={ButtonTypeEnum.PRIMARY}
-          translateKey="OK"
-        />
-      </div>
-    </div>
-  </Modal>
-{/if}
+<Modal dialogLabelKey="deleteAllTitle" bind:showModal>
+  <h2>{translate('deleteAllConfirmMessage')}</h2>
+  <div>
+    <Button
+      on:buttonClick={() => (showModal = false)}
+      buttonType={ButtonTypeEnum.SECONDARY}
+      translateKey="cancelButton"
+    />
+    <Button
+      on:buttonClick={handleDeleteAll}
+      buttonType={ButtonTypeEnum.PRIMARY}
+      translateKey="OK"
+    />
+  </div>
+</Modal>
 
 <style lang="scss">
   h2,

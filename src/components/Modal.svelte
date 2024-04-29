@@ -1,29 +1,22 @@
-<div class="overlay" aria-label="Pop up générique" aria-modal="true">
-  <div class="modal">
+<script lang="ts">
+  import { translate } from 'src/utils/utils';
+  export let dialogLabelKey: string;
+  export let showModal: boolean;
+  let dialog: HTMLDialogElement;
+  $: if (dialog && showModal) dialog.showModal();
+  $: if (dialog && !showModal) dialog.close();
+</script>
+
+<dialog
+  bind:this={dialog}
+  aria-label="{translate(dialogLabelKey)}" >
     <slot />
-  </div>
-</div>
-
+</dialog>
 <style>
-  .modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: var(--spacing--xl);
-    border: var(--border-width--thin) solid #ccc;
-    box-shadow: var(--box-shadow--sm);
-    z-index: 1000;
-  }
-
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-  }
+    dialog {
+        text-align: center;
+    }
+    ::backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
 </style>

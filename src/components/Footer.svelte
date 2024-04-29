@@ -1,6 +1,9 @@
+<script>
+  import { translate } from 'src/utils/utils';
+</script>
+
 <footer>
-  Copyright © 2024 <a class="green-trackr-link" href="https://conserto.pro/greentrackr/" target="_blank">Conserto.pro/greentrackr</a>.Tous
-  droits réservés.
+  {translate('footRights')} {new Date().getFullYear()} <a class="green-trackr-link" href="https://conserto.pro/greentrackr/" target="_blank">Conserto.pro/greentrackr</a>.
 </footer>
 
 <style lang="scss">

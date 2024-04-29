@@ -48,7 +48,7 @@
     position: relative;
     display: inline-block;
 
-    &:hover {
+    &:hover, &:focus-visible {
       .tooltipbtn {
         visibility: visible;
       }
@@ -64,7 +64,7 @@
       color: var(--color--white);
       background: var(--color--green);
 
-      &:hover {
+      &:hover, &:focus {
         background: var(--color-dark-green);
       }
     }

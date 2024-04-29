@@ -1,12 +1,12 @@
 {
   "manifest_version": 3,
-  "name": "GreenTrackr",
-  "description": "Evaluez l'empreinte environnementale de votre site Web",
-  "version": "2.0.2",
+  "name": "GreenTrackR",
+  "description": "__MSG_extDesc__",
+  "version": "2.0.3",
   "icons": {
     "64": "images/logo.png"
   },
-  "default_locale": "fr",
+  "default_locale": "en",
   "permissions": [
     "tabs",
     "browsingData",

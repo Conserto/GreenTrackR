@@ -44,6 +44,9 @@
   "deleteAllConfirmMessage": {
     "message": "Voulez vous vraiment supprimer tout l'historique ?"
   },
+  "deleteAllTitle": {
+    "message": "Effacer tout#Effacer tout"
+  },
   "deleteButton": {
     "message": "Effacer#Effacer"
   },
@@ -65,8 +68,14 @@
   "exportButton": {
     "message": "Exporter#Exporter les données"
   },
+  "extDesc": {
+    "message": "Evaluez l'empreinte environnementale de votre site Web"
+  },
   "firstResults": {
     "message": "Premiers résultats reçus !"
+  },
+  "footRights": {
+    "message": "Tous droits réservés"
   },
   "gesDataCenter": {
     "message": "GES Serveur#GES serveur en gCO2eq"
@@ -170,6 +179,15 @@
   "paramSave": {
     "message": "Paramètres sauvegardés"
   },
+  "paramSaveMessage": {
+    "message": "Les paramètres vont être enregistrés et l'extension sera rechargée"
+  },
+  "paramSavePopup": {
+    "message": "Recharger#Recharger l'extension"
+  },
+  "paramSaveTitle": {
+    "message": "Sauvegarde des paramètres"
+  },
   "paramTabTitle": {
     "message": "Paramétrage"
   },
@@ -196,6 +214,9 @@
   },
   "saveAnalysisButton": {
     "message": "Enregistrer l'évaluation#Bouton pour enregistrer l'évaluation de la page"
+  },
+  "saveAnalysisTitle": {
+    "message": "Résultat de l'évaluation."
   },
   "serverRegionLabel": {
     "message": "Simuler la localisation du serveur dans une autre zone #Label pour la selection"
@@ -322,6 +343,9 @@
   },
   "visitEquivalent": {
     "message": "visite(s) l'équivalent de : #Label l'information sur les visites part. 2"
+  },
+  "warning": {
+    "message": "Avertissement"
   },
   "wuEquivalent": {
     "message": "EAU#Eau utilisée en litres"
