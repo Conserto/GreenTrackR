@@ -1,12 +1,14 @@
 <script lang="ts">
   import { getLocalStorageObject, setLocalStorageObject, translate, translateDescription } from 'src/utils/utils';
   import { ButtonTypeEnum, InputTypeEnum } from '../enum';
-  import { Input } from '../components';
+  import { Input, Modal } from '../components';
   import Button from '../components/Button.svelte';
   import { onMount } from 'svelte';
   import { paramRetry, paramTokenCo2 } from '../const';
   import { VITE_MAX_HAR_RETRIES_DEFAULT } from '../const/config.const';
   import { logDebug } from '../utils/log';
+
+  let showModal = false;
 
   let co2TokenStr: string;
   let nbRetry: number;
@@ -22,8 +24,7 @@
   const onSaveParameters = () => {
     setLocalStorageObject(paramTokenCo2, co2TokenStr);
     setLocalStorageObject(paramRetry, nbRetry);
-    alert(translate("paramSave"));
-    location.reload();
+    showModal = true;
   };
 
 </script>
@@ -53,6 +54,16 @@
     />
   </div>
 </div>
+
+<Modal dialogLabelKey="paramSaveTitle" bind:showModal>
+  <h2>{translate('paramSaveMessage')}</h2>
+  <Button
+    on:buttonClick={() => (location.reload())}
+    buttonType={ButtonTypeEnum.PRIMARY}
+    tooltip="{true}"
+    translateKey="paramSavePopup"
+  />
+</Modal>
 
 <Button
   on:buttonClick={onSaveParameters}
