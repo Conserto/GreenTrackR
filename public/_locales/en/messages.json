@@ -44,11 +44,11 @@
   "deleteAllButton": {
     "message": "Delete All#Delete All Button"
   },
-  "deleteAllTitle": {
-    "message": "Delete All#Delete All Button"
-  },
   "deleteAllConfirmMessage": {
     "message": "Do you really want to delete all history ?#Delete All Confirm Message"
+  },
+  "deleteAllTitle": {
+    "message": "Delete All#Delete All Button"
   },
   "deleteButton": {
     "message": "Delete#Delete Button"
@@ -182,6 +182,15 @@
   "paramSave": {
     "message": "Parameters saved"
   },
+  "paramSaveMessage": {
+    "message": "The settings will be saved and the extension will be reloaded"
+  },
+  "paramSavePopup": {
+    "message": "Reload#Reload extension"
+  },
+  "paramSaveTitle": {
+    "message": "Save parameters"
+  },
   "paramTabTitle": {
     "message": "Setting"
   },
@@ -206,11 +215,11 @@
   "saveAnalysis": {
     "message": "Analysis successfully saved.#Popup message"
   },
-  "saveAnalysisTitle": {
-    "message": "Analysis Results."
-  },
   "saveAnalysisButton": {
     "message": "Save assessment#Button to save web page evaluation"
+  },
+  "saveAnalysisTitle": {
+    "message": "Analysis Results."
   },
   "serverRegionLabel": {
     "message": "Simulate server localization in an other zone #Label for select"

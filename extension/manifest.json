@@ -6,7 +6,7 @@
   "icons": {
     "64": "images/logo.png"
   },
-  "default_locale": "fr",
+  "default_locale": "en",
   "permissions": [
     "tabs",
     "browsingData",
