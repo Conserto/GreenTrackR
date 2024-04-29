@@ -21,7 +21,7 @@
   }
 
   let currentDisplayedTab = TabType.None;
-  let showPopUp = false;
+  let showModal = false;
 
   const scrollTypes = [
     { label: 'Px', value: ScrollInputType.PIXEL },
@@ -106,7 +106,7 @@
     if (currentDisplayedTab === TabType.HistoricTab) {
       updateHistoryTab();
     }
-    showPopUp = true;
+    showModal = true;
   };
 
   const handleSimulation = async (event: any) => {
@@ -191,18 +191,14 @@
 {:else if currentDisplayedTab === TabType.HistoricTab}
   <HistoricResults saveName="{savedScrollMeasures}" bind:updateHistory={updateHistoryTab} />
 {/if}
-{#if showPopUp}
-  <Modal>
-    <div class="modal">
-      <h2>{translate('saveAnalysis')}</h2>
-      <Button
-        on:buttonClick={() => (showPopUp = false)}
-        buttonType={ButtonTypeEnum.PRIMARY}
-        translateKey="closePopup"
-      />
-    </div>
-  </Modal>
-{/if}
+<Modal dialogLabelKey="saveAnalysisTitle" bind:showModal>
+  <h2>{translate('saveAnalysis')}</h2>
+  <Button
+    on:buttonClick={() => (showModal = false)}
+    buttonType={ButtonTypeEnum.PRIMARY}
+    translateKey="closePopup"
+  />
+</Modal>
 
 <style lang="scss">
 
