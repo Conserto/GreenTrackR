@@ -65,11 +65,14 @@
   "exportButton": {
     "message": "Exporter#Exporter les données"
   },
+  "extDesc": {
+    "message": "Evaluez l'empreinte environnementale de votre site Web"
+  },
   "firstResults": {
     "message": "Premiers résultats reçus !"
   },
   "footRights": {
-    "message": "Tous droits réservés."
+    "message": "Tous droits réservés"
   },
   "gesDataCenter": {
     "message": "GES Serveur#GES serveur en gCO2eq"

@@ -3,7 +3,7 @@
 </script>
 
 <footer>
-  Copyright © 2024 <a class="green-trackr-link" href="https://conserto.pro/greentrackr/" target="_blank">Conserto.pro/greentrackr</a>. {translate('footRights')}
+  {translate('footRights')} {new Date().getFullYear()} <a class="green-trackr-link" href="https://conserto.pro/greentrackr/" target="_blank">Conserto.pro/greentrackr</a>.
 </footer>
 
 <style lang="scss">
