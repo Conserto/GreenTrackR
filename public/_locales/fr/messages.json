@@ -41,6 +41,9 @@
   "deleteAllButton": {
     "message": "Effacer tout#Effacer tout"
   },
+  "deleteAllTitle": {
+    "message": "Effacer tout#Effacer tout"
+  },
   "deleteAllConfirmMessage": {
     "message": "Voulez vous vraiment supprimer tout l'historique ?"
   },
@@ -193,6 +196,9 @@
   },
   "saveAnalysis": {
     "message": "L'évaluation a bien été enregistrée.#Message de popup"
+  },
+  "saveAnalysisTitle": {
+    "message": "Résultat de l'évaluation."
   },
   "saveAnalysisButton": {
     "message": "Enregistrer l'évaluation#Bouton pour enregistrer l'évaluation de la page"
