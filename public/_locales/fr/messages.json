@@ -325,5 +325,8 @@
   },
   "wuEquivalent": {
     "message": "EAU#Eau utilisée en litres"
+  },
+  "warning": {
+    "message": "Avertissement"
   }
 }
