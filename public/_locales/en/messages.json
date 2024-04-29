@@ -170,6 +170,9 @@
   "paramRetryDescription": {
     "message": "Set the maximum number of attempts to avoid errors in computing HTTP requests for the websites you want to analyze."
   },
+  "paramSave": {
+    "message": "Parameters saved"
+  },
   "paramTabTitle": {
     "message": "Setting"
   },

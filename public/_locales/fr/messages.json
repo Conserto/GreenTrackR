@@ -167,6 +167,9 @@
   "paramRetryDescription": {
     "message": "Saisissez le nombre maximal d'essais afin d'éviter les erreurs de calcul des requêtes HTTP pour les sites que vous souhaitez analyser."
   },
+  "paramSave": {
+    "message": "Paramètres sauvegardés"
+  },
   "paramTabTitle": {
     "message": "Paramétrage"
   },
