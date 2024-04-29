@@ -10,6 +10,14 @@
   const dispatch = createEventDispatcher();
 
   function handleClickTab() {
+    document.querySelectorAll('button.nav-link')
+      .forEach(elem => {
+        if (elem.id !== id) {
+          elem.setAttribute('tabindex', '0');
+        } else {
+          elem.setAttribute('tabindex', '-1');
+        }
+      });
     dispatch('clickTab', { id });
   }
 </script>
@@ -30,20 +38,20 @@
 </div>
 
 <style>
-  .nav-link {
-    background: var(---color--white);
-    cursor: pointer;
-    border: none;
-    padding: var(--spacing--sm) var(--spacing--lg);
-    color: var(--color--dark-grey);
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: bold;
-  }
+    .nav-link {
+        background: var(---color--white);
+        cursor: pointer;
+        border: none;
+        padding: var(--spacing--sm) var(--spacing--lg);
+        color: var(--color--dark-grey);
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: bold;
+    }
 
-  .nav-link.active {
-    color: var(--color--green);
-    border-bottom: var(--border-width--normal) solid transparent;
-    border-color: var(--color--green);
-  }
+    .nav-link.active {
+        color: var(--color--green);
+        border-bottom: var(--border-width--normal) solid transparent;
+        border-color: var(--color--green);
+    }
 </style>
