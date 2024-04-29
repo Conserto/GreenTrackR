@@ -29,7 +29,7 @@
     position: relative;
     display: inline-block;
 
-    &:hover, &:focus {
+    &:hover {
       .tooltiptext {
         visibility: visible;
       }

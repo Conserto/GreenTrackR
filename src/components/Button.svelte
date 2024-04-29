@@ -48,7 +48,7 @@
     position: relative;
     display: inline-block;
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
       .tooltipbtn {
         visibility: visible;
       }
