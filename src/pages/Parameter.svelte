@@ -22,6 +22,7 @@
   const onSaveParameters = () => {
     setLocalStorageObject(paramTokenCo2, co2TokenStr);
     setLocalStorageObject(paramRetry, nbRetry);
+    alert(translate("paramSave"));
     location.reload();
   };
 
