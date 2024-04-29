@@ -1,5 +1,5 @@
 <script>
-import { translate } from '../utils/index.js';
+  import { translate } from 'src/utils/utils';
 </script>
 
 <footer>
