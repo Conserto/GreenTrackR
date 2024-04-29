@@ -65,8 +65,14 @@
   "exportButton": {
     "message": "Exporter#Exporter les données"
   },
+  "extDesc": {
+    "message": "Evaluez l'empreinte environnementale de votre site Web"
+  },
   "firstResults": {
     "message": "Premiers résultats reçus !"
+  },
+  "footRights": {
+    "message": "Tous droits réservés"
   },
   "gesDataCenter": {
     "message": "GES Serveur#GES serveur en gCO2eq"
@@ -323,10 +329,10 @@
   "visitEquivalent": {
     "message": "visite(s) l'équivalent de : #Label l'information sur les visites part. 2"
   },
-  "wuEquivalent": {
-    "message": "EAU#Eau utilisée en litres"
-  },
   "warning": {
     "message": "Avertissement"
+  },
+  "wuEquivalent": {
+    "message": "EAU#Eau utilisée en litres"
   }
 }
