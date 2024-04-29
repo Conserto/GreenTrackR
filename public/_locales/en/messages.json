@@ -328,5 +328,8 @@
   },
   "wuEquivalent": {
     "message": "WATER#Water used in liters"
+  },
+  "warning": {
+    "message": "Warning"
   }
 }

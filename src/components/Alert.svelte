@@ -6,7 +6,7 @@
   export let alertType: AlertTypeEnum = AlertTypeEnum.INFO;
 </script>
 
-<div class={`flex-center alert ${alertType}`} aria-describedby="Zone d'information" role="alert">
+<div class={`flex-center alert ${alertType}`}>
   <WarnIcon />
   <p class="development-message">{translate(message)}</p>
 </div>
