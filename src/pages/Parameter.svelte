@@ -33,7 +33,7 @@
   <div class="parameter">
     <p>{translate('paramTokenCo2Description')}
       <a
-        href="{translateDescription('paramTokenCo2Description')}">{translateDescription('paramTokenCo2Description')}</a>
+        href="{translateDescription('paramTokenCo2Description')}" target="_blank">{translateDescription('paramTokenCo2Description')}</a>
     </p>
     <Input
       type={InputTypeEnum.TEXT}
