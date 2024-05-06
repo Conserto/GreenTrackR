@@ -27,12 +27,12 @@
 
 <form class="zone-simulation">
   <div class="simulation-select simulation-region">
-    <span class="simulation-select__label">{translate('serverRegionLabel')}</span>
+    <label for="simulation-server-region-label" class="simulation-select__label">{translate('serverRegionLabel')}</label>
     <Select bind:selectedValue={countryCodeSelected} selectValues={zonesOptions}
             name="simulation-server-region-label" style="max-width: 48%" on:selectChange={handleSubmitSimulation} />
   </div>
   <div class="simulation-select simulation-user">
-    <span class="simulation-select__label">{translate('serverUserLabel')}</span>
+    <label for="simulation-user-region-label" class="simulation-select__label">{translate('serverUserLabel')}</label>
     <Select bind:selectedValue={userCountryCodeSelected} selectValues={zonesOptions}
             name="simulation-user-region-label" style="max-width: 48%" on:selectChange={handleSubmitSimulation} />
   </div>
