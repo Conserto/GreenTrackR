@@ -42,7 +42,7 @@
 </script>
 
 <header class="flex-col-center">
-  <img src={logo} alt="Green tracker" />
+  <img src={logo} alt="GreenTrackR Conserto" />
   {#if !getLocalStorageObject(paramTokenCo2)}
     <div>
       <Alert message="errorNoToken" alertType={AlertTypeEnum.ERROR} />
