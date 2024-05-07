@@ -8,17 +8,32 @@
   export let translateKey: string;
 
   const dispatch = createEventDispatcher();
-
   function handleClickTab() {
-    document.querySelectorAll('button.nav-link')
-      .forEach(elem => {
-        if (elem.id !== id) {
-          elem.setAttribute('tabindex', '0');
-        } else {
-          elem.setAttribute('tabindex', '-1');
-        }
-      });
     dispatch('clickTab', { id });
+  }
+  function handleKeydown(e : KeyboardEvent) {
+    const tabList = (e.currentTarget as HTMLElement).closest('[role="tablist"]')!;
+    const tabs = [...tabList.querySelectorAll('[role="tab"]')] as HTMLButtonElement[];
+    const currentTab: HTMLButtonElement = tabList.querySelector('[role="tab"][aria-selected="true"]')!;
+    let currentIndex = tabs.indexOf(currentTab);
+    if (e.key === 'ArrowRight') {
+      currentIndex++;
+      if (currentIndex === tabs.length) {
+        currentIndex = 0;
+      }
+    } else if (e.key === 'ArrowLeft') {
+      currentIndex--;
+      if (currentIndex === -1) {
+        currentIndex = tabs.length -1;
+      }
+    } else if (e.key === 'Home') {
+      currentIndex = 0
+    } else if (e.key === 'End') {
+      currentIndex = tabs.length -1
+    }
+    const newlySelectedTab = tabs[currentIndex].id;
+    tabs[currentIndex].focus();
+    dispatch('clickTab', { id:newlySelectedTab});
   }
 </script>
 
@@ -29,9 +44,11 @@
     {id}
     type="button"
     role="tab"
+    tabindex="{isActive ? 0 : -1}"
     aria-controls={name}
-    aria-selected="true"
+    aria-selected="{isActive}"
     on:click={handleClickTab}
+    on:keydown={handleKeydown}
   >
     {translate(translateKey)}
   </button>
