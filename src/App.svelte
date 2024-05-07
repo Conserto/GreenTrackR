@@ -36,7 +36,7 @@
   ];
   export let activeTabId = 'evaluation-tab';
 
-  function handleClick(event: any) {
+  function handleClick(event: CustomEvent) {
     activeTabId = event.detail.id;
   }
 </script>
