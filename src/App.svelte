@@ -36,13 +36,13 @@
   ];
   export let activeTabId = 'evaluation-tab';
 
-  function handleClick(event: any) {
+  function handleClick(event: CustomEvent) {
     activeTabId = event.detail.id;
   }
 </script>
 
 <header class="flex-col-center">
-  <img src={logo} alt="Green tracker" />
+  <img src={logo} alt="GreenTrackR Conserto" />
   {#if !getLocalStorageObject(paramTokenCo2)}
     <div>
       <Alert message="errorNoToken" alertType={AlertTypeEnum.ERROR} />

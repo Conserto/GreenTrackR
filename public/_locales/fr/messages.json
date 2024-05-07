@@ -349,5 +349,8 @@
   },
   "wuEquivalent": {
     "message": "EAU#Eau utilisée en litres"
+  },
+  "unitLabel": {
+    "message": "unité"
   }
 }

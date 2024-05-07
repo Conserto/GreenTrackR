@@ -7,6 +7,7 @@
   export let buttonType: ButtonTypeEnum;
   export let disabled: boolean = false;
   export let tooltip: boolean = false;
+  export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
 
   const dispatch = createEventDispatcher();
 
@@ -16,6 +17,7 @@
 </script>
 
 <button
+  type="{type}"
   on:click={handleButtonClick}
   {disabled}
   class:primary={buttonType === ButtonTypeEnum.PRIMARY}

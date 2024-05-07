@@ -20,9 +20,7 @@
       <span
         class:active={scoreLevel.gradeLetter === score?.gradeLetter}
         class="score-letter"
-        style:color={scoreLevel.gradeLetter === score?.gradeLetter
-          ? scoreLevel.textColor
-          : 'transparent'}>{scoreLevel.gradeLetter}</span>
+        style:color={scoreLevel.textColor}>{scoreLevel.gradeLetter}</span>
       {#if scoreLevel.gradeLetter === score?.gradeLetter}
         <p class="score-number">
           {resScore}
@@ -55,9 +53,10 @@
   }
 
   .score-letter {
-    color: transparent;
+    visibility: hidden;
 
     &.active {
+      visibility: visible;
       background-color: inherit;
       height: 4rem;
       width: 4rem;

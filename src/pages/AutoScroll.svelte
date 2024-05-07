@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Button, Input, LoadingWheel, Modal, Select } from 'src/components';
-  import { ButtonTypeEnum, InputTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
+  import { Button, LoadingWheel, Modal, Select } from 'src/components';
+  import { ButtonTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
   import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
   import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { onDestroy, onMount } from 'svelte';
@@ -116,16 +116,17 @@
   };
 </script>
 
-<p class="input-label">
+<label for="scrollValue" class="input-label">
   {#if currentScrollType === ScrollInputType.PIXEL}
     {translate('autoscrollPxInput')}
   {:else}
     {translate('autoscrollPercentInput')}
   {/if}
-</p>
+</label>
 
 <div class="flex-center input-container">
-  <Input type={InputTypeEnum.NUMBER} name="scrollValue" bind:value={scrollValue} />
+  <input type="number" name="scrollValue" class="generic-input" id="scrollValue" bind:value={scrollValue} />
+  <label for="scroll-value" class="visually-hidden">{translate("unitLabel")}</label>
   <Select bind:selectedValue={currentScrollType} selectValues={scrollTypes} name="scroll-value" />
 </div>
 

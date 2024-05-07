@@ -4,16 +4,16 @@
 
   export let name: string;
   export let value: number | string;
-  export let translateKey: string | undefined = undefined;
+  export let translateKey: string;
   export let type: InputTypeEnum;
 </script>
 
 <div class="input-wrapper">
-  <label>{translate(translateKey)}
+  <label for="{name}">{translate(translateKey)}
     {#if type === InputTypeEnum.TEXT}
-      <input class="generic-input" type="text" {name} bind:value />
+      <input class="generic-input" type="text" {name} id="{name}" bind:value />
     {:else if type === InputTypeEnum.NUMBER}
-      <input class="generic-input" type="number" {name} bind:value />
+      <input class="generic-input" type="number" {name} id="{name}" bind:value />
     {/if}
   </label>
 
