@@ -41,7 +41,7 @@
   }
 </script>
 
-<header class="flex-col-center">
+<header role="banner" class="flex-col-center">
   <img src={logo} alt="GreenTrackR Conserto" />
   {#if !getLocalStorageObject(paramTokenCo2)}
     <div>
@@ -61,7 +61,7 @@
   </div>
 </header>
 
-<div class="app-container">
+<main class="app-container">
   {#if activeTabId !== 'parameter-tab' }
     <h1 class="plugin-title">{translate('noContentPhraseEvaluation')}</h1>
   {/if}
@@ -75,7 +75,7 @@
       </div>
     {/if}
   {/each}
-</div>
+</main>
 <Footer />
 
 <style>
