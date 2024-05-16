@@ -61,7 +61,7 @@
   </div>
 </header>
 
-<main class="app-container">
+<main role="main" class="app-container">
   {#if activeTabId !== 'parameter-tab' }
     <h1 class="plugin-title">{translate('noContentPhraseEvaluation')}</h1>
   {/if}
