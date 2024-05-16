@@ -1,4 +1,4 @@
-  <script lang="ts">
+<script lang="ts">
   import type { Measure } from 'src/interface';
   import { formatGesMeasuresForTable, translate } from 'src/utils/utils';
   import { SynthesisTable, Table } from 'src/components';
