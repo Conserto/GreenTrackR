@@ -140,14 +140,23 @@
   "messageResults": {
     "message": "User journey summary table"
   },
+  "descriptionResults": {
+    "message": "The scroll, click and total (scroll + click) actions are presented in 5 columns, with, for each, the number of hits, the weight, the queries, the greenhouse gases, the score, and finally the KPI'S."
+  },
   "messageResultsAnalysis": {
     "message": "Analysis results#Résultat de l'analyse"
+  },
+  "descriptionResultsAnalysis": {
+    "message": "Parameters are presented in 5 columns: date, URL, event, page weight and number of HTTP requests. Greenhouse gas emissions are shown in 6 columns, broken down into emissions for the server, network, devices, total, score and rating. Water, ADP and electricity consumption are broken down into 4 columns: server, network, devices and total. This is followed by the client and server columns, divided into 2 columns for zone and intensity, and finally the action column."
   },
   "messageResultsDetail": {
     "message": "Detailed table of user journey analysis"
   },
+  "descriptionResultsDetail": {
+    "message": "Parameters are presented in 5 columns: date, URL, event, page weight and number of HTTP requests. Greenhouse gas emissions are shown in 6 columns, broken down into emissions for the server, network, devices, total, score and rating. Water, ADP and electricity consumption are broken down into 4 columns: server, network, devices and total. This is followed by the client and server columns, divided into 2 columns for zone and intensity."
+  },
   "nbRequest": {
-    "message": "HTTP requests#Number of requests without extentions 'without cache (with cache)'"
+    "message": "HTTP requests#Number of requests without extensions 'without cache (with cache)'"
   },
   "networkTotal": {
     "message": "Network#Total GES emissions of network"
@@ -292,6 +301,9 @@
   },
   "tabJourney": {
     "message": "User Journey#User Journey tab"
+  },
+  "tableParameterSurHead": {
+    "message": "PARAMETER"
   },
   "tableAdpeSurHead": {
     "message": "ADP#Abiotic Depletion Potential (use of natural resources, minerals and metals) in kg antimony equivalent (kg eq. SB)"

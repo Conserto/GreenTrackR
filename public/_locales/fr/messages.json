@@ -137,11 +137,20 @@
   "messageResults": {
     "message": "Tableau récapitulatif du parcours utilisateur"
   },
+  "descriptionResults": {
+    "message": "Les actions de défilements, de click, et le total (défilement + clic) sont présentés sur 5 colonnes, avec, pour chacun le nombre de hit, le poids, les requêtes, les gaz à effets de serre, le score, et enfin les KPI'S"
+  },
   "messageResultsAnalysis": {
     "message": "Résultat de l'analyse#Résultat de l'analyse"
   },
+  "descriptionResultsAnalysis": {
+    "message": "Les paramètres sont présentés sur 5 colonnes, ces 5 colonnes contiennent la date, l'URL, l'événement, le poids de la page et enfin le nombre de requêtes HTTP. Les émissions de gaz à effet de serre sont sur 6 colonnes qui se décomposent en émissions pour la partie serveur, réseau, appareils, le total, le score et enfin la note. La consommation d'eau, d'ADP, d'électricité sont réparties sur 4 colonnes avec la partie serveur, réseau, appareils et total. S'en suit les colonnes client et serveur divisé en 2 colonnes zone et intensité, puis enfin s'en suit la colonne d'action."
+  },
   "messageResultsDetail": {
     "message": "Tableau détaillé de l'analyse du parcours utilisateur"
+  },
+  "descriptionResultsDetail": {
+    "message": "Les paramètres sont présentés sur 5 colonnes, ces 5 colonnes contiennent la date, l'URL, l'événement, le poids de la page et enfin le nombre de requêtes HTTP. Les émissions de gaz à effet de serre sont sur 6 colonnes qui se décomposent en émissions pour la partie serveur, réseau, appareils, le total, le score et enfin la note. La consommation d'eau, d'ADP, d'électricité sont réparties sur 4 colonnes avec la partie serveur, réseau, appareils et total. S'en suit les colonnes client et serveur divisé en 2 colonnes zone et intensité."
   },
   "nbRequest": {
     "message": "Requêtes HTTP#Nombre de requête hors extension : 'sans cache (avec cache)'"
@@ -290,6 +299,9 @@
   "tabJourney": {
     "message": "Parcours Utilisateur#User Journey tab"
   },
+  "tableParameterSurHead": {
+    "message": "PARAMÈTRE"
+  },
   "tableAdpeSurHead": {
     "message": "ADP#Potentiel d'épuisement abiotique (utilisation des ressources naturelles, minéraux et métaux) en kg équivalent antimoine (kg eq. SB)"
   },
@@ -321,7 +333,7 @@
     "message": "EAU#Eau utilisée en litres"
   },
   "tableZoneIntensityShort": {
-    "message": "Intensity#Intensité carbone en gCO2eq/Kwh de l'électricité consommée"
+    "message": "Intensité#Intensité carbone en gCO2eq/Kwh de l'électricité consommée"
   },
   "tableZoneIp": {
     "message": "Zone#Localisation de l'adresse IP"
