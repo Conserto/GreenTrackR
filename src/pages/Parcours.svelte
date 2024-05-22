@@ -82,7 +82,6 @@
     on:buttonClick={handleAnalysis}
     buttonType={ButtonTypeEnum.PRIMARY}
     translateKey={onGoingAnalysis ? 'stopJourneyButton' : 'startJourneyButton'}
-    tooltip={true}
   />
 
   <Button
@@ -90,13 +89,11 @@
     on:buttonClick={resetUserJourney}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="resetJourneyButton"
-    tooltip={true}
   />
   <Button
     on:buttonClick={handleClearCache}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="clearBrowserCacheButton"
-    tooltip={true}
   />
 </div>
 <ZoneSimulation on:submitSimulation={handleSimulation} />

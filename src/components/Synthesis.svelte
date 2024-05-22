@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { Measure } from '../interface';
-  import Tooltip from './Tooltip.svelte';
   import { formatNbRequest, formatNumber, formatSizeTransferred, translate } from '../utils';
   import { SynthesisSrv } from '../service/synthesis.service';
   import { AdpIcon, EauIcon, ElecIcon, GesIcon } from '../assets/icons';
@@ -38,43 +37,41 @@
     <tr>
       <th scope="col" colspan="1"></th>
       <th class="scroll" scope="col" colspan="6">
-        <Tooltip translateKey='synTabHeadScroll' />
+        {translate('synTabHeadScroll')}
       </th>
       <th scope="col" colspan="6">
-        <Tooltip translateKey='synTabHeadClick' />
+        {translate('synTabHeadClick')}
       </th>
       <th class="page" scope="col" colspan="5">
-        <Tooltip translateKey='synTabHeadPage' />
+        {translate('synTabHeadPage')}
       </th>
     </tr>
     <tr>
       <th scope="col" colspan="1">
-        <Tooltip translateKey='synTabHeadUrl' />
+        {translate('synTabHeadUrl')}
+
       </th>
       {#each heads as head}
         {#if (head.count)}
           <th class="{head.classe}" scope="col" colspan="1">
-            <Tooltip translateKey='synTabHeadCount' />
+            {translate('synTabHeadCount')}
           </th>
         {/if}
         <th class="{head.classe}" scope="col" colspan="1">
-          <Tooltip translateKey='synTabHeadSize' />
+          {translate('synTabHeadSize')}
         </th>
         <th class="{head.classe}" scope="col" colspan="1">
-          <Tooltip translateKey='synTabHeadRequest' />
+          {translate('synTabHeadRequest')}
         </th>
         <th class="{head.classe}" scope="col" colspan="1">
-          <Tooltip translateKey='synTabHeadGes' />
+          {translate('synTabHeadGes')}
         </th>
         <th class="{head.classe}" scope="col" colspan="1">
-          <Tooltip translateKey='synTabHeadScore' />
+          {translate('synTabHeadScore')}
         </th>
         <th class="{head.classe}" scope="col" colspan="1">
-          <Tooltip translateKey='synTabHeadKpi' />
+          {translate('synTabHeadKpi')}
         </th>
-        <!--<th class="{head.classe}" scope="col" colspan="1">
-          <Tooltip translateKey='synTabHeadGrade' />
-        </th>-->
       {/each}
     </tr>
     </thead>
@@ -82,7 +79,7 @@
     {#each synthesis.pages as page, index}
       <tr class:even={index % 2 === 0}>
         <td>
-          <Tooltip value={page.shortUrl} tooltipValue={page.url} />
+          {page.shortUrl}
         </td>
         <td class="scroll">{page.sScroll.count}</td>
         <td
@@ -106,16 +103,13 @@
         {/if}
         <td class="scroll">
           <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="" />
-            <Tooltip top="{true}" value="{formatNumber(page.sScroll.wu.pageTotal)}"
-                     tooltipValue={translate("wuEquivalent")} />
+            {formatNumber(page.sScroll.wu.pageTotal)}
           </div>
           <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="" />
-            <Tooltip top="{true}" value="{formatNumber(page.sScroll.adpe.pageTotal)}"
-                     tooltipValue={translate("adpeEquivalent")} />
+            {formatNumber(page.sScroll.adpe.pageTotal)}
           </div>
           <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="" />
-            <Tooltip top="{true}" value="{formatNumber(page.sScroll.energy.kWhPage)}"
-                     tooltipValue={translate("energyEquivalent")} />
+            {formatNumber(page.sScroll.energy.kWhPage)}
           </div>
         </td>
         <td>{page.sClick.count}</td>
@@ -139,16 +133,13 @@
         {/if}
         <td>
           <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="" />
-            <Tooltip top="{true}" value="{formatNumber(page.sClick.wu.pageTotal)}"
-                     tooltipValue={translate("wuEquivalent")} />
+            {formatNumber(page.sClick.wu.pageTotal)}
           </div>
           <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="" />
-            <Tooltip top="{true}" value="{formatNumber(page.sClick.adpe.pageTotal)}"
-                     tooltipValue={translate("adpeEquivalent")} />
+            {formatNumber(page.sClick.adpe.pageTotal)}
           </div>
           <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="" />
-            <Tooltip top="{true}" value="{formatNumber(page.sClick.energy.kWhPage)}"
-                     tooltipValue={translate("energyEquivalent")} />
+            {formatNumber(page.sClick.energy.kWhPage)}
           </div>
         </td>
         <td
@@ -172,16 +163,13 @@
         {/if}
         <td class="page">
           <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="" />
-            <Tooltip top="{true}" value="{formatNumber(page.sPage.wu.pageTotal)}"
-                     tooltipValue={translate("wuEquivalent")} />
+            {formatNumber(page.sPage.wu.pageTotal)}
           </div>
           <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="" />
-            <Tooltip top="{true}" value="{formatNumber(page.sPage.adpe.pageTotal)}"
-                     tooltipValue={translate("adpeEquivalent")} />
+            {formatNumber(page.sPage.adpe.pageTotal)}
           </div>
           <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="" />
-            <Tooltip top="{true}" value="{formatNumber(page.sPage.energy.kWhPage)}"
-                     tooltipValue={translate("energyEquivalent")} />
+            {formatNumber(page.sPage.energy.kWhPage)}
           </div>
         </td>
       </tr>
@@ -190,7 +178,7 @@
     <tfoot>
     <tr>
       <th>
-        <Tooltip translateKey='synTabFootTotal' top="{true}" />
+        {translate('synTabFootTotal')}
       </th>
       <th class="scroll">{synthesis.total.sScroll.count}</th>
       <th
@@ -215,16 +203,13 @@
       {/if}
       <th class="scroll">
         <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="" />
-          <Tooltip top="{true}" value="{formatNumber(synthesis.total.sScroll.wu.pageTotal)}"
-                   tooltipValue={translate("wuEquivalent")} />
+          {formatNumber(synthesis.total.sScroll.wu.pageTotal)}
         </div>
         <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="" />
-          <Tooltip top="{true}" value="{formatNumber(synthesis.total.sScroll.adpe.pageTotal)}"
-                   tooltipValue={translate("adpeEquivalent")} />
+          {formatNumber(synthesis.total.sScroll.adpe.pageTotal)}
         </div>
         <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="" />
-          <Tooltip top="{true}" value="{formatNumber(synthesis.total.sScroll.energy.kWhPage)}"
-                   tooltipValue={translate("energyEquivalent")} />
+          {formatNumber(synthesis.total.sScroll.energy.kWhPage)}
         </div>
       </th>
       <th>{synthesis.total.sClick.count}</th>
@@ -248,16 +233,13 @@
       {/if}
       <th>
         <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="" />
-          <Tooltip top="{true}" value="{formatNumber(synthesis.total.sClick.wu.pageTotal)}"
-                   tooltipValue={translate("wuEquivalent")} />
+          {formatNumber(synthesis.total.sClick.wu.pageTotal)}
         </div>
         <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="" />
-          <Tooltip top="{true}" value="{formatNumber(synthesis.total.sClick.adpe.pageTotal)}"
-                   tooltipValue={translate("adpeEquivalent")} />
+          {formatNumber(synthesis.total.sClick.adpe.pageTotal)}
         </div>
         <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="" />
-          <Tooltip top="{true}" value="{formatNumber(synthesis.total.sClick.energy.kWhPage)}"
-                   tooltipValue={translate("energyEquivalent")} />
+          {formatNumber(synthesis.total.sClick.energy.kWhPage)}
         </div>
       </th>
       <th
@@ -282,16 +264,13 @@
       {/if}
       <th class="scroll">
         <div class="kpi"><img src="{EauIcon}" class="icoWu" alt="" />
-          <Tooltip top="{true}" value="{formatNumber(synthesis.total.sPage.wu.pageTotal)}"
-                   tooltipValue={translate("wuEquivalent")} />
+          {formatNumber(synthesis.total.sPage.wu.pageTotal)}
         </div>
         <div class="kpi"><img src="{AdpIcon}" class="icoAdp" alt="" />
-          <Tooltip top="{true}" value="{formatNumber(synthesis.total.sPage.adpe.pageTotal)}"
-                   tooltipValue={translate("adpeEquivalent")} />
+          {formatNumber(synthesis.total.sPage.adpe.pageTotal)}
         </div>
         <div class="kpi"><img src="{ElecIcon}" class="icoElec" alt="" />
-          <Tooltip top="{true}" value="{formatNumber(synthesis.total.sPage.energy.kWhPage)}"
-                   tooltipValue={translate("energyEquivalent")} />
+          {formatNumber(synthesis.total.sPage.energy.kWhPage)}
         </div>
       </th>
     </tr>

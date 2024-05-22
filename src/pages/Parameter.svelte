@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getLocalStorageObject, setLocalStorageObject, translate, translateDescription } from 'src/utils/utils';
+  import { getLocalStorageObject, setLocalStorageObject, translate } from 'src/utils/utils';
   import { ButtonTypeEnum, InputTypeEnum } from '../enum';
   import { Input, Modal } from '../components';
   import Button from '../components/Button.svelte';
@@ -34,8 +34,7 @@
 <div class="parameter-container">
   <div class="parameter">
     <p>{translate('paramTokenCo2Description')}
-      <a
-        href="{translateDescription('paramTokenCo2Description')}" target="_blank">{translateDescription('paramTokenCo2Description')}</a>
+      <a href="{translate('paramTokenCo2URL')}" target="_blank">{translate('paramTokenCo2URL')}</a>
     </p>
     <Input
       type={InputTypeEnum.TEXT}
@@ -60,7 +59,6 @@
   <Button
     on:buttonClick={() => (location.reload())}
     buttonType={ButtonTypeEnum.PRIMARY}
-    tooltip="{true}"
     translateKey="paramSavePopup"
   />
 </Modal>
@@ -69,7 +67,6 @@
   on:buttonClick={onSaveParameters}
   buttonType={ButtonTypeEnum.PRIMARY}
   translateKey="paramBtnSave"
-  tooltip={true}
 />
 
 <style lang="scss">

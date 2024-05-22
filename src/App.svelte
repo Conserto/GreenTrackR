@@ -12,12 +12,14 @@
       name: translate('evaluationTab'),
       id: 'evaluation-tab',
       component: Evaluation,
+      description: translate('evaluationTabDescription')
     },
     {
       translateKey: 'tabAutoScroll',
       name: translate('scrollAnalysisTab'),
       id: 'analysis-scroll-tab',
       component: AutoScroll,
+      description: translate('scrollTabDescription'),
       beta: true,
     },
     {
@@ -25,6 +27,7 @@
       name: translate('userJourneyTab'),
       id: 'journey-tab',
       component: Parcours,
+      description: translate('userJourneyTabDescription'),
       beta: true,
     },
     {
@@ -62,15 +65,21 @@
 </header>
 
 <main role="main" class="app-container">
-  {#if activeTabId !== 'parameter-tab' }
-    <h1 class="plugin-title">{translate('noContentPhraseEvaluation')}</h1>
-  {/if}
   {#each tabs as tab}
     {#if activeTabId === tab.id}
-      {#if tab.beta}
-        <Alert message="betaMessage"/>
+      {#if activeTabId !== 'parameter-tab' }
+        <h1 class="plugin-title">{translate('noContentPhraseEvaluation')}</h1>
       {/if}
       <div class="tab-panel" role="tabpanel" aria-label={`${tab.name}`}>
+        {#if tab.description}
+          <details>
+            <summary class="summary">{translate('globalInfo')}</summary>
+            <p>{tab.description}</p>
+          </details>
+        {/if}
+        {#if tab.beta}
+          <Alert message="betaMessage"/>
+        {/if}
         <svelte:component this={tab.component} />
       </div>
     {/if}
