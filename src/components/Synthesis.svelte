@@ -6,7 +6,8 @@
   import { AdpIcon, EauIcon, ElecIcon, GesIcon } from '../assets/icons';
 
   export let datas: Measure[];
-
+  export let caption: string = '';
+  export let description: string = '';
   let srv = new SynthesisSrv();
   const synthesis = srv.getSynthesis(datas);
 
@@ -29,6 +30,10 @@
 <!-- TODO trop de code répété, faire un générateur) -->
 <div class="synthesis-container">
   <table class="table">
+    <caption>
+      {caption}
+      <span class="visually-hidden">{description}</span>
+    </caption>
     <thead>
     <tr>
       <th scope="col" colspan="1"></th>
@@ -302,6 +307,11 @@
     border-radius: 8px;
     padding-bottom: 0.5em;
 
+    caption {
+      font-weight: bold;
+      padding-inline-start: 1rem;
+      text-align: left;
+    }
     div.kpi {
       white-space: nowrap;
 

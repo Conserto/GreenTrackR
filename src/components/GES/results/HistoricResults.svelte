@@ -41,10 +41,11 @@
   };
 </script>
 
-<h4>{translate('messageResultsAnalysis')}</h4>
 <Table
-  columnHeaders={[...gesTableHeaders, { id: 'action', translateKey: 'action' }]}
+  columnHeaders={[...gesTableHeaders, { id: 'action', translateKey: 'action', class: 'bold'}]}
   datas={formattedData}
+  caption={translate('messageResultsAnalysis')}
+  description={translate('descriptionResultsAnalysis')}
   on:actionClicked={handleDeleteMeasure}
 />
 <div class="flex-center">

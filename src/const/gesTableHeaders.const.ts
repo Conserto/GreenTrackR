@@ -2,31 +2,31 @@ export const gesTableHeaders = [
   {
     id: 'date',
     translateKey: 'Date',
-    groupHead: '',
+    groupHead: 'tableParameterSurHead',
     class: 'light'
   },
   {
     id: 'url',
     translateKey: 'Url',
-    groupHead: '',
+    groupHead: 'tableParameterSurHead',
     class: 'light'
   },
   {
     id: 'urlAction',
     translateKey: 'urlAction',
-    groupHead: '',
+    groupHead: 'tableParameterSurHead',
     class: 'light'
   },
   {
     id: 'sizeTransferred',
     translateKey: 'sizeTransferredBytes',
-    groupHead: '',
+    groupHead: 'tableParameterSurHead',
     class: 'light'
   },
   {
     id: 'nbRequest',
     translateKey: 'nbRequest',
-    groupHead: '',
+    groupHead: 'tableParameterSurHead',
     class: 'light'
   },
   {
