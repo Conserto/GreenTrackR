@@ -370,5 +370,17 @@
   },
   "barChartGES": {
     "message": "GES and energy bar charts"
+  },
+  "evaluationTab": {
+    "message": "Evaluation"
+  },
+  "scrollAnalysisTab": {
+    "message": "Scroll Analysis"
+  },
+  "userJourneyTab": {
+    "message": "User journey"
+  },
+  "parameterTab": {
+    "message": "Parameter"
   }
 }
