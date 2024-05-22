@@ -207,13 +207,13 @@
     "message": "Réinitialiser le parcours#Bouton pour réinitialiser le parcours (unité fonctionnelle)"
   },
   "resetMeasure": {
-    "message": "Réinitialiser la mesure#Remise à zéro des calculs du modèle"
+    "message": "Réinitialiser la mesure"
   },
   "saveAnalysis": {
     "message": "L'évaluation a bien été enregistrée.#Message de popup"
   },
   "saveAnalysisButton": {
-    "message": "Enregistrer l'évaluation#Bouton pour enregistrer l'évaluation de la page"
+    "message": "Enregistrer l'évaluation"
   },
   "saveAnalysisTitle": {
     "message": "Résultat de l'évaluation."

@@ -210,13 +210,13 @@
     "message": "Reset journey#Button to reset journey (functional unit)"
   },
   "resetMeasure": {
-    "message": "Reset measure#Resetting model calculations to zero"
+    "message": "Reset measure"
   },
   "saveAnalysis": {
     "message": "Analysis successfully saved.#Popup message"
   },
   "saveAnalysisButton": {
-    "message": "Save assessment#Button to save web page evaluation"
+    "message": "Save assessment"
   },
   "saveAnalysisTitle": {
     "message": "Analysis Results."

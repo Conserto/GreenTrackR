@@ -88,7 +88,6 @@
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="saveAnalysisButton"
     disabled={!currentMeasure}
-    tooltip={true}
   />
   <Button
     on:buttonClick={() => (currentDisplayedTab = TabType.HistoricTab)}
@@ -107,13 +106,11 @@
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="resetMeasure"
     disabled={!currentMeasure}
-    tooltip={true}
   />
   <Button
     on:buttonClick={onRefresh}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="refresh"
-    tooltip={true}
   />
 </div>
 <ZoneSimulation on:submitSimulation={handleSimulation} />
