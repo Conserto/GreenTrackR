@@ -10,37 +10,37 @@
 <div class="emissions-infos">
   <p class="info-mix">{translate('infoMix')}</p>
   <div class="emissions-infos_data">
-    <div>
+    <p>
       <span class="data-label"><Tooltip translateKey="gesZone" /></span>
       <span class="data-value">{measure?.serverGES ? (measure?.serverGES?.cityName
         ? `${measure?.serverGES.cityName}, ${measure?.serverGES.countryName}`
         : measure?.serverGES?.countryName) : '-'}</span>
-    </div>
-    <div>
+    </p>
+    <p>
       <span class="data-label"><Tooltip translateKey="gesUserZone" /></span>
       <span class="data-value">{measure?.userGES ? (measure?.userGES?.cityName
         ? `${measure?.userGES.cityName}, ${measure?.userGES.countryName}`
         : measure?.userGES?.countryName) : '-'}</span>
-    </div>
-    <div>
+    </p>
+    <p>
       <span class="data-label"><Tooltip translateKey="sizeTransferredBytes" /></span>
       <span class="data-value">{formatSize(measure?.networkMeasure.network.size)} {Units.pageSize}
         / {formatSize(measure?.networkMeasure.network.sizeUncompress)} {Units.pageSize}</span>
-    </div>
-    <div>
+    </p>
+    <p>
       <span class="data-label"><Tooltip translateKey="gesIntensity" /></span>
       <span
         class="data-value">{measure?.serverGES?.carbonIntensity ? measure?.serverGES?.carbonIntensity : '-' } {Units.carbonIntensity}</span>
-    </div>
-    <div>
+    </p>
+    <p>
       <span class="data-label"><Tooltip translateKey="gesUserIntensity" /></span>
       <span
         class="data-value">{measure?.userGES?.carbonIntensity ? measure?.userGES?.carbonIntensity : '-' } {Units.carbonIntensity}</span>
-    </div>
-    <div>
+    </p>
+    <p>
       <span class="data-label"><Tooltip translateKey="nbRequest" /></span>
       <span class="data-value">{measure?.networkMeasure.nbRequest} ({measure?.networkMeasure.nbRequestCache})</span>
-    </div>
+    </p>
   </div>
 </div>
 

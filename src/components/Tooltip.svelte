@@ -10,17 +10,17 @@
 </script>
 
 {#if !translateKey && !value && !tooltipValue}
-<div></div>
+<span></span>
 {:else if translateKey}
-  <div class="tooltip">{translate(translateKey)}
+  <span class="tooltip">{translate(translateKey)}
     <span class="tooltiptext {sclass}">{translateDescription(translateKey)}</span>
-  </div>
+  </span>
 {:else }
-  <div class="tooltip">{value}
+  <span class="tooltip">{value}
     {#if tooltipValue}
       <span class="tooltiptext {sclass}">{tooltipValue}</span>
     {/if}
-  </div>
+  </span>
 {/if}
 
 <style lang="scss">
