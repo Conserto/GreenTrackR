@@ -182,7 +182,7 @@
     <GesResults measure={currentMeasure} />
     <div class="histo-container">
       {#if currentMeasure?.complete}
-        <Histogram datas={histoDatas} yLabel="greenhouseGasesEmissionDefault" yLabel2="energyDefault" />
+        <Histogram datas={histoDatas} chartLabel="chartLabel" yLabel="greenhouseGasesEmissionDefault" yLabel2="energyDefault" />
       {/if}
     </div>
   {/if}
@@ -214,8 +214,6 @@
   .histo-container {
     width: 100%;
     overflow-x: auto;
-    display: flex;
-    justify-content: center;
   }
 
   .buttons-container {
