@@ -365,6 +365,9 @@
   "unitLabel": {
     "message": "unité"
   },
+  "barChartGES": {
+    "message": "Histogramme des valeurs GES et énergétique"
+  },
   "evaluationTab": {
     "message": "Èvaluation"
   },

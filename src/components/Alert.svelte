@@ -13,7 +13,6 @@
 
 <style lang="scss">
   .alert {
-    padding: 0 var(--spacing--md);
     border-radius: var(--border-radius--slight);
     margin: var(--spacing--md) 0;
     font-size: smaller;

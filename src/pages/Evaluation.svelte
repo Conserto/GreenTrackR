@@ -125,6 +125,7 @@
       {:else if currentMeasure?.complete}
         <Histogram
           datas={histoDatas}
+          chartLabel="barChartGES"
           yLabel="greenhouseGasesEmissionDefault"
           yLabel2="energyDefault"
         />
@@ -160,7 +161,5 @@
   .histo-container {
     width: 100%;
     overflow-x: auto;
-    display: flex;
-    justify-content: center;
   }
 </style>
