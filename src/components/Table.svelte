@@ -4,7 +4,6 @@
   import Button from './Button.svelte';
   import { ButtonTypeEnum } from 'src/enum';
   import { createEventDispatcher } from 'svelte';
-  import Tooltip from './Tooltip.svelte';
   import { AdpIcon, EauIcon, ElecIcon, GesIcon } from '../assets/icons';
 
   export let columnHeaders: TableHeader[] = [];
@@ -34,7 +33,7 @@
           {:else if ('GesIcon' === value.icon)}
             <img src="{GesIcon}" alt="" class="surHeadImg" />
           {/if}
-          <Tooltip translateKey={value.translateKey} />
+          {translate(value.translateKey)}
         </th>
       {/each}
     </tr>
@@ -42,7 +41,7 @@
       {#if columnHeaders.length > 0}
         {#each columnHeaders as columnHeader}
           <th id="header{columnHeader.id}" class="{columnHeader.class}">
-            <Tooltip translateKey={columnHeader.translateKey} />
+            {translate(columnHeader.translateKey)}
           </th>
         {/each}
       {/if}
@@ -62,10 +61,7 @@
                   translateKey={data.get(header.id)?.content ?? ""}
                 />
               {:else if data.get(header.id)?.detail}
-                <Tooltip
-                  top={true}
-                  value={data.get(header.id)?.content}
-                  tooltipValue={data.get(header.id)?.detail} />
+                {data.get(header.id)?.content}
               {:else}
                 {translate(data.get(header.id)?.content)}
               {/if}

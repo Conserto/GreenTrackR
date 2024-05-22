@@ -1,138 +1,138 @@
 {
   "adpeEquivalent": {
-    "message": "ADP#Abiotic Depletion Potential (use of natural resources, minerals and metals) in kg antimony equivalent (kg eq. SB)"
+    "message": "ADP:"
   },
   "analysisInProgress": {
-    "message": "Analysis in progress. Start browsing on the current tab, then come back here to get stats !#Analysis in progress message"
+    "message": "Analysis in progress. Start browsing on the current tab, then come back here to get stats !"
   },
   "autoscrollPercentInput": {
-    "message": "Enter % to scroll for page's analysis#Enter % to scroll"
+    "message": "Enter % to scroll for page's analysis"
   },
   "autoscrollPxInput": {
-    "message": "Enter pixels number to scroll for page's analysis#Enter pixels number to scroll"
+    "message": "Enter pixels number to scroll for page's analysis"
   },
   "backToTop": {
-    "message": "Back to top#Back to top"
+    "message": "Back to top"
   },
   "betaMessage": {
-    "message": "This feature is a beta version, errors may occur.#Message to warn the user that not all features are present"
+    "message": "This feature is a beta version, errors may occur."
   },
   "cancelButton": {
-    "message": "Cancel#Cancel"
+    "message": "Cancel"
   },
   "carbonIntensity": {
-    "message": "Carbon intensity (CO2eq/Kwh)#Carbon intensity (gCO2eq/Kwh)"
+    "message": "Carbon intensity (CO2eq/Kwh)"
   },
   "carIndicator": {
-    "message": "Km by car#Label for car indicator"
+    "message": "Km by car"
   },
   "clearBrowserCacheButton": {
-    "message": "Clear cache#Cache cleaning corrects certain errors, such as those related to website loading or formatting"
+    "message": "Clear cache"
   },
   "closePopup": {
-    "message": "Close#close popup content"
+    "message": "Close"
   },
   "csvColumnsLabel": {
-    "message": "Date;Url;Uncompressed size(b);Compressed size(kb);DOM;GES Data Center(gCO2e);GES Network(gCO2e);GES User(gCO2e);GES Total(gCO2e); GES Score; Grade; Country; CarbonIntensity; NumberRequest#csvColumnsLabel"
+    "message": "Date;Url;Uncompressed size(b);Compressed size(kb);DOM;GES Data Center(gCO2e);GES Network(gCO2e);GES User(gCO2e);GES Total(gCO2e); GES Score; Grade; Country; CarbonIntensity; NumberRequest"
   },
   "dataCenterTotal": {
-    "message": "Data center#Total GES emissions of data center"
+    "message": "Data center"
   },
   "date": {
-    "message": "Date#Date of event"
+    "message": "Date"
   },
   "deleteAllButton": {
-    "message": "Delete All#Delete All Button"
+    "message": "Delete All"
   },
   "deleteAllConfirmMessage": {
-    "message": "Do you really want to delete all history ?#Delete All Confirm Message"
+    "message": "Do you really want to delete all history ?"
   },
   "deleteAllTitle": {
-    "message": "Delete All#Delete All Button"
+    "message": "Delete All"
   },
   "deleteButton": {
-    "message": "Delete#Delete Button"
+    "message": "Delete"
   },
   "deviceTotal": {
-    "message": "Devices#Total GES emissions of devices"
+    "message": "Devices"
   },
   "eitherFor": {
-    "message": "Either for #Label for informations about visits part. 1"
+    "message": "Either for "
   },
   "energyDefault": {
-    "message": "Energy (Wh)#Energy used, default"
+    "message": "Energy (Wh)"
   },
   "energyEquivalent": {
-    "message": "ELEC#Electricity consumption in kWh"
+    "message": "ELEC:"
   },
   "errorNoToken": {
-    "message": "No CO2 token found, the extension may not work#Env variable not found"
+    "message": "No CO2 token found, the extension may not work"
   },
   "exportButton": {
-    "message": "Export#Export Button"
+    "message": "Export"
   },
   "extDesc": {
     "message": "Assess your website's environmental footprint"
   },
   "firstResults": {
-    "message": "First results received !#First analysis resulted have been computed."
+    "message": "First results received !"
   },
   "footRights": {
     "message": "Copyright ©"
   },
   "gesDataCenter": {
-    "message": "GES server#GES server in gCO2eq"
+    "message": "GES server"
   },
   "gesDevice": {
-    "message": "GES User#GES user in gCO2eq"
+    "message": "GES User"
   },
   "gesGrade": {
-    "message": "Grade#A grade of A->F (the higher the grade, the better the webpage!)"
+    "message": "Grade:"
   },
   "gesIntensity": {
-    "message": "Server energy mix#Carbon intensity in gCO2eq/Kwh of electricity consumed by server location"
+    "message": "Server energy mix"
   },
   "gesIntensityShort": {
-    "message": "Server.I#Carbon intensity in gCO2eq/Kwh of electricity consumed by server location"
+    "message": "Server.I"
   },
   "gesNetwork": {
-    "message": "GES Network#GES Network in gCO2eq"
+    "message": "GES Network"
   },
   "gesScore": {
-    "message": "Score#The higher the score (closer to 100), the better the webpage!"
+    "message": "Score:"
   },
   "gesTotal": {
-    "message": "GES Total#GES Total"
+    "message": "GES Total"
   },
   "gesUserIntensity": {
-    "message": "User energy mix#Carbon intensity in gCO2eq/Kwh of electricity consumed by user location"
+    "message": "User energy mix"
   },
   "gesUserIntensityShort": {
-    "message": "User.I#Carbon intensity in gCO2eq/Kwh of electricity consumed by user location"
+    "message": "User.I"
   },
   "gesUserZone": {
-    "message": "User#Locating the user's IP address"
+    "message": "User"
   },
   "gesZone": {
-    "message": "Server#Locating the server's IP address"
+    "message": "Server"
   },
   "greenhouseGasesEmission": {
-    "message": "GES#Greenhouse gas emission values (gCO2eq)"
+    "message": "GES:"
   },
   "greenhouseGasesEmissionDefault": {
-    "message": "GES (gCO2eq)#Greenhouse Gases Emission (gCO2e), default"
+    "message": "GES (gCO2eq)"
   },
   "historyButton": {
-    "message": "History#History Button"
+    "message": "History"
   },
   "infoMix": {
-    "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season:#Infos pour comprendre l'impact du mix énergétiques"
+    "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season:"
   },
   "launchAnalysisButton": {
-    "message": "Analysis#The analysis launch does not take into account the part of the screen hidden by the devtools"
+    "message": "Analysis"
   },
   "launchAnalysisButtonWithAutoScrollButton": {
-    "message": "Auto Scrolling#Launch Analysis with auto scroll"
+    "message": "Auto Scrolling"
   },
   "menuText": {
     "message": "GreenTrackR is install in your browser and accessible via the devtool panel (F12 or CMD + ALT + i sur Mac)"
@@ -144,7 +144,7 @@
     "message": "The scroll, click and total (scroll + click) actions are presented in 5 columns, with, for each, the number of hits, the weight, the queries, the greenhouse gases, the score, and finally the KPI'S."
   },
   "messageResultsAnalysis": {
-    "message": "Analysis results#Résultat de l'analyse"
+    "message": "Analysis results"
   },
   "descriptionResultsAnalysis": {
     "message": "Parameters are presented in 5 columns: date, URL, event, page weight and number of HTTP requests. Greenhouse gas emissions are shown in 6 columns, broken down into emissions for the server, network, devices, total, score and rating. Water, ADP and electricity consumption are broken down into 4 columns: server, network, devices and total. This is followed by the client and server columns, divided into 2 columns for zone and intensity, and finally the action column."
@@ -156,28 +156,28 @@
     "message": "Parameters are presented in 5 columns: date, URL, event, page weight and number of HTTP requests. Greenhouse gas emissions are shown in 6 columns, broken down into emissions for the server, network, devices, total, score and rating. Water, ADP and electricity consumption are broken down into 4 columns: server, network, devices and total. This is followed by the client and server columns, divided into 2 columns for zone and intensity."
   },
   "nbRequest": {
-    "message": "HTTP requests#Number of requests without extensions 'without cache (with cache)'"
+    "message": "HTTP requests"
   },
   "networkTotal": {
-    "message": "Network#Total GES emissions of network"
+    "message": "Network"
   },
   "nocontentPhrase": {
-    "message": "Estimate the carbon footprint of your website#Message when you arrive on the auto-scroll page and the analysis is not yet launched"
+    "message": "Estimate the carbon footprint of your website"
   },
   "noContentPhraseEvaluation": {
-    "message": "Estimate the carbon footprint of your website#Message when you arrive on the evaluation page and the analysis is not yet launched"
+    "message": "Estimate the carbon footprint of your website"
   },
   "noFullData": {
     "message": "Localisation (Server ou User) undefined, use simulator for show results"
   },
   "numberVisit": {
-    "message": "Number of visits#Label for visit indicator"
+    "message": "Number of visits"
   },
   "pageTotal": {
-    "message": "Page total#Total GES emissions of website"
+    "message": "Page total"
   },
   "paramBtnSave": {
-    "message": "Save#Save configuration"
+    "message": "Save"
   },
   "paramCo2TokenLabel": {
     "message": "Token CO2signal API"
@@ -195,7 +195,7 @@
     "message": "The settings will be saved and the extension will be reloaded"
   },
   "paramSavePopup": {
-    "message": "Reload#Reload extension"
+    "message": "Reload"
   },
   "paramSaveTitle": {
     "message": "Save parameters"
@@ -204,25 +204,28 @@
     "message": "Setting"
   },
   "paramTokenCo2Description": {
-    "message": "GreenTrackR uses the 'CO2signal' API from Electricity Maps. To use this API, you need an access token, you can get it on the following link 'Go to api portal' -> #https://www.co2signal.com/"
+    "message": "GreenTrackR uses the 'CO2signal' API from Electricity Maps. To use this API, you need an access token, you can get it on the following link 'Go to api portal' -> "
+  },
+  "paramTokenCo2URL": {
+    "message": "https://www.co2signal.com/"
   },
   "pixelDisplayed": {
-    "message": "This tab displays a height of#Display viewport pixels number"
+    "message": "This tab displays a height of"
   },
   "receivedResults": {
-    "message": "Results received#Received user journey results"
+    "message": "Results received"
   },
   "refresh": {
-    "message": "Reload page#Refresh this webpage"
+    "message": "Reload page"
   },
   "resetJourneyButton": {
-    "message": "Reset journey#Button to reset journey (functional unit)"
+    "message": "Reset journey"
   },
   "resetMeasure": {
     "message": "Reset measure"
   },
   "saveAnalysis": {
-    "message": "Analysis successfully saved.#Popup message"
+    "message": "Analysis successfully saved."
   },
   "saveAnalysisButton": {
     "message": "Save assessment"
@@ -231,139 +234,139 @@
     "message": "Analysis Results."
   },
   "serverRegionLabel": {
-    "message": "Simulate server localization in an other zone #Label for select"
+    "message": "Simulate server localization in an other zone "
   },
   "serverUserLabel": {
-    "message": "Simulate user localization in an other zone #Label for select"
+    "message": "Simulate user localization in an other zone "
   },
   "sizeTransferred": {
-    "message": "Webpage size#Transferred webpage size in KB (compressed/Uncompressed)"
+    "message": "Webpage size"
   },
   "sizeTransferredBytes": {
-    "message": "Webpage size#Transferred webpage size in KB (compressed/Uncompressed)"
+    "message": "Webpage size"
   },
   "sizeTransferredBytesCompressed": {
-    "message": "Compressed webpage size#Compressed transferred size (KB)"
+    "message": "Compressed webpage size"
   },
   "sizeTransferredBytesUncompressed": {
-    "message": "Uncompressed webpage size#Uncompressed transferred size (KB)"
+    "message": "Uncompressed webpage size"
   },
   "smartphoneIndicator": {
-    "message": "Charged smartphones #Label for smartphone indicator"
+    "message": "Charged smartphones "
   },
   "startJourneyButton": {
-    "message": "Start recorder#Launch registration of a functional unit"
+    "message": "Start recorder"
   },
   "stopJourneyButton": {
-    "message": "Stop saving#Stop Journey Analysis"
+    "message": "Stop saving"
   },
   "synTabFootTotal": {
-    "message": "Total#Total result of the journey"
+    "message": "Total"
   },
   "synTabHeadClick": {
-    "message": "Clique#Webpage selection event"
+    "message": "Clique"
   },
   "synTabHeadCount": {
-    "message": "Hit#Number of events "
+    "message": "Hit"
   },
   "synTabHeadGes": {
-    "message": "GES#GES Total event"
+    "message": "GES"
   },
   "synTabHeadGrade": {
-    "message": "Grade#A grade of A->F"
+    "message": "Grade"
   },
   "synTabHeadKpi": {
-    "message": "KPI's#KPI"
+    "message": "KPI's"
   },
   "synTabHeadPage": {
-    "message": "Webpage#Total events (scroll + click)"
+    "message": "Webpage"
   },
   "synTabHeadRequest": {
-    "message": "Requests#Number of requests without extentions 'without cache (with cache)'"
+    "message": "Requests"
   },
   "synTabHeadScore": {
-    "message": "Score#Event score"
+    "message": "Score"
   },
   "synTabHeadScroll": {
-    "message": "Scroll#webPage scrolling event"
+    "message": "Scroll"
   },
   "synTabHeadSize": {
-    "message": "Size#Size of data transferred in KB (compressed/uncompressed)"
+    "message": "Size"
   },
   "synTabHeadUrl": {
-    "message": "Url#urls of visited web pages"
+    "message": "Url"
   },
   "tabAutoScroll": {
-    "message": "Auto Scroll/Page#GES auto scroll analysis tab"
+    "message": "Auto Scroll/Page"
   },
   "tabEvaluation": {
-    "message": "Assessment/Page#GES analysis tab"
+    "message": "Assessment/Page"
   },
   "tabJourney": {
-    "message": "User Journey#User Journey tab"
+    "message": "User Journey"
   },
   "tableParameterSurHead": {
     "message": "PARAMETER"
   },
   "tableAdpeSurHead": {
-    "message": "ADP#Abiotic Depletion Potential (use of natural resources, minerals and metals) in kg antimony equivalent (kg eq. SB)"
+    "message": "ADP"
   },
   "tableClientSurHead": {
-    "message": "USER#Locating the user's IP address"
+    "message": "USER"
   },
   "tableElecSurHead": {
-    "message": "ELEC#Electricity consumption in kWh"
+    "message": "ELEC"
   },
   "tableGesSurHead": {
-    "message": "GES#Greenhouse gas emission values (gCO2eq)"
+    "message": "GES"
   },
   "tableKpiDataCenter": {
-    "message": "Server#GES emissions of data center"
+    "message": "Server"
   },
   "tableKpiDevice": {
-    "message": "Devices#GES emissions of devices"
+    "message": "Devices"
   },
   "tableKpiNetwork": {
-    "message": "Network#GES emissions of network"
+    "message": "Network"
   },
   "tableKpiTotal": {
-    "message": "GES Total#GES Total"
+    "message": "GES Total"
   },
   "tableSrvSurHead": {
-    "message": "SERVER#Locating the server's IP address"
+    "message": "SERVER"
   },
   "tableWuSurHead": {
-    "message": "WATER#Water used in liters"
+    "message": "WATER"
   },
   "tableZoneIntensityShort": {
-    "message": "Intensité#Carbon intensity in gCO2eq/Kwh of electricity consumed"
+    "message": "Intensité"
   },
   "tableZoneIp": {
-    "message": "Zone#Location of IP address"
+    "message": "Zone"
   },
   "tabParameter": {
     "message": "Parameters"
   },
   "url": {
-    "message": "Url#urls of visited web page"
+    "message": "Url"
   },
   "urlAction": {
-    "message": "Event#Events recorded during the journey (scroll/click)"
+    "message": "Event"
   },
   "validateRegionButton": {
-    "message": "Confirm#Confirm Region"
+    "message": "Confirm"
   },
   "viewHistoryButton": {
-    "message": "View History#Button to show saved history (option: export to .csv)"
+    "message": "View History"
   },
   "visitEquivalent": {
-    "message": "visit(s) the equivalent of : #Label for informations about visits part. 2"
+    "message": "visit(s) the equivalent of : "
   },
   "warning": {
     "message": "Warning"
   },
   "wuEquivalent": {
-    "message": "WATER#Water used in liters"
+    "message": "WATER:"
   },
   "unitLabel": {
     "message": "unit"
@@ -382,5 +385,17 @@
   },
   "parameterTab": {
     "message": "Parameter"
+  },
+  "globalInfo": {
+    "message": "Détails (TODO)"
+  },
+  "evaluationTabDescription": {
+    "message": "evaluation desc (TODO)"
+  },
+  "scrollTabDescription": {
+    "message": "scroll desc (TODO)"
+  },
+  "userJourneyTabDescription": {
+    "message": "user journey desc (TODO)"
   }
 }
