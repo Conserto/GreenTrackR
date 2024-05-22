@@ -136,44 +136,37 @@
     on:buttonClick={handleAutoScroll}
     buttonType={ButtonTypeEnum.PRIMARY}
     translateKey={'launchAnalysisButtonWithAutoScrollButton'}
-    tooltip={true}
   />
   <Button
     on:buttonClick={onSaveCurrentMeasure}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="saveAnalysisButton"
     disabled={!currentMeasure}
-    tooltip={true}
   />
   <Button
     on:buttonClick={() => (currentDisplayedTab = TabType.HistoricTab)}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="viewHistoryButton"
-    tooltip={true}
   />
   <Button
     on:buttonClick={handleCleanCache}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="clearBrowserCacheButton"
-    tooltip={true}
   />
   <Button
     on:buttonClick={handleResetMeasure}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="resetMeasure"
-    tooltip={true}
   />
   <Button
     on:buttonClick={handleRefresh}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="refresh"
-    tooltip={true}
   />
   <Button
     on:buttonClick={() => sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP })}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="backToTop"
-    tooltip={true}
   />
 </div>
 <ZoneSimulation on:submitSimulation={handleSimulation} />

@@ -81,7 +81,6 @@
     on:buttonClick={handleRunAnalysis}
     buttonType={ButtonTypeEnum.PRIMARY}
     translateKey={'launchAnalysisButton'}
-    tooltip={true}
   />
   <Button
     on:buttonClick={onSaveCurrentMeasure}
@@ -93,13 +92,11 @@
     on:buttonClick={() => (currentDisplayedTab = TabType.HistoricTab)}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="viewHistoryButton"
-    tooltip={true}
   />
   <Button
     on:buttonClick={onCleanCache}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="clearBrowserCacheButton"
-    tooltip={true}
   />
   <Button
     on:buttonClick={onResetMeasure}

@@ -14,20 +14,7 @@ export const translate = (translateKey?: string) => {
     } catch (e) {
       logWarn('Warning ! You are trying to translate a null translateKey. -> ' + translateKey);
     }
-    translatedLabel = translatedLabel ? translatedLabel.split('#')[0] : translateKey;
-  }
-  return translatedLabel;
-};
-
-export const translateDescription = (translateKey: string) => {
-  let translatedLabel = '';
-  if (translateKey) {
-    try {
-      translatedLabel = chrome.i18n.getMessage(translateKey);
-    } catch (e) {
-      logWarn('Warning ! You are trying to translate a null translateKey. -> ' + translateKey);
-    }
-    translatedLabel = translatedLabel ? (translatedLabel.split('#')[1] ? translatedLabel.split('#')[1] : '') : '';
+    translatedLabel = translatedLabel || translateKey;
   }
   return translatedLabel;
 };
