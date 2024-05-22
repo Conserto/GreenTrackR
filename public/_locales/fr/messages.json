@@ -364,5 +364,17 @@
   },
   "unitLabel": {
     "message": "unité"
+  },
+  "evaluationTab": {
+    "message": "Èvaluation"
+  },
+  "scrollAnalysisTab": {
+    "message": "Analyse du défilement"
+  },
+  "userJourneyTab": {
+    "message": "Parcours utilisateur"
+  },
+  "parameterTab": {
+    "message": "Paramètre"
   }
 }

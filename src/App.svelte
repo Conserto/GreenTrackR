@@ -9,27 +9,27 @@
   export let tabs = [
     {
       translateKey: 'tabEvaluation',
-      name: 'Evaluation',
+      name: translate('evaluationTab'),
       id: 'evaluation-tab',
       component: Evaluation,
     },
     {
       translateKey: 'tabAutoScroll',
-      name: 'Scroll analysis',
+      name: translate('scrollAnalysisTab'),
       id: 'analysis-scroll-tab',
       component: AutoScroll,
       beta: true,
     },
     {
       translateKey: 'tabJourney',
-      name: 'User journey',
+      name: translate('userJourneyTab'),
       id: 'journey-tab',
       component: Parcours,
       beta: true,
     },
     {
       translateKey: 'tabParameter',
-      name: 'Parameter',
+      name: translate('parameterTab'),
       id: 'parameter-tab',
       component: Parameter,
     },
@@ -70,7 +70,7 @@
       {#if tab.beta}
         <Alert message="betaMessage"/>
       {/if}
-      <div class="tab-panel" role="tabpanel" aria-labelledby={`${tab.name} tab content`}>
+      <div class="tab-panel" role="tabpanel" aria-label={`${tab.name}`}>
         <svelte:component this={tab.component} />
       </div>
     {/if}
