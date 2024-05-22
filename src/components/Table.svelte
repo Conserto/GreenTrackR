@@ -9,17 +9,22 @@
 
   export let columnHeaders: TableHeader[] = [];
   export let datas: Map<string, TableData>[] = [];
-
+  export let caption: string = '';
+  export let description: string ='';
   const dispatch = createEventDispatcher();
   const surHeads = getSurHead(columnHeaders);
 </script>
 
 <div class="table-container">
   <table class="table">
+    <caption>
+      {caption}
+      <span class="visually-hidden">{description}</span>
+    </caption>
     <thead>
     <tr>
       {#each surHeads as [key, value]}
-        <th scope="col" colspan="{value.colspan}" class="{value.class}">
+        <th id="surHead{key}" colspan="{value.colspan}" class="{value.class}" aria-hidden={!value.translateKey || null}>
           {#if ('AdpIcon' === value.icon)}
             <img src="{AdpIcon}" alt="" class="surHeadImg" />
           {:else if ('EauIcon' === value.icon)}
@@ -36,7 +41,7 @@
     <tr>
       {#if columnHeaders.length > 0}
         {#each columnHeaders as columnHeader}
-          <th scope="col" class="{columnHeader.class}">
+          <th id="header{columnHeader.id}" class="{columnHeader.class}">
             <Tooltip translateKey={columnHeader.translateKey} />
           </th>
         {/each}
@@ -49,7 +54,7 @@
 
         {#if columnHeaders.length > 0}
           {#each columnHeaders as header, colNumber}
-            <td style={data.get(header.id)?.style} class="{header.class}">
+            <td headers="surHead{header.groupHead} header{header.id}" style={data.get(header.id)?.style} class="{header.class}">
               {#if data.get(header.id)?.action}
                 <Button
                   on:buttonClick={() => dispatch('actionClicked', { data })}
@@ -66,8 +71,6 @@
               {/if}
             </td>
           {/each}
-          <!--        {:else}
-                    <td style={data.?.style}>{translate(data.get(index)?.content)}</td>-->
         {/if}
       </tr>
     {/each}
@@ -81,11 +84,8 @@
     overflow: auto;
     box-shadow: var(--box-shadow--sm), var(--box-shadow--sm);
     border-radius: 8px;
-
-    th, td {
-      &.bold {
-        background-color: rgba(0, 0, 0, 0.1);
-      }
+    .bold {
+      background-color: rgba(0, 0, 0, 0.1);
     }
 
     .table {
@@ -117,7 +117,11 @@
       }
     }
   }
-
+  caption {
+    font-weight: bold;
+    padding-inline-start: 1rem;
+    text-align: left;
+  }
   .even {
     background-color: var(--color--light-grey);
   }
