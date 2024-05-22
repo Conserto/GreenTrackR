@@ -367,5 +367,8 @@
   },
   "unitLabel": {
     "message": "unit"
+  },
+  "barChartGES": {
+    "message": "GES and energy bar charts"
   }
 }
