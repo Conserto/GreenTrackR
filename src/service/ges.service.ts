@@ -190,7 +190,8 @@ export class GESService {
 
   getResources(usrResource: number | undefined, srvResource: number | undefined, energy: EnergyMeasure): ResTotals {
     const dataCenterTotal = srvResource ? energy.kWhDataCenter * srvResource : undefined;
-    const networkTotal = srvResource ? energy.kWhNetwork * srvResource : undefined;
+    const meanResources = (srvResource && usrResource) ? ((srvResource + usrResource) / 2) : undefined;
+    const networkTotal = meanResources ? energy.kWhNetwork * meanResources : undefined;
     const deviceTotal = usrResource ? energy.kWhDevice * usrResource : undefined;
     const pageTotal = (dataCenterTotal ? dataCenterTotal : 0) + (networkTotal ? networkTotal : 0) + (deviceTotal ? deviceTotal : 0);
     return {
