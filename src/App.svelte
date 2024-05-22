@@ -94,11 +94,7 @@
   }
 
   .tab-panel {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: start;
-    align-items: center;
+    text-align: center;
   }
 
   .plugin-title {
