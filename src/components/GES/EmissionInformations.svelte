@@ -53,12 +53,14 @@
       display: grid;
       gap: var(--spacing--lg);
       grid-template-rows: auto auto;
-      grid-template-columns: auto auto auto;
+      grid-template-columns: auto auto;
       // Resize when more infos are displayed
       // grid-template-columns: auto auto auto auto;
     }
   }
-
+  @media (min-width: 25rem) {
+    .emissions-infos_data { grid-template-columns: auto auto auto}
+  }
   .info-mix {
     text-align: center;
   }
