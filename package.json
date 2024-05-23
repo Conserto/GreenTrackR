@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host=0.0.0.0",
     "build": "vite build",
+    "md-to-html": "vite-node src/post-build/mdToHtml.ts",
     "build-log": "env NODE_ENV=development vite build",
     "preview": "vite preview",
     "test": "vitest",
@@ -32,6 +33,7 @@
     "typescript": "^5.4.3",
     "typescript-eslint": "^7.8.0",
     "vite": "^5.2.2",
-    "vitest": "^1.4.0"
+    "vitest": "^1.4.0",
+    "showdown": "^2.1.0"
   }
 }

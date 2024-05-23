@@ -1,5 +1,11 @@
 import type { GES, Measure, NetworkMeasure, TableData, TableHeader, TableSurHeader } from 'src/interface';
-import { logDebug, logWarn } from './log';
+import { logDebug, logInfo, logWarn } from './log';
+
+const PREFIX_HTML_KEY = '@';
+const SUFFIX_HTML_FILE = '.html';
+const SOURCE_HTML_FOLDER = '/descriptions/';
+
+const cacheHtmlTranslate = new Map<string, string>;
 
 export const getAverageValue = (data: number[]) => {
   let sum = data.reduce((partialSum: number, a) => partialSum + a, 0);
@@ -11,6 +17,10 @@ export const translate = (translateKey?: string) => {
   if (translateKey) {
     try {
       translatedLabel = chrome.i18n.getMessage(translateKey);
+      if (translatedLabel && translatedLabel.startsWith(PREFIX_HTML_KEY)) {
+        // TODO
+        translatedLabel = getHtmlValue(translatedLabel.replace(PREFIX_HTML_KEY,''));
+      }
     } catch (e) {
       logWarn('Warning ! You are trying to translate a null translateKey. -> ' + translateKey);
     }
