@@ -17,10 +17,10 @@ export const translate = (translateKey?: string) => {
   if (translateKey) {
     try {
       translatedLabel = chrome.i18n.getMessage(translateKey);
-      if (translatedLabel && translatedLabel.startsWith(PREFIX_HTML_KEY)) {
+/*      if (translatedLabel && translatedLabel.startsWith(PREFIX_HTML_KEY)) {
         // TODO
-        translatedLabel = getHtmlValue(translatedLabel.replace(PREFIX_HTML_KEY,''));
-      }
+        translatedLabel =  readFileSync(SOURCE_HTML_FOLDER + translatedLabel.replace(PREFIX_HTML_KEY,'') + SUFFIX_HTML_FILE);
+      }*/
     } catch (e) {
       logWarn('Warning ! You are trying to translate a null translateKey. -> ' + translateKey);
     }
