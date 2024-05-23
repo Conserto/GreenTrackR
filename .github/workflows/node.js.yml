@@ -25,6 +25,8 @@ jobs:
         cache: 'npm'
     - name: Install
       run: yarn install --frozen-lockfile
+    - name: Translate Markdown to Html
+      run: yarn run md-to-html
     - name: Run tests
       run: yarn run test
     - name: Run check
