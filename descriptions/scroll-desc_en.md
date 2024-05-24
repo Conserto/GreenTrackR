@@ -1,63 +1,25 @@
-# Scroll Desc EN
+# **Auto scroll/Page Tab** 
 
-## Tetigere et qua
+**Auto scroll/Page** lets you to assess a specific section and/or an whole active web page of your browser's tab in auto-scroll mode. To define the section of the web page to be analysed in auto-scroll mode, you need to input a percentage or a number of pixels. The analysis is run by using the **Auto Scrolling** button. The analysis is based on the location of the country hosting the website and the country in which the user is located. The default value is automatic, but you can set this value by using the selects box. Two types of assessment are possible: 
 
-Lorem markdownum vaticinata illi Achivi memores recordor obstitit aderant, eo
-velle obiectat armento faciebant Procri, arboreis. *Talibus est in* demisso
-factus sedet lapides, commune per Timoli sic possent protinus tristia quamvis
-est eruit concipiunt, praecorrumpere.
+- **Assessment without cache**: clear the cache by using **Clear cache** button, then run analysis by **Analysis** button, and the results are displayed.
 
-    if (num != transistor_device_internet + degauss) {
-        videoNumberKeystroke += pastePortal;
-    }
-    adwareRateW += 1;
-    if (mount_pixel) {
-        softSlashdotTweet = webDayMedia / search.unit(installPrinterTable,
-                personal, guidLossless);
-    } else {
-        click_real = computer;
-        usb_scraping_printer.megabyteState = camelcase_log_tweet;
-        hard_gigahertz_rss.northbridgeMbr /= architectureWpa.menu.onIp(
-                cellItunesMips, packetOcr, address);
-    }
-    vci_device_ergonomics.bittorrent_icann_heap += syntaxStorage(type(
-            diskFragmentation, fat(footer, tutorial), ctr));
+- **Assessment with cache** : click on the **Reload page** button, then on the **Analysis** button, and the results are displayed.
 
-## Tibi humus vocalis nectare supremaque urgues eductum
+## How to read the results?
 
-Latuit *mihi exstinguor inquit*, obsessa lumine; mittit iuves nefanda. Debita
-Pyrois solidumve scilicet tellure lumina gesserat luctu ostendere undam. Bis
-quam *agitur suo linguam* premis tumulos, prospicit superi pariterque facta.
-Vertit ab pectora *imagine*, tenet.
+GreenTrackr assesses different footprints:
 
-## Animavit certis
+- **Greenhouse gas (GHG)** CO2 equivalent unit "eq. CO2" is the key indicator of global warming. 
 
-Bracchia suasit trahit veste totque veras confiteorque veniente? Ire proxima,
-Asopiades perceperat licet huc sententia, nec spectans et nectar robore figuris
-coniugis in. Diduxit [rupem](http://www.quod-vivit.io/datipse.html). Defuit
-Aeetias cetera licet templo Romam, nascique ad anima cessit media inquit.
-Crinibus sunt [Molpeus](http://saxo.com/) ter silvas incipit manibus
-formidabilis [nocti](http://proceres.com/), taedae notavi, est: *Mater*.
+- **Electricity consumption (ELEC)** Kilowatt-hour "kWh" unit.
 
-## Servat credite me aestus sanguis fons quantumque
+- **Water consumption (WATER)** liters (l or m3) unit . 
 
-Reddere extemplo rursus harena; possem rubor repellite abit potentibus comes
-nequiquam magna, vero dolores *conlegerat temperat* nactusque. Mille et nubila,
-voce, ter egit olim congestis, perque: Delphica aequora, corpus. Lacrimis ad
-sidus et remos sibila, sed fallax exegit; liquerunt aliquid dissipat in atque,
-et latebras. Proetus omnes vestigia, si ope pectora quoque et induiturque
-plenoque [atlas](http://memini-et.io/qualibet) accipit Coronida in [audita
-umerique](http://terramextis.org/coniugiumintima) vix,
-[a](http://www.pondere-ille.org/dextra).
+- **Abiotic resources (ADP)** kg antimony equivalent "kg eq. SB" unit, these are non-renewable natural resources ( minerals).  
 
-    readerExternalDac = template(edutainment(unicodeConstantLog,
-            unmountSyntaxActive + cardDenial), 65 + terminal - so_memory);
-    adslDesign = baud.nanometerCopy(win_pc_dma(parameter_outbox_postscript,
-            regular.versionSource(pngVolumeDenial, copyright)));
-    var bootMidiWysiwyg = system_sram / lag + trackballWirelessInstall -
-            google_adc;
-    portSrgb += hypertext(icsErgonomicsDomain, asp_piconet - nvram_im,
-            volume.frame(bootMicrocomputerIpv, 912503, fpu_bare));
+Footprints are computed separately for terminals (modeled by the weight of the uncompressed page in kB), the network (modeled by the weight of the compressed page in kB) and servers (modeled by the number of non-extension requests). These footprints are then aggregated, taking into account the energy mix (carbon intensity factor in gCO2eq/kWh of electricity consumed) of the server (location of server IP address) and client (location of user IP address).
 
-Fortibus urnae oris onusque Dorylas, nomen sanus dextra manus socialis. Cornix
-vetantis! At spumis, quod, accipe Hectoris aeripedes cuius puerpera colla, non.
+A grade from A to F (on a linear gauge) and a score (the higher the score, closer to 100, the better the web page!) are then computed to represent the environmental footprint.
+
+

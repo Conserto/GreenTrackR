@@ -1,63 +1,20 @@
-# Journey Desc FR
+# **Onglet Parcours Utilisateur** 
 
-## Tetigere et qua
+**Parcours Utilisateur** vous permet d'évaluer d'un parcours client correspondant à une suite d'actions résalisées pour un cas d'usage donné. Le lancement de l'analyse se fait via le bouton **Démarrer l'enegistement**, l'extension enregistrera le parcours effectué. Une fois le parcours terminé, l'appui sur le bouton **Stopper l'enregistrement** permet d'afficher deux tableaux des résultats (un tableau récapitulatif et détaillé) pour chaque action effectuée : "(scroll)" et/ou "(click)" sur les pages visitées. L'analyse se base sur la localisation du pays hébergeant le site web et du pays dans lequel se trouve l'utilisateur, par défaut la valeur est en automatique, vous pouvez modifier cette valeur via les selects box. 
 
-Lorem markdownum vaticinata illi Achivi memores recordor obstitit aderant, eo
-velle obiectat armento faciebant Procri, arboreis. *Talibus est in* demisso
-factus sedet lapides, commune per Timoli sic possent protinus tristia quamvis
-est eruit concipiunt, praecorrumpere.
+## Comment interpréter les résultats ?
 
-    if (num != transistor_device_internet + degauss) {
-        videoNumberKeystroke += pastePortal;
-    }
-    adwareRateW += 1;
-    if (mount_pixel) {
-        softSlashdotTweet = webDayMedia / search.unit(installPrinterTable,
-                personal, guidLossless);
-    } else {
-        click_real = computer;
-        usb_scraping_printer.megabyteState = camelcase_log_tweet;
-        hard_gigahertz_rss.northbridgeMbr /= architectureWpa.menu.onIp(
-                cellItunesMips, packetOcr, address);
-    }
-    vci_device_ergonomics.bittorrent_icann_heap += syntaxStorage(type(
-            diskFragmentation, fat(footer, tutorial), ctr));
+GreenTrackr évalue différents impacts :
 
-## Tibi humus vocalis nectare supremaque urgues eductum
+- **Gaz à effet de serre (GES)** unité équivalent CO2 « eq. CO2 » c’est l’indicateur le plus d’impact dans le réchauffement climatique. 
 
-Latuit *mihi exstinguor inquit*, obsessa lumine; mittit iuves nefanda. Debita
-Pyrois solidumve scilicet tellure lumina gesserat luctu ostendere undam. Bis
-quam *agitur suo linguam* premis tumulos, prospicit superi pariterque facta.
-Vertit ab pectora *imagine*, tenet.
+- **Consommation d’électricité (ELEC)** unité Kilowattheure « kWh ». 
 
-## Animavit certis
+- **Consommation d’eau (EAU)** unité litres (l ou m3). 
 
-Bracchia suasit trahit veste totque veras confiteorque veniente? Ire proxima,
-Asopiades perceperat licet huc sententia, nec spectans et nectar robore figuris
-coniugis in. Diduxit [rupem](http://www.quod-vivit.io/datipse.html). Defuit
-Aeetias cetera licet templo Romam, nascique ad anima cessit media inquit.
-Crinibus sunt [Molpeus](http://saxo.com/) ter silvas incipit manibus
-formidabilis [nocti](http://proceres.com/), taedae notavi, est: *Mater*.
+- **Ressources abiotiques (ADP)** unité kg équivalent antimoine « kg eq. SB » ce sont les ressources naturelles non renouvelables (minerais). 
 
-## Servat credite me aestus sanguis fons quantumque
+Les impacts sont calculés de manière distincte pour les terminaux (modéliser par le poids de la page non-compressé en kB), le réseau (modéliser par le poids de la page compressé kB) et les serveurs (modéliser par le nombre de requêtes hors extension). Par la suite, ces impacts sont agrégés en tenant compte de mix énergétique (facteur d'intensité carbone en gCO2eq/kWh de l'électricité consommé)  du serveur (localisation de l'adresse IP du serveur) et du client ( localisation de l'adresse IP de l'utilisateur).
 
-Reddere extemplo rursus harena; possem rubor repellite abit potentibus comes
-nequiquam magna, vero dolores *conlegerat temperat* nactusque. Mille et nubila,
-voce, ter egit olim congestis, perque: Delphica aequora, corpus. Lacrimis ad
-sidus et remos sibila, sed fallax exegit; liquerunt aliquid dissipat in atque,
-et latebras. Proetus omnes vestigia, si ope pectora quoque et induiturque
-plenoque [atlas](http://memini-et.io/qualibet) accipit Coronida in [audita
-umerique](http://terramextis.org/coniugiumintima) vix,
-[a](http://www.pondere-ille.org/dextra).
+Une note de A à F (sur une jauge linéaire) et un score (plus le score est élevé proche de 100, meilleure est la page Web !) sont alors calculés pour refléter l'impact environnemental.
 
-    readerExternalDac = template(edutainment(unicodeConstantLog,
-            unmountSyntaxActive + cardDenial), 65 + terminal - so_memory);
-    adslDesign = baud.nanometerCopy(win_pc_dma(parameter_outbox_postscript,
-            regular.versionSource(pngVolumeDenial, copyright)));
-    var bootMidiWysiwyg = system_sram / lag + trackballWirelessInstall -
-            google_adc;
-    portSrgb += hypertext(icsErgonomicsDomain, asp_piconet - nvram_im,
-            volume.frame(bootMicrocomputerIpv, 912503, fpu_bare));
-
-Fortibus urnae oris onusque Dorylas, nomen sanus dextra manus socialis. Cornix
-vetantis! At spumis, quod, accipe Hectoris aeripedes cuius puerpera colla, non.

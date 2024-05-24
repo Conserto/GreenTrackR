@@ -1,63 +1,20 @@
-# Journey Desc EN
+# **User journey Tab** 
 
-## Tetigere et qua
+**User Journey** lets you to assess a user journey based on a series of actions for a given use case. The analysis is run by using the **Start recorder** button, and the extension will record the journey performed. Once the journey has been completed, clicking the **Stop saving** button displays two tables of results (a summary table and a detailed table) for each action performed: "(scroll)" and/or "(click)" on the pages visited. The analysis is based on the location of the country hosting the website and the country in which the user is located. The default value is automatic, but you can set this value by using the selects box. 
 
-Lorem markdownum vaticinata illi Achivi memores recordor obstitit aderant, eo
-velle obiectat armento faciebant Procri, arboreis. *Talibus est in* demisso
-factus sedet lapides, commune per Timoli sic possent protinus tristia quamvis
-est eruit concipiunt, praecorrumpere.
+## How to read the results?
 
-    if (num != transistor_device_internet + degauss) {
-        videoNumberKeystroke += pastePortal;
-    }
-    adwareRateW += 1;
-    if (mount_pixel) {
-        softSlashdotTweet = webDayMedia / search.unit(installPrinterTable,
-                personal, guidLossless);
-    } else {
-        click_real = computer;
-        usb_scraping_printer.megabyteState = camelcase_log_tweet;
-        hard_gigahertz_rss.northbridgeMbr /= architectureWpa.menu.onIp(
-                cellItunesMips, packetOcr, address);
-    }
-    vci_device_ergonomics.bittorrent_icann_heap += syntaxStorage(type(
-            diskFragmentation, fat(footer, tutorial), ctr));
+GreenTrackr assesses different footprints:
 
-## Tibi humus vocalis nectare supremaque urgues eductum
+- **Greenhouse gas (GHG)** CO2 equivalent unit "eq. CO2" is the key indicator of global warming. 
 
-Latuit *mihi exstinguor inquit*, obsessa lumine; mittit iuves nefanda. Debita
-Pyrois solidumve scilicet tellure lumina gesserat luctu ostendere undam. Bis
-quam *agitur suo linguam* premis tumulos, prospicit superi pariterque facta.
-Vertit ab pectora *imagine*, tenet.
+- **Electricity consumption (ELEC)** unit Kilowatt-hour "kWh".
 
-## Animavit certis
+- **Water consumption (WATER)** unit liters (l or m3). 
 
-Bracchia suasit trahit veste totque veras confiteorque veniente? Ire proxima,
-Asopiades perceperat licet huc sententia, nec spectans et nectar robore figuris
-coniugis in. Diduxit [rupem](http://www.quod-vivit.io/datipse.html). Defuit
-Aeetias cetera licet templo Romam, nascique ad anima cessit media inquit.
-Crinibus sunt [Molpeus](http://saxo.com/) ter silvas incipit manibus
-formidabilis [nocti](http://proceres.com/), taedae notavi, est: *Mater*.
+- **Abiotic resources (ADP)** unit kg antimony equivalent "kg eq. SB", these are non-renewable natural resources ( minerals).  
 
-## Servat credite me aestus sanguis fons quantumque
+Footprints are computed separately for terminals (modeled by the weight of the uncompressed page in kB), the network (modeled by the weight of the compressed page in kB) and servers (modeled by the number of non-extension requests). These footprints are then aggregated, taking into account the energy mix (carbon intensity factor in gCO2eq/kWh of electricity consumed) of the server (location of server IP address) and client (location of user IP address).
 
-Reddere extemplo rursus harena; possem rubor repellite abit potentibus comes
-nequiquam magna, vero dolores *conlegerat temperat* nactusque. Mille et nubila,
-voce, ter egit olim congestis, perque: Delphica aequora, corpus. Lacrimis ad
-sidus et remos sibila, sed fallax exegit; liquerunt aliquid dissipat in atque,
-et latebras. Proetus omnes vestigia, si ope pectora quoque et induiturque
-plenoque [atlas](http://memini-et.io/qualibet) accipit Coronida in [audita
-umerique](http://terramextis.org/coniugiumintima) vix,
-[a](http://www.pondere-ille.org/dextra).
+A grade from A to F (on a linear gauge) and a score (the higher the score, closer to 100, the better the web page!) are then computed to represent the environmental footprint.
 
-    readerExternalDac = template(edutainment(unicodeConstantLog,
-            unmountSyntaxActive + cardDenial), 65 + terminal - so_memory);
-    adslDesign = baud.nanometerCopy(win_pc_dma(parameter_outbox_postscript,
-            regular.versionSource(pngVolumeDenial, copyright)));
-    var bootMidiWysiwyg = system_sram / lag + trackballWirelessInstall -
-            google_adc;
-    portSrgb += hypertext(icsErgonomicsDomain, asp_piconet - nvram_im,
-            volume.frame(bootMicrocomputerIpv, 912503, fpu_bare));
-
-Fortibus urnae oris onusque Dorylas, nomen sanus dextra manus socialis. Cornix
-vetantis! At spumis, quod, accipe Hectoris aeripedes cuius puerpera colla, non.
