@@ -74,7 +74,7 @@
     <Button
       on:buttonClick={handleDeleteAll}
       buttonType={ButtonTypeEnum.PRIMARY}
-      translateKey="OK"
+      translateKey="deleteAllButton"
     />
   </div>
 </Modal>
