@@ -1,5 +1,9 @@
 import type { GES, Measure, NetworkMeasure, TableData, TableHeader, TableSurHeader } from 'src/interface';
-import { logDebug, logWarn } from './log';
+import { logDebug } from './log';
+
+const PREFIX_HTML_KEY = '@';
+const SUFFIX_HTML_FILE = '.html';
+const SOURCE_HTML_FOLDER = '/descriptions/';
 
 export const getAverageValue = (data: number[]) => {
   let sum = data.reduce((partialSum: number, a) => partialSum + a, 0);
@@ -9,12 +13,7 @@ export const getAverageValue = (data: number[]) => {
 export const translate = (translateKey?: string) => {
   let translatedLabel = '';
   if (translateKey) {
-    try {
-      translatedLabel = chrome.i18n.getMessage(translateKey);
-    } catch (e) {
-      logWarn('Warning ! You are trying to translate a null translateKey. -> ' + translateKey);
-    }
-    translatedLabel = translatedLabel || translateKey;
+    translatedLabel = chrome.i18n.getMessage(translateKey) || translateKey;
   }
   return translatedLabel;
 };
@@ -344,4 +343,15 @@ export const scrollPrompt = (topPrompt: number, leftPrompt: number, timeout: num
     logDebug('End Of Page');
     return new Promise<void>((resolve) => resolve());
   }
+};
+
+export const translateHtmlUrl = (translateKey?: string) : string => {
+  let translatedLabel = '';
+  if (translateKey) {
+    translatedLabel = chrome.i18n.getMessage(translateKey);
+    if (translatedLabel?.startsWith(PREFIX_HTML_KEY)) {
+      return SOURCE_HTML_FOLDER + translatedLabel.replace(PREFIX_HTML_KEY,'') + SUFFIX_HTML_FILE;
+    }
+  }
+  return '';
 };

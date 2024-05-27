@@ -74,14 +74,13 @@
     <Button
       on:buttonClick={handleDeleteAll}
       buttonType={ButtonTypeEnum.PRIMARY}
-      translateKey="OK"
+      translateKey="deleteAllButton"
     />
   </div>
 </Modal>
 
 <style lang="scss">
-  h2,
-  h4 {
+  h2 {
     text-align: center;
   }
 </style>

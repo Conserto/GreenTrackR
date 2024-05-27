@@ -384,15 +384,15 @@
     "message": "Paramètre"
   },
   "globalInfo": {
-    "message": "Détails (TODO)"
+    "message": "Information"
   },
   "evaluationTabDescription": {
-    "message": "evaluation desc (TODO)"
+    "message": "@evaluation-desc_fr"
   },
   "scrollTabDescription": {
-    "message": "scroll desc (TODO)"
+    "message": "@scroll-desc_fr"
   },
   "userJourneyTabDescription": {
-    "message": "user journey desc (TODO)"
+    "message": "@journey-desc_fr"
   }
 }
