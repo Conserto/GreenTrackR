@@ -14,6 +14,9 @@
   "backToTop": {
     "message": "Remonter la page"
   },
+  "barChartGES": {
+    "message": "Histogramme des valeurs GES et énergétique"
+  },
   "betaMessage": {
     "message": "Cette fonctionnalité est une version bêta, des erreurs peuvent survenir."
   },
@@ -50,6 +53,15 @@
   "deleteButton": {
     "message": "Effacer"
   },
+  "descriptionResults": {
+    "message": "Les actions de défilements, de click, et le total (défilement + clic) sont présentés sur 5 colonnes, avec, pour chacun le nombre de hit, le poids, les requêtes, les gaz à effets de serre, le score, et enfin les KPI'S"
+  },
+  "descriptionResultsAnalysis": {
+    "message": "Les paramètres sont présentés sur 5 colonnes, ces 5 colonnes contiennent la date, l'URL, l'événement, le poids de la page et enfin le nombre de requêtes HTTP. Les émissions de gaz à effet de serre sont sur 6 colonnes qui se décomposent en émissions pour la partie serveur, réseau, appareils, le total, le score et enfin la note. La consommation d'eau, d'ADP, d'électricité sont réparties sur 4 colonnes avec la partie serveur, réseau, appareils et total. S'en suit les colonnes client et serveur divisé en 2 colonnes zone et intensité, puis enfin s'en suit la colonne d'action."
+  },
+  "descriptionResultsDetail": {
+    "message": "Les paramètres sont présentés sur 5 colonnes, ces 5 colonnes contiennent la date, l'URL, l'événement, le poids de la page et enfin le nombre de requêtes HTTP. Les émissions de gaz à effet de serre sont sur 6 colonnes qui se décomposent en émissions pour la partie serveur, réseau, appareils, le total, le score et enfin la note. La consommation d'eau, d'ADP, d'électricité sont réparties sur 4 colonnes avec la partie serveur, réseau, appareils et total. S'en suit les colonnes client et serveur divisé en 2 colonnes zone et intensité."
+  },
   "deviceTotal": {
     "message": "Appareils"
   },
@@ -64,6 +76,12 @@
   },
   "errorNoToken": {
     "message": "Aucun token CO2 trouvé, l'extension pourrait ne pas fonctionner"
+  },
+  "evaluationTab": {
+    "message": "Èvaluation"
+  },
+  "evaluationTabDescription": {
+    "message": "@evaluation-desc_fr"
   },
   "exportButton": {
     "message": "Exporter"
@@ -113,6 +131,9 @@
   "gesZone": {
     "message": "Serveur"
   },
+  "globalInfo": {
+    "message": "Informations"
+  },
   "greenhouseGasesEmission": {
     "message": "GES :"
   },
@@ -137,20 +158,11 @@
   "messageResults": {
     "message": "Tableau récapitulatif du parcours utilisateur"
   },
-  "descriptionResults": {
-    "message": "Les actions de défilements, de click, et le total (défilement + clic) sont présentés sur 5 colonnes, avec, pour chacun le nombre de hit, le poids, les requêtes, les gaz à effets de serre, le score, et enfin les KPI'S"
-  },
   "messageResultsAnalysis": {
     "message": "Résultat de l'analyse"
   },
-  "descriptionResultsAnalysis": {
-    "message": "Les paramètres sont présentés sur 5 colonnes, ces 5 colonnes contiennent la date, l'URL, l'événement, le poids de la page et enfin le nombre de requêtes HTTP. Les émissions de gaz à effet de serre sont sur 6 colonnes qui se décomposent en émissions pour la partie serveur, réseau, appareils, le total, le score et enfin la note. La consommation d'eau, d'ADP, d'électricité sont réparties sur 4 colonnes avec la partie serveur, réseau, appareils et total. S'en suit les colonnes client et serveur divisé en 2 colonnes zone et intensité, puis enfin s'en suit la colonne d'action."
-  },
   "messageResultsDetail": {
     "message": "Tableau détaillé de l'analyse du parcours utilisateur"
-  },
-  "descriptionResultsDetail": {
-    "message": "Les paramètres sont présentés sur 5 colonnes, ces 5 colonnes contiennent la date, l'URL, l'événement, le poids de la page et enfin le nombre de requêtes HTTP. Les émissions de gaz à effet de serre sont sur 6 colonnes qui se décomposent en émissions pour la partie serveur, réseau, appareils, le total, le score et enfin la note. La consommation d'eau, d'ADP, d'électricité sont réparties sur 4 colonnes avec la partie serveur, réseau, appareils et total. S'en suit les colonnes client et serveur divisé en 2 colonnes zone et intensité."
   },
   "nbRequest": {
     "message": "Requêtes HTTP"
@@ -178,6 +190,9 @@
   },
   "paramCo2TokenLabel": {
     "message": "Token API CO2signal"
+  },
+  "parameterTab": {
+    "message": "Paramètre"
   },
   "paramNbRetryLabel": {
     "message": "Nombre d'essais"
@@ -229,6 +244,12 @@
   },
   "saveAnalysisTitle": {
     "message": "Résultat de l'évaluation."
+  },
+  "scrollAnalysisTab": {
+    "message": "Analyse du défilement"
+  },
+  "scrollTabDescription": {
+    "message": "@scroll-desc_fr"
   },
   "serverRegionLabel": {
     "message": "Simuler la localisation du serveur dans une autre zone "
@@ -302,9 +323,6 @@
   "tabJourney": {
     "message": "Parcours Utilisateur"
   },
-  "tableParameterSurHead": {
-    "message": "PARAMÈTRE"
-  },
   "tableAdpeSurHead": {
     "message": "ADP"
   },
@@ -329,6 +347,9 @@
   "tableKpiTotal": {
     "message": "Total"
   },
+  "tableParameterSurHead": {
+    "message": "PARAMÈTRE"
+  },
   "tableSrvSurHead": {
     "message": "SERVEUR"
   },
@@ -344,11 +365,20 @@
   "tabParameter": {
     "message": "Paramètres"
   },
+  "unitLabel": {
+    "message": "unité"
+  },
   "url": {
     "message": "Url"
   },
   "urlAction": {
     "message": "Événement"
+  },
+  "userJourneyTab": {
+    "message": "Parcours utilisateur"
+  },
+  "userJourneyTabDescription": {
+    "message": "@journey-desc_fr"
   },
   "validateRegionButton": {
     "message": "Valider"
@@ -364,35 +394,5 @@
   },
   "wuEquivalent": {
     "message": "EAU :"
-  },
-  "unitLabel": {
-    "message": "unité"
-  },
-  "barChartGES": {
-    "message": "Histogramme des valeurs GES et énergétique"
-  },
-  "evaluationTab": {
-    "message": "Èvaluation"
-  },
-  "scrollAnalysisTab": {
-    "message": "Analyse du défilement"
-  },
-  "userJourneyTab": {
-    "message": "Parcours utilisateur"
-  },
-  "parameterTab": {
-    "message": "Paramètre"
-  },
-  "globalInfo": {
-    "message": "Information"
-  },
-  "evaluationTabDescription": {
-    "message": "@evaluation-desc_fr"
-  },
-  "scrollTabDescription": {
-    "message": "@scroll-desc_fr"
-  },
-  "userJourneyTabDescription": {
-    "message": "@journey-desc_fr"
   }
 }

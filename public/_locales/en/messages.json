@@ -14,6 +14,9 @@
   "backToTop": {
     "message": "Back to top"
   },
+  "barChartGES": {
+    "message": "GES and energy bar charts"
+  },
   "betaMessage": {
     "message": "This feature is a beta version, errors may occur."
   },
@@ -53,6 +56,15 @@
   "deleteButton": {
     "message": "Delete"
   },
+  "descriptionResults": {
+    "message": "The scroll, click and total (scroll + click) actions are presented in 5 columns, with, for each, the number of hits, the weight, the queries, the greenhouse gases, the score, and finally the KPI'S."
+  },
+  "descriptionResultsAnalysis": {
+    "message": "Parameters are presented in 5 columns: date, URL, event, page weight and number of HTTP requests. Greenhouse gas emissions are shown in 6 columns, broken down into emissions for the server, network, devices, total, score and rating. Water, ADP and electricity consumption are broken down into 4 columns: server, network, devices and total. This is followed by the client and server columns, divided into 2 columns for zone and intensity, and finally the action column."
+  },
+  "descriptionResultsDetail": {
+    "message": "Parameters are presented in 5 columns: date, URL, event, page weight and number of HTTP requests. Greenhouse gas emissions are shown in 6 columns, broken down into emissions for the server, network, devices, total, score and rating. Water, ADP and electricity consumption are broken down into 4 columns: server, network, devices and total. This is followed by the client and server columns, divided into 2 columns for zone and intensity."
+  },
   "deviceTotal": {
     "message": "Devices"
   },
@@ -67,6 +79,12 @@
   },
   "errorNoToken": {
     "message": "No CO2 token found, the extension may not work"
+  },
+  "evaluationTab": {
+    "message": "Evaluation"
+  },
+  "evaluationTabDescription": {
+    "message": "@evaluation-desc_en"
   },
   "exportButton": {
     "message": "Export"
@@ -116,6 +134,9 @@
   "gesZone": {
     "message": "Server"
   },
+  "globalInfo": {
+    "message": "Informations"
+  },
   "greenhouseGasesEmission": {
     "message": "GES:"
   },
@@ -140,20 +161,11 @@
   "messageResults": {
     "message": "User journey summary table"
   },
-  "descriptionResults": {
-    "message": "The scroll, click and total (scroll + click) actions are presented in 5 columns, with, for each, the number of hits, the weight, the queries, the greenhouse gases, the score, and finally the KPI'S."
-  },
   "messageResultsAnalysis": {
     "message": "Analysis results"
   },
-  "descriptionResultsAnalysis": {
-    "message": "Parameters are presented in 5 columns: date, URL, event, page weight and number of HTTP requests. Greenhouse gas emissions are shown in 6 columns, broken down into emissions for the server, network, devices, total, score and rating. Water, ADP and electricity consumption are broken down into 4 columns: server, network, devices and total. This is followed by the client and server columns, divided into 2 columns for zone and intensity, and finally the action column."
-  },
   "messageResultsDetail": {
     "message": "Detailed table of user journey analysis"
-  },
-  "descriptionResultsDetail": {
-    "message": "Parameters are presented in 5 columns: date, URL, event, page weight and number of HTTP requests. Greenhouse gas emissions are shown in 6 columns, broken down into emissions for the server, network, devices, total, score and rating. Water, ADP and electricity consumption are broken down into 4 columns: server, network, devices and total. This is followed by the client and server columns, divided into 2 columns for zone and intensity."
   },
   "nbRequest": {
     "message": "HTTP requests"
@@ -181,6 +193,9 @@
   },
   "paramCo2TokenLabel": {
     "message": "Token CO2signal API"
+  },
+  "parameterTab": {
+    "message": "Parameter"
   },
   "paramNbRetryLabel": {
     "message": "Number of tests"
@@ -232,6 +247,12 @@
   },
   "saveAnalysisTitle": {
     "message": "Analysis Results."
+  },
+  "scrollAnalysisTab": {
+    "message": "Scroll Analysis"
+  },
+  "scrollTabDescription": {
+    "message": "@scroll-desc_en"
   },
   "serverRegionLabel": {
     "message": "Simulate server localization in an other zone "
@@ -305,9 +326,6 @@
   "tabJourney": {
     "message": "User Journey"
   },
-  "tableParameterSurHead": {
-    "message": "PARAMETER"
-  },
   "tableAdpeSurHead": {
     "message": "ADP"
   },
@@ -332,6 +350,9 @@
   "tableKpiTotal": {
     "message": "GES Total"
   },
+  "tableParameterSurHead": {
+    "message": "PARAMETER"
+  },
   "tableSrvSurHead": {
     "message": "SERVER"
   },
@@ -347,11 +368,20 @@
   "tabParameter": {
     "message": "Parameters"
   },
+  "unitLabel": {
+    "message": "unit"
+  },
   "url": {
     "message": "Url"
   },
   "urlAction": {
     "message": "Event"
+  },
+  "userJourneyTab": {
+    "message": "User journey"
+  },
+  "userJourneyTabDescription": {
+    "message": "@journey-desc_en"
   },
   "validateRegionButton": {
     "message": "Confirm"
@@ -367,35 +397,5 @@
   },
   "wuEquivalent": {
     "message": "WATER:"
-  },
-  "unitLabel": {
-    "message": "unit"
-  },
-  "barChartGES": {
-    "message": "GES and energy bar charts"
-  },
-  "evaluationTab": {
-    "message": "Evaluation"
-  },
-  "scrollAnalysisTab": {
-    "message": "Scroll Analysis"
-  },
-  "userJourneyTab": {
-    "message": "User journey"
-  },
-  "parameterTab": {
-    "message": "Parameter"
-  },
-  "globalInfo": {
-    "message": "Information"
-  },
-  "evaluationTabDescription": {
-    "message": "@evaluation-desc_en"
-  },
-  "scrollTabDescription": {
-    "message": "@scroll-desc_en"
-  },
-  "userJourneyTabDescription": {
-    "message": "@journey-desc_en"
   }
 }
