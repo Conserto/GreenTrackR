@@ -2,10 +2,12 @@
   import logo from '/images/logo.png';
   import { AutoScroll, Evaluation, Parcours, Parameter } from 'src/pages';
   import { Alert, Tab, Footer, Button } from 'src/components';
-  import { getLocalStorageObject, translate } from './utils';
+  import { getLocalStorageObject, translate, translateHtmlUrl } from './utils';
   import { AlertTypeEnum, ButtonTypeEnum } from './enum';
   import { paramTokenCo2 } from './const';
   import { Modal } from './components';
+  import { onMount } from 'svelte';
+  import { logErr } from './utils/log';
 
   export let tabs = [
     {
@@ -13,14 +15,16 @@
       name: translate('evaluationTab'),
       id: 'evaluation-tab',
       component: Evaluation,
-      description: translate('evaluationTabDescription')
+      descriptionKey: 'evaluationTabDescription',
+      description: ''
     },
     {
       translateKey: 'tabAutoScroll',
       name: translate('scrollAnalysisTab'),
       id: 'analysis-scroll-tab',
       component: AutoScroll,
-      description: translate('scrollTabDescription'),
+      descriptionKey: 'scrollTabDescription',
+      description: '',
       beta: true,
     },
     {
@@ -28,7 +32,8 @@
       name: translate('userJourneyTab'),
       id: 'journey-tab',
       component: Parcours,
-      description: translate('userJourneyTabDescription'),
+      descriptionKey: 'userJourneyTabDescription',
+      description: '',
       beta: true,
     },
     {
@@ -43,6 +48,19 @@
   function handleClick(event: CustomEvent) {
     activeTabId = event.detail.id;
   }
+
+  onMount(() => {
+    tabs.forEach(tab => {
+      if (tab.descriptionKey) {
+        fetch(translateHtmlUrl(tab.descriptionKey)).then(r => r.text().then(t => {
+          tab.description = t;
+          tabs = tabs;
+        })).catch((err) => {
+          logErr(`unable to perform the fetch request ${err}`)
+        });
+      }
+    })
+  });
 </script>
 
 <header role="banner" class="flex-col-center">
@@ -78,7 +96,9 @@
         </h1>
         {#if tab.description}
           <Modal dialogLabelKey="globalInfo" bind:showModal cssClass="infos">
-            {tab.description}
+            <div class="dialog__wrapper">
+              {@html tab.description}
+            </div>
             <div><Button
               on:buttonClick={() => (showModal = false)}
               buttonType={ButtonTypeEnum.SECONDARY}
@@ -103,6 +123,11 @@
   .app-container {
     justify-content: start;
     margin: 0 var(--spacing--xl) 0 var(--spacing--xl);
+  }
+  .dialog__wrapper {
+      height: 60vh;
+      overflow: auto;
+      overflow-wrap: break-word;
   }
 
   .nav {
