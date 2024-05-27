@@ -9,15 +9,7 @@
   const dataFormatted = formatGesMeasuresForTable(measures);
 </script>
 
-<h4 class="table-caption">{translate('messageResults')}</h4>
-<SynthesisTable datas={measures} />
+<SynthesisTable datas={measures} caption={translate('messageResults')} description={translate('descriptionResults')}/>
 <br/>
-<br/>
-<h4 class="table-caption">{translate('messageResultsDetail')}</h4>
-<Table columnHeaders={gesTableHeaders} datas={dataFormatted} />
 
-<style lang="scss">
-  .table-caption {
-    text-align: center;
-  }
-</style>
+<Table caption={translate('messageResultsDetail')} description={translate('descriptionResultsDetail')} columnHeaders={gesTableHeaders} datas={dataFormatted} />

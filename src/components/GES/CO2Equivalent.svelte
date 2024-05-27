@@ -1,13 +1,13 @@
 <script lang="ts">
   import { Units } from 'src/const';
   import type { Measure } from 'src/interface';
-  import Tooltip from '../Tooltip.svelte';
+  import { translate } from '../../utils';
 
   export let measure: Measure | undefined;
 </script>
 
 <div class="ges-equivalent">
-  <span><Tooltip translateKey="greenhouseGasesEmission" /> :</span>
+  <span>{translate("greenhouseGasesEmission")}</span>
   <span
     class="ges-equivalent_value"
     style:color={measure?.score?.textColor}
@@ -16,19 +16,19 @@
 </div>
 
 <div class="energy-equivalent">
-  <span><Tooltip translateKey="energyEquivalent" /> :</span>
+  <span>{translate("energyEquivalent")}</span>
   <span class="energy-equivalent_value"
   >{measure?.energy?.kWhPage?.toFixed(2)} {Units.energy}</span>
 </div>
 
 <div class="wu-equivalent">
-  <span><Tooltip translateKey="wuEquivalent" /> :</span>
+  <span>{translate("wuEquivalent")}</span>
   <span class="wu-equivalent_value"
   >{measure?.wu?.pageTotal?.toFixed(2)} {Units.waterUse}</span>
 </div>
 
 <div class="adpe-equivalent">
-  <span><Tooltip translateKey="adpeEquivalent" /> :</span>
+  <span>{translate("adpeEquivalent")}</span>
   <span class="adpe-equivalent_value"
   >{measure?.adpe?.pageTotal?.toFixed(2)} {Units.adpeUnit}</span>
 </div>

@@ -12,6 +12,8 @@ dist
 tmp
 dist-ssr
 *.local
+/public/descriptions/
+!/public/descriptions/.gitkeep
 
 # Editor directories and files
 .vscode

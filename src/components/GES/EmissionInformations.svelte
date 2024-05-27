@@ -2,7 +2,6 @@
   import { formatSize, translate } from 'src/utils/utils';
   import type { Measure } from 'src/interface';
   import { Units } from 'src/const';
-  import Tooltip from '../Tooltip.svelte';
 
   export let measure: Measure | undefined;
 </script>
@@ -10,37 +9,37 @@
 <div class="emissions-infos">
   <p class="info-mix">{translate('infoMix')}</p>
   <div class="emissions-infos_data">
-    <div>
-      <span class="data-label"><Tooltip translateKey="gesZone" /></span>
+    <p>
+      <span class="data-label">{translate("gesZone")}</span>
       <span class="data-value">{measure?.serverGES ? (measure?.serverGES?.cityName
         ? `${measure?.serverGES.cityName}, ${measure?.serverGES.countryName}`
         : measure?.serverGES?.countryName) : '-'}</span>
-    </div>
-    <div>
-      <span class="data-label"><Tooltip translateKey="gesUserZone" /></span>
+    </p>
+    <p>
+      <span class="data-label">{translate("gesUserZone")}</span>
       <span class="data-value">{measure?.userGES ? (measure?.userGES?.cityName
         ? `${measure?.userGES.cityName}, ${measure?.userGES.countryName}`
         : measure?.userGES?.countryName) : '-'}</span>
-    </div>
-    <div>
-      <span class="data-label"><Tooltip translateKey="sizeTransferredBytes" /></span>
+    </p>
+    <p>
+      <span class="data-label">{translate("sizeTransferredBytes")}</span>
       <span class="data-value">{formatSize(measure?.networkMeasure.network.size)} {Units.pageSize}
         / {formatSize(measure?.networkMeasure.network.sizeUncompress)} {Units.pageSize}</span>
-    </div>
-    <div>
-      <span class="data-label"><Tooltip translateKey="gesIntensity" /></span>
+    </p>
+    <p>
+      <span class="data-label">{translate("gesIntensity")}</span>
       <span
         class="data-value">{measure?.serverGES?.carbonIntensity ? measure?.serverGES?.carbonIntensity : '-' } {Units.carbonIntensity}</span>
-    </div>
-    <div>
-      <span class="data-label"><Tooltip translateKey="gesUserIntensity" /></span>
+    </p>
+    <p>
+      <span class="data-label">{translate("gesUserIntensity")}</span>
       <span
         class="data-value">{measure?.userGES?.carbonIntensity ? measure?.userGES?.carbonIntensity : '-' } {Units.carbonIntensity}</span>
-    </div>
-    <div>
-      <span class="data-label"><Tooltip translateKey="nbRequest" /></span>
+    </p>
+    <p>
+      <span class="data-label">{translate("nbRequest")}</span>
       <span class="data-value">{measure?.networkMeasure.nbRequest} ({measure?.networkMeasure.nbRequestCache})</span>
-    </div>
+    </p>
   </div>
 </div>
 
@@ -53,12 +52,14 @@
       display: grid;
       gap: var(--spacing--lg);
       grid-template-rows: auto auto;
-      grid-template-columns: auto auto auto;
+      grid-template-columns: auto auto;
       // Resize when more infos are displayed
       // grid-template-columns: auto auto auto auto;
     }
   }
-
+  @media (min-width: 25rem) {
+    .emissions-infos_data { grid-template-columns: auto auto auto}
+  }
   .info-mix {
     text-align: center;
   }

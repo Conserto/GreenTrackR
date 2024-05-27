@@ -81,39 +81,33 @@
     on:buttonClick={handleRunAnalysis}
     buttonType={ButtonTypeEnum.PRIMARY}
     translateKey={'launchAnalysisButton'}
-    tooltip={true}
   />
   <Button
     on:buttonClick={onSaveCurrentMeasure}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="saveAnalysisButton"
     disabled={!currentMeasure}
-    tooltip={true}
   />
   <Button
     on:buttonClick={() => (currentDisplayedTab = TabType.HistoricTab)}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="viewHistoryButton"
-    tooltip={true}
   />
   <Button
     on:buttonClick={onCleanCache}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="clearBrowserCacheButton"
-    tooltip={true}
   />
   <Button
     on:buttonClick={onResetMeasure}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="resetMeasure"
     disabled={!currentMeasure}
-    tooltip={true}
   />
   <Button
     on:buttonClick={onRefresh}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="refresh"
-    tooltip={true}
   />
 </div>
 <ZoneSimulation on:submitSimulation={handleSimulation} />
@@ -128,6 +122,7 @@
       {:else if currentMeasure?.complete}
         <Histogram
           datas={histoDatas}
+          chartLabel="barChartGES"
           yLabel="greenhouseGasesEmissionDefault"
           yLabel2="energyDefault"
         />
@@ -163,7 +158,5 @@
   .histo-container {
     width: 100%;
     overflow-x: auto;
-    display: flex;
-    justify-content: center;
   }
 </style>

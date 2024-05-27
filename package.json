@@ -1,11 +1,12 @@
 {
   "name": "greenTrackR",
   "private": true,
-  "version": "2.0.4",
+  "version": "2.0.5",
   "type": "module",
   "scripts": {
     "dev": "vite --host=0.0.0.0",
     "build": "vite build",
+    "md-to-html": "vite-node src/post-build/mdToHtml.ts",
     "build-log": "env NODE_ENV=development vite build",
     "preview": "vite preview",
     "test": "vitest",
@@ -18,6 +19,8 @@
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "@tsconfig/svelte": "^5.0.2",
     "@types/chrome": "^0.0.263",
+    "@types/node": "^20.11.1",
+    "@types/showdown": "^2.0.6",
     "eslint": "^9.1.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-svelte": "^2.38.0",
@@ -32,6 +35,7 @@
     "typescript": "^5.4.3",
     "typescript-eslint": "^7.8.0",
     "vite": "^5.2.2",
-    "vitest": "^1.4.0"
+    "vitest": "^1.4.0",
+    "showdown": "^2.1.0"
   }
 }

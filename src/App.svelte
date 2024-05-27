@@ -1,47 +1,69 @@
 <script lang="ts">
   import logo from '/images/logo.png';
   import { AutoScroll, Evaluation, Parcours, Parameter } from 'src/pages';
-  import { Alert, Tab, Footer } from 'src/components';
-  import { getLocalStorageObject, translate } from './utils';
-  import { AlertTypeEnum } from './enum';
+  import { Alert, Tab, Footer, Button } from 'src/components';
+  import { getLocalStorageObject, translate, translateHtmlUrl } from './utils';
+  import { AlertTypeEnum, ButtonTypeEnum } from './enum';
   import { paramTokenCo2 } from './const';
+  import { Modal } from './components';
+  import { onMount } from 'svelte';
+  import { logErr } from './utils/log';
 
   export let tabs = [
     {
       translateKey: 'tabEvaluation',
-      name: 'Evaluation',
+      name: translate('evaluationTab'),
       id: 'evaluation-tab',
       component: Evaluation,
+      descriptionKey: 'evaluationTabDescription',
+      description: ''
     },
     {
       translateKey: 'tabAutoScroll',
-      name: 'Scroll analysis',
+      name: translate('scrollAnalysisTab'),
       id: 'analysis-scroll-tab',
       component: AutoScroll,
+      descriptionKey: 'scrollTabDescription',
+      description: '',
       beta: true,
     },
     {
       translateKey: 'tabJourney',
-      name: 'User journey',
+      name: translate('userJourneyTab'),
       id: 'journey-tab',
       component: Parcours,
+      descriptionKey: 'userJourneyTabDescription',
+      description: '',
       beta: true,
     },
     {
       translateKey: 'tabParameter',
-      name: 'Parameter',
+      name: translate('parameterTab'),
       id: 'parameter-tab',
       component: Parameter,
     },
   ];
   export let activeTabId = 'evaluation-tab';
-
+  let showModal = false;
   function handleClick(event: CustomEvent) {
     activeTabId = event.detail.id;
   }
+
+  onMount(() => {
+    tabs.forEach(tab => {
+      if (tab.descriptionKey) {
+        fetch(translateHtmlUrl(tab.descriptionKey)).then(r => r.text().then(t => {
+          tab.description = t;
+          tabs = tabs;
+        })).catch((err) => {
+          logErr(`unable to perform the fetch request ${err}`)
+        });
+      }
+    })
+  });
 </script>
 
-<header class="flex-col-center">
+<header role="banner" class="flex-col-center">
   <img src={logo} alt="GreenTrackR Conserto" />
   {#if !getLocalStorageObject(paramTokenCo2)}
     <div>
@@ -61,27 +83,51 @@
   </div>
 </header>
 
-<div class="app-container">
-  {#if activeTabId !== 'parameter-tab' }
-    <h1 class="plugin-title">{translate('noContentPhraseEvaluation')}</h1>
-  {/if}
+<main role="main" class="app-container">
   {#each tabs as tab}
     {#if activeTabId === tab.id}
-      {#if tab.beta}
-        <Alert message="betaMessage"/>
+      {#if activeTabId !== 'parameter-tab' }
+        <h1 class="plugin-title">{translate('noContentPhraseEvaluation')}
+          {#if tab.description}
+            <button type="button" class="modaltrigger" on:click={() => (showModal = true)}><svg role="img" aria-label="{translate('globalInfo')}" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50">
+              <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 25 11 A 3 3 0 0 0 22 14 A 3 3 0 0 0 25 17 A 3 3 0 0 0 28 14 A 3 3 0 0 0 25 11 z M 21 21 L 21 23 L 22 23 L 23 23 L 23 36 L 22 36 L 21 36 L 21 38 L 22 38 L 23 38 L 27 38 L 28 38 L 29 38 L 29 36 L 28 36 L 27 36 L 27 21 L 26 21 L 22 21 L 21 21 z"></path>
+            </svg></button>
+          {/if}
+        </h1>
+        {#if tab.description}
+          <Modal dialogLabelKey="globalInfo" bind:showModal cssClass="infos">
+            <div class="dialog__wrapper">
+              {@html tab.description}
+            </div>
+            <div><Button
+              on:buttonClick={() => (showModal = false)}
+              buttonType={ButtonTypeEnum.SECONDARY}
+              translateKey="closePopup"
+            /></div>
+          </Modal>
+        {/if}
       {/if}
-      <div class="tab-panel" role="tabpanel" aria-labelledby={`${tab.name} tab content`}>
+      <div class="tab-panel" role="tabpanel" aria-label={`${tab.name}`}>
+
+        {#if tab.beta}
+          <Alert message="betaMessage"/>
+        {/if}
         <svelte:component this={tab.component} />
       </div>
     {/if}
   {/each}
-</div>
+</main>
 <Footer />
 
 <style>
   .app-container {
     justify-content: start;
     margin: 0 var(--spacing--xl) 0 var(--spacing--xl);
+  }
+  .dialog__wrapper {
+      height: 60vh;
+      overflow: auto;
+      overflow-wrap: break-word;
   }
 
   .nav {
@@ -94,16 +140,16 @@
   }
 
   .tab-panel {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: start;
-    align-items: center;
+    text-align: center;
   }
 
   .plugin-title {
     font-size: var(--font-size--xxl);
     color: var(--color--green);
     text-align: center;
+  }
+  .modaltrigger {
+      background-color: unset;
+      border-color: transparent;
   }
 </style>
