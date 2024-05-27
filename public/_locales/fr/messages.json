@@ -171,10 +171,10 @@
     "message": "Réseau"
   },
   "nocontentPhrase": {
-    "message": "Estimez l'empreinte carbone de votre site web"
+    "message": "Estimez l'impact environnemental de votre site web"
   },
   "noContentPhraseEvaluation": {
-    "message": "Estimez l'empreinte carbone de votre site web"
+    "message": "Estimez l'impact environnemental de votre site web"
   },
   "noFullData": {
     "message": "Localisation (Serveur ou Utilisateur) non déterminée, utiliser le simulateur pour accéder aux résultats"
