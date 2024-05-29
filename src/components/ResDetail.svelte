@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { NetworkDetail, NetworkMeasure } from '../interface';
+  import type { NetworkMeasure } from '../interface';
   import { formatNumber, formatSize, translate } from '../utils';
   import { Units } from '../const';
 
