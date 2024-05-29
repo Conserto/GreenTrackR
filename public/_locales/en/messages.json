@@ -255,13 +255,13 @@
     "message": "Percent"
   },
   "resDetTitleClient": {
-    "message": "Client : Size page"
+    "message": "Client: Webpage Size"
   },
   "resDetTitleNetwork": {
-    "message": "Network : Size page"
+    "message": "Network: Webpage Size"
   },
   "resDetTitleServer": {
-    "message": "Server : Request"
+    "message": "Server: HTTP requests"
   },
   "resetJourneyButton": {
     "message": "Reset journey"

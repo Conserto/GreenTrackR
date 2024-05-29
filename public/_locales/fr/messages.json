@@ -246,19 +246,19 @@
     "message": "Cache"
   },
   "resDetSubTitleServerCacheMiss": {
-    "message": "Non Caché"
+    "message": "Non Cache"
   },
   "resDetSubTitleServerPercent": {
     "message": "Pourcentage"
   },
   "resDetTitleClient": {
-    "message": "Client : Taille page"
+    "message": "Client : Poids page"
   },
   "resDetTitleNetwork": {
-    "message": "Réseau: Taille page"
+    "message": "Réseau : Poids page"
   },
   "resDetTitleServer": {
-    "message": "Serveur: Requête"
+    "message": "Serveur : Requêtes HTTP"
   },
   "resetJourneyButton": {
     "message": "Réinitialiser le parcours"
