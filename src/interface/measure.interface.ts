@@ -12,6 +12,7 @@ export interface Measure {
   dom: number;
   userGES?: GES;
   serverGES?: GES;
+  networkGES?: GES;
   networkMeasure: NetworkMeasure;
   extensionMeasure: NetworkMeasure;
   complete: boolean;

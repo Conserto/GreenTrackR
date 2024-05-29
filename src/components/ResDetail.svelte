@@ -8,11 +8,11 @@
   export let description: string = '';
   const network = measure.networkMeasure;
   const totRequest = network.nbRequest + network.nbRequestCache;
-  const srvCity = measure.serverGES ? (measure.serverGES?.cityName ? `${measure.serverGES.cityName}, ${measure.serverGES.countryName}` : measure.serverGES?.countryName) : '-';
-  const cliCity = measure.userGES ? (measure.userGES?.cityName ? `${measure.userGES.cityName}, ${measure.userGES.countryName}` : measure.userGES?.countryName) : '-';
+  const srvCity = measure.serverGES?.display || '-';
+  const cliCity = measure.userGES?.display || '-';
   const netCity = srvCity.split(',')[0] + " -- " + cliCity.split(',')[0];
   const mixSrv = measure.serverGES?.carbonIntensity ? measure.serverGES?.carbonIntensity + Units.carbonIntensity : '-';
-  const mixNet = measure.networkCarbonIntensity ? measure.networkCarbonIntensity + Units.carbonIntensity : '-';
+  const mixNet = measure.networkGES?.carbonIntensity ? measure.networkGES?.carbonIntensity + Units.carbonIntensity : '-';
   const mixCli = measure.userGES?.carbonIntensity ? measure.userGES?.carbonIntensity + Units.carbonIntensity : '-';
 </script>
 

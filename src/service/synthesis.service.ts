@@ -53,6 +53,7 @@ export class SynthesisSrv {
     let nbRequest = 0, nbRequestCache = 0, netSize = 0, netSizeUnc = 0;
     let carbonSrv = 0, adpeSrv = 0, wuSrv = 0;
     let carbonUsr = 0, adpeUsr = 0, wuUsr = 0;
+    let carbonNet = 0, adpeNet = 0, wuNet = 0;
     measures.forEach(m => {
       nbRequest += m.networkMeasure.nbRequest;
       nbRequestCache += m.networkMeasure.nbRequestCache;
@@ -60,10 +61,13 @@ export class SynthesisSrv {
       netSizeUnc += m.networkMeasure.network.sizeUncompress;
       carbonSrv += m.serverGES?.carbonIntensity ?? 0;
       carbonUsr += m.userGES?.carbonIntensity ?? 0;
+      carbonNet += m.networkGES?.carbonIntensity ?? 0;
       wuSrv += m.serverGES?.wu ?? 0;
       wuUsr += m.userGES?.wu ?? 0;
+      wuNet += m.networkGES?.wu ?? 0;
       adpeSrv += m.serverGES?.adpe ?? 0;
       adpeUsr += m.userGES?.adpe ?? 0;
+      adpeNet += m.networkGES?.adpe ?? 0;
     });
     const net: NetworkMeasure = {
       nbRequest: nbRequest,
@@ -87,12 +91,20 @@ export class SynthesisSrv {
       countryCode: 'none',
       countryName: 'none'
     };
+    const gesNet: GES = {
+      carbonIntensity: carbonNet / count,
+      adpe: adpeNet / count,
+      wu: wuNet / count,
+      countryCode: 'none',
+      countryName: 'none'
+    };
     //     GES -> Calcul obligatoire -> besoin carbon, moyenne
     const { ges, wu, adpe, energy } = this.gesService.getEnergyAndResources(
       net.network,
       net.nbRequest,
       gesSrv,
-      gesUsr
+      gesUsr,
+      gesNet
     );
     return {
       count: count,
