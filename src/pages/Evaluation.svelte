@@ -110,6 +110,7 @@
     translateKey="refresh"
   />
 </div>
+<p class="info-mix">{translate('infoMix')}</p>
 <ZoneSimulation on:submitSimulation={handleSimulation} />
 {#if currentDisplayedTab === TabType.ResultTab}
   {#if currentMeasure && !loading}

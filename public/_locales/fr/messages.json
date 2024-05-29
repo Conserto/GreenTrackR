@@ -144,7 +144,7 @@
     "message": "Historique"
   },
   "infoMix": {
-    "message": "Vos émissions dépendent du mix énergétique du pays dans lequel vous vous trouvez, et dans lequel le site est hébergé. Ce mix énergétique peut varier d'heure en heure et au gré des saisons :"
+    "message": "Vos émissions dépendent du mix énergétique du pays dans lequel vous vous trouvez, et dans lequel le site est hébergé. Ce mix énergétique peut varier d'heure en heure et au gré des saisons."
   },
   "launchAnalysisButton": {
     "message": "Analyser"
@@ -265,6 +265,15 @@
   },
   "resDetTitleServer": {
     "message": "Serveur : Requêtes HTTP"
+  },
+  "resDetTitleTotal": {
+    "message": "Total"
+  },
+  "resDetTitleLocation": {
+    "message": "Localisation"
+  },
+  "resDetTitleEnergy": {
+    "message": "Mix énergétique"
   },
   "resetJourneyButton": {
     "message": "Réinitialiser le parcours"

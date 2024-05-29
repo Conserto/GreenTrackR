@@ -147,7 +147,7 @@
     "message": "History"
   },
   "infoMix": {
-    "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season:"
+    "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season."
   },
   "launchAnalysisButton": {
     "message": "Analysis"
@@ -268,6 +268,15 @@
   },
   "resDetTitleServer": {
     "message": "Server: HTTP requests"
+  },
+  "resDetTitleTotal": {
+    "message": "Total"
+  },
+  "resDetTitleLocation": {
+    "message": "Location"
+  },
+  "resDetTitleEnergy": {
+    "message": "Energy mix"
   },
   "resetJourneyButton": {
     "message": "Reset journey"

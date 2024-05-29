@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Measure } from 'src/interface';
-  import { CO2Equivalent, EmissionInformations, ScoreTag } from 'src/components/GES';
+  import { CO2Equivalent, ScoreTag } from 'src/components/GES';
   import VisitsEquivalent from '../VisitsEquivalent.svelte';
   import { AlertTypeEnum } from '../../../enum';
   import { Alert } from '../../index';
@@ -17,9 +17,6 @@
     {:else}
       <Alert message="noFullData" alertType={AlertTypeEnum.WARNING} />
     {/if}
-  </div>
-  <div class="ges-infos">
-    <EmissionInformations {measure} />
   </div>
 </div>
 

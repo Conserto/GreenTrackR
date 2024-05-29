@@ -20,7 +20,7 @@ export interface Measure {
 
 export interface NetworkMeasure {
   network: NetworkResponse;
-  detail?: NetworkDetail[];
+  detail: NetworkDetail[];
   nbRequest: number;
   nbRequestCache: number;
 }
