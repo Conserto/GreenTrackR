@@ -84,15 +84,29 @@
 <style lang="scss">
   .table-container {
 
+    caption {
+      font-weight: bold;
+      font-size: large;
+      padding-inline-start: 1rem;
+      padding-bottom: 1rem;
+      text-align: left;
+      color: var(--color--green);
+    }
+
     .table {
       border-collapse: collapse;
 
-      th.subtitle {
-        font-weight: normal;
-        font-style: oblique;
-        border-left-style: groove;
-        padding-right: 0.1em;
-        padding-left: 0.1em;
+      th {
+        color: var(--color--green);
+
+        &.subtitle {
+          color: inherit;
+          font-weight: normal;
+          font-style: oblique;
+          border-left-style: groove;
+          padding-right: 0.1em;
+          padding-left: 0.1em;
+        }
       }
 
       td, th {
