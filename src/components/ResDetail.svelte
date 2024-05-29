@@ -65,7 +65,7 @@
       <td class="client">{formatSize(network.network.sizeUncompress)}{Units.pageSize}</td>
       <td class="client">100%</td>
     </tr>
-    <tr>
+    <tr class="even">
       <td class="fist">Localisation</td>
       <td class="server" colspan="3">{srvCity}</td>
       <td colspan="2">{netCity}</td>
