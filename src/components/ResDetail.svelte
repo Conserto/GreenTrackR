@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { NetworkMeasure } from '../interface';
-  import { formatNumber, formatSize } from '../utils';
+  import { formatNumber, formatSize, translate } from '../utils';
   import { Units } from '../const';
 
   export let datas: NetworkMeasure;
@@ -18,19 +18,19 @@
     <thead>
     <tr>
       <th></th>
-      <th colspan="3" class="server">Server : Request</th>
-      <th colspan="2">Network : Size page</th>
-      <th colspan="2" class="client">Client : Size page</th>
+      <th colspan="3" class="server">{translate("resDetTitleServer")}</th>
+      <th colspan="2">{translate("resDetTitleNetwork")}</th>
+      <th colspan="2" class="client">{translate("resDetTitleClient")}</th>
     </tr>
     <tr>
       <th></th>
-      <th class="server">Cache</th>
-      <th class="server">Cache miss</th>
-      <th class="server">Percent</th>
-      <th>Compress</th>
-      <th>Percent</th>
-      <th class="client">Uncompress</th>
-      <th class="client">Percent</th>
+      <th class="server">{translate("resDetSubTitleServerCache")}</th>
+      <th class="server">{translate("resDetSubTitleServerCacheMiss")}</th>
+      <th class="server">{translate("resDetSubTitleServerPercent")}</th>
+      <th>{translate("resDetSubTitleNetworkCompress")}</th>
+      <th>{translate("resDetSubTitleNetworkPercent")}</th>
+      <th class="client">{translate("resDetSubTitleCliUncompress")}</th>
+      <th class="client">{translate("resDetSubTitleCliPercent")}</th>
     </tr>
     </thead>
     <tbody>

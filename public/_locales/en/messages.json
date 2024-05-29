@@ -233,6 +233,36 @@
   "refresh": {
     "message": "Reload page"
   },
+  "resDetSubTitleCliPercent": {
+    "message": "Percent"
+  },
+  "resDetSubTitleCliUncompress": {
+    "message": "Uncompress"
+  },
+  "resDetSubTitleNetworkCompress": {
+    "message": "Compress"
+  },
+  "resDetSubTitleNetworkPercent": {
+    "message": "Percent"
+  },
+  "resDetSubTitleServerCache": {
+    "message": "Cache"
+  },
+  "resDetSubTitleServerCacheMiss": {
+    "message": "Cache Miss"
+  },
+  "resDetSubTitleServerPercent": {
+    "message": "Percent"
+  },
+  "resDetTitleClient": {
+    "message": "Client : Size page"
+  },
+  "resDetTitleNetwork": {
+    "message": "Network : Size page"
+  },
+  "resDetTitleServer": {
+    "message": "Server : Request"
+  },
   "resetJourneyButton": {
     "message": "Reset journey"
   },
