@@ -161,18 +161,18 @@
   }
 
   .detail-container {
-    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-    .detail {
-      margin-top: var(--spacing--md);
-      margin-bottom: var(--spacing--md);
-      margin-left: var(--spacing--md);
-      box-shadow: var(--box-shadow--md);
-      padding-top: var(--spacing--xxl);
-
-      &.request {
-        padding: 1em;
-      }
-    }
+  .detail {
+    overflow: auto;
+    margin: var(--spacing--md);
+    margin-right: 0;
+    padding-top: var(--spacing--xxl);
+  }
+  .request {
+    padding: 1em;
   }
 </style>

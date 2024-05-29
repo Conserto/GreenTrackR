@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { NetworkMeasure } from '../interface';
+  import type { NetworkDetail, NetworkMeasure } from '../interface';
   import { formatNumber, formatSize, translate } from '../utils';
   import { Units } from '../const';
 
@@ -70,19 +70,11 @@
       thead {
         border-bottom: var(--spacing--xs) solid var(--color--green);
         background-color: var(--color--light);
-        position: sticky;
-        top: 0;
-
-        th {
-          padding: var(--spacing--md) var(--spacing--xl);
-
-        }
       }
 
       tbody {
         td {
           text-align: center;
-          padding: var(--spacing--lg) var(--spacing--xl);
         }
       }
     }
