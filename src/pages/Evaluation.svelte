@@ -122,7 +122,7 @@
       {:else if currentMeasure?.complete}
         <div class="detail request">
           <ResDetail
-            datas={currentMeasure.networkMeasure}
+            measure={currentMeasure}
             caption={translate("resDetCaption")}
             description={translate("resDetCaptionDescription")}
           />

@@ -1,12 +1,19 @@
 <script lang="ts">
-  import type { NetworkMeasure } from '../interface';
+  import type { Measure, NetworkMeasure } from '../interface';
   import { formatNumber, formatSize, translate } from '../utils';
   import { Units } from '../const';
 
-  export let datas: NetworkMeasure;
+  export let measure: Measure;
   export let caption: string = '';
   export let description: string = '';
-  const totRequest = datas.nbRequest + datas.nbRequestCache;
+  const network = measure.networkMeasure;
+  const totRequest = network.nbRequest + network.nbRequestCache;
+  const srvCity = measure.serverGES ? (measure.serverGES?.cityName ? `${measure.serverGES.cityName}, ${measure.serverGES.countryName}` : measure.serverGES?.countryName) : '-';
+  const cliCity = measure.userGES ? (measure.userGES?.cityName ? `${measure.userGES.cityName}, ${measure.userGES.countryName}` : measure.userGES?.countryName) : '-';
+  const netCity = srvCity.split(',')[0] + " -- " + cliCity.split(',')[0];
+  const mixSrv = measure.serverGES?.carbonIntensity ? measure.serverGES?.carbonIntensity + Units.carbonIntensity : '-';
+  const mixNet = measure.networkCarbonIntensity ? measure.networkCarbonIntensity + Units.carbonIntensity : '-';
+  const mixCli = measure.userGES?.carbonIntensity ? measure.userGES?.carbonIntensity + Units.carbonIntensity : '-';
 </script>
 
 <div class="table-container">
@@ -34,22 +41,43 @@
     </tr>
     </thead>
     <tbody>
-    {#each datas.detail as detail, index}
+    {#each network.detail as detail, index}
       <tr class:even={index % 2 === 0}>
         <td class="fist">{detail.resource}</td>
         <td class="server">{detail.nbRequestCache}</td>
         <td class="server">{detail.nbRequest}</td>
         <td class="server">{formatNumber(100 * (detail.nbRequest + detail.nbRequestCache) / totRequest)}%</td>
         <td>{formatSize(detail.network.size)}{Units.pageSize}</td>
-        <td>{detail.network.size ? formatNumber(100 * detail.network.size / datas.network.size) : 0}%</td>
+        <td>{detail.network.size ? formatNumber(100 * detail.network.size / network.network.size) : 0}%</td>
         <td class="client">{formatSize(detail.network.sizeUncompress)}{Units.pageSize}</td>
-        <td
-          class="client">{detail.network.sizeUncompress ? formatNumber(100 * detail.network.sizeUncompress / datas.network.sizeUncompress) : 0}
-          %
-        </td>
+        <td class="client">{detail.network.sizeUncompress ? formatNumber(100 * detail.network.sizeUncompress / network.network.sizeUncompress) : 0}%</td>
       </tr>
     {/each}
     </tbody>
+    <tfoot>
+    <tr>
+      <td class="fist">Total</td>
+      <td class="server">{network.nbRequestCache}</td>
+      <td class="server">{network.nbRequest}</td>
+      <td class="server">100%</td>
+      <td>{formatSize(network.network.size)}{Units.pageSize}</td>
+      <td>100%</td>
+      <td class="client">{formatSize(network.network.sizeUncompress)}{Units.pageSize}</td>
+      <td class="client">100%</td>
+    </tr>
+    <tr>
+      <td class="fist">Localisation</td>
+      <td class="server" colspan="3">{srvCity}</td>
+      <td colspan="2">{netCity}</td>
+      <td class="client" colspan="2">{cliCity}</td>
+    </tr>
+    <tr>
+      <td class="fist">Mix énergétique</td>
+      <td class="server" colspan="3">{mixSrv}</td>
+      <td colspan="2">{mixNet}</td>
+      <td class="client" colspan="2">{mixCli}</td>
+    </tr>
+    </tfoot>
   </table>
 </div>
 
@@ -81,6 +109,11 @@
 
       thead {
         border-bottom: var(--spacing--xs) solid var(--color--green);
+        background-color: var(--color--light);
+      }
+
+      tfoot {
+        border-top: var(--spacing--xs) solid var(--color--green);
         background-color: var(--color--light);
       }
 
