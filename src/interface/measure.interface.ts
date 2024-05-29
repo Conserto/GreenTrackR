@@ -19,7 +19,14 @@ export interface Measure {
 
 export interface NetworkMeasure {
   network: NetworkResponse;
-  detail?: Map<string, NetworkResponse>;
+  detail?: NetworkDetail[];
+  nbRequest: number;
+  nbRequestCache: number;
+}
+
+export interface NetworkDetail {
+  resource: string;
+  network: NetworkResponse;
   nbRequest: number;
   nbRequestCache: number;
 }

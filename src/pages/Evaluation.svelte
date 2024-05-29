@@ -1,7 +1,7 @@
 <script lang="ts">
   import { ButtonTypeEnum } from 'src/enum';
   import { GesResults, HistoricResults } from 'src/components/GES/results';
-  import { Button, Histogram, LoadingWheel, Modal } from 'src/components';
+  import { Button, Histogram, LoadingWheel, Modal, ResDetail } from 'src/components';
   import { ZoneSimulation } from 'src/components/GES';
   import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { savedMeasures } from 'src/const';
@@ -114,18 +114,23 @@
 {#if currentDisplayedTab === TabType.ResultTab}
   {#if currentMeasure && !loading}
     <GesResults measure={currentMeasure} />
-    <div class="histo-container">
+    <div class="detail-container">
       {#if loadGes}
         <div class="loading-ges">
           <LoadingWheel />
         </div>
       {:else if currentMeasure?.complete}
-        <Histogram
-          datas={histoDatas}
-          chartLabel="barChartGES"
-          yLabel="greenhouseGasesEmissionDefault"
-          yLabel2="energyDefault"
-        />
+        <div class="detail request">
+          <ResDetail datas={currentMeasure.networkMeasure} />
+        </div>
+        <div class="detail histo">
+          <Histogram
+            datas={histoDatas}
+            chartLabel="barChartGES"
+            yLabel="greenhouseGasesEmissionDefault"
+            yLabel2="energyDefault"
+          />
+        </div>
       {/if}
     </div>
   {:else if loading === true}
@@ -155,8 +160,19 @@
     margin: $margin-y 0 $margin-y 0;
   }
 
-  .histo-container {
-    width: 100%;
-    overflow-x: auto;
+  .detail-container {
+    display: inline-block;
+
+    .detail {
+      margin-top: var(--spacing--md);
+      margin-bottom: var(--spacing--md);
+      margin-left: var(--spacing--md);
+      box-shadow: var(--box-shadow--md);
+      padding-top: var(--spacing--xxl);
+
+      &.request {
+        padding: 1em;
+      }
+    }
   }
 </style>

@@ -1,7 +1,7 @@
 import { PREFIX_URL_DATA, PREFIX_URL_EXTENSION } from '../const';
 import { logDebug, logWarn } from '../utils/log';
 import { getTabUrl } from '../utils';
-import type { NetworkResponse } from '../interface';
+import type { NetworkDetail } from '../interface';
 
 export class NetworkService {
 
@@ -61,16 +61,22 @@ export class NetworkService {
     return { responsesSize, responsesSizeUncompress };
   }
 
-  calculateDetailResponseSizes(entries: HARFormatEntry[]): Map<string, NetworkResponse> {
-    let resp: Map<string, NetworkResponse> = new Map();
+  calculateDetailResponseSizes(entries: HARFormatEntry[]): NetworkDetail[] {
+    let resp: NetworkDetail[] = [];
     const detailEntries = Object.groupBy(entries, ({ _resourceType }) => _resourceType ?? '');
     for (let index in Object.entries(detailEntries)) {
       const key = Object.keys(detailEntries)[index] ?? 'other';
       const mes = Object.values(detailEntries)[index];
       const { responsesSize, responsesSizeUncompress } = this.calculateResponseSizes(mes);
-      resp.set(key, {
-        size: responsesSize,
-        sizeUncompress: responsesSizeUncompress
+      const nbCache = this.calculateNbCache(mes);
+      resp.push({
+        resource: key,
+        network: {
+          size: responsesSize,
+          sizeUncompress: responsesSizeUncompress
+        },
+        nbRequestCache: nbCache,
+        nbRequest: mes?.length - nbCache
       });
     }
     return resp;
