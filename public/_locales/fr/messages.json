@@ -15,7 +15,7 @@
     "message": "Remonter la page"
   },
   "barChartGES": {
-    "message": "Histogramme des valeurs GES et énergétique"
+    "message": "Histogramme des valeurs GES et énergétiques"
   },
   "betaMessage": {
     "message": "Cette fonctionnalité est une version bêta, des erreurs peuvent survenir."
@@ -231,10 +231,10 @@
     "message": "Recharger la page"
   },
   "resDetCaption": {
-    "message": "Analyse de ressources"
+    "message": "Analyse des ressources"
   },
   "resDetCaptionDescription": {
-    "message": "Analyse de ressources détaillées par type et pas composant"
+    "message": "Analyse des ressources détaillées par type et pas composant"
   },
   "resDetSubTitleCliPercent": {
     "message": "Pourcentage"

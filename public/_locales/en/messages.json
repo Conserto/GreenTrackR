@@ -234,7 +234,7 @@
     "message": "Reload page"
   },
   "resDetCaption": {
-    "message": "Resource analysis"
+    "message": "Resources analysis"
   },
   "resDetCaptionDescription": {
     "message": "Analysis of detailed resources by type and component step"

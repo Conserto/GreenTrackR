@@ -19,7 +19,7 @@
 <div class="table-container">
   <table class="table">
     <caption>
-      {caption}
+      <h3>{caption}</h3>
       <span class="visually-hidden">{description}</span>
     </caption>
     <thead>
@@ -84,12 +84,10 @@
 <style lang="scss">
   .table-container {
 
-    caption {
+    caption h3{
       font-weight: bold;
-      font-size: large;
-      padding-inline-start: 1rem;
-      padding-bottom: 1rem;
-      text-align: left;
+      font-size: var(--font-size--xl);
+      text-align: center;
       color: var(--color--green);
     }
 
