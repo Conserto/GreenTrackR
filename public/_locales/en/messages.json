@@ -233,6 +233,12 @@
   "refresh": {
     "message": "Reload page"
   },
+  "resDetCaption": {
+    "message": "Resource analysis"
+  },
+  "resDetCaptionDescription": {
+    "message": "Analysis of detailed resources by type and component step"
+  },
   "resDetSubTitleCliPercent": {
     "message": "Percent"
   },

@@ -230,6 +230,12 @@
   "refresh": {
     "message": "Recharger la page"
   },
+  "resDetCaption": {
+    "message": "Analyse de ressources"
+  },
+  "resDetCaptionDescription": {
+    "message": "Analyse de ressources détaillées par type et pas composant"
+  },
   "resDetSubTitleCliPercent": {
     "message": "Pourcentage"
   },

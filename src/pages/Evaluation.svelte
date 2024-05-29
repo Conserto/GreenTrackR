@@ -121,7 +121,11 @@
         </div>
       {:else if currentMeasure?.complete}
         <div class="detail request">
-          <ResDetail datas={currentMeasure.networkMeasure} />
+          <ResDetail
+            datas={currentMeasure.networkMeasure}
+            caption={translate("resDetCaption")}
+            description={translate("resDetCaptionDescription")}
+          />
         </div>
         <div class="detail histo">
           <Histogram
@@ -164,15 +168,19 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
+    .detail {
+      overflow: auto;
+      margin: var(--spacing--md);
+      margin-right: 0;
+      padding-top: var(--spacing--xxl);
+      box-shadow: var(--box-shadow--md);
+
+      &.request {
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+    }
   }
 
-  .detail {
-    overflow: auto;
-    margin: var(--spacing--md);
-    margin-right: 0;
-    padding-top: var(--spacing--xxl);
-  }
-  .request {
-    padding: 1em;
-  }
 </style>
