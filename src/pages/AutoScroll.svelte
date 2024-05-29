@@ -10,7 +10,7 @@
   import { PAGE_HEIGHT } from '../const/action.const';
   import { SEARCH_AUTO } from '../const/key.const';
   import type { HistoData, Measure } from '../interface';
-  import { ZoneSimulation } from '../components/GES';
+  import { OtherEquivalent, ZoneSimulation } from '../components/GES';
   import { HistoricResults } from '../components/GES/results';
   import { savedScrollMeasures } from '../const';
 
@@ -173,9 +173,15 @@
 <ZoneSimulation on:submitSimulation={handleSimulation} />
 {#if currentDisplayedTab === TabType.ResultTab}
   {#if currentMeasure && !loading}
-    <GesResults measure={currentMeasure} />
+    <GesResults measure={currentMeasure} caption="gesEquivalentCaption" />
     <div class="detail-container">
       {#if currentMeasure?.complete}
+        <div class="detail other">
+          <OtherEquivalent
+            measure={currentMeasure}
+            caption={translate("othEquivalentCaption")}
+          />
+        </div>
         <div class="detail request">
           <ResDetail
             measure={currentMeasure}

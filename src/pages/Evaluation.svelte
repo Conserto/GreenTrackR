@@ -2,7 +2,7 @@
   import { ButtonTypeEnum } from 'src/enum';
   import { GesResults, HistoricResults } from 'src/components/GES/results';
   import { Button, Histogram, LoadingWheel, Modal, ResDetail } from 'src/components';
-  import { ZoneSimulation } from 'src/components/GES';
+  import { OtherEquivalent, ZoneSimulation } from 'src/components/GES';
   import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { savedMeasures } from 'src/const';
   import { cleanCache, reloadCurrentTab } from 'src/utils/chrome.utils';
@@ -114,13 +114,19 @@
 <ZoneSimulation on:submitSimulation={handleSimulation} />
 {#if currentDisplayedTab === TabType.ResultTab}
   {#if currentMeasure && !loading}
-    <GesResults measure={currentMeasure} />
+    <GesResults measure={currentMeasure} caption="gesEquivalentCaption" />
     <div class="detail-container">
       {#if loadGes}
         <div class="loading-ges">
           <LoadingWheel />
         </div>
       {:else if currentMeasure?.complete}
+        <div class="detail other">
+          <OtherEquivalent
+            measure={currentMeasure}
+            caption={translate("othEquivalentCaption")}
+          />
+        </div>
         <div class="detail request">
           <ResDetail
             measure={currentMeasure}

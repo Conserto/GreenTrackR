@@ -4,11 +4,14 @@
   import VisitsEquivalent from '../VisitsEquivalent.svelte';
   import { AlertTypeEnum } from '../../../enum';
   import { Alert } from '../../index';
+  import { translate } from '../../../utils';
 
   export let measure: Measure | undefined;
+  export let caption: string = '';
 </script>
 
 <div class="results-container">
+  <h3>{translate(caption)}</h3>
   <div class="score-container">
     {#if measure?.complete}
       <ScoreTag score={measure?.score} />
@@ -33,24 +36,23 @@
     margin-bottom: var(--spacing--md);
     box-shadow: var(--box-shadow--md);
     padding-top: var(--spacing--xxl);
+    padding-bottom: var(--spacing--xl);
+
+    h3 {
+      font-weight: bold;
+      font-size: var(--font-size--xl);
+      text-align: center;
+      color: var(--color--green);
+    }
+
+    .score-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      flex-wrap: wrap;
+      gap: var(--spacing--xl);
+    }
   }
 
-  .score-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    flex-wrap: wrap;
-    gap: var(--spacing--xl);
-  }
 
-  .ges-infos {
-    display: grid;
-    grid-template-rows: auto auto;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: var(--spacing--md);
-    justify-content: start;
-    width: 100%;
-    margin: var(--spacing--xs) 0;
-  }
 </style>

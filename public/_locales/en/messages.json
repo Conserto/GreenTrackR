@@ -104,6 +104,9 @@
   "gesDevice": {
     "message": "GES User"
   },
+  "gesEquivalentCaption": {
+    "message": "Carbon footprint "
+  },
   "gesGrade": {
     "message": "Grade:"
   },
@@ -185,6 +188,9 @@
   "numberVisit": {
     "message": "Number of visits"
   },
+  "othEquivalentCaption": {
+    "message": "Other footprint"
+  },
   "pageTotal": {
     "message": "Page total"
   },
@@ -263,6 +269,12 @@
   "resDetTitleClient": {
     "message": "Client: Webpage Size"
   },
+  "resDetTitleEnergy": {
+    "message": "Energy mix"
+  },
+  "resDetTitleLocation": {
+    "message": "Location"
+  },
   "resDetTitleNetwork": {
     "message": "Network: Webpage Size"
   },
@@ -271,12 +283,6 @@
   },
   "resDetTitleTotal": {
     "message": "Total"
-  },
-  "resDetTitleLocation": {
-    "message": "Location"
-  },
-  "resDetTitleEnergy": {
-    "message": "Energy mix"
   },
   "resetJourneyButton": {
     "message": "Reset journey"

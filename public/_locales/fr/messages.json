@@ -101,6 +101,9 @@
   "gesDevice": {
     "message": "GES Client"
   },
+  "gesEquivalentCaption": {
+    "message": "Empreinte carbon"
+  },
   "gesGrade": {
     "message": "Note :"
   },
@@ -182,6 +185,9 @@
   "numberVisit": {
     "message": "Nombre de visites"
   },
+  "othEquivalentCaption": {
+    "message": "Autres empreinte"
+  },
   "pageTotal": {
     "message": "Total page"
   },
@@ -260,6 +266,12 @@
   "resDetTitleClient": {
     "message": "Client : Poids page"
   },
+  "resDetTitleEnergy": {
+    "message": "Mix énergétique"
+  },
+  "resDetTitleLocation": {
+    "message": "Localisation"
+  },
   "resDetTitleNetwork": {
     "message": "Réseau : Poids page"
   },
@@ -268,12 +280,6 @@
   },
   "resDetTitleTotal": {
     "message": "Total"
-  },
-  "resDetTitleLocation": {
-    "message": "Localisation"
-  },
-  "resDetTitleEnergy": {
-    "message": "Mix énergétique"
   },
   "resetJourneyButton": {
     "message": "Réinitialiser le parcours"
