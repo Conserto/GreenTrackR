@@ -18,32 +18,32 @@
     <thead>
     <tr>
       <th></th>
-      <th colspan="3">Server : Request</th>
+      <th colspan="3" class="server">Server : Request</th>
       <th colspan="2">Network : Size page</th>
-      <th colspan="2">Client : Size page</th>
+      <th colspan="2" class="client">Client : Size page</th>
     </tr>
     <tr>
       <th></th>
-      <th>Cache</th>
-      <th>Cache miss</th>
-      <th>Percent</th>
+      <th class="server">Cache</th>
+      <th class="server">Cache miss</th>
+      <th class="server">Percent</th>
       <th>Compress</th>
       <th>Percent</th>
-      <th>Uncompress</th>
-      <th>Percent</th>
+      <th class="client">Uncompress</th>
+      <th class="client">Percent</th>
     </tr>
     </thead>
     <tbody>
     {#each datas.detail as detail, index}
       <tr class:even={index % 2 === 0}>
         <td>{detail.resource}</td>
-        <td>{detail.nbRequestCache}</td>
-        <td>{detail.nbRequest}</td>
-        <td>{formatNumber(100 * (detail.nbRequest + detail.nbRequestCache) / totRequest)}%</td>
+        <td class="server">{detail.nbRequestCache}</td>
+        <td class="server">{detail.nbRequest}</td>
+        <td class="server">{formatNumber(100 * (detail.nbRequest + detail.nbRequestCache) / totRequest)}%</td>
         <td>{formatSize(detail.network.size)}{Units.pageSize}</td>
         <td>{detail.network.size ? formatNumber(100 * detail.network.size / datas.network.size) : 0}%</td>
-        <td>{formatSize(detail.network.sizeUncompress)}{Units.pageSize}</td>
-        <td>{detail.network.sizeUncompress ? formatNumber(100 * detail.network.sizeUncompress / datas.network.sizeUncompress) : 0}%</td>
+        <td class="client">{formatSize(detail.network.sizeUncompress)}{Units.pageSize}</td>
+        <td class="client">{detail.network.sizeUncompress ? formatNumber(100 * detail.network.sizeUncompress / datas.network.sizeUncompress) : 0}%</td>
       </tr>
     {/each}
     </tbody>
@@ -60,6 +60,12 @@
 
     .table {
       border-collapse: collapse;
+
+      td, th {
+        &.server, &.client {
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+      }
 
       thead {
         border-bottom: var(--spacing--xs) solid var(--color--green);
