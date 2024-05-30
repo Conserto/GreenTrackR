@@ -24,11 +24,8 @@ export class GESService {
       zoneGES = this.cacheGesByUrl.get(cacheSrvKey);
     } else {
       zoneGES = await this.getGESServer(urlHost, countryCodeSelected);
-      if (zoneGES) {
-        zoneGES.display = this.getDisplayZone(zoneGES);
-        if (cacheSrvKey) {
-          this.cacheGesByUrl.set(cacheSrvKey, zoneGES);
-        }
+      if (zoneGES && cacheSrvKey) {
+        this.cacheGesByUrl.set(cacheSrvKey, zoneGES);
       }
     }
     if (userGesUseCacheUserGes) {
@@ -36,16 +33,13 @@ export class GESService {
       userGES = this.cacheUserGes;
     } else {
       userGES = await this.getGESUser(userCountryCodeSelected);
-      if (userGES) {
-        userGES.display = this.getDisplayZone(userGES);
-        if (userCountryCodeSelected === SEARCH_AUTO) {
-          this.cacheUserGes = userGES;
-        }
+      if (userCountryCodeSelected === SEARCH_AUTO && userGES) {
+        this.cacheUserGes = userGES;
       }
     }
     const networkGES: GES = {
       countryCode: '', countryName: '',
-      display: zoneGES?.display?.split(',')[0] + " -- " + userGES?.display?.split(',')[0],
+      display: zoneGES?.display?.split(',')[0] + ' -- ' + userGES?.display?.split(',')[0],
       carbonIntensity: ((userGES?.carbonIntensity || 0) + (zoneGES?.carbonIntensity || 0)) / 2,
       wu: ((userGES?.wu || 0) + (zoneGES?.wu || 0)) / 2,
       adpe: ((userGES?.adpe || 0) + (zoneGES?.adpe || 0)) / 2
@@ -53,12 +47,16 @@ export class GESService {
     return { zoneGES, userGES, networkGES };
   }
 
-  getDisplayZone(ges: GES | undefined) {
-    return ges ? this.getDisplayZoneStr(ges.cityName, ges.countryName) : '-';
-  }
-
-  getDisplayZoneStr(cityName: string | undefined, countryName: string | undefined) {
-    return (cityName && countryName) ? (cityName ? (cityName + ', ' + countryName) : countryName) : '-';
+  getDisplayZone(cityName: string | undefined, countryName: string | undefined) {
+    let value: string = '-';
+    if (cityName && countryName) {
+      value = cityName + ', ' + countryName;
+    } else if (countryName) {
+      value = countryName;
+    } else if (cityName) {
+      value = cityName;
+    }
+    return value;
   }
 
   async getGESServer(url: URL | undefined, countryCodeSelected: string): Promise<GES | undefined> {
@@ -105,7 +103,7 @@ export class GESService {
           carbonIntensity: await getCarbonIntensity(countryCodeSelected),
           countryCode: countryCodeSelected,
           countryName: countryName,
-          display: this.getDisplayZoneStr(undefined, countryName),
+          display: this.getDisplayZone(undefined, countryName)
         };
       } else {
         const location = serverType ? await getServerZone(urlHost) : await getCurrentZone();
@@ -116,7 +114,7 @@ export class GESService {
             countryCode: location.countryCode,
             countryName: location.countryName,
             cityName: location.cityName,
-            display: this.getDisplayZoneStr(location.cityName, location.countryName),
+            display: this.getDisplayZone(location.cityName, location.countryName)
           };
         }
       }
@@ -140,7 +138,7 @@ export class GESService {
       countryName: countryName,
       cityName: '',
       countryCode: countryCodeSelected,
-      display: this.getDisplayZoneStr(undefined, countryName),
+      display: this.getDisplayZone(undefined, countryName)
     };
   }
 
@@ -188,7 +186,7 @@ export class GESService {
       }));
   }
 
-  getEnergyAndResources(network: NetworkResponse, nbRequest: number, zoneGES?: GES, userGES?: GES,  networkGES?: GES): {
+  getEnergyAndResources(network: NetworkResponse, nbRequest: number, zoneGES?: GES, userGES?: GES, networkGES?: GES): {
     ges: ResTotals;
     wu: ResTotals;
     adpe: ResTotals;
