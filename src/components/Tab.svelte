@@ -9,14 +9,6 @@
 
   const dispatch = createEventDispatcher();
   function handleClickTab() {
-    document.querySelectorAll('button.nav-link')
-      .forEach(elem => {
-        if (elem.id !== id) {
-          elem.setAttribute('tabindex', '0');
-        } else {
-          elem.setAttribute('tabindex', '-1');
-        }
-      });
     dispatch('clickTab', { id });
   }
   function handleKeydown(e : KeyboardEvent) {
