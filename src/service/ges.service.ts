@@ -147,6 +147,24 @@ export class GESService {
     return codeZone.find((cz) => cz.zoneAlpha2 === search || cz.zoneAlpha3 === search);
   }
 
+  async getGESFromLocalFile(countryCodeSelected: string): Promise<GES | undefined> {
+    let lastReportOnDate;
+    const { data: carbonData, countryName } =
+    (await this.parseCarbonFile(countryCodeSelected)) || [];
+
+    if (carbonData.length > 0) {
+      lastReportOnDate = carbonData[carbonData.length - 1];
+    }
+
+    return {
+      carbonIntensity: lastReportOnDate?.carbonIntensity ?? undefined,
+      countryName: countryName,
+      cityName: '',
+      countryCode: countryCodeSelected,
+      display: this.getDisplayZone(undefined, countryName)
+    };
+  }
+
   async getLocation(urlHost: URL | undefined, serverType: boolean) {
     return serverType ? await getServerZone(urlHost) : await getCurrentZone();
   }
