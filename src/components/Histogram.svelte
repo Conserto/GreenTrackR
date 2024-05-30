@@ -24,7 +24,7 @@
     return value * yScale;
   }
 </script>
-<h3>{translate(chartLabel)}</h3>
+<h2 class="card__title">{translate(chartLabel)}</h2>
 <svg width={fullSvgWidth} height={svgHeight + 75} aria-labelledby="title">
   <title id="title">{translate(chartLabel)}</title>
   <defs>
@@ -107,11 +107,3 @@
     text-anchor="middle">{yLabel2 ? translate(yLabel2) : ""}</text
   >
 </svg>
-<style lang="scss">
-    h3{
-        font-weight: bold;
-        font-size: var(--font-size--xl);
-        text-align: center;
-        color: var(--color--green);
-    }
-</style>
