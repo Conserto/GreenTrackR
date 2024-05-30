@@ -42,6 +42,7 @@ export const sumRequest = (measures: Measure[]) => {
   let netMes: NetworkMeasure = {
     nbRequest: 0,
     nbRequestCache: 0,
+    detail: [],
     network: {
       size: 0,
       sizeUncompress: 0
@@ -294,7 +295,8 @@ export const createEmptyMeasure = (): Measure => {
       adpe: 0,
       countryName: '',
       cityName: '',
-      countryCode: ''
+      countryCode: '',
+      display: ''
     },
     serverGES: {
       carbonIntensity: 0,
@@ -302,13 +304,15 @@ export const createEmptyMeasure = (): Measure => {
       adpe: 0,
       countryName: '',
       cityName: '',
-      countryCode: ''
+      countryCode: '',
+      display: ''
     },
     complete: false,
     dom: 0,
     extensionMeasure: {
       nbRequest: 0,
       nbRequestCache: 0,
+      detail: [],
       network: {
         size: 0,
         sizeUncompress: 0
@@ -317,6 +321,7 @@ export const createEmptyMeasure = (): Measure => {
     networkMeasure: {
       nbRequest: 0,
       nbRequestCache: 0,
+      detail: [],
       network: {
         size: 0,
         sizeUncompress: 0

@@ -72,6 +72,7 @@ export class SynthesisSrv {
     const net: NetworkMeasure = {
       nbRequest: nbRequest,
       nbRequestCache: nbRequestCache,
+      detail: [],
       network: {
         size: netSize,
         sizeUncompress: netSizeUnc
@@ -82,21 +83,24 @@ export class SynthesisSrv {
       adpe: adpeUsr / count,
       wu: wuUsr / count,
       countryCode: 'none',
-      countryName: 'none'
+      countryName: 'none',
+      display: 'none'
     };
     const gesSrv: GES = {
       carbonIntensity: carbonSrv / count,
       adpe: adpeSrv / count,
       wu: wuSrv / count,
       countryCode: 'none',
-      countryName: 'none'
+      countryName: 'none',
+      display: 'none'
     };
     const gesNet: GES = {
       carbonIntensity: carbonNet / count,
       adpe: adpeNet / count,
       wu: wuNet / count,
       countryCode: 'none',
-      countryName: 'none'
+      countryName: 'none',
+      display: 'none'
     };
     //     GES -> Calcul obligatoire -> besoin carbon, moyenne
     const { ges, wu, adpe, energy } = this.gesService.getEnergyAndResources(

@@ -44,6 +44,7 @@ export class GESService {
       }
     }
     const networkGES: GES = {
+      countryCode: '', countryName: '',
       display: zoneGES?.display?.split(',')[0] + " -- " + userGES?.display?.split(',')[0],
       carbonIntensity: ((userGES?.carbonIntensity || 0) + (zoneGES?.carbonIntensity || 0)) / 2,
       wu: ((userGES?.wu || 0) + (zoneGES?.wu || 0)) / 2,
@@ -53,7 +54,11 @@ export class GESService {
   }
 
   getDisplayZone(ges: GES | undefined) {
-    return ges ? (ges?.cityName ? (ges.cityName + ', ' + ges.countryName) : ges.countryName) : '-';
+    return ges ? this.getDisplayZoneStr(ges.cityName, ges.countryName) : '-';
+  }
+
+  getDisplayZoneStr(cityName: string | undefined, countryName: string | undefined) {
+    return (cityName && countryName) ? (cityName ? (cityName + ', ' + countryName) : countryName) : '-';
   }
 
   async getGESServer(url: URL | undefined, countryCodeSelected: string): Promise<GES | undefined> {
@@ -95,10 +100,12 @@ export class GESService {
     let ges: GES | undefined;
     try {
       if (countryCodeSelected !== SEARCH_AUTO) {
+        const countryName = codeZone.find((zoneObj) => zoneObj.zone === countryCodeSelected)?.countryName ?? '';
         ges = {
           carbonIntensity: await getCarbonIntensity(countryCodeSelected),
           countryCode: countryCodeSelected,
-          countryName: codeZone.find((zoneObj) => zoneObj.zone === countryCodeSelected)?.countryName ?? ''
+          countryName: countryName,
+          display: this.getDisplayZoneStr(undefined, countryName),
         };
       } else {
         const location = serverType ? await getServerZone(urlHost) : await getCurrentZone();
@@ -108,7 +115,8 @@ export class GESService {
             carbonIntensity: await getCarbonIntensity(location),
             countryCode: location.countryCode,
             countryName: location.countryName,
-            cityName: location.cityName
+            cityName: location.cityName,
+            display: this.getDisplayZoneStr(location.cityName, location.countryName),
           };
         }
       }
@@ -131,7 +139,8 @@ export class GESService {
       carbonIntensity: lastReportOnDate?.carbonIntensity ?? undefined,
       countryName: countryName,
       cityName: '',
-      countryCode: countryCodeSelected
+      countryCode: countryCodeSelected,
+      display: this.getDisplayZoneStr(undefined, countryName),
     };
   }
 
