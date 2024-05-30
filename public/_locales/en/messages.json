@@ -1,6 +1,6 @@
 {
   "adpeEquivalent": {
-    "message": "ADP:"
+    "message": "Abiotic resources"
   },
   "analysisInProgress": {
     "message": "Analysis in progress. Start browsing on the current tab, then come back here to get stats !"
@@ -75,7 +75,7 @@
     "message": "Energy (Wh)"
   },
   "energyEquivalent": {
-    "message": "ELEC:"
+    "message": "Electricity"
   },
   "errorNoToken": {
     "message": "No CO2 token found, the extension may not work"
@@ -104,8 +104,11 @@
   "gesDevice": {
     "message": "GES User"
   },
+  "gesEquivalentCaption": {
+    "message": "Carbon footprint "
+  },
   "gesGrade": {
-    "message": "Grade:"
+    "message": "Grade"
   },
   "gesIntensity": {
     "message": "Server energy mix"
@@ -117,7 +120,7 @@
     "message": "GES Network"
   },
   "gesScore": {
-    "message": "Score:"
+    "message": "Score"
   },
   "gesTotal": {
     "message": "GES Total"
@@ -138,7 +141,7 @@
     "message": "Informations"
   },
   "greenhouseGasesEmission": {
-    "message": "GES:"
+    "message": "GES"
   },
   "greenhouseGasesEmissionDefault": {
     "message": "GES (gCO2eq)"
@@ -147,7 +150,7 @@
     "message": "History"
   },
   "infoMix": {
-    "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season:"
+    "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season."
   },
   "launchAnalysisButton": {
     "message": "Analysis"
@@ -184,6 +187,9 @@
   },
   "numberVisit": {
     "message": "Number of visits"
+  },
+  "othEquivalentCaption": {
+    "message": "Other footprint"
   },
   "pageTotal": {
     "message": "Page total"
@@ -232,6 +238,51 @@
   },
   "refresh": {
     "message": "Reload page"
+  },
+  "resDetCaption": {
+    "message": "Resources analysis"
+  },
+  "resDetCaptionDescription": {
+    "message": "Analysis of detailed resources by type and component step"
+  },
+  "resDetSubTitleCliPercent": {
+    "message": "Percent"
+  },
+  "resDetSubTitleCliUncompress": {
+    "message": "Uncompress"
+  },
+  "resDetSubTitleNetworkCompress": {
+    "message": "Compress"
+  },
+  "resDetSubTitleNetworkPercent": {
+    "message": "Percent"
+  },
+  "resDetSubTitleServerCache": {
+    "message": "Cache"
+  },
+  "resDetSubTitleServerCacheMiss": {
+    "message": "Cache Miss"
+  },
+  "resDetSubTitleServerPercent": {
+    "message": "Percent"
+  },
+  "resDetTitleClient": {
+    "message": "Client: Webpage Size"
+  },
+  "resDetTitleEnergy": {
+    "message": "Energy mix"
+  },
+  "resDetTitleLocation": {
+    "message": "Location"
+  },
+  "resDetTitleNetwork": {
+    "message": "Network: Webpage Size"
+  },
+  "resDetTitleServer": {
+    "message": "Server: HTTP requests"
+  },
+  "resDetTitleTotal": {
+    "message": "Total"
   },
   "resetJourneyButton": {
     "message": "Reset journey"
@@ -396,6 +447,6 @@
     "message": "Warning"
   },
   "wuEquivalent": {
-    "message": "WATER:"
+    "message": "Water"
   }
 }

@@ -24,8 +24,11 @@ export class GESService {
       zoneGES = this.cacheGesByUrl.get(cacheSrvKey);
     } else {
       zoneGES = await this.getGESServer(urlHost, countryCodeSelected);
-      if (zoneGES && cacheSrvKey) {
-        this.cacheGesByUrl.set(cacheSrvKey, zoneGES);
+      if (zoneGES) {
+        zoneGES.display = this.getDisplayZone(zoneGES);
+        if (cacheSrvKey) {
+          this.cacheGesByUrl.set(cacheSrvKey, zoneGES);
+        }
       }
     }
     if (userGesUseCacheUserGes) {
@@ -33,11 +36,29 @@ export class GESService {
       userGES = this.cacheUserGes;
     } else {
       userGES = await this.getGESUser(userCountryCodeSelected);
-      if (userCountryCodeSelected === SEARCH_AUTO && userGES) {
-        this.cacheUserGes = userGES;
+      if (userGES) {
+        userGES.display = this.getDisplayZone(userGES);
+        if (userCountryCodeSelected === SEARCH_AUTO) {
+          this.cacheUserGes = userGES;
+        }
       }
     }
-    return { zoneGES, userGES };
+    const networkGES: GES = {
+      countryCode: '', countryName: '',
+      display: zoneGES?.display?.split(',')[0] + " -- " + userGES?.display?.split(',')[0],
+      carbonIntensity: ((userGES?.carbonIntensity || 0) + (zoneGES?.carbonIntensity || 0)) / 2,
+      wu: ((userGES?.wu || 0) + (zoneGES?.wu || 0)) / 2,
+      adpe: ((userGES?.adpe || 0) + (zoneGES?.adpe || 0)) / 2
+    };
+    return { zoneGES, userGES, networkGES };
+  }
+
+  getDisplayZone(ges: GES | undefined) {
+    return ges ? this.getDisplayZoneStr(ges.cityName, ges.countryName) : '-';
+  }
+
+  getDisplayZoneStr(cityName: string | undefined, countryName: string | undefined) {
+    return (cityName && countryName) ? (cityName ? (cityName + ', ' + countryName) : countryName) : '-';
   }
 
   async getGESServer(url: URL | undefined, countryCodeSelected: string): Promise<GES | undefined> {
@@ -79,10 +100,12 @@ export class GESService {
     let ges: GES | undefined;
     try {
       if (countryCodeSelected !== SEARCH_AUTO) {
+        const countryName = codeZone.find((zoneObj) => zoneObj.zone === countryCodeSelected)?.countryName ?? '';
         ges = {
           carbonIntensity: await getCarbonIntensity(countryCodeSelected),
           countryCode: countryCodeSelected,
-          countryName: codeZone.find((zoneObj) => zoneObj.zone === countryCodeSelected)?.countryName ?? ''
+          countryName: countryName,
+          display: this.getDisplayZoneStr(undefined, countryName),
         };
       } else {
         const location = serverType ? await getServerZone(urlHost) : await getCurrentZone();
@@ -92,7 +115,8 @@ export class GESService {
             carbonIntensity: await getCarbonIntensity(location),
             countryCode: location.countryCode,
             countryName: location.countryName,
-            cityName: location.cityName
+            cityName: location.cityName,
+            display: this.getDisplayZoneStr(location.cityName, location.countryName),
           };
         }
       }
@@ -115,7 +139,8 @@ export class GESService {
       carbonIntensity: lastReportOnDate?.carbonIntensity ?? undefined,
       countryName: countryName,
       cityName: '',
-      countryCode: countryCodeSelected
+      countryCode: countryCodeSelected,
+      display: this.getDisplayZoneStr(undefined, countryName),
     };
   }
 
@@ -163,7 +188,7 @@ export class GESService {
       }));
   }
 
-  getEnergyAndResources(network: NetworkResponse, nbRequest: number, zoneGES?: GES, userGES?: GES): {
+  getEnergyAndResources(network: NetworkResponse, nbRequest: number, zoneGES?: GES, userGES?: GES,  networkGES?: GES): {
     ges: ResTotals;
     wu: ResTotals;
     adpe: ResTotals;
@@ -181,17 +206,16 @@ export class GESService {
     };
 
     return {
-      ges: this.getResources(userGES?.carbonIntensity, zoneGES?.carbonIntensity, enrgy),
-      wu: this.getResources(userGES?.wu, zoneGES?.wu, enrgy),
-      adpe: this.getResources(userGES?.adpe, zoneGES?.adpe, enrgy),
+      ges: this.getResources(userGES?.carbonIntensity, zoneGES?.carbonIntensity, networkGES?.carbonIntensity, enrgy),
+      wu: this.getResources(userGES?.wu, zoneGES?.wu, networkGES?.wu, enrgy),
+      adpe: this.getResources(userGES?.adpe, zoneGES?.adpe, networkGES?.adpe, enrgy),
       energy: enrgy
     };
   }
 
-  getResources(usrResource: number | undefined, srvResource: number | undefined, energy: EnergyMeasure): ResTotals {
+  getResources(usrResource: number | undefined, srvResource: number | undefined, netResource: number | undefined, energy: EnergyMeasure): ResTotals {
     const dataCenterTotal = srvResource ? energy.kWhDataCenter * srvResource : undefined;
-    const meanResources = (srvResource && usrResource) ? ((srvResource + usrResource) / 2) : undefined;
-    const networkTotal = meanResources ? energy.kWhNetwork * meanResources : undefined;
+    const networkTotal = netResource ? energy.kWhNetwork * netResource : undefined;
     const deviceTotal = usrResource ? energy.kWhDevice * usrResource : undefined;
     const pageTotal = (dataCenterTotal ? dataCenterTotal : 0) + (networkTotal ? networkTotal : 0) + (deviceTotal ? deviceTotal : 0);
     return {

@@ -1,14 +1,17 @@
 <script lang="ts">
   import type { Measure } from 'src/interface';
-  import { CO2Equivalent, EmissionInformations, ScoreTag } from 'src/components/GES';
+  import { CO2Equivalent, OtherEquivalent, ScoreTag } from 'src/components/GES';
   import VisitsEquivalent from '../VisitsEquivalent.svelte';
   import { AlertTypeEnum } from '../../../enum';
   import { Alert } from '../../index';
+  import { translate } from '../../../utils';
 
   export let measure: Measure | undefined;
+  export let caption: string = '';
 </script>
 
 <div class="results-container">
+  <h2 class="card__title">{translate(caption)}</h2>
   <div class="score-container">
     {#if measure?.complete}
       <ScoreTag score={measure?.score} />
@@ -18,9 +21,10 @@
       <Alert message="noFullData" alertType={AlertTypeEnum.WARNING} />
     {/if}
   </div>
-  <div class="ges-infos">
-    <EmissionInformations {measure} />
-  </div>
+  <OtherEquivalent
+    measure={measure}
+    caption={translate("othEquivalentCaption")}
+  />
 </div>
 
 <style lang="scss">
@@ -36,24 +40,23 @@
     margin-bottom: var(--spacing--md);
     box-shadow: var(--box-shadow--md);
     padding-top: var(--spacing--xxl);
+    padding-bottom: var(--spacing--xl);
+
+    h2 {
+      font-weight: bold;
+      font-size: var(--font-size--xl);
+      text-align: center;
+      color: var(--color--green);
+    }
+
+    .score-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      flex-wrap: wrap;
+      gap: var(--spacing--xl);
+    }
   }
 
-  .score-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    flex-wrap: wrap;
-    gap: var(--spacing--xl);
-  }
 
-  .ges-infos {
-    display: grid;
-    grid-template-rows: auto auto;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: var(--spacing--md);
-    justify-content: start;
-    width: 100%;
-    margin: var(--spacing--xs) 0;
-  }
 </style>

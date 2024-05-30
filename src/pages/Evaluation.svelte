@@ -1,7 +1,7 @@
 <script lang="ts">
   import { ButtonTypeEnum } from 'src/enum';
   import { GesResults, HistoricResults } from 'src/components/GES/results';
-  import { Button, Histogram, LoadingWheel, Modal } from 'src/components';
+  import { Button, Histogram, LoadingWheel, Modal, ResDetail } from 'src/components';
   import { ZoneSimulation } from 'src/components/GES';
   import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { savedMeasures } from 'src/const';
@@ -110,22 +110,32 @@
     translateKey="refresh"
   />
 </div>
+<p class="info-mix">{translate('infoMix')}</p>
 <ZoneSimulation on:submitSimulation={handleSimulation} />
 {#if currentDisplayedTab === TabType.ResultTab}
   {#if currentMeasure && !loading}
-    <GesResults measure={currentMeasure} />
-    <div class="histo-container">
+    <GesResults measure={currentMeasure} caption="gesEquivalentCaption" />
+    <div class="detail-container">
       {#if loadGes}
         <div class="loading-ges">
           <LoadingWheel />
         </div>
       {:else if currentMeasure?.complete}
-        <Histogram
-          datas={histoDatas}
-          chartLabel="barChartGES"
-          yLabel="greenhouseGasesEmissionDefault"
-          yLabel2="energyDefault"
-        />
+        <div class="detail request">
+          <ResDetail
+            measure={currentMeasure}
+            caption={translate("resDetCaption")}
+            description={translate("resDetCaptionDescription")}
+          />
+        </div>
+        <div class="detail histo">
+          <Histogram
+            datas={histoDatas}
+            chartLabel="barChartGES"
+            yLabel="greenhouseGasesEmissionDefault"
+            yLabel2="energyDefault"
+          />
+        </div>
       {/if}
     </div>
   {:else if loading === true}
@@ -155,8 +165,23 @@
     margin: $margin-y 0 $margin-y 0;
   }
 
-  .histo-container {
-    width: 100%;
-    overflow-x: auto;
+  .detail-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .detail {
+      overflow: auto;
+      margin: var(--spacing--md);
+      margin-right: 0;
+      padding-top: var(--spacing--xxl);
+      box-shadow: var(--box-shadow--md);
+
+      &.request {
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+    }
   }
+
 </style>

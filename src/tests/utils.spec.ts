@@ -15,7 +15,8 @@ const measure: Measure = {
   networkMeasure: {
     nbRequest: 21,
     nbRequestCache: 2,
-    network: { size: 39, sizeUncompress: 488000 }
+    network: { size: 39, sizeUncompress: 488000 },
+    detail: []
   },
   ges: {
     dataCenterTotal: 0.55,
@@ -41,19 +42,22 @@ const measure: Measure = {
     countryName: 'France',
     countryCode: 'fr',
     cityName: 'Nantes',
-    carbonIntensity: 371
+    carbonIntensity: 371,
+    display: 'Nantes, France'
   },
   serverGES: {
     countryName: 'France',
     countryCode: 'fr',
     cityName: 'Nantes',
-    carbonIntensity: 371
+    carbonIntensity: 371,
+    display: 'Nantes, France'
   },
   complete: false,
   extensionMeasure: {
     nbRequest: 21,
     nbRequestCache: 0,
-    network: { size: 39, sizeUncompress: 488000 }
+    network: { size: 39, sizeUncompress: 488000 },
+    detail: []
   }
 };
 
@@ -152,7 +156,8 @@ test('CreateEmptyMeasure function', async () => {
       network: {
         size: 0,
         sizeUncompress: 0
-      }
+      },
+      detail: []
     },
     ges: {
       dataCenterTotal: 0,
@@ -178,6 +183,7 @@ test('CreateEmptyMeasure function', async () => {
       countryName: '',
       cityName: '',
       countryCode: '',
+      display: '',
       wu: 0,
       adpe: 0
     },
@@ -186,6 +192,7 @@ test('CreateEmptyMeasure function', async () => {
       countryName: '',
       cityName: '',
       countryCode: '',
+      display: '',
       wu: 0,
       adpe: 0
     },
@@ -208,7 +215,8 @@ test('CreateEmptyMeasure function', async () => {
       network: {
         size: 0,
         sizeUncompress: 0
-      }
+      },
+      detail: []
     },
     dom: 0
   };
