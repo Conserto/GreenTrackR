@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Measure } from 'src/interface';
-  import { CO2Equivalent, ScoreTag } from 'src/components/GES';
+  import { CO2Equivalent, OtherEquivalent, ScoreTag } from 'src/components/GES';
   import VisitsEquivalent from '../VisitsEquivalent.svelte';
   import { AlertTypeEnum } from '../../../enum';
   import { Alert } from '../../index';
@@ -11,7 +11,7 @@
 </script>
 
 <div class="results-container">
-  <h3>{translate(caption)}</h3>
+  <h2 class="card__title">{translate(caption)}</h2>
   <div class="score-container">
     {#if measure?.complete}
       <ScoreTag score={measure?.score} />
@@ -21,6 +21,10 @@
       <Alert message="noFullData" alertType={AlertTypeEnum.WARNING} />
     {/if}
   </div>
+  <OtherEquivalent
+    measure={measure}
+    caption={translate("othEquivalentCaption")}
+  />
 </div>
 
 <style lang="scss">
@@ -38,7 +42,7 @@
     padding-top: var(--spacing--xxl);
     padding-bottom: var(--spacing--xl);
 
-    h3 {
+    h2 {
       font-weight: bold;
       font-size: var(--font-size--xl);
       text-align: center;

@@ -1,6 +1,6 @@
 {
   "adpeEquivalent": {
-    "message": "ADP :"
+    "message": "Resources abiotiques"
   },
   "analysisInProgress": {
     "message": "Analyse en cours. Naviguez sur l'onglet actif puis revenez ici pour les résultats."
@@ -72,7 +72,7 @@
     "message": "Energie (Wh)"
   },
   "energyEquivalent": {
-    "message": "ELEC :"
+    "message": "Electricité"
   },
   "errorNoToken": {
     "message": "Aucun token CO2 trouvé, l'extension pourrait ne pas fonctionner"
@@ -102,10 +102,10 @@
     "message": "GES Client"
   },
   "gesEquivalentCaption": {
-    "message": "Empreinte carbon"
+    "message": "Empreinte carbone"
   },
   "gesGrade": {
-    "message": "Note :"
+    "message": "Note"
   },
   "gesIntensity": {
     "message": "Mix énergétique serveur"
@@ -117,7 +117,7 @@
     "message": "GES Réseau"
   },
   "gesScore": {
-    "message": "Score :"
+    "message": "Score"
   },
   "gesTotal": {
     "message": "GES Total"
@@ -138,7 +138,7 @@
     "message": "Informations"
   },
   "greenhouseGasesEmission": {
-    "message": "GES :"
+    "message": "GES"
   },
   "greenhouseGasesEmissionDefault": {
     "message": "GES (gCO2eq)"
@@ -186,7 +186,7 @@
     "message": "Nombre de visites"
   },
   "othEquivalentCaption": {
-    "message": "Autres empreinte"
+    "message": "Autres empreintes"
   },
   "pageTotal": {
     "message": "Total page"
@@ -444,6 +444,6 @@
     "message": "Avertissement"
   },
   "wuEquivalent": {
-    "message": "EAU :"
+    "message": "Eau"
   }
 }

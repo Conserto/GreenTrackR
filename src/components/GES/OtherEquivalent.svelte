@@ -7,8 +7,8 @@
   export let caption: string = '';
 </script>
 
+<h2 class="card__title">{translate(caption)}</h2>
 <div class="other-equivalent">
-  <h3>{translate(caption)}</h3>
   <div class="energy-equivalent">
     <span>{translate("energyEquivalent")}</span>
     <span class="energy-equivalent_value"
@@ -31,14 +31,11 @@
 <style lang="scss">
 
   .other-equivalent {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
     padding: 0.5em;
-
-    h3{
-      font-weight: bold;
-      font-size: var(--font-size--xl);
-      text-align: center;
-      color: var(--color--green);
-    }
 
     .wu-equivalent_value {
       background-color: #95d1e5;
@@ -53,12 +50,13 @@
     }
 
     .wu-equivalent, .adpe-equivalent, .energy-equivalent {
-      display: flex;
-      align-items: center;
       font-weight: var(--font-weight--bold);
       font-size: var(--font-size--sm);
       padding-bottom: .5rem;
-
+      @media screen and (max-width: 40rem) {
+          display: flex;
+          flex-direction: column;
+      }
       &_value {
         margin-left: var(--spacing--md);
         padding: var(--spacing--sm) var(--spacing--xl);

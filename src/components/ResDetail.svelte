@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Measure, NetworkMeasure } from '../interface';
+  import type { Measure } from '../interface';
   import { formatNumber, formatSize, translate } from '../utils';
   import { Units } from '../const';
 
@@ -19,7 +19,7 @@
 <div class="table-container">
   <table class="table">
     <caption>
-      <h3>{caption}</h3>
+      <h2 class="card__title">{caption}</h2>
       <span class="visually-hidden">{description}</span>
     </caption>
     <thead>
@@ -83,14 +83,6 @@
 
 <style lang="scss">
   .table-container {
-
-    caption h3{
-      font-weight: bold;
-      font-size: var(--font-size--xl);
-      text-align: center;
-      color: var(--color--green);
-    }
-
     .table {
       border-collapse: collapse;
 

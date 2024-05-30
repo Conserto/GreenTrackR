@@ -43,3 +43,11 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
+.card__title{
+  margin-block: 0 var(--spacing--sm);
+  font-weight: bold;
+  font-size: var(--font-size--xl);
+  text-align: center;
+  color: var(--color--green);
+}

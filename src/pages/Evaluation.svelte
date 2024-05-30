@@ -2,7 +2,7 @@
   import { ButtonTypeEnum } from 'src/enum';
   import { GesResults, HistoricResults } from 'src/components/GES/results';
   import { Button, Histogram, LoadingWheel, Modal, ResDetail } from 'src/components';
-  import { OtherEquivalent, ZoneSimulation } from 'src/components/GES';
+  import { ZoneSimulation } from 'src/components/GES';
   import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { savedMeasures } from 'src/const';
   import { cleanCache, reloadCurrentTab } from 'src/utils/chrome.utils';
@@ -121,12 +121,6 @@
           <LoadingWheel />
         </div>
       {:else if currentMeasure?.complete}
-        <div class="detail other">
-          <OtherEquivalent
-            measure={currentMeasure}
-            caption={translate("othEquivalentCaption")}
-          />
-        </div>
         <div class="detail request">
           <ResDetail
             measure={currentMeasure}
