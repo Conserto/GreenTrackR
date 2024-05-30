@@ -29,13 +29,14 @@ export class MeasureAcquisition {
     this.nbRetry = getLocalStorageObject(paramRetry) ?? VITE_MAX_HAR_RETRIES_DEFAULT;
   }
 
-  updateMeasureValues(zoneGES?: GES, userGES?: GES): void {
+  updateMeasureValues(zoneGES?: GES, userGES?: GES,  networkGES?: GES): void {
     // Energie total requetes (réseau, user, server)
     const { ges, wu, adpe, energy } = this.gesService.getEnergyAndResources(
       this.measure.networkMeasure.network,
       this.measure.networkMeasure.nbRequest,
       zoneGES,
-      userGES
+      userGES,
+      networkGES
     );
 
     this.measure.ges = ges;
@@ -44,6 +45,7 @@ export class MeasureAcquisition {
     this.measure.energy = energy;
     this.measure.userGES = userGES;
     this.measure.serverGES = zoneGES;
+    this.measure.networkGES = networkGES;
     this.measure.complete = !!(zoneGES && userGES);
     if (this.measure.ges?.pageTotal) {
       this.measure.score = this.scoreService.getScore(this.measure.ges.pageTotal);
@@ -55,12 +57,12 @@ export class MeasureAcquisition {
   async getGESMeasure(countryCodeSelected: string, userCountryCodeSelected: string) {
     logDebug('getGESMeasure');
     let urlHost = this.networkService.getUrl(this.measure.url);
-    const { zoneGES, userGES } = await this.gesService.computeGES(
+    const { zoneGES, userGES, networkGES } = await this.gesService.computeGES(
       countryCodeSelected,
       userCountryCodeSelected,
       urlHost
     );
-    this.updateMeasureValues(zoneGES, userGES);
+    this.updateMeasureValues(zoneGES, userGES, networkGES);
     logDebug('Wait Dom');
     await this.waitForDomElements();
     logDebug('End getGESMeasure');
@@ -82,10 +84,12 @@ export class MeasureAcquisition {
         this.measure = await this.getMeasureFromEntries(this.measure, entriesPage);
         this.measure = {
           ...this.measure,
-          extensionMeasure: this.getNetworkAndRequestFromEntries(entriesExtension)
+          extensionMeasure: this.getNetworkAndRequestFromEntries(entriesExtension),
         };
         logInfo(`Extension request ignore, datas: requests=${this.measure.extensionMeasure.nbRequest}` +
           ` / size(compress/uncompress)=${this.measure.extensionMeasure.network.size}/${this.measure.extensionMeasure.network.size} KB`);
+        // console.log(this.measure.networkMeasure.detail);
+        // TODO nous avons ici la répartition des resources, un graph ça serait sympa
       }
     }
     this.harRetryCount = 0;
@@ -128,6 +132,7 @@ export class MeasureAcquisition {
     networkMeasure = {
       nbRequest: entries.length - nbCache,
       nbRequestCache: nbCache,
+      detail: this.networkService.calculateDetailResponseSizes(entries),
       network: {
         size: responsesSize,
         sizeUncompress: responsesSizeUncompress

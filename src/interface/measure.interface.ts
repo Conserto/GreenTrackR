@@ -12,12 +12,21 @@ export interface Measure {
   dom: number;
   userGES?: GES;
   serverGES?: GES;
+  networkGES?: GES;
   networkMeasure: NetworkMeasure;
   extensionMeasure: NetworkMeasure;
   complete: boolean;
 }
 
 export interface NetworkMeasure {
+  network: NetworkResponse;
+  detail: NetworkDetail[];
+  nbRequest: number;
+  nbRequestCache: number;
+}
+
+export interface NetworkDetail {
+  resource: string;
   network: NetworkResponse;
   nbRequest: number;
   nbRequestCache: number;

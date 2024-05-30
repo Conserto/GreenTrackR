@@ -5,6 +5,7 @@ export interface GES {
   countryName: string;
   cityName?: string;
   countryCode: string;
+  display: string;
 }
 
 export interface ResTotals {

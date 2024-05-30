@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, LoadingWheel, Modal, Select } from 'src/components';
+  import { Button, LoadingWheel, Modal, ResDetail, Select } from 'src/components';
   import { ButtonTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
   import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
   import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils/utils';
@@ -10,7 +10,7 @@
   import { PAGE_HEIGHT } from '../const/action.const';
   import { SEARCH_AUTO } from '../const/key.const';
   import type { HistoData, Measure } from '../interface';
-  import { ZoneSimulation } from '../components/GES';
+  import { OtherEquivalent, ZoneSimulation } from '../components/GES';
   import { HistoricResults } from '../components/GES/results';
   import { savedScrollMeasures } from '../const';
 
@@ -169,13 +169,34 @@
     translateKey="backToTop"
   />
 </div>
+<p class="info-mix">{translate('infoMix')}</p>
 <ZoneSimulation on:submitSimulation={handleSimulation} />
 {#if currentDisplayedTab === TabType.ResultTab}
   {#if currentMeasure && !loading}
-    <GesResults measure={currentMeasure} />
-    <div class="histo-container">
+    <GesResults measure={currentMeasure} caption="gesEquivalentCaption" />
+    <div class="detail-container">
       {#if currentMeasure?.complete}
-        <Histogram datas={histoDatas} chartLabel="chartLabel" yLabel="greenhouseGasesEmissionDefault" yLabel2="energyDefault" />
+        <div class="detail other">
+          <OtherEquivalent
+            measure={currentMeasure}
+            caption={translate("othEquivalentCaption")}
+          />
+        </div>
+        <div class="detail request">
+          <ResDetail
+            measure={currentMeasure}
+            caption={translate("resDetCaption")}
+            description={translate("resDetCaptionDescription")}
+          />
+        </div>
+        <div class="detail histo">
+          <Histogram
+            datas={histoDatas}
+            chartLabel="barChartGES"
+            yLabel="greenhouseGasesEmissionDefault"
+            yLabel2="energyDefault"
+          />
+        </div>
       {/if}
     </div>
   {/if}
@@ -204,9 +225,23 @@
     margin-bottom: var(--spacing--xl);
   }
 
-  .histo-container {
-    width: 100%;
-    overflow-x: auto;
+  .detail-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .detail {
+      overflow: auto;
+      margin: var(--spacing--md);
+      margin-right: 0;
+      padding-top: var(--spacing--xxl);
+      box-shadow: var(--box-shadow--md);
+
+      &.request {
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+    }
   }
 
   .buttons-container {

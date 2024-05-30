@@ -15,7 +15,7 @@
     "message": "Remonter la page"
   },
   "barChartGES": {
-    "message": "Histogramme des valeurs GES et énergétique"
+    "message": "Histogramme des valeurs GES et énergétiques"
   },
   "betaMessage": {
     "message": "Cette fonctionnalité est une version bêta, des erreurs peuvent survenir."
@@ -101,6 +101,9 @@
   "gesDevice": {
     "message": "GES Client"
   },
+  "gesEquivalentCaption": {
+    "message": "Empreinte carbon"
+  },
   "gesGrade": {
     "message": "Note :"
   },
@@ -144,7 +147,7 @@
     "message": "Historique"
   },
   "infoMix": {
-    "message": "Vos émissions dépendent du mix énergétique du pays dans lequel vous vous trouvez, et dans lequel le site est hébergé. Ce mix énergétique peut varier d'heure en heure et au gré des saisons :"
+    "message": "Vos émissions dépendent du mix énergétique du pays dans lequel vous vous trouvez, et dans lequel le site est hébergé. Ce mix énergétique peut varier d'heure en heure et au gré des saisons."
   },
   "launchAnalysisButton": {
     "message": "Analyser"
@@ -181,6 +184,9 @@
   },
   "numberVisit": {
     "message": "Nombre de visites"
+  },
+  "othEquivalentCaption": {
+    "message": "Autres empreinte"
   },
   "pageTotal": {
     "message": "Total page"
@@ -229,6 +235,51 @@
   },
   "refresh": {
     "message": "Recharger la page"
+  },
+  "resDetCaption": {
+    "message": "Analyse des ressources"
+  },
+  "resDetCaptionDescription": {
+    "message": "Analyse des ressources détaillées par type et pas composant"
+  },
+  "resDetSubTitleCliPercent": {
+    "message": "Pourcentage"
+  },
+  "resDetSubTitleCliUncompress": {
+    "message": "Décompressé"
+  },
+  "resDetSubTitleNetworkCompress": {
+    "message": "Compressé"
+  },
+  "resDetSubTitleNetworkPercent": {
+    "message": "Pourcentage"
+  },
+  "resDetSubTitleServerCache": {
+    "message": "Cache"
+  },
+  "resDetSubTitleServerCacheMiss": {
+    "message": "Non Cache"
+  },
+  "resDetSubTitleServerPercent": {
+    "message": "Pourcentage"
+  },
+  "resDetTitleClient": {
+    "message": "Client : Poids page"
+  },
+  "resDetTitleEnergy": {
+    "message": "Mix énergétique"
+  },
+  "resDetTitleLocation": {
+    "message": "Localisation"
+  },
+  "resDetTitleNetwork": {
+    "message": "Réseau : Poids page"
+  },
+  "resDetTitleServer": {
+    "message": "Serveur : Requêtes HTTP"
+  },
+  "resDetTitleTotal": {
+    "message": "Total"
   },
   "resetJourneyButton": {
     "message": "Réinitialiser le parcours"

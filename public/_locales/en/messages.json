@@ -104,6 +104,9 @@
   "gesDevice": {
     "message": "GES User"
   },
+  "gesEquivalentCaption": {
+    "message": "Carbon footprint "
+  },
   "gesGrade": {
     "message": "Grade:"
   },
@@ -147,7 +150,7 @@
     "message": "History"
   },
   "infoMix": {
-    "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season:"
+    "message": "Your emissions depend on the energy mix of the country in which you are located, and in which the website is hosted. This energy mix can vary from hour to hour and season to season."
   },
   "launchAnalysisButton": {
     "message": "Analysis"
@@ -184,6 +187,9 @@
   },
   "numberVisit": {
     "message": "Number of visits"
+  },
+  "othEquivalentCaption": {
+    "message": "Other footprint"
   },
   "pageTotal": {
     "message": "Page total"
@@ -232,6 +238,51 @@
   },
   "refresh": {
     "message": "Reload page"
+  },
+  "resDetCaption": {
+    "message": "Resources analysis"
+  },
+  "resDetCaptionDescription": {
+    "message": "Analysis of detailed resources by type and component step"
+  },
+  "resDetSubTitleCliPercent": {
+    "message": "Percent"
+  },
+  "resDetSubTitleCliUncompress": {
+    "message": "Uncompress"
+  },
+  "resDetSubTitleNetworkCompress": {
+    "message": "Compress"
+  },
+  "resDetSubTitleNetworkPercent": {
+    "message": "Percent"
+  },
+  "resDetSubTitleServerCache": {
+    "message": "Cache"
+  },
+  "resDetSubTitleServerCacheMiss": {
+    "message": "Cache Miss"
+  },
+  "resDetSubTitleServerPercent": {
+    "message": "Percent"
+  },
+  "resDetTitleClient": {
+    "message": "Client: Webpage Size"
+  },
+  "resDetTitleEnergy": {
+    "message": "Energy mix"
+  },
+  "resDetTitleLocation": {
+    "message": "Location"
+  },
+  "resDetTitleNetwork": {
+    "message": "Network: Webpage Size"
+  },
+  "resDetTitleServer": {
+    "message": "Server: HTTP requests"
+  },
+  "resDetTitleTotal": {
+    "message": "Total"
   },
   "resetJourneyButton": {
     "message": "Reset journey"
