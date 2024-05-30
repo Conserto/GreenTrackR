@@ -23,9 +23,6 @@
   "cancelButton": {
     "message": "Cancel"
   },
-  "carbonIntensity": {
-    "message": "Carbon intensity (CO2eq/Kwh)"
-  },
   "carIndicator": {
     "message": "Km by car"
   },
