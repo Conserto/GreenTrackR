@@ -23,9 +23,6 @@
   "cancelButton": {
     "message": "Cancel"
   },
-  "carbonIntensity": {
-    "message": "Carbon intensity (CO2eq/Kwh)"
-  },
   "carIndicator": {
     "message": "Km by car"
   },
@@ -243,7 +240,7 @@
     "message": "Resources analysis"
   },
   "resDetCaptionDescription": {
-    "message": "Analysis of detailed resources by type and component step"
+    "message": "The resources used by the analyzed page are shown in the first column of the following table. The server part is divided into 3 columns representing the number of cached requests, then those without cache, and finally a percentage of each resources. Next, the networks section displays the weight of the compressed resource transferred, as well as its percentage. Finally, the client part contains the weight of the decompressed page downloaded, as well as its percentage. Translated with DeepL.com (free version)"
   },
   "resDetSubTitleCliPercent": {
     "message": "Percent"

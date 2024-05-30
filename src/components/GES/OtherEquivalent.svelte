@@ -9,23 +9,23 @@
 
 <h2 class="card__title">{translate(caption)}</h2>
 <div class="other-equivalent">
-  <div class="energy-equivalent">
+  <p class="energy-equivalent">
     <span>{translate("energyEquivalent")}</span>
     <span class="energy-equivalent_value"
     >{measure?.energy?.kWhPage?.toFixed(2)} {Units.energy}</span>
-  </div>
+  </p>
 
-  <div class="wu-equivalent">
+  <p class="wu-equivalent">
     <span>{translate("wuEquivalent")}</span>
     <span class="wu-equivalent_value"
     >{measure?.wu?.pageTotal?.toFixed(2)} {Units.waterUse}</span>
-  </div>
+  </p>
 
-  <div class="adpe-equivalent">
+  <p class="adpe-equivalent">
     <span>{translate("adpeEquivalent")}</span>
     <span class="adpe-equivalent_value"
     >{measure?.adpe?.pageTotal?.toFixed(2)} {Units.adpeUnit}</span>
-  </div>
+  </p>
 </div>
 
 <style lang="scss">
@@ -52,7 +52,8 @@
     .wu-equivalent, .adpe-equivalent, .energy-equivalent {
       font-weight: var(--font-weight--bold);
       font-size: var(--font-size--sm);
-      padding-bottom: .5rem;
+      padding-block-end: .5rem;
+      margin-block: 0;
       @media screen and (max-width: 40rem) {
           display: flex;
           flex-direction: column;

@@ -21,3 +21,7 @@ GreenTrackr assesses different footprints:
 Footprints are computed separately for terminals (modeled by the weight of the uncompressed page in kB), the network (modeled by the weight of the compressed page in kB) and servers (modeled by the number of non-extension requests). These footprints are then aggregated, taking into account the energy mix (carbon intensity factor in gCO2eq/kWh of electricity consumed) of the server (location of server IP address) and client (location of user IP address).
 
 A grade from A to F (on a linear gauge) and a score (the higher the score, closer to 100, the better the web page!) are then computed to represent the environmental footprint.
+
+### Resources analysis 
+
+The table summarizing the resources used on the page analyzed details the number of css files, js files, $\dots$ images, etc., the percentage of each resource, as well as their compressed and decompressed weight (cached or not). The results of the table enable you to analyze the best eco-design practices and, where appropriate, the recommendations to be implemented to reduce the environmental footprint of your website. 
