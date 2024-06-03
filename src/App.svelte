@@ -67,7 +67,7 @@
   <img src={logo} alt="GreenTrackR Conserto" />
   {#if !getLocalStorageObject(paramTokenCo2)}
     <div>
-      <Alert message="errorNoToken" alertType={AlertTypeEnum.ERROR} />
+      <Alert message="errorNoToken" alertType={AlertTypeEnum.INFO} />
     </div>
   {/if}
   <div class="nav nav-tabs" id="myTab" role="tablist">
