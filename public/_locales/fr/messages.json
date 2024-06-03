@@ -75,7 +75,7 @@
     "message": "Electricité"
   },
   "errorNoToken": {
-    "message": "Aucun token CO2 trouvé, l'extension pourrait ne pas fonctionner"
+    "message": "GreenTrackR utilise l'API 'CO2signal' de 'Electricity Maps', afin de pouvoir utiliser cette API il vous faut un token d'accès, rendez-vous dans l'onglet Paramètres"
   },
   "evaluationTab": {
     "message": "Èvaluation"

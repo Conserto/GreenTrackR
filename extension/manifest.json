@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "GreenTrackR",
   "description": "__MSG_extDesc__",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "icons": {
     "64": "images/logo.png"
   },
