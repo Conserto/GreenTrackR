@@ -106,6 +106,7 @@ export class GESService {
           display: this.getDisplayZone(undefined, countryName)
         };
       } else {
+        // TODO cache by url
         const location = serverType ? await getServerZone(urlHost) : await getCurrentZone();
         logDebug(`Location ${location}`);
         if (location) {

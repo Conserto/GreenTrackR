@@ -12,6 +12,7 @@ export interface Measure {
   dom: number;
   userGES?: GES;
   serverGES?: GES;
+  DetailResources?: DetailServer[];
   networkGES?: GES;
   networkMeasure: NetworkMeasure;
   extensionMeasure: NetworkMeasure;
@@ -30,6 +31,19 @@ export interface NetworkDetail {
   network: NetworkResponse;
   nbRequest: number;
   nbRequestCache: number;
+}
+
+export interface DetailServer {
+  hostname: string;
+  ges: GES;
+  details: DetailServerUrl[]
+}
+
+export interface DetailServerUrl {
+  url: string;
+  size: NetworkResponse;
+  resource: string;
+  cache: boolean;
 }
 
 export interface EnergyMeasure {
