@@ -5,6 +5,7 @@ import { getLocalStorageObject } from '../utils';
 import { paramTokenCo2 } from '../const';
 
 export const getCarbonIntensity = async (location: string | GeoLocation | undefined): Promise<number | undefined> => {
+  // TODO Cache
   let token = getLocalStorageObject(paramTokenCo2);
   if (!location) {
     logWarn('Carbon intensity not check because no location');

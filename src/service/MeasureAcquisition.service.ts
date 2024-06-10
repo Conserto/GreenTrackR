@@ -29,12 +29,12 @@ export class MeasureAcquisition {
     this.nbRetry = getLocalStorageObject(paramRetry) ?? VITE_MAX_HAR_RETRIES_DEFAULT;
   }
 
-  updateMeasureValues(zoneGES?: GES, userGES?: GES,  networkGES?: GES): void {
+  updateMeasureValues(serverGES?: GES, userGES?: GES,  networkGES?: GES): void {
     // Energie total requetes (réseau, user, server)
     const { ges, wu, adpe, energy } = this.gesService.getEnergyAndResources(
       this.measure.networkMeasure.network,
       this.measure.networkMeasure.nbRequest,
-      zoneGES,
+      serverGES,
       userGES,
       networkGES
     );
@@ -44,9 +44,9 @@ export class MeasureAcquisition {
     this.measure.adpe = adpe;
     this.measure.energy = energy;
     this.measure.userGES = userGES;
-    this.measure.serverGES = zoneGES;
+    this.measure.serverGES = serverGES;
     this.measure.networkGES = networkGES;
-    this.measure.complete = !!(zoneGES && userGES);
+    this.measure.complete = !!(serverGES && userGES);
     if (this.measure.ges?.pageTotal) {
       this.measure.score = this.scoreService.getScore(this.measure.ges.pageTotal);
     } else {
@@ -57,12 +57,12 @@ export class MeasureAcquisition {
   async getGESMeasure(countryCodeSelected: string, userCountryCodeSelected: string) {
     logDebug('getGESMeasure');
     let urlHost = this.networkService.getUrl(this.measure.url);
-    const { zoneGES, userGES, networkGES } = await this.gesService.computeGES(
+    const { serverGES, userGES, networkGES } = await this.gesService.computeGES(
       countryCodeSelected,
       userCountryCodeSelected,
       urlHost
     );
-    this.updateMeasureValues(zoneGES, userGES, networkGES);
+    this.updateMeasureValues(serverGES, userGES, networkGES);
     logDebug('Wait Dom');
     await this.waitForDomElements();
     logDebug('End getGESMeasure');

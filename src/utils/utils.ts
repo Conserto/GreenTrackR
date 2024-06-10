@@ -1,5 +1,6 @@
-import type { GES, Measure, NetworkMeasure, TableData, TableHeader, TableSurHeader } from 'src/interface';
+import type { GES, Measure, NetworkMeasure, TableData, TableHeader, TableSurHeader, Zone } from 'src/interface';
 import { logDebug } from './log';
+import { Units } from '../const';
 
 const PREFIX_HTML_KEY = '@';
 const SUFFIX_HTML_FILE = '.html';
@@ -178,6 +179,10 @@ export const formatShortUrl = (url: string | undefined) => {
     formatted = formatted.length > 23 ? `${formatted.slice(0, 23)}...` : formatted;
   }
   return formatted;
+};
+
+export const formatSimulationLabel = (zone: Zone | undefined) => {
+  return `${zone?.countryName} (${formatNumber(zone?.carbonFactor)} ${Units.carbonIntensity})`;
 };
 
 export const formatSizeTransferred = (netSize: number, netUncompressSize: number) => {
