@@ -56,19 +56,6 @@ export interface NetworkDetail {
   nbRequestCache: number;
 }
 
-export interface DetailServer {
-  hostname: string;
-  ges: GES;
-  details: DetailServerUrl[]
-}
-
-export interface DetailServerUrl {
-  url: string;
-  size: NetworkResponse;
-  resource: string;
-  cache: boolean;
-}
-
 export interface EnergyMeasure {
   kWhDataCenter: number;
   kWhNetwork: number;
