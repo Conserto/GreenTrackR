@@ -11,9 +11,9 @@
   const srvCity = measure.serverGES?.display || '-';
   const cliCity = measure.userGES?.display || '-';
   const netCity = srvCity.split(',')[0] + " -- " + cliCity.split(',')[0];
-  const mixSrv = measure.serverGES?.carbonIntensity ? measure.serverGES?.carbonIntensity + Units.carbonIntensity : '-';
-  const mixNet = measure.networkGES?.carbonIntensity ? measure.networkGES?.carbonIntensity + Units.carbonIntensity : '-';
-  const mixCli = measure.userGES?.carbonIntensity ? measure.userGES?.carbonIntensity + Units.carbonIntensity : '-';
+  const mixSrv = measure.serverGES?.carbonIntensity ? formatNumber(measure.serverGES?.carbonIntensity) + Units.carbonIntensity : '-';
+  const mixNet = measure.networkGES?.carbonIntensity ? formatNumber(measure.networkGES?.carbonIntensity) + Units.carbonIntensity : '-';
+  const mixCli = measure.userGES?.carbonIntensity ? formatNumber(measure.userGES?.carbonIntensity) + Units.carbonIntensity : '-';
 </script>
 
 <div class="table-container">

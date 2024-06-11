@@ -74,9 +74,6 @@
   "energyEquivalent": {
     "message": "Electricité"
   },
-  "errorNoToken": {
-    "message": "GreenTrackR utilise l'API 'CO2signal' de 'Electricity Maps', afin de pouvoir utiliser cette API il vous faut un token d'accès, rendez-vous dans l'onglet Paramètres"
-  },
   "evaluationTab": {
     "message": "Èvaluation"
   },
@@ -222,7 +219,7 @@
     "message": "Paramétrage"
   },
   "paramTokenCo2Description": {
-    "message": "GreenTrackR utilise l'API 'CO2signal' de 'Electricity Maps', afin de pouvoir utiliser cette API il vous faut un token d'accès, cliquez sur le lien puis sur 'Go to api portal' -> "
+    "message": "GreenTrackR peut-être plus précis dans ses mesures en utilisant l'API 'CO2signal' de 'Electricity Maps', afin de pouvoir utiliser cette API il vous faut un token d'accès, cliquez sur le lien puis sur 'Go to api portal' -> "
   },
   "paramTokenCo2URL": {
     "message": "https://www.co2signal.com/"

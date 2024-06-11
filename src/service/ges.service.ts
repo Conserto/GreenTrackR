@@ -1,50 +1,55 @@
 import { getCarbonIntensity, getCurrentZone, getServerZone } from 'src/api';
 import { codeZone } from 'src/assets/data/codeZone';
 import { KWH_DEVICE, KWH_PER_BYTE_NETWORK, KWH_PER_REQUEST_DATA_CENTER } from 'src/const/measure.const';
-import type { CarbonData, CarbonDatas, EnergyMeasure, GES, NetworkResponse, ResTotals } from 'src/interface';
+import type { DetailedGeoLoc, EnergyMeasure, GES, NetworkResponse, ResTotals, Zone } from 'src/interface';
 import { logDebug, logErr } from '../utils/log';
 import { SEARCH_AUTO } from '../const/key.const';
+import { getLocalStorageObject } from '../utils';
+import { paramTokenCo2 } from '../const';
 
 export class GESService {
 
   private cacheGesByUrl: Map<string, GES>;
-  private cacheUserGes?: GES;
+  private cacheGesUser?: GES;
+  private cacheLocationByHost: Map<string, DetailedGeoLoc>;
 
   constructor() {
     this.cacheGesByUrl = new Map<string, GES>();
+    this.cacheLocationByHost = new Map<string, DetailedGeoLoc>;
   }
 
   async computeGES(countryCodeSelected: string, userCountryCodeSelected: string, urlHost?: URL) {
+    const callApi = (window.navigator.onLine && getLocalStorageObject(paramTokenCo2));
     let cacheSrvKey = (countryCodeSelected === SEARCH_AUTO && urlHost?.hostname) ? urlHost.hostname : undefined;
-    let userGesUseCacheUserGes = userCountryCodeSelected === SEARCH_AUTO && this.cacheUserGes;
-    let zoneGES: GES | undefined;
+    let userGesUseCacheUserGes = userCountryCodeSelected === SEARCH_AUTO && this.cacheGesUser;
+    let serverGES: GES | undefined;
     let userGES: GES | undefined;
     if (cacheSrvKey && this.cacheGesByUrl.has(cacheSrvKey)) {
       logDebug('cache for Server');
-      zoneGES = this.cacheGesByUrl.get(cacheSrvKey);
+      serverGES = this.cacheGesByUrl.get(cacheSrvKey);
     } else {
-      zoneGES = await this.getGESServer(urlHost, countryCodeSelected);
-      if (zoneGES && cacheSrvKey) {
-        this.cacheGesByUrl.set(cacheSrvKey, zoneGES);
+      serverGES = await this.getGESServer(urlHost, countryCodeSelected, callApi);
+      if (serverGES && cacheSrvKey) {
+        this.cacheGesByUrl.set(cacheSrvKey, serverGES);
       }
     }
     if (userGesUseCacheUserGes) {
       logDebug('cache for user');
-      userGES = this.cacheUserGes;
+      userGES = this.cacheGesUser;
     } else {
-      userGES = await this.getGESUser(userCountryCodeSelected);
+      userGES = await this.getGESUser(userCountryCodeSelected, callApi);
       if (userCountryCodeSelected === SEARCH_AUTO && userGES) {
-        this.cacheUserGes = userGES;
+        this.cacheGesUser = userGES;
       }
     }
     const networkGES: GES = {
       countryCode: '', countryName: '',
-      display: zoneGES?.display?.split(',')[0] + ' -- ' + userGES?.display?.split(',')[0],
-      carbonIntensity: ((userGES?.carbonIntensity || 0) + (zoneGES?.carbonIntensity || 0)) / 2,
-      wu: ((userGES?.wu || 0) + (zoneGES?.wu || 0)) / 2,
-      adpe: ((userGES?.adpe || 0) + (zoneGES?.adpe || 0)) / 2
+      display: serverGES?.display?.split(',')[0] + ' -- ' + userGES?.display?.split(',')[0],
+      carbonIntensity: ((userGES?.carbonIntensity || 0) + (serverGES?.carbonIntensity || 0)) / 2,
+      wu: ((userGES?.wu || 0) + (serverGES?.wu || 0)) / 2,
+      adpe: ((userGES?.adpe || 0) + (serverGES?.adpe || 0)) / 2
     };
-    return { zoneGES, userGES, networkGES };
+    return { serverGES, userGES, networkGES };
   }
 
   getDisplayZone(cityName: string | undefined, countryName: string | undefined) {
@@ -59,131 +64,62 @@ export class GESService {
     return value;
   }
 
-  async getGESServer(url: URL | undefined, countryCodeSelected: string): Promise<GES | undefined> {
+  async getGESServer(url: URL | undefined, countryCodeSelected: string, callApi: boolean): Promise<GES | undefined> {
     logDebug('Call GES Server');
-    return await this.getGES(url, true, countryCodeSelected);
+    return await this.getGES(url, true, countryCodeSelected, callApi);
   }
 
-  async getGESUser(userCountryCodeSelected: string): Promise<GES | undefined> {
+  async getGESUser(userCountryCodeSelected: string, callApi: boolean): Promise<GES | undefined> {
     logDebug('Call GES User');
-    return this.getGES(undefined, false, userCountryCodeSelected);
+    return this.getGES(undefined, false, userCountryCodeSelected, callApi);
   }
 
-  async getGES(url: URL | undefined, serverType: boolean, countryCodeSelected: string): Promise<GES | undefined> {
-    let GES: GES | undefined = undefined;
+  async getGES(url: URL | undefined, serverType: boolean, countryCodeSelected: string, callApi: boolean): Promise<GES | undefined> {
+    let ges: GES | undefined = undefined;
+    let location: DetailedGeoLoc | string | undefined = undefined;
+    let carbonIntensity = undefined;
     try {
-      if (window.navigator.onLine) {
-        GES = await this.getGESFromApi(url, serverType, countryCodeSelected);
+      if (countryCodeSelected == SEARCH_AUTO) {
+        location = (url && url.host) ? this.cacheLocationByHost.get(url.host + serverType) : undefined;
+        if (!location) {
+          location = await this.getLocation(url, serverType);
+          if (url && url.host && location) {
+            this.cacheLocationByHost.set(url.host + serverType, location);
+          }
+        }
       } else {
-        GES = await this.getGESFromLocalFile(countryCodeSelected);
+        location = countryCodeSelected;
+      }
+      if (callApi) {
+        carbonIntensity = await getCarbonIntensity(location);
+      }
+      const zone: Zone | undefined = this.findZoneFromLocation(typeof location === 'string' ? location : location?.countryCode || '');
+      const city = typeof location === 'string' ? undefined : location?.cityName;
+      if (zone) {
+        ges = {
+          countryCode: zone.zoneAlpha2 || countryCodeSelected,
+          countryName: zone.countryName,
+          cityName: city,
+          display: this.getDisplayZone(city, zone.countryName),
+          carbonIntensity: carbonIntensity || zone.carbonFactor,
+          wu: zone.wu ? zone.wu * 1000 : undefined,
+          adpe: zone.adpe ? zone.adpe * 1000 * 1000 : undefined
+        };
       }
     } catch (error) {
-      try {
-        GES = await this.getGESFromLocalFile(countryCodeSelected);
-      } catch (e) {
-        logErr(`There has been a problem when trying to get GES Emissions : ${error} from distant API and local file`);
-      }
+      logErr(`There has been a problem when trying to get GES Emissions : ${error} from distant API and local file`);
     }
-    const countryCode = countryCodeSelected !== SEARCH_AUTO ? countryCodeSelected : (GES && GES.countryCode ? GES.countryCode : undefined);
-    if (countryCode && GES) {
-      let datas = codeZone.find((line) => line.zone === countryCode);
-      GES.wu = datas?.wu ? datas.wu * 1000 : undefined;
-      GES.adpe = datas?.adpe ? datas.adpe * 1000 * 1000 : undefined;
-    }
-    logDebug(`Return GES ${GES?.cityName} / ${GES?.carbonIntensity} / ${GES?.wu} / ${GES?.adpe}`);
-    return GES;
-  }
-
-  async getGESFromApi(urlHost: URL | undefined, serverType: boolean, countryCodeSelected: string): Promise<GES | undefined> {
-    let ges: GES | undefined;
-    try {
-      if (countryCodeSelected !== SEARCH_AUTO) {
-        const countryName = codeZone.find((zoneObj) => zoneObj.zone === countryCodeSelected)?.countryName ?? '';
-        ges = {
-          carbonIntensity: await getCarbonIntensity(countryCodeSelected),
-          countryCode: countryCodeSelected,
-          countryName: countryName,
-          display: this.getDisplayZone(undefined, countryName)
-        };
-      } else {
-        const location = serverType ? await getServerZone(urlHost) : await getCurrentZone();
-        logDebug(`Location ${location}`);
-        if (location) {
-          ges = {
-            carbonIntensity: await getCarbonIntensity(location),
-            countryCode: location.countryCode,
-            countryName: location.countryName,
-            cityName: location.cityName,
-            display: this.getDisplayZone(location.cityName, location.countryName)
-          };
-        }
-      }
-    } catch (error: any) {
-      throw new Error(`There has been a problem when trying to get GES emissions from API : ${error}`);
-    }
+    logDebug(`Return GES ${ges?.cityName} / ${ges?.carbonIntensity} / ${ges?.wu} / ${ges?.adpe}`);
     return ges;
   }
 
-  async getGESFromLocalFile(countryCodeSelected: string): Promise<GES | undefined> {
-    let lastReportOnDate;
-    const { data: carbonData, countryName } =
-    (await this.parseCarbonFile(countryCodeSelected)) || [];
-
-    if (carbonData.length > 0) {
-      lastReportOnDate = carbonData[carbonData.length - 1];
-    }
-
-    return {
-      carbonIntensity: lastReportOnDate?.carbonIntensity ?? undefined,
-      countryName: countryName,
-      cityName: '',
-      countryCode: countryCodeSelected,
-      display: this.getDisplayZone(undefined, countryName)
-    };
+  findZoneFromLocation(countryCode: string) {
+    const search = countryCode.toUpperCase();
+    return codeZone.find((cz) => cz.zoneAlpha2 === search || cz.zoneAlpha3 === search);
   }
 
-  async parseCarbonFile(countryCodeSelected: string): Promise<CarbonDatas> {
-    let data: CarbonData[] = [];
-    let countryName: string = '';
-    try {
-      if (countryCodeSelected == SEARCH_AUTO) {
-        countryCodeSelected = 'FR';
-      }
-      let response: any = await import('src/assets/data/data_carbon.json');
-      countryName = response[countryCodeSelected]?.[0].country_name;
-      data = this.getSortedDayGESReport(response, countryCodeSelected);
-    } catch (error: any) {
-      logErr(
-        'There has been a problem when trying to get GES emissions from Local file : ' + error
-      );
-    }
-    return { data, countryName };
-  }
-
-  getSortedDayGESReport(jsonContent: any, countryCodeSelected: string): CarbonData[] {
-    const dayGESReport = this.getDayGESReport(jsonContent, countryCodeSelected);
-    return dayGESReport.sort((a: any, b: any) => {
-      if (a.date < b.date) {
-        return -1;
-      } else if (a.date > b.date) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
-  }
-
-  getDayGESReport(jsonContent: any, countryCodeSelected: string): CarbonData[] {
-    return jsonContent[countryCodeSelected]
-      .filter((dataCountry: any) => {
-        let now = new Date();
-        let reportDate = new Date(dataCountry.date);
-        return now.getDay() === reportDate.getDay() && reportDate.getHours() < now.getHours();
-      })
-      .map((dataCountry: any) => ({
-        date: new Date(dataCountry.date),
-        carbonIntensity: dataCountry.carbonfactor
-      }));
+  async getLocation(urlHost: URL | undefined, serverType: boolean) {
+    return serverType ? await getServerZone(urlHost) : await getCurrentZone();
   }
 
   getEnergyAndResources(network: NetworkResponse, nbRequest: number, zoneGES?: GES, userGES?: GES, networkGES?: GES): {

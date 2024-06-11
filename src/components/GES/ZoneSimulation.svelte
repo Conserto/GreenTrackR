@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte';
-  import { translate } from 'src/utils/utils';
+  import { formatSimulationLabel, translate } from 'src/utils/utils';
   import { codeZone } from 'src/assets/data/codeZone';
 
   import { Select } from 'src/components';
@@ -12,7 +12,7 @@
   onMount(async () => {
     zonesOptions = [
       { label: 'Automatique', value: SEARCH_AUTO },
-      ...codeZone.map((zone) => ({ label: zone.countryName, value: zone.zone }))
+      ...codeZone.map((zone) => ({ label: formatSimulationLabel(zone), value: zone.zoneAlpha2 }))
     ];
   });
 
@@ -27,7 +27,8 @@
 
 <form class="zone-simulation">
   <div class="simulation-select simulation-region">
-    <label for="simulation-server-region-label" class="simulation-select__label">{translate('serverRegionLabel')}</label>
+    <label for="simulation-server-region-label"
+           class="simulation-select__label">{translate('serverRegionLabel')}</label>
     <Select bind:selectedValue={countryCodeSelected} selectValues={zonesOptions}
             name="simulation-server-region-label" style="max-width: 100%" on:selectChange={handleSubmitSimulation} />
   </div>

@@ -23,14 +23,6 @@ export default defineConfig({
         // output file at '/index.html'
         index: 'src/index.html',
       },
-      output: {
-        manualChunks(id) {
-          // Déclarez le fichier comme un "chunk" à part
-          if (id.includes('src/assets/data/data_carbon.json')) {
-            return 'data_carbon';
-          }
-        },
-      },
     },
   },
   resolve: {
