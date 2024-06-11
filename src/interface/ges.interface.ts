@@ -15,12 +15,9 @@ export interface ResTotals {
   pageTotal?: number;
 }
 
-export interface CarbonDatas {
-  data: CarbonData[];
-  countryName: string;
+export interface Co2SignalResponse {
+  carbonIntensity?: number;
+  countryCode?: string;
 }
 
-export interface CarbonData {
-  date: Date | null;
-  carbonIntensity: number;
-}
+

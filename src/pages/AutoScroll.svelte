@@ -80,6 +80,7 @@
     cleanCache();
     currentDisplayedTab = TabType.None;
     currentMeasure = null;
+    reloadCurrentTab();
   };
 
   const handleResetMeasure = () => {

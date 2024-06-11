@@ -1,14 +1,17 @@
 import { PREFIX_URL_DATA, PREFIX_URL_EXTENSION } from '../const';
 import { logDebug, logWarn } from '../utils/log';
 import { getTabUrl } from '../utils';
-import type { NetworkDetail } from '../interface';
+import type { DetailServer, DetailServerUrl, NetworkDetail } from '../interface';
 
 export class NetworkService {
 
   getUrl(url?: string) {
     let formattedUrl: URL | undefined = undefined;
     if (url && this.isRealUrl(url)) {
+      // TODO REVOIR histoire www
       try {
+        // FIXME a revoir aussi
+        url = url.replace('blob:','');
         formattedUrl = new URL(url);
         if (formattedUrl.host.split('.').length <= 2) {
           formattedUrl.host = 'www.' + formattedUrl.host;
@@ -82,6 +85,39 @@ export class NetworkService {
     return resp;
   }
 
+  getDetailResourcesFromEntries(entries: HARFormatEntry[]): DetailServer[] {
+    let resp: DetailServer[] = [];
+    const detailServers = Object.groupBy(entries, ({ request }) => this.getUrl(request.url)?.host ?? '');
+    for (let index in Object.entries(detailServers)) {
+      const key = Object.keys(detailServers)[index] ?? 'none';
+      const mes = Object.values(detailServers)[index];
+      resp.push({
+        hostname: key,
+        oneUrl: mes ? this.getUrl(mes[0].request.url) : undefined,
+        details: mes ? this.calculateDetailServerUrl(mes) : []
+      });
+    }
+    return resp;
+  }
+
+  calculateDetailServerUrl(entries: HARFormatEntry[]) {
+    let resp: DetailServerUrl[] = [];
+    entries.forEach((entry: HARFormatEntry) => {
+      resp.push(
+        {
+          url: entry.request.url,
+          cache: this.isCacheCall(entry),
+          size: {
+            size: entry.response._transferSize || 0,
+            sizeUncompress: entry.response.content.size
+          },
+          resource: entry._resourceType || 'other'
+        }
+      );
+    });
+    return resp;
+  }
+
   /**
    * Detect network resources (data urls embedded in page is not network resource)
    *  Test with request.url as  request.httpVersion === "data"  does not work with old chrome version (example v55)
@@ -90,8 +126,8 @@ export class NetworkService {
     return harEntry.request.url && !harEntry.request.url.startsWith(PREFIX_URL_DATA);
   }
 
-  isCacheCall(harEntry: HARFormatEntry) {
-    return harEntry._fromCache;
+  isCacheCall(harEntry: HARFormatEntry): boolean {
+    return !!harEntry._fromCache;
   }
 
   isAfter(harEntry: HARFormatEntry, date: Date) {

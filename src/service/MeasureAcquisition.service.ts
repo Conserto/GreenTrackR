@@ -29,7 +29,7 @@ export class MeasureAcquisition {
     this.nbRetry = getLocalStorageObject(paramRetry) ?? VITE_MAX_HAR_RETRIES_DEFAULT;
   }
 
-  updateMeasureValues(serverGES?: GES, userGES?: GES,  networkGES?: GES): void {
+  updateMeasureValues(serverGES?: GES, userGES?: GES, networkGES?: GES): void {
     // Energie total requetes (réseau, user, server)
     const { ges, wu, adpe, energy } = this.gesService.getEnergyAndResources(
       this.measure.networkMeasure.network,
@@ -62,6 +62,10 @@ export class MeasureAcquisition {
       userCountryCodeSelected,
       urlHost
     );
+    this.measure = {
+      ...this.measure,
+      detailResourcesGes: await this.gesService.computeGesDetailResource(countryCodeSelected, this.measure.detailResources, serverGES)
+    };
     this.updateMeasureValues(serverGES, userGES, networkGES);
     logDebug('Wait Dom');
     await this.waitForDomElements();
@@ -84,7 +88,7 @@ export class MeasureAcquisition {
         this.measure = await this.getMeasureFromEntries(this.measure, entriesPage);
         this.measure = {
           ...this.measure,
-          extensionMeasure: this.getNetworkAndRequestFromEntries(entriesExtension),
+          extensionMeasure: this.getNetworkAndRequestFromEntries(entriesExtension)
         };
         logInfo(`Extension request ignore, datas: requests=${this.measure.extensionMeasure.nbRequest}` +
           ` / size(compress/uncompress)=${this.measure.extensionMeasure.network.size}/${this.measure.extensionMeasure.network.size} KB`);
@@ -117,7 +121,8 @@ export class MeasureAcquisition {
       ...measureCurrent,
       date: new Date(),
       url: await this.networkService.getMotherUrl(),
-      networkMeasure: this.getNetworkAndRequestFromEntries(entries)
+      networkMeasure: this.getNetworkAndRequestFromEntries(entries),
+      detailResources: this.networkService.getDetailResourcesFromEntries(entries)
     };
     return measureNew;
   }
