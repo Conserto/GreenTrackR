@@ -88,8 +88,6 @@ export class MeasureAcquisition {
         };
         logInfo(`Extension request ignore, datas: requests=${this.measure.extensionMeasure.nbRequest}` +
           ` / size(compress/uncompress)=${this.measure.extensionMeasure.network.size}/${this.measure.extensionMeasure.network.size} KB`);
-        // console.log(this.measure.networkMeasure.detail);
-        // TODO nous avons ici la répartition des resources, un graph ça serait sympa
       }
     }
     this.harRetryCount = 0;

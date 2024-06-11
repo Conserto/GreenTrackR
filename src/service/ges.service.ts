@@ -10,16 +10,18 @@ import { paramTokenCo2 } from '../const';
 export class GESService {
 
   private cacheGesByUrl: Map<string, GES>;
-  private cacheUserGes?: GES;
+  private cacheGesUser?: GES;
+  private cacheLocationByHost: Map<string, DetailedGeoLoc>;
 
   constructor() {
     this.cacheGesByUrl = new Map<string, GES>();
+    this.cacheLocationByHost = new Map<string, DetailedGeoLoc>;
   }
 
   async computeGES(countryCodeSelected: string, userCountryCodeSelected: string, urlHost?: URL) {
     const callApi = (window.navigator.onLine && getLocalStorageObject(paramTokenCo2));
     let cacheSrvKey = (countryCodeSelected === SEARCH_AUTO && urlHost?.hostname) ? urlHost.hostname : undefined;
-    let userGesUseCacheUserGes = userCountryCodeSelected === SEARCH_AUTO && this.cacheUserGes;
+    let userGesUseCacheUserGes = userCountryCodeSelected === SEARCH_AUTO && this.cacheGesUser;
     let serverGES: GES | undefined;
     let userGES: GES | undefined;
     if (cacheSrvKey && this.cacheGesByUrl.has(cacheSrvKey)) {
@@ -33,11 +35,11 @@ export class GESService {
     }
     if (userGesUseCacheUserGes) {
       logDebug('cache for user');
-      userGES = this.cacheUserGes;
+      userGES = this.cacheGesUser;
     } else {
       userGES = await this.getGESUser(userCountryCodeSelected, callApi);
       if (userCountryCodeSelected === SEARCH_AUTO && userGES) {
-        this.cacheUserGes = userGES;
+        this.cacheGesUser = userGES;
       }
     }
     const networkGES: GES = {
@@ -78,7 +80,13 @@ export class GESService {
     let carbonIntensity = undefined;
     try {
       if (countryCodeSelected == SEARCH_AUTO) {
-        location = await this.getLocation(url, serverType);
+        location = (url && url.host) ? this.cacheLocationByHost.get(url.host + serverType) : undefined;
+        if (!location) {
+          location = await this.getLocation(url, serverType);
+          if (url && url.host && location) {
+            this.cacheLocationByHost.set(url.host + serverType, location);
+          }
+        }
       } else {
         location = countryCodeSelected;
       }
@@ -111,7 +119,6 @@ export class GESService {
   }
 
   async getLocation(urlHost: URL | undefined, serverType: boolean) {
-    // TODO Cache
     return serverType ? await getServerZone(urlHost) : await getCurrentZone();
   }
 
