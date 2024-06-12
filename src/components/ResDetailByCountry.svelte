@@ -15,46 +15,48 @@
     <span class="title">{translate("resDetCountTitleHit")}</span>
   </div>
 
-  {#each measure.detailResourcesGes as detail, index}
-    <details id='level1' class:even={index % 2 === 0}>
-      <summary class="data">
-        <span class="import">{detail.ges?.display}</span>
-        <span>{formatEmission(detail.ges)}</span>
-        <span>{detail.hit}</span>
-      </summary>
-      <div class="title inner">
-        <span class="title">{translate("resDetHostTitleHost")}</span>
-        <span class="title">{translate("resDetHostTitleSize")}</span>
-        <span class="title">{translate("resDetHostTitleHit")}</span>
-      </div>
+  {#if measure.detailResourcesGes}
+    {#each measure.detailResourcesGes as detail, index}
+      <details id='level1' class:even={index % 2 === 0}>
+        <summary class="data">
+          <span class="import">{detail.ges?.display}</span>
+          <span>{formatEmission(detail.ges)}</span>
+          <span>{detail.hit}</span>
+        </summary>
+        <div class="title inner">
+          <span class="title">{translate("resDetHostTitleHost")}</span>
+          <span class="title">{translate("resDetHostTitleSize")}</span>
+          <span class="title">{translate("resDetHostTitleHit")}</span>
+        </div>
 
-      {#each detail.hostnames as host, index2}
-        <details id='level2' class:even={index2 % 2 === 0}>
-          <summary class="data">
-            <span class="import">{host.hostname}</span>
-            <span>{formatSizeTransferred(host.sizeTotal.size, host.sizeTotal.sizeUncompress)}</span>
-            <span>{host.details.length}</span>
-          </summary>
-          <div class="title inner">
-            <span class="title">{translate("resDetHostDTitleResource")}</span>
-            <span class="title">{translate("resDetHostDTitleUrl")}</span>
-            <span class="title">{translate("resDetHostDTitleSize")}</span>
-            <span class="title">{translate("resDetHostDTitleCache")}</span>
-          </div>
-
-          {#each host.details as req, index3}
-            <div id='level3' class="data {index3 % 2 === 0 ? 'even' : ''}">
-              <span class="import">{req.resource}</span>
-              <span>{req.url}</span>
-              <span>{formatSizeTransferred(req.size.size, req.size.sizeUncompress)}</span>
-              <span>{req.cache}</span>
+        {#each detail.hostnames as host, index2}
+          <details id='level2' class:even={index2 % 2 === 0}>
+            <summary class="data">
+              <span class="import">{host.hostname}</span>
+              <span>{formatSizeTransferred(host.sizeTotal.size, host.sizeTotal.sizeUncompress)}</span>
+              <span>{host.details.length}</span>
+            </summary>
+            <div class="title inner">
+              <span class="title">{translate("resDetHostDTitleResource")}</span>
+              <span class="title">{translate("resDetHostDTitleUrl")}</span>
+              <span class="title">{translate("resDetHostDTitleSize")}</span>
+              <span class="title">{translate("resDetHostDTitleCache")}</span>
             </div>
-          {/each}
-        </details>
-      {/each}
 
-    </details>
-  {/each}
+            {#each host.details as req, index3}
+              <div id='level3' class="data {index3 % 2 === 0 ? 'even' : ''}">
+                <span class="import">{req.resource}</span>
+                <span>{req.url}</span>
+                <span>{formatSizeTransferred(req.size.size, req.size.sizeUncompress)}</span>
+                <span>{req.cache}</span>
+              </div>
+            {/each}
+          </details>
+        {/each}
+
+      </details>
+    {/each}
+  {/if}
 </div>
 
 <style lang="scss">
@@ -98,7 +100,7 @@
       padding-left: 1rem;
     }
 
-    div#level3, details#level2 div.title.inner{
+    div#level3, details#level2 div.title.inner {
       padding-left: 2rem;
     }
 
