@@ -18,7 +18,7 @@ export const getCarbonIntensity = async (location: string | GeoLocation | undefi
   logDebug('Call Carbon intensity');
   let requestUrl = CO2_API;
   let params = '';
-  let cacheVal: number | undefined = undefined;
+  let cacheVal: Co2SignalResponse | undefined = undefined;
   if (typeof location === 'string') {
     params = `countryCode=${location}`;
   } else if (location.lon !== 0 && location.lat !== 0) {

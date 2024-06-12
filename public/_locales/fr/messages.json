@@ -442,5 +442,38 @@
   },
   "wuEquivalent": {
     "message": "Eau"
+  },
+  "resDetCountCaption": {
+    "message": "Analyse géographique"
+  },
+  "resDetCountTitleCountry": {
+    "message": "Pays"
+  },
+  "resDetCountTitleMix": {
+    "message": "Empreinte carbone"
+  },
+  "resDetCountTitleHit": {
+    "message": "Hit"
+  },
+  "resDetHostTitleHost": {
+    "message": "Domaine"
+  },
+  "resDetHostTitleSize": {
+    "message": "Poids Compressé/Décompressé"
+  },
+  "resDetHostTitleHit": {
+    "message": "Hit"
+  },
+  "resDetHostDTitleResource": {
+    "message": "Type"
+  },
+  "resDetHostDTitleUrl": {
+    "message": "Url"
+  },
+  "resDetHostDTitleSize": {
+    "message": "Poids"
+  },
+  "resDetHostDTitleCache": {
+    "message": "Caché"
   }
 }

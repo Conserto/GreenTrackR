@@ -442,5 +442,38 @@
   },
   "wuEquivalent": {
     "message": "Water"
+  },
+  "resDetCountCaption": {
+    "message": "Geographic analysis"
+  },
+  "resDetCountTitleCountry": {
+    "message": "Country"
+  },
+  "resDetCountTitleMix": {
+    "message": "Carbon footprint"
+  },
+  "resDetCountTitleHit": {
+    "message": "Hit"
+  },
+  "resDetHostTitleHost": {
+    "message": "Domain"
+  },
+  "resDetHostTitleSize": {
+    "message": "Size Compress/Uncompress"
+  },
+  "resDetHostTitleHit": {
+    "message": "Hit"
+  },
+  "resDetHostDTitleResource": {
+    "message": "Type"
+  },
+  "resDetHostDTitleUrl": {
+    "message": "Url"
+  },
+  "resDetHostDTitleSize": {
+    "message": "Size"
+  },
+  "resDetHostDTitleCache": {
+    "message": "Cached"
   }
 }

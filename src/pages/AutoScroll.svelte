@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, LoadingWheel, Modal, ResDetail, Select } from 'src/components';
+  import { Button, LoadingWheel, Modal, ResDetailByCountry, ResDetailByType, Select } from 'src/components';
   import { ButtonTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
   import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
   import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils/utils';
@@ -178,7 +178,7 @@
     <div class="detail-container">
       {#if currentMeasure?.complete}
         <div class="detail request">
-          <ResDetail
+          <ResDetailByType
             measure={currentMeasure}
             caption={translate("resDetCaption")}
             description={translate("resDetCaptionDescription")}
@@ -190,6 +190,12 @@
             chartLabel="barChartGES"
             yLabel="greenhouseGasesEmissionDefault"
             yLabel2="energyDefault"
+          />
+        </div>
+        <div class="detail request">
+          <ResDetailByCountry
+            measure={currentMeasure}
+            captionKey="resDetCountCaption"
           />
         </div>
       {/if}

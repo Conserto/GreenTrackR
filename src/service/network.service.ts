@@ -1,7 +1,7 @@
 import { PREFIX_URL_DATA, PREFIX_URL_EXTENSION } from '../const';
 import { logDebug, logWarn } from '../utils/log';
 import { getTabUrl } from '../utils';
-import type { DetailServer, DetailServerUrl, NetworkDetail } from '../interface';
+import type { DetailServer, DetailServerUrl, NetworkDetail, NetworkMeasure, NetworkResponse } from '../interface';
 
 export class NetworkService {
 
@@ -11,7 +11,7 @@ export class NetworkService {
       // TODO REVOIR histoire www
       try {
         // FIXME a revoir aussi
-        url = url.replace('blob:','');
+        url = url.replace('blob:', '');
         formattedUrl = new URL(url);
         if (formattedUrl.host.split('.').length <= 2) {
           formattedUrl.host = 'www.' + formattedUrl.host;
@@ -91,31 +91,45 @@ export class NetworkService {
     for (let index in Object.entries(detailServers)) {
       const key = Object.keys(detailServers)[index] ?? 'none';
       const mes = Object.values(detailServers)[index];
+      const { detail, size } = this.calculateDetailServerUrl(mes);
       resp.push({
         hostname: key,
         oneUrl: mes ? this.getUrl(mes[0].request.url) : undefined,
-        details: mes ? this.calculateDetailServerUrl(mes) : []
+        details: detail,
+        sizeTotal: size
       });
     }
     return resp;
   }
 
-  calculateDetailServerUrl(entries: HARFormatEntry[]) {
-    let resp: DetailServerUrl[] = [];
-    entries.forEach((entry: HARFormatEntry) => {
-      resp.push(
-        {
-          url: entry.request.url,
-          cache: this.isCacheCall(entry),
-          size: {
-            size: entry.response._transferSize || 0,
-            sizeUncompress: entry.response.content.size
-          },
-          resource: entry._resourceType || 'other'
-        }
-      );
-    });
-    return resp;
+  calculateDetailServerUrl(entries?: HARFormatEntry[]) {
+    let detail: DetailServerUrl[] = [];
+    let responsesSize = 0;
+    let responsesSizeCompress = 0;
+    if (entries) {
+      entries.forEach((entry: HARFormatEntry) => {
+        const size = entry.response._transferSize || 0;
+        const sizeUncompress = entry.response.content.size;
+        responsesSize += size;
+        responsesSizeCompress += sizeUncompress;
+        detail.push(
+          {
+            url: entry.request.url,
+            cache: this.isCacheCall(entry),
+            size: {
+              size: size,
+              sizeUncompress: sizeUncompress
+            },
+            resource: entry._resourceType || 'other'
+          }
+        );
+      });
+    }
+    const size: NetworkResponse = {
+      size: responsesSize,
+      sizeUncompress: responsesSizeCompress
+    };
+    return { detail, size };
   }
 
   /**

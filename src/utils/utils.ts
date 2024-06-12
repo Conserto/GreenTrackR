@@ -209,6 +209,14 @@ export const formatIntensity = (ges: GES | undefined) => {
   return formatted;
 };
 
+export const formatEmission = (ges: GES | undefined) => {
+  let formatted = '';
+  if (ges?.carbonIntensity) {
+    formatted = `${ges.carbonIntensity} ${Units.carbonEmissions}`;
+  }
+  return formatted;
+};
+
 export const formatGes = (ges: GES | undefined) => {
   let formatted = '';
   if (ges) {

@@ -21,18 +21,15 @@ export interface Measure {
 }
 
 export interface DetailServerGes {
-  hostname: string[];
+  hostnames: DetailServer[];
   ges?: GES;
-  details: DetailServerUrl[]
-}
-
-export interface DetailServerGesTmp extends DetailServerGes{
-  hostnameTmp: string;
+  hit: number;
 }
 
 export interface DetailServer {
   hostname: string;
   oneUrl?: URL;
+  sizeTotal: NetworkResponse;
   details: DetailServerUrl[]
 }
 

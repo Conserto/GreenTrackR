@@ -4,7 +4,7 @@ import { KWH_DEVICE, KWH_PER_BYTE_NETWORK, KWH_PER_REQUEST_DATA_CENTER } from 's
 import type {
   Co2SignalResponse,
   DetailedGeoLoc,
-  DetailServer, DetailServerGes, DetailServerGesTmp, DetailServerUrl,
+  DetailServer, DetailServerGes,
   EnergyMeasure,
   GES,
   NetworkResponse,
@@ -30,35 +30,25 @@ export class GESService {
   async computeGesDetailResource(countryCodeSelected: string, detailsServer?: DetailServer[], srvGes?: GES) {
     const defGes = countryCodeSelected === SEARCH_AUTO ? undefined : srvGes;
     const callApi = (window.navigator.onLine && getLocalStorageObject(paramTokenCo2));
-    let respTmp: DetailServerGesTmp[] = [];
+    let respTmp: Map<string, DetailServerGes> = new Map<string, DetailServerGes>();
     let resp: DetailServerGes[] = [];
     if (detailsServer) {
       for (const ds of detailsServer){
-        respTmp.push({
-          details: ds.details,
-          hostnameTmp: ds.hostname,
-          hostname: [],
-          ges: defGes ? defGes : await this.getGESServer(ds.oneUrl, countryCodeSelected, callApi)
-        });
-      }
-      const fusion = Object.groupBy(respTmp, ({ ges }) => ges?.countryCode ?? 'n/a');
-      for (let index in Object.entries(fusion)) {
-        const key = Object.keys(fusion)[index] ?? 'none';
-        const mes = Object.values(fusion)[index];
-        let hostnames: string[] = [];
-        let details: DetailServerUrl[] = [];
-        let ges: GES | undefined = undefined;
-        for (const ds of mes){
-          hostnames.push(ds.hostnameTmp);
-          ges = ges ? ges : ds.ges;
-          details = details.concat(ds.details);
+        const ges = defGes ? defGes : await this.getGESServer(ds.oneUrl, countryCodeSelected, callApi);
+        let detailServerGes = respTmp.get(ges?.countryCode || '-');
+        if (detailServerGes){
+          detailServerGes.hostnames.push(ds);
+          detailServerGes.hit += ds.details.length;
+        } else {
+          detailServerGes = {
+            hostnames: [ds],
+            ges: ges,
+            hit: ds.details.length
+          };
         }
-        resp.push({
-          hostname: hostnames,
-          ges: ges,
-          details: details
-        });
+        respTmp.set(ges?.countryCode || '-', detailServerGes);
       }
+      resp = [ ...respTmp.values()];
     }
     return resp;
   }

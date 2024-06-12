@@ -9,4 +9,5 @@ export { default as Alert } from './Alert.svelte';
 export { default as Footer } from './Footer.svelte';
 export { default as Histogram } from './Histogram.svelte';
 export { default as SynthesisTable } from './Synthesis.svelte';
-export { default as ResDetail } from './ResDetail.svelte';
+export { default as ResDetailByType } from './ResDetailByType.svelte';
+export { default as ResDetailByCountry } from './ResDetailByCountry.svelte';
