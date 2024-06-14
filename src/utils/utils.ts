@@ -185,7 +185,7 @@ export const formatUriOnly = (url: string | undefined) => {
   let formatted = '';
   try {
     const urlC = new URL(url ?? '');
-    formatted = urlC.pathname;
+    formatted = urlC.pathname.substring(urlC.pathname.lastIndexOf('/'));
   } catch (e) {
 
   }
@@ -369,7 +369,7 @@ export const scrollPrompt = (topPrompt: number, leftPrompt: number, timeout: num
     window.scrollBy({ left: leftPrompt, top: topPrompt, behavior: 'smooth' });
     return new Promise<void>((resolve, reject) => {
       const failed = setTimeout(() => {
-        reject();
+        reject(Error("Timeout"));
       }, timeout);
       window.addEventListener('scrollend', () => {
         clearTimeout(failed);
