@@ -21,8 +21,8 @@
   <ul class="detail-country-container">
     {#each measure.detailResourcesGes as detail, index}
       <li>
-        <details id='level1' class:even={index % 2 === 0}>
-          <summary class="data">
+        <details id='level1'>
+          <summary class="data" class:even={index % 2 === 0}>
             <span class="import">{detail.ges?.display}</span>
             <span>{formatEmission(detail.ges)}</span>
             <span class="import">{detail.hit} {translate("resDetCountTitleHit")}</span>
@@ -30,8 +30,8 @@
           <ul>
             {#each detail.hostnames as host, index2}
               <li>
-                <details id='level2' class:even={index2 % 2 === 0}>
-                  <summary class="data">
+                <details id='level2'>
+                  <summary class="data" class:even={index2 % 2 === 0}>
                     <span class="import">{host.hostname}</span>
                     <span>{formatSizeTransferredWithUnit(host.sizeTotal.size, host.sizeTotal.sizeUncompress)}</span>
                     <span class="import">{host.details.length} {translate("resDetCountTitleHit")}</span>
@@ -101,10 +101,6 @@
 
     #level3 {
       padding-left: 2rem;
-    }
-
-    li.even, details.even summary {
-      background-color: var(--color--light-grey);
     }
   }
 </style>

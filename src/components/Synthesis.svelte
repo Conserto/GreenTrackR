@@ -339,7 +339,4 @@
     }
   }
 
-  .even {
-    background-color: var(--color--light-grey);
-  }
 </style>

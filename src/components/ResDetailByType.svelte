@@ -135,8 +135,4 @@
     padding-inline-start: 1rem;
     text-align: left;
   }
-
-  .even {
-    background-color: var(--color--light-grey);
-  }
 </style>
