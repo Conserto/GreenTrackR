@@ -1,7 +1,16 @@
 import { getCarbonIntensity, getCurrentZone, getServerZone } from 'src/api';
 import { codeZone } from 'src/assets/data/codeZone';
 import { KWH_DEVICE, KWH_PER_BYTE_NETWORK, KWH_PER_REQUEST_DATA_CENTER } from 'src/const/measure.const';
-import type { DetailedGeoLoc, EnergyMeasure, GES, NetworkResponse, ResTotals, Zone } from 'src/interface';
+import type {
+  Co2SignalResponse,
+  DetailedGeoLoc,
+  DetailServer, DetailServerGes,
+  EnergyMeasure,
+  GES,
+  NetworkResponse,
+  ResTotals,
+  Zone
+} from 'src/interface';
 import { logDebug, logErr } from '../utils/log';
 import { SEARCH_AUTO } from '../const/key.const';
 import { getLocalStorageObject } from '../utils';
@@ -16,6 +25,32 @@ export class GESService {
   constructor() {
     this.cacheGesByUrl = new Map<string, GES>();
     this.cacheLocationByHost = new Map<string, DetailedGeoLoc>;
+  }
+
+  async computeGesDetailResource(countryCodeSelected: string, detailsServer?: DetailServer[], srvGes?: GES) {
+    const defGes = countryCodeSelected === SEARCH_AUTO ? undefined : srvGes;
+    const callApi = (window.navigator.onLine && getLocalStorageObject(paramTokenCo2));
+    let respTmp: Map<string, DetailServerGes> = new Map<string, DetailServerGes>();
+    let resp: DetailServerGes[] = [];
+    if (detailsServer) {
+      for (const ds of detailsServer){
+        const ges = defGes ? defGes : await this.getGESServer(ds.oneUrl, countryCodeSelected, callApi);
+        let detailServerGes = respTmp.get(ges?.countryCode || '-');
+        if (detailServerGes){
+          detailServerGes.hostnames.push(ds);
+          detailServerGes.hit += ds.details.length;
+        } else {
+          detailServerGes = {
+            hostnames: [ds],
+            ges: ges,
+            hit: ds.details.length
+          };
+        }
+        respTmp.set(ges?.countryCode || '-', detailServerGes);
+      }
+      resp = [ ...respTmp.values()];
+    }
+    return resp;
   }
 
   async computeGES(countryCodeSelected: string, userCountryCodeSelected: string, urlHost?: URL) {
@@ -77,7 +112,7 @@ export class GESService {
   async getGES(url: URL | undefined, serverType: boolean, countryCodeSelected: string, callApi: boolean): Promise<GES | undefined> {
     let ges: GES | undefined = undefined;
     let location: DetailedGeoLoc | string | undefined = undefined;
-    let carbonIntensity = undefined;
+    let carbonResponse: Co2SignalResponse | undefined = undefined;
     try {
       if (countryCodeSelected == SEARCH_AUTO) {
         location = (url && url.host) ? this.cacheLocationByHost.get(url.host + serverType) : undefined;
@@ -91,17 +126,18 @@ export class GESService {
         location = countryCodeSelected;
       }
       if (callApi) {
-        carbonIntensity = await getCarbonIntensity(location);
+        carbonResponse = await getCarbonIntensity(location);
       }
       const zone: Zone | undefined = this.findZoneFromLocation(typeof location === 'string' ? location : location?.countryCode || '');
       const city = typeof location === 'string' ? undefined : location?.cityName;
       if (zone) {
+        logDebug(`Retour: ${carbonResponse?.countryCode} || ${zone.zoneAlpha2} || ${countryCodeSelected}`);
         ges = {
-          countryCode: zone.zoneAlpha2 || countryCodeSelected,
+          countryCode: carbonResponse?.countryCode || zone.zoneAlpha2 || countryCodeSelected,
           countryName: zone.countryName,
           cityName: city,
           display: this.getDisplayZone(city, zone.countryName),
-          carbonIntensity: carbonIntensity || zone.carbonFactor,
+          carbonIntensity:  carbonResponse?.carbonIntensity || zone.carbonFactor,
           wu: zone.wu ? zone.wu * 1000 : undefined,
           adpe: zone.adpe ? zone.adpe * 1000 * 1000 : undefined
         };

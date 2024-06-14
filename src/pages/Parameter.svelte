@@ -22,7 +22,7 @@
   });
 
   const onSaveParameters = () => {
-    setLocalStorageObject(paramTokenCo2, co2TokenStr);
+    setLocalStorageObject(paramTokenCo2, co2TokenStr.trim());
     setLocalStorageObject(paramRetry, nbRetryStr);
     showModal = true;
   };

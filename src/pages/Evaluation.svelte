@@ -1,7 +1,14 @@
 <script lang="ts">
   import { ButtonTypeEnum } from 'src/enum';
   import { GesResults, HistoricResults } from 'src/components/GES/results';
-  import { Button, Histogram, LoadingWheel, Modal, ResDetail } from 'src/components';
+  import {
+    Button,
+    Histogram,
+    LoadingWheel,
+    Modal,
+    ResDetailByCountry,
+    ResDetailByType
+  } from 'src/components';
   import { ZoneSimulation } from 'src/components/GES';
   import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils/utils';
   import { savedMeasures } from 'src/const';
@@ -122,7 +129,7 @@
         </div>
       {:else if currentMeasure?.complete}
         <div class="detail request">
-          <ResDetail
+          <ResDetailByType
             measure={currentMeasure}
             caption={translate("resDetCaption")}
             description={translate("resDetCaptionDescription")}
@@ -134,6 +141,12 @@
             chartLabel="barChartGES"
             yLabel="greenhouseGasesEmissionDefault"
             yLabel2="energyDefault"
+          />
+        </div>
+        <div class="detail request">
+          <ResDetailByCountry
+            measure={currentMeasure}
+            captionKey="resDetCountCaption"
           />
         </div>
       {/if}

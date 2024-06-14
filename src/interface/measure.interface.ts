@@ -12,10 +12,32 @@ export interface Measure {
   dom: number;
   userGES?: GES;
   serverGES?: GES;
+  detailResources?: DetailServer[];
+  detailResourcesGes?: DetailServerGes[];
   networkGES?: GES;
   networkMeasure: NetworkMeasure;
   extensionMeasure: NetworkMeasure;
   complete: boolean;
+}
+
+export interface DetailServerGes {
+  hostnames: DetailServer[];
+  ges?: GES;
+  hit: number;
+}
+
+export interface DetailServer {
+  hostname: string;
+  oneUrl?: URL;
+  sizeTotal: NetworkResponse;
+  details: DetailServerUrl[]
+}
+
+export interface DetailServerUrl {
+  url: string;
+  size: NetworkResponse;
+  resource: string;
+  cache: boolean;
 }
 
 export interface NetworkMeasure {
