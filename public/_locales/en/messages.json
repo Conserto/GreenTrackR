@@ -444,7 +444,7 @@
     "message": "Water"
   },
   "resDetCountCaption": {
-    "message": "Geographic analysis"
+    "message": "Geolocation of resources"
   },
   "resDetCountTitleCountry": {
     "message": "Country"

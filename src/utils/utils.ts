@@ -181,6 +181,17 @@ export const formatShortUrl = (url: string | undefined) => {
   return formatted;
 };
 
+export const formatUriOnly = (url: string | undefined) => {
+  let formatted = '';
+  try {
+    const urlC = new URL(url ?? '');
+    formatted = urlC.pathname;
+  } catch (e) {
+
+  }
+  return formatted;
+};
+
 export const formatSimulationLabel = (zone: Zone | undefined) => {
   return `${zone?.countryName} (${formatNumber(zone?.carbonFactor)} ${Units.carbonIntensity})`;
 };
@@ -188,6 +199,14 @@ export const formatSimulationLabel = (zone: Zone | undefined) => {
 export const formatSizeTransferred = (netSize: number, netUncompressSize: number) => {
   if (netSize > 0 || netUncompressSize > 0) {
     return `${formatSize(netSize)} / ${formatSize(netUncompressSize)}`;
+  } else {
+    return '';
+  }
+};
+
+export const formatSizeTransferredWithUnit = (netSize: number, netUncompressSize: number) => {
+  if (netSize > 0 || netUncompressSize > 0) {
+    return `${formatSize(netSize)}${Units.pageSize}-${formatSize(netUncompressSize)}${Units.pageSize}`;
   } else {
     return '';
   }

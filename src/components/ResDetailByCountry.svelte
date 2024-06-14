@@ -1,6 +1,12 @@
 <script lang="ts">
   import type { Measure } from '../interface';
-  import { formatEmission, formatSizeTransferred, translate } from '../utils';
+  import {
+    formatEmission,
+    formatSizeTransferred,
+    formatSizeTransferredWithUnit,
+    formatUriOnly,
+    translate
+  } from '../utils';
 
   export let measure: Measure;
   export let captionKey: string = '';
@@ -10,9 +16,9 @@
 
 <div class="detail-country-container">
   <div class="title">
-    <span class="title">{translate("resDetCountTitleCountry")}</span>
-    <span class="title">{translate("resDetCountTitleMix")}</span>
-    <span class="title">{translate("resDetCountTitleHit")}</span>
+    <!--<span class="title">{translate("resDetCountTitleCountry")}</span>-->
+    <!--<span class="title">{translate("resDetCountTitleMix")}</span>
+    <span class="title">{translate("resDetCountTitleHit")}</span>-->
   </div>
 
   {#if measure.detailResourcesGes}
@@ -20,35 +26,45 @@
       <details id='level1' class:even={index % 2 === 0}>
         <summary class="data">
           <span class="import">{detail.ges?.display}</span>
+          <span class="import"> / </span>
           <span>{formatEmission(detail.ges)}</span>
-          <span>{detail.hit}</span>
+          <span class="import"> / </span>
+          <span>{detail.hit} {translate("resDetCountTitleHit")}</span>
         </summary>
         <div class="title inner">
-          <span class="title">{translate("resDetHostTitleHost")}</span>
+<!--          <span class="title">{translate("resDetHostTitleHost")}</span>
           <span class="title">{translate("resDetHostTitleSize")}</span>
-          <span class="title">{translate("resDetHostTitleHit")}</span>
+          <span class="title">{translate("resDetHostTitleHit")}</span>-->
         </div>
 
         {#each detail.hostnames as host, index2}
           <details id='level2' class:even={index2 % 2 === 0}>
             <summary class="data">
               <span class="import">{host.hostname}</span>
-              <span>{formatSizeTransferred(host.sizeTotal.size, host.sizeTotal.sizeUncompress)}</span>
-              <span>{host.details.length}</span>
+              <span class="import"> / </span>
+              <span>{formatSizeTransferredWithUnit(host.sizeTotal.size, host.sizeTotal.sizeUncompress)}</span>
+              <span class="import"> / </span>
+              <span>{host.details.length} {translate("resDetCountTitleHit")}</span>
             </summary>
             <div class="title inner">
-              <span class="title">{translate("resDetHostDTitleResource")}</span>
+<!--              <span class="title">{translate("resDetHostDTitleResource")}</span>
               <span class="title">{translate("resDetHostDTitleUrl")}</span>
               <span class="title">{translate("resDetHostDTitleSize")}</span>
-              <span class="title">{translate("resDetHostDTitleCache")}</span>
+              <span class="title">{translate("resDetHostDTitleCache")}</span>-->
             </div>
 
             {#each host.details as req, index3}
               <div id='level3' class="data {index3 % 2 === 0 ? 'even' : ''}">
                 <span class="import">{req.resource}</span>
-                <span>{req.url}</span>
-                <span>{formatSizeTransferred(req.size.size, req.size.sizeUncompress)}</span>
-                <span>{req.cache}</span>
+                <span class="import"> / </span>
+                <!--<span class="fullurl">{req.url}</span>-->
+                <span>{formatUriOnly(req.url)}</span>
+                <span class="import"> / </span>
+                <span>{formatSizeTransferredWithUnit(req.size.size, req.size.sizeUncompress)}</span>
+                {#if req.cache}
+                  <span class="import"> / </span>
+                  <span>({translate("resDetHostDTitleCache")})</span>
+                {/if}
               </div>
             {/each}
           </details>
@@ -81,7 +97,7 @@
         font-weight: bold;
 
         &:not(:first-child) {
-          border-left-style: groove;
+          /*border-left-style: groove;*/
         }
       }
     }
@@ -91,7 +107,7 @@
         padding: calc(var(--spacing--xs) / 2);
 
         &:not(:first-child) {
-          border-left-style: groove;
+          /*border-left-style: groove;*/
         }
       }
     }

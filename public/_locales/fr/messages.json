@@ -444,7 +444,7 @@
     "message": "Eau"
   },
   "resDetCountCaption": {
-    "message": "Analyse géographique"
+    "message": "Géolocalisation des ressources"
   },
   "resDetCountTitleCountry": {
     "message": "Pays"
@@ -453,7 +453,7 @@
     "message": "Empreinte carbone"
   },
   "resDetCountTitleHit": {
-    "message": "Hit"
+    "message": "requêtes"
   },
   "resDetHostTitleHost": {
     "message": "Domaine"
