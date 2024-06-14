@@ -29,7 +29,7 @@
           <span class="import"> / </span>
           <span>{formatEmission(detail.ges)}</span>
           <span class="import"> / </span>
-          <span>{detail.hit} {translate("resDetCountTitleHit")}</span>
+          <span class="import">{detail.hit} {translate("resDetCountTitleHit")}</span>
         </summary>
         <div class="title inner">
 <!--          <span class="title">{translate("resDetHostTitleHost")}</span>
@@ -44,7 +44,7 @@
               <span class="import"> / </span>
               <span>{formatSizeTransferredWithUnit(host.sizeTotal.size, host.sizeTotal.sizeUncompress)}</span>
               <span class="import"> / </span>
-              <span>{host.details.length} {translate("resDetCountTitleHit")}</span>
+              <span class="import">{host.details.length} {translate("resDetCountTitleHit")}</span>
             </summary>
             <div class="title inner">
 <!--              <span class="title">{translate("resDetHostDTitleResource")}</span>
@@ -60,10 +60,10 @@
                 <!--<span class="fullurl">{req.url}</span>-->
                 <span>{formatUriOnly(req.url)}</span>
                 <span class="import"> / </span>
-                <span>{formatSizeTransferredWithUnit(req.size.size, req.size.sizeUncompress)}</span>
+                <span class="import">{formatSizeTransferredWithUnit(req.size.size, req.size.sizeUncompress)}</span>
                 {#if req.cache}
                   <span class="import"> / </span>
-                  <span>({translate("resDetHostDTitleCache")})</span>
+                  <span >{translate("resDetHostDTitleCache")}</span>
                 {/if}
               </div>
             {/each}
