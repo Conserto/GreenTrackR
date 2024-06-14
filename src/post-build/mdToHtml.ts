@@ -1,5 +1,5 @@
 import { readdir, readFileSync, writeFile } from 'fs';
-import { logErr, logInfo } from '../utils/log';
+import { logErr, logInfo } from 'src/utils';
 import showdown from 'showdown';
 
 const SOURCE_MD_FOLDER = './descriptions/';

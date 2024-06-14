@@ -4,17 +4,27 @@ import { KWH_DEVICE, KWH_PER_BYTE_NETWORK, KWH_PER_REQUEST_DATA_CENTER } from 's
 import type {
   Co2SignalResponse,
   DetailedGeoLoc,
-  DetailServer, DetailServerGes,
+  DetailServer,
+  DetailServerGes,
   EnergyMeasure,
   GES,
   NetworkResponse,
   ResTotals,
+  SimpleGES,
   Zone
 } from 'src/interface';
-import { logDebug, logErr } from '../utils/log';
-import { SEARCH_AUTO } from '../const/key.const';
-import { getLocalStorageObject } from '../utils';
-import { paramTokenCo2 } from '../const';
+import {
+  computeResources,
+  formatDisplayZone,
+  getAdpeUnit,
+  getAverageValue,
+  getLocalStorageObject, getRealCall,
+  getWuUnit,
+  logDebug,
+  logErr
+} from 'src/utils';
+import { SEARCH_AUTO } from 'src/const/key.const';
+import { paramTokenCo2 } from 'src/const';
 
 export class GESService {
 
@@ -33,22 +43,24 @@ export class GESService {
     let respTmp: Map<string, DetailServerGes> = new Map<string, DetailServerGes>();
     let resp: DetailServerGes[] = [];
     if (detailsServer) {
-      for (const ds of detailsServer){
+      for (const ds of detailsServer) {
         const ges = defGes ? defGes : await this.getGESServer(ds.oneUrl, countryCodeSelected, callApi);
         let detailServerGes = respTmp.get(ges?.countryCode || '-');
-        if (detailServerGes){
+        if (detailServerGes) {
           detailServerGes.hostnames.push(ds);
           detailServerGes.hit += ds.details.length;
+          detailServerGes.hitReal += getRealCall(ds.details);
         } else {
           detailServerGes = {
             hostnames: [ds],
             ges: ges,
-            hit: ds.details.length
+            hit: ds.details.length,
+            hitReal: getRealCall(ds.details)
           };
         }
         respTmp.set(ges?.countryCode || '-', detailServerGes);
       }
-      resp = [ ...respTmp.values()];
+      resp = [...respTmp.values()];
     }
     return resp;
   }
@@ -77,26 +89,7 @@ export class GESService {
         this.cacheGesUser = userGES;
       }
     }
-    const networkGES: GES = {
-      countryCode: '', countryName: '',
-      display: serverGES?.display?.split(',')[0] + ' -- ' + userGES?.display?.split(',')[0],
-      carbonIntensity: ((userGES?.carbonIntensity || 0) + (serverGES?.carbonIntensity || 0)) / 2,
-      wu: ((userGES?.wu || 0) + (serverGES?.wu || 0)) / 2,
-      adpe: ((userGES?.adpe || 0) + (serverGES?.adpe || 0)) / 2
-    };
-    return { serverGES, userGES, networkGES };
-  }
-
-  getDisplayZone(cityName: string | undefined, countryName: string | undefined) {
-    let value: string = '-';
-    if (cityName && countryName) {
-      value = cityName + ', ' + countryName;
-    } else if (countryName) {
-      value = countryName;
-    } else if (cityName) {
-      value = cityName;
-    }
-    return value;
+    return { serverGES, userGES };
   }
 
   async getGESServer(url: URL | undefined, countryCodeSelected: string, callApi: boolean): Promise<GES | undefined> {
@@ -136,10 +129,10 @@ export class GESService {
           countryCode: carbonResponse?.countryCode || zone.zoneAlpha2 || countryCodeSelected,
           countryName: zone.countryName,
           cityName: city,
-          display: this.getDisplayZone(city, zone.countryName),
-          carbonIntensity:  carbonResponse?.carbonIntensity || zone.carbonFactor,
-          wu: zone.wu ? zone.wu * 1000 : undefined,
-          adpe: zone.adpe ? zone.adpe * 1000 * 1000 : undefined
+          display: formatDisplayZone(city, zone.countryName),
+          carbonIntensity: carbonResponse?.carbonIntensity || zone.carbonFactor,
+          wu: zone.wu ? getWuUnit(zone.wu) : undefined,
+          adpe: zone.adpe ? getAdpeUnit(zone.adpe) : undefined
         };
       }
     } catch (error) {
@@ -158,7 +151,7 @@ export class GESService {
     return serverType ? await getServerZone(urlHost) : await getCurrentZone();
   }
 
-  getEnergyAndResources(network: NetworkResponse, nbRequest: number, zoneGES?: GES, userGES?: GES, networkGES?: GES): {
+  getEnergyAndResources(network: NetworkResponse, nbRequest: number, zoneGES?: SimpleGES, userGES?: GES, networkGES?: SimpleGES): {
     ges: ResTotals;
     wu: ResTotals;
     adpe: ResTotals;
@@ -176,23 +169,10 @@ export class GESService {
     };
 
     return {
-      ges: this.getResources(userGES?.carbonIntensity, zoneGES?.carbonIntensity, networkGES?.carbonIntensity, enrgy),
-      wu: this.getResources(userGES?.wu, zoneGES?.wu, networkGES?.wu, enrgy),
-      adpe: this.getResources(userGES?.adpe, zoneGES?.adpe, networkGES?.adpe, enrgy),
+      ges: computeResources(userGES?.carbonIntensity, zoneGES?.carbonIntensity, networkGES?.carbonIntensity, enrgy),
+      wu: computeResources(userGES?.wu, zoneGES?.wu, networkGES?.wu, enrgy),
+      adpe: computeResources(userGES?.adpe, zoneGES?.adpe, networkGES?.adpe, enrgy),
       energy: enrgy
-    };
-  }
-
-  getResources(usrResource: number | undefined, srvResource: number | undefined, netResource: number | undefined, energy: EnergyMeasure): ResTotals {
-    const dataCenterTotal = srvResource ? energy.kWhDataCenter * srvResource : undefined;
-    const networkTotal = netResource ? energy.kWhNetwork * netResource : undefined;
-    const deviceTotal = usrResource ? energy.kWhDevice * usrResource : undefined;
-    const pageTotal = (dataCenterTotal ? dataCenterTotal : 0) + (networkTotal ? networkTotal : 0) + (deviceTotal ? deviceTotal : 0);
-    return {
-      dataCenterTotal: dataCenterTotal,
-      networkTotal: networkTotal,
-      deviceTotal: deviceTotal,
-      pageTotal: pageTotal
     };
   }
 

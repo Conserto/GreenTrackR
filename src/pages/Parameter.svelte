@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { getLocalStorageObject, setLocalStorageObject, translate } from 'src/utils/utils';
+  import { getLocalStorageObject, setLocalStorageObject, translate } from 'src/utils';
   import { ButtonTypeEnum, InputTypeEnum } from '../enum';
   import { Input, Modal } from '../components';
   import Button from '../components/Button.svelte';
   import { onMount } from 'svelte';
   import { paramRetry, paramTokenCo2 } from '../const';
   import { VITE_MAX_HAR_RETRIES_DEFAULT } from '../const/config.const';
-  import { logDebug } from '../utils/log';
+  import { logDebug } from 'src/utils';
 
   let showModal = false;
 

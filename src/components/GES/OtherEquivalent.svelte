@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Units } from 'src/const';
   import type { Measure } from 'src/interface';
-  import { translate } from '../../utils';
+  import { translate } from 'src/utils';
 
   export let measure: Measure | undefined;
   export let caption: string = '';

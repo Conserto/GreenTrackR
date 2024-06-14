@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { translate } from 'src/utils/utils';
+  import { translate } from 'src/utils';
   import { createEventDispatcher } from 'svelte';
 
   export let isActive: boolean;

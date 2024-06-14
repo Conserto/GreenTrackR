@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getSurHead, translate } from 'src/utils/utils';
+  import { getSurHead, translate } from 'src/utils';
   import type { TableData, TableHeader } from 'src/interface/table.interface';
   import Button from './Button.svelte';
   import { ButtonTypeEnum } from 'src/enum';

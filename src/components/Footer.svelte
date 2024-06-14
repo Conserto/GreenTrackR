@@ -1,5 +1,5 @@
 <script>
-  import { translate } from 'src/utils/utils';
+  import { translate } from 'src/utils';
 </script>
 
 <footer role="contentinfo">

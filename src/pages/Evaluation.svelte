@@ -10,9 +10,9 @@
     ResDetailByType
   } from 'src/components';
   import { ZoneSimulation } from 'src/components/GES';
-  import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils/utils';
+  import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils';
   import { savedMeasures } from 'src/const';
-  import { cleanCache, reloadCurrentTab } from 'src/utils/chrome.utils';
+  import { cleanCache, reloadCurrentTab } from 'src/utils';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
   import { SEARCH_AUTO } from '../const/key.const';
   import type { HistoData, Measure } from '../interface';

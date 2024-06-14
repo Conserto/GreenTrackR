@@ -3,9 +3,9 @@
   import { ButtonTypeEnum } from 'src/enum';
   import { Button, Modal, Table } from 'src/components';
   import { export_data } from 'src/service';
-  import { formatGesMeasuresForTable, getLocalStorageObject, setLocalStorageObject, translate } from 'src/utils/utils';
+  import { formatGesMeasuresForTable, getLocalStorageObject, setLocalStorageObject, translate } from 'src/utils';
   import { onMount } from 'svelte';
-  import type { Measure, TableData } from '../../../interface';
+  import type { Measure, TableData } from 'src/interface';
 
   let formattedData: Map<string, TableData>[];
   let measures: Measure[] = [];

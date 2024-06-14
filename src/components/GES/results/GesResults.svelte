@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { Measure } from 'src/interface';
   import { CO2Equivalent, OtherEquivalent, ScoreTag } from 'src/components/GES';
-  import VisitsEquivalent from '../VisitsEquivalent.svelte';
-  import { AlertTypeEnum } from '../../../enum';
-  import { Alert } from '../../index';
-  import { translate } from '../../../utils';
+  import VisitsEquivalent from 'src/components/GES/VisitsEquivalent.svelte';
+  import { AlertTypeEnum } from 'src/enum';
+  import { Alert } from 'src/components/index';
+  import { translate } from 'src/utils';
 
   export let measure: Measure | undefined;
   export let caption: string = '';
