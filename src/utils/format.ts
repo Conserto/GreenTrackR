@@ -39,7 +39,7 @@ export const formatSize = (value?: number): string => {
 
 export const formatScoreForGrade = (score?: number) => {
   return score ? `${Math.round(score)}/100` : '-';
-}
+};
 
 export const formatGesMeasuresForTable = (measures: Measure[], add?: Map<string, TableData>): Map<string, TableData>[] => {
   return measures.map((measure): Map<string, TableData> => {
@@ -147,7 +147,7 @@ export const formatIntensity = (ges: GES | undefined) => {
 export const formatEmission = (ges: GES | undefined) => {
   let formatted = '';
   if (ges?.carbonIntensity) {
-    formatted = `${ges.carbonIntensity} ${Units.carbonEmissions}`;
+    formatted = `${ges.carbonIntensity} ${Units.carbonIntensity}`;
   }
   return formatted;
 };
