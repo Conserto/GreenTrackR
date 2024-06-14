@@ -239,6 +239,18 @@
   "resDetCaptionDescription": {
     "message": "Les ressources utilisées par la page analysée sont présentées dans la première colonne du tableau suivant. La partie serveur est subdivisé en 3 colonnes qui représente le nombre de requêtes en cache, puis celles sans cache et enfin un pourcentage de la part de chaque ressource. Ensuite, la partie réseaux présentent le poids de la ressource compressée transférée, ainsi que son pourcentage. Enfin, la partie client contient le poids de la page décompressé téléchargée ainsi que son pourcentage."
   },
+  "resDetCountCaption": {
+    "message": "Géolocalisation des ressources"
+  },
+  "resDetCountrySwitchUrl": {
+    "message": "Afficher/cacher l'URL complète"
+  },
+  "resDetCountTitleHit": {
+    "message": "requêtes"
+  },
+  "resDetHostDTitleCache": {
+    "message": "En cache"
+  },
   "resDetSubTitleCliPercent": {
     "message": "Pourcentage"
   },
@@ -442,38 +454,5 @@
   },
   "wuEquivalent": {
     "message": "Eau"
-  },
-  "resDetCountCaption": {
-    "message": "Géolocalisation des ressources"
-  },
-  "resDetCountTitleCountry": {
-    "message": "Pays"
-  },
-  "resDetCountTitleMix": {
-    "message": "Empreinte carbone"
-  },
-  "resDetCountTitleHit": {
-    "message": "requêtes"
-  },
-  "resDetHostTitleHost": {
-    "message": "Domaine"
-  },
-  "resDetHostTitleSize": {
-    "message": "Poids Compressé/Décompressé"
-  },
-  "resDetHostTitleHit": {
-    "message": "Hit"
-  },
-  "resDetHostDTitleResource": {
-    "message": "Type"
-  },
-  "resDetHostDTitleUrl": {
-    "message": "Url"
-  },
-  "resDetHostDTitleSize": {
-    "message": "Poids"
-  },
-  "resDetHostDTitleCache": {
-    "message": "En cache"
   }
 }
