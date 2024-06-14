@@ -8,7 +8,6 @@
   export let captionKey: string = '';
 
   let fullUrl = false;
-  let lightUrl = '';
 
   const switchUrl = async () => {
     fullUrl = !fullUrl;
@@ -20,49 +19,58 @@
 
 {#if measure.detailResourcesGes}
   <ul class="detail-country-container">
-  {#each measure.detailResourcesGes as detail, index}
-    <li>
-      <details id='level1' class:even={index % 2 === 0}>
-        <summary class="data">
-          <span class="import">{detail.ges?.display}</span>
-          <span>{formatEmission(detail.ges)}</span>
-          <span class="import">{detail.hit} {translate("resDetCountTitleHit")}</span>
-        </summary>
-        <ul>
-        {#each detail.hostnames as host, index2}
-          <li>
-            <details id='level2' class:even={index2 % 2 === 0}>
-              <summary class="data">
-                <span class="import">{host.hostname}</span>
-                <span>{formatSizeTransferredWithUnit(host.sizeTotal.size, host.sizeTotal.sizeUncompress)}</span>
-                <span class="import">{host.details.length} {translate("resDetCountTitleHit")}</span>
-              </summary>
-              <ul>
-              {#each host.details as req, index3}
-                <li id='level3' class="data {index3 % 2 === 0 ? 'even' : ''}">
-                  <span class="import">{req.resource}</span>
-                  <span class:hide={!fullUrl}>{req.url}</span>
-                  <span class:hide={fullUrl}>{formatUriOnly(req.url)}</span>
-                  <span class="import">{formatSizeTransferredWithUnit(req.size.size, req.size.sizeUncompress)}</span>
-                  {#if req.cache}
-                    <span>{translate("resDetHostDTitleCache")}</span>
-                  {/if}
-                </li>
-              {/each}
-              </ul>
-            </details>
-          </li>
-        {/each}
-        </ul>
-      </details>
-    </li>
-  {/each}
-  <Button
-    on:buttonClick={switchUrl}
-    buttonType={ButtonTypeEnum.PRIMARY}
-    translateKey={'resDetCountrySwitchUrl'}
-  />
-</ul>
+    {#each measure.detailResourcesGes as detail, index}
+      <li>
+        <details id='level1' class:even={index % 2 === 0}>
+          <summary class="data">
+            <span class="import">{detail.ges?.display}</span>
+            <span>{formatEmission(detail.ges)}</span>
+            <span class="import">{detail.hit} {translate("resDetCountTitleHit")}</span>
+          </summary>
+          <ul>
+            {#each detail.hostnames as host, index2}
+              <li>
+                <details id='level2' class:even={index2 % 2 === 0}>
+                  <summary class="data">
+                    <span class="import">{host.hostname}</span>
+                    <span>{formatSizeTransferredWithUnit(host.sizeTotal.size, host.sizeTotal.sizeUncompress)}</span>
+                    <span class="import">{host.details.length} {translate("resDetCountTitleHit")}</span>
+                  </summary>
+                  <ul>
+                    {#each host.details as req, index3}
+                      <li id='level3' class="data {index3 % 2 === 0 ? 'even' : ''}">
+                        <span class="import">{req.resource}</span>
+                        <span class:hide={!fullUrl}>{req.url}</span>
+                        <span class:hide={fullUrl}>{formatUriOnly(req.url)}</span>
+                        <span
+                          class="import">{formatSizeTransferredWithUnit(req.size.size, req.size.sizeUncompress)}</span>
+                        {#if req.cache}
+                          <span>{translate("resDetHostDTitleCache")}</span>
+                        {/if}
+                      </li>
+                    {/each}
+                  </ul>
+                </details>
+              </li>
+            {/each}
+          </ul>
+        </details>
+      </li>
+    {/each}
+    {#if fullUrl}
+      <Button
+        on:buttonClick={switchUrl}
+        buttonType={ButtonTypeEnum.PRIMARY}
+        translateKey={'resDetCountrySwitchUrlHide'}
+      />
+    {:else }
+      <Button
+        on:buttonClick={switchUrl}
+        buttonType={ButtonTypeEnum.PRIMARY}
+        translateKey={'resDetCountrySwitchUrlShow'}
+      />
+    {/if}
+  </ul>
 {/if}
 
 <style lang="scss">
@@ -70,6 +78,7 @@
     padding-inline-start: 0;
     list-style-type: '';
   }
+
   .detail-country-container {
     text-align: left;
 

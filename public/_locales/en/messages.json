@@ -242,8 +242,11 @@
   "resDetCountCaption": {
     "message": "Geolocation of resources"
   },
-  "resDetCountrySwitchUrl": {
-    "message": "Show/hide full URL"
+  "resDetCountrySwitchUrlHide": {
+    "message": "Hide full URL"
+  },
+  "resDetCountrySwitchUrlShow": {
+    "message": "Show full URL"
   },
   "resDetCountTitleHit": {
     "message": "requests"

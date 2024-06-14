@@ -242,8 +242,11 @@
   "resDetCountCaption": {
     "message": "Géolocalisation des ressources"
   },
-  "resDetCountrySwitchUrl": {
-    "message": "Afficher/cacher l'URL complète"
+  "resDetCountrySwitchUrlHide": {
+    "message": "Masquer les URL complètes"
+  },
+  "resDetCountrySwitchUrlShow": {
+    "message": "Afficher les URL complètes"
   },
   "resDetCountTitleHit": {
     "message": "requêtes"
