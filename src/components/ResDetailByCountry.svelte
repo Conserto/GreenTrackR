@@ -57,20 +57,20 @@
         </details>
       </li>
     {/each}
-    {#if fullUrl}
-      <Button
-        on:buttonClick={switchUrl}
-        buttonType={ButtonTypeEnum.PRIMARY}
-        translateKey={'resDetCountrySwitchUrlHide'}
-      />
-    {:else }
-      <Button
-        on:buttonClick={switchUrl}
-        buttonType={ButtonTypeEnum.PRIMARY}
-        translateKey={'resDetCountrySwitchUrlShow'}
-      />
-    {/if}
   </ul>
+  {#if fullUrl}
+    <Button
+      on:buttonClick={switchUrl}
+      buttonType={ButtonTypeEnum.PRIMARY}
+      translateKey={'resDetCountrySwitchUrlHide'}
+    />
+  {:else }
+    <Button
+      on:buttonClick={switchUrl}
+      buttonType={ButtonTypeEnum.PRIMARY}
+      translateKey={'resDetCountrySwitchUrlShow'}
+    />
+  {/if}
 {/if}
 
 <style lang="scss">
@@ -103,11 +103,11 @@
       padding-left: 2rem;
     }
 
-    .even {
+    li.even {
       background-color: var(--color--light-grey);
     }
 
-    .even summary {
+    details.even summary {
       background-color: var(--color--light-grey);
     }
   }
