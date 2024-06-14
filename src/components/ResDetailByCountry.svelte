@@ -103,11 +103,7 @@
       padding-left: 2rem;
     }
 
-    li.even {
-      background-color: var(--color--light-grey);
-    }
-
-    details.even summary {
+    li.even, details.even summary {
       background-color: var(--color--light-grey);
     }
   }
