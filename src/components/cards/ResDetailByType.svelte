@@ -72,12 +72,6 @@
           class="client">{formatSize(network.network.sizeUncompress)}{Units.pageSize}</td>
       <td headers="thClient thClientPercent thTotal" class="client">100%</td>
     </tr>
-    <!--    <tr class="even">
-          <th id="thLocation" scope="row">{translate("resDetTitleLocation")}</th>
-          <td headers="thServer thLocation" class="server" colspan="3">{srvCity}</td>
-          <td headers="thNetwork thLocation" colspan="2">{netCity}</td>
-          <td headers="thClient thLocation" class="client" colspan="2">{cliCity}</td>
-        </tr>-->
     <tr>
       <th id="thEnergy" scope="row">{translate("resDetTitleEnergy")}</th>
       <td headers="thServer thEnergy" class="server" colspan="3">{mixSrv}</td>
