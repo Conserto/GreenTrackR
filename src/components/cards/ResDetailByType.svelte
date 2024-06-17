@@ -8,9 +8,6 @@
   export let description: string = '';
   const network = measure.networkMeasure;
   const totRequest = network.nbRequest + network.nbRequestCache;
-  /*  const srvCity = measure.serverGES?.display || '-';
-    const cliCity = measure.userGES?.display || '-';
-    const netCity = srvCity.split(',')[0] + " -- " + cliCity.split(',')[0];*/
   const mixSrv = measure.serversGES?.carbonIntensity ? formatNumber(measure.serversGES?.carbonIntensity) + Units.carbonIntensity : '-';
   const mixNet = measure.networkGES?.carbonIntensity ? formatNumber(measure.networkGES?.carbonIntensity) + Units.carbonIntensity : '-';
   const mixCli = measure.userGES?.carbonIntensity ? formatNumber(measure.userGES?.carbonIntensity) + Units.carbonIntensity : '-';
