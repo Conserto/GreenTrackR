@@ -151,6 +151,7 @@ export class GESService {
     return serverType ? await getServerZone(urlHost) : await getCurrentZone();
   }
 
+  
   getEnergyAndResources(network: NetworkResponse, nbRequest: number, zoneGES?: SimpleGES, userGES?: GES, networkGES?: SimpleGES): {
     ges: ResTotals;
     wu: ResTotals;
