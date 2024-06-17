@@ -18,7 +18,7 @@
   import { Button, LoadingWheel, Select } from 'src/components/html';
   import { Modal, ZoneSimulation } from 'src/components/page';
   import { GesResults, HistoricResults } from 'src/components/results';
-  import { Histogram, ResDetailByCountry, ResDetailByType } from 'src/components/cards';
+  import { Histogram, ResDetailByCountry, ResDetailByType, Summary } from 'src/components/cards';
 
   enum TabType {
     ResultTab,
@@ -183,6 +183,12 @@
     <GesResults measure={currentMeasure} caption="gesEquivalentCaption" />
     <div class="detail-container">
       {#if currentMeasure?.complete}
+        <div class="detail summary">
+          <Summary
+            measure={currentMeasure}
+            captionKey="resSumCaption"
+          />
+        </div>
         <div class="detail request">
           <ResDetailByType
             measure={currentMeasure}

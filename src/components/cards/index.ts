@@ -5,3 +5,4 @@ export { default as VisitsEquivalent } from './GES/VisitsEquivalent.svelte';
 export { default as Histogram } from './Histogram.svelte';
 export { default as ResDetailByType } from './ResDetailByType.svelte';
 export { default as ResDetailByCountry } from './ResDetailByCountry.svelte';
+export { default as Summary } from './Summary.svelte';

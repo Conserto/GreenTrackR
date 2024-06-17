@@ -302,6 +302,30 @@
   "resetMeasure": {
     "message": "Réinitialiser la mesure"
   },
+  "resSumCaption": {
+    "message": "Résumé"
+  },
+  "resSumEmpCli": {
+    "message": "Emplacement client : "
+  },
+  "resSumEmpSrv": {
+    "message": "Emplacement serveur : "
+  },
+  "resSumNbCountry": {
+    "message": "Pays serveur(s) : "
+  },
+  "resSumNbRes": {
+    "message": "Ressource(s) chargée(s) : "
+  },
+  "resSumNbSrv": {
+    "message": "Nombre de serveur : "
+  },
+  "resSumSizeClient": {
+    "message": "Poids page client : "
+  },
+  "resSumSizeNetwork": {
+    "message": "Transfert réseau : "
+  },
   "saveAnalysis": {
     "message": "L'évaluation a bien été enregistrée."
   },
