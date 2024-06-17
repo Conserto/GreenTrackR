@@ -1,6 +1,6 @@
 import type { DetailedGeoLoc } from 'src/interface';
-import { IP_API, IPFI_API } from '../const/url.const';
-import { logDebug, logErr } from '../utils/log';
+import { IP_API, IPFI_API } from 'src/const/url.const';
+import { logDebug, logErr } from 'src/utils';
 
 const getIpAddress = async (): Promise<string | undefined> => {
   const { ip } = await fetch(IPFI_API)
@@ -24,5 +24,5 @@ export const getCurrentZone = async (url?: string): Promise<DetailedGeoLoc | und
 };
 
 export const getServerZone = (urlHost?: URL): Promise<DetailedGeoLoc | undefined> => {
-  return getCurrentZone(urlHost ? urlHost.host.replace(/^www\./,"") : urlHost); // Remove www.
+  return getCurrentZone(urlHost ? urlHost.host.replace(/^www\./, '') : urlHost); // Remove www.
 };

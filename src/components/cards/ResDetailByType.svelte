@@ -1,19 +1,16 @@
 <script lang="ts">
-  import type { Measure } from '../interface';
-  import { formatNumber, formatSize, translate } from '../utils';
-  import { Units } from '../const';
+  import type { Measure } from 'src/interface';
+  import { formatNumber, formatSize, translate } from 'src/utils';
+  import { Units } from 'src/const';
 
   export let measure: Measure;
   export let caption: string = '';
   export let description: string = '';
   const network = measure.networkMeasure;
   const totRequest = network.nbRequest + network.nbRequestCache;
-  const srvCity = measure.serverGES?.display || '-';
-  const cliCity = measure.userGES?.display || '-';
-  const netCity = srvCity.split(',')[0] + " -- " + cliCity.split(',')[0];
-  const mixSrv = measure.serverGES?.carbonIntensity ? measure.serverGES?.carbonIntensity + Units.carbonIntensity : '-';
-  const mixNet = measure.networkGES?.carbonIntensity ? measure.networkGES?.carbonIntensity + Units.carbonIntensity : '-';
-  const mixCli = measure.userGES?.carbonIntensity ? measure.userGES?.carbonIntensity + Units.carbonIntensity : '-';
+  const mixSrv = measure.serversGES?.carbonIntensity ? formatNumber(measure.serversGES?.carbonIntensity) + Units.carbonIntensity : '-';
+  const mixNet = measure.networkGES?.carbonIntensity ? formatNumber(measure.networkGES?.carbonIntensity) + Units.carbonIntensity : '-';
+  const mixCli = measure.userGES?.carbonIntensity ? formatNumber(measure.userGES?.carbonIntensity) + Units.carbonIntensity : '-';
 </script>
 
 <div class="table-container">
@@ -26,7 +23,7 @@
     <tr>
       <th aria-hidden="true"></th>
       <th id="thServer" colspan="3" scope="col" class="server">{translate("resDetTitleServer")}</th>
-      <th id="thNetwork" colspan="2" scope="col" >{translate("resDetTitleNetwork")}</th>
+      <th id="thNetwork" colspan="2" scope="col">{translate("resDetTitleNetwork")}</th>
       <th id="thClient" colspan="2" scope="col" class="client">{translate("resDetTitleClient")}</th>
     </tr>
     <tr>
@@ -46,11 +43,20 @@
         <th id="thResourceName" scope="row">{detail.resource}</th>
         <td headers="thServer thServerCache thResourceName" class="server">{detail.nbRequestCache}</td>
         <td headers="thServer thServerCacheMiss thResourceName" class="server">{detail.nbRequest}</td>
-        <td headers="thServer thServerPercent thResourceName" class="server">{formatNumber(100 * (detail.nbRequest + detail.nbRequestCache) / totRequest)}%</td>
+        <td headers="thServer thServerPercent thResourceName"
+            class="server">{formatNumber(100 * (detail.nbRequest + detail.nbRequestCache) / totRequest)}%
+        </td>
         <td headers="thNetwork thNetworkCompress thResourceName">{formatSize(detail.network.size)}{Units.pageSize}</td>
-        <td headers="thNetwork thNetworkPercent thResourceName">{detail.network.size ? formatNumber(100 * detail.network.size / network.network.size) : 0}%</td>
-        <td headers="thClient thClientUncompressed thResourceName" class="client">{formatSize(detail.network.sizeUncompress)}{Units.pageSize}</td>
-        <td headers="thClient thClientPercent thResourceName" class="client">{detail.network.sizeUncompress ? formatNumber(100 * detail.network.sizeUncompress / network.network.sizeUncompress) : 0}%</td>
+        <td
+          headers="thNetwork thNetworkPercent thResourceName">{detail.network.size ? formatNumber(100 * detail.network.size / network.network.size) : 0}
+          %
+        </td>
+        <td headers="thClient thClientUncompressed thResourceName"
+            class="client">{formatSize(detail.network.sizeUncompress)}{Units.pageSize}</td>
+        <td headers="thClient thClientPercent thResourceName"
+            class="client">{detail.network.sizeUncompress ? formatNumber(100 * detail.network.sizeUncompress / network.network.sizeUncompress) : 0}
+          %
+        </td>
       </tr>
     {/each}
     </tbody>
@@ -62,14 +68,9 @@
       <td headers="thServer thServerPercent thTotal" class="server">100%</td>
       <td headers="thNetwork thNetworkCompress thTotal">{formatSize(network.network.size)}{Units.pageSize}</td>
       <td headers="thNetwork thNetworkPercent thTotal">100%</td>
-      <td headers="thClient thClientUncompressed thTotal" class="client">{formatSize(network.network.sizeUncompress)}{Units.pageSize}</td>
+      <td headers="thClient thClientUncompressed thTotal"
+          class="client">{formatSize(network.network.sizeUncompress)}{Units.pageSize}</td>
       <td headers="thClient thClientPercent thTotal" class="client">100%</td>
-    </tr>
-    <tr class="even">
-      <th id="thLocation" scope="row">{translate("resDetTitleLocation")}</th>
-      <td headers="thServer thLocation" class="server" colspan="3">{srvCity}</td>
-      <td headers="thNetwork thLocation" colspan="2">{netCity}</td>
-      <td headers="thClient thLocation" class="client" colspan="2">{cliCity}</td>
     </tr>
     <tr>
       <th id="thEnergy" scope="row">{translate("resDetTitleEnergy")}</th>
@@ -124,6 +125,7 @@
       tbody td {
         text-align: center;
       }
+
       tbody th {
         font-weight: normal;
       }
@@ -134,9 +136,5 @@
     font-weight: bold;
     padding-inline-start: 1rem;
     text-align: left;
-  }
-
-  .even {
-    background-color: var(--color--light-grey);
   }
 </style>

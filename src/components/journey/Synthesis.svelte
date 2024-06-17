@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { Measure } from '../interface';
-  import { formatNbRequest, formatNumber, formatSizeTransferred, translate } from '../utils';
-  import { SynthesisSrv } from '../service/synthesis.service';
-  import { AdpIcon, EauIcon, ElecIcon, GesIcon } from '../assets/icons';
+  import type { Measure } from 'src/interface';
+  import { formatNbRequest, formatNumber, formatSizeTransferred, translate } from 'src/utils';
+  import { SynthesisSrv } from 'src/service/synthesis.service';
+  import { AdpIcon, EauIcon, ElecIcon, GesIcon } from 'src/assets/icons';
 
   export let datas: Measure[];
   export let caption: string = '';
@@ -291,6 +291,7 @@
       padding-inline-start: 1rem;
       text-align: left;
     }
+
     div.kpi {
       white-space: nowrap;
 
@@ -339,7 +340,4 @@
     }
   }
 
-  .even {
-    background-color: var(--color--light-grey);
-  }
 </style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { translate } from 'src/utils/utils';
+  import { translate } from 'src/utils';
   import { createEventDispatcher } from 'svelte';
 
   export let isActive: boolean;
@@ -8,10 +8,12 @@
   export let translateKey: string;
 
   const dispatch = createEventDispatcher();
+
   function handleClickTab() {
     dispatch('clickTab', { id });
   }
-  function handleKeydown(e : KeyboardEvent) {
+
+  function handleKeydown(e: KeyboardEvent) {
     const tabList = (e.currentTarget as HTMLElement).closest('[role="tablist"]')!;
     const tabs = [...tabList.querySelectorAll('[role="tab"]')] as HTMLButtonElement[];
     const currentTab: HTMLButtonElement = tabList.querySelector('[role="tab"][aria-selected="true"]')!;
@@ -24,16 +26,16 @@
     } else if (e.key === 'ArrowLeft') {
       currentIndex--;
       if (currentIndex === -1) {
-        currentIndex = tabs.length -1;
+        currentIndex = tabs.length - 1;
       }
     } else if (e.key === 'Home') {
-      currentIndex = 0
+      currentIndex = 0;
     } else if (e.key === 'End') {
-      currentIndex = tabs.length -1
+      currentIndex = tabs.length - 1;
     }
     const newlySelectedTab = tabs[currentIndex].id;
     tabs[currentIndex].focus();
-    dispatch('clickTab', { id:newlySelectedTab});
+    dispatch('clickTab', { id: newlySelectedTab });
   }
 </script>
 

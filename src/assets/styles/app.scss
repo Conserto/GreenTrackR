@@ -52,3 +52,10 @@ body {
   width: 1px !important;
   white-space: nowrap !important;
 }
+.hide {
+  display: none;
+}
+
+.even {
+  background-color: var(--color--light-grey);
+}

@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { getSurHead, translate } from 'src/utils/utils';
+  import { getSurHead, translate } from 'src/utils';
   import type { TableData, TableHeader } from 'src/interface/table.interface';
-  import Button from './Button.svelte';
   import { ButtonTypeEnum } from 'src/enum';
   import { createEventDispatcher } from 'svelte';
-  import { AdpIcon, EauIcon, ElecIcon, GesIcon } from '../assets/icons';
+  import { AdpIcon, EauIcon, ElecIcon, GesIcon } from 'src/assets/icons';
+  import { Button } from 'src/components/html';
 
   export let columnHeaders: TableHeader[] = [];
   export let datas: Map<string, TableData>[] = [];
   export let caption: string = '';
-  export let description: string ='';
+  export let description: string = '';
   const dispatch = createEventDispatcher();
   const surHeads = getSurHead(columnHeaders);
 </script>
@@ -53,7 +53,8 @@
 
         {#if columnHeaders.length > 0}
           {#each columnHeaders as header, colNumber}
-            <td headers="surHead{header.groupHead} header{header.id}" style={data.get(header.id)?.style} class="{header.class}">
+            <td headers="surHead{header.groupHead} header{header.id}" style={data.get(header.id)?.style}
+                class="{header.class}">
               {#if data.get(header.id)?.action}
                 <Button
                   on:buttonClick={() => dispatch('actionClicked', { data })}
@@ -80,6 +81,7 @@
     overflow: auto;
     box-shadow: var(--box-shadow--sm), var(--box-shadow--sm);
     border-radius: 8px;
+
     .bold {
       background-color: rgba(0, 0, 0, 0.1);
     }
@@ -113,12 +115,10 @@
       }
     }
   }
+
   caption {
     font-weight: bold;
     padding-inline-start: 1rem;
     text-align: left;
-  }
-  .even {
-    background-color: var(--color--light-grey);
   }
 </style>

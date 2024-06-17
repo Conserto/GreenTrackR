@@ -1,14 +1,21 @@
 <script lang="ts">
   import { ButtonTypeEnum } from 'src/enum';
-  import { GesResults, HistoricResults } from 'src/components/GES/results';
-  import { Button, Histogram, LoadingWheel, Modal, ResDetail } from 'src/components';
-  import { ZoneSimulation } from 'src/components/GES';
-  import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils/utils';
+  import {
+    cleanCache,
+    getLocalStorageObject,
+    reloadCurrentTab,
+    setLocalStorageObject,
+    toHistoFormattedDatas,
+    translate
+  } from 'src/utils';
   import { savedMeasures } from 'src/const';
-  import { cleanCache, reloadCurrentTab } from 'src/utils/chrome.utils';
-  import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
-  import { SEARCH_AUTO } from '../const/key.const';
-  import type { HistoData, Measure } from '../interface';
+  import { MeasureAcquisition } from 'src/service/MeasureAcquisition.service';
+  import { SEARCH_AUTO } from 'src/const/key.const';
+  import type { HistoData, Measure } from 'src/interface';
+  import { Button, LoadingWheel } from 'src/components/html';
+  import { Modal, ZoneSimulation } from 'src/components/page';
+  import { GesResults, HistoricResults } from 'src/components/results';
+  import { Histogram, ResDetailByCountry, ResDetailByType, Summary } from 'src/components/cards';
 
   enum TabType {
     ResultTab,
@@ -121,8 +128,14 @@
           <LoadingWheel />
         </div>
       {:else if currentMeasure?.complete}
+        <div class="detail summary">
+          <Summary
+            measure={currentMeasure}
+            captionKey="resSumCaption"
+          />
+        </div>
         <div class="detail request">
-          <ResDetail
+          <ResDetailByType
             measure={currentMeasure}
             caption={translate("resDetCaption")}
             description={translate("resDetCaptionDescription")}
@@ -134,6 +147,12 @@
             chartLabel="barChartGES"
             yLabel="greenhouseGasesEmissionDefault"
             yLabel2="energyDefault"
+          />
+        </div>
+        <div class="detail request">
+          <ResDetailByCountry
+            measure={currentMeasure}
+            captionKey="resDetCountCaption"
           />
         </div>
       {/if}

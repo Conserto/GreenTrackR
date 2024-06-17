@@ -6,7 +6,7 @@ import {
   formatSize,
   getAverageValue,
   toHistoFormattedDatas
-} from 'src/utils/utils';
+} from 'src/utils';
 import { assert, expect, test } from 'vitest';
 
 const measure: Measure = {

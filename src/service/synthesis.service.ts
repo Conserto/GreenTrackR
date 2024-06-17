@@ -1,6 +1,14 @@
 import { GESService, ScoreService } from '.';
-import type { GES, Measure, NetworkMeasure, Synthesis, SynthesisCommon, SynthesisLine } from '../interface';
-import { filterMeasure, formatShortUrl } from '../utils';
+import type {
+  DetailServerGes,
+  GES,
+  Measure,
+  NetworkMeasure, SimpleGES,
+  Synthesis,
+  SynthesisCommon,
+  SynthesisLine
+} from '../interface';
+import { filterMeasure, formatShortUrl } from 'src/utils';
 
 export class SynthesisSrv {
   private gesService: GESService;
@@ -94,13 +102,10 @@ export class SynthesisSrv {
       countryName: 'none',
       display: 'none'
     };
-    const gesNet: GES = {
+    const gesNet: SimpleGES = {
       carbonIntensity: carbonNet / count,
       adpe: adpeNet / count,
-      wu: wuNet / count,
-      countryCode: 'none',
-      countryName: 'none',
-      display: 'none'
+      wu: wuNet / count
     };
     //     GES -> Calcul obligatoire -> besoin carbon, moyenne
     const { ges, wu, adpe, energy } = this.gesService.getEnergyAndResources(

@@ -1,7 +1,10 @@
-export interface GES {
+export interface SimpleGES {
   carbonIntensity?: number;
   wu?: number;
   adpe?: number;
+}
+
+export interface GES extends SimpleGES {
   countryName: string;
   cityName?: string;
   countryCode: string;
@@ -15,12 +18,9 @@ export interface ResTotals {
   pageTotal?: number;
 }
 
-export interface CarbonDatas {
-  data: CarbonData[];
-  countryName: string;
+export interface Co2SignalResponse {
+  carbonIntensity?: number;
+  countryCode?: string;
 }
 
-export interface CarbonData {
-  date: Date | null;
-  carbonIntensity: number;
-}
+

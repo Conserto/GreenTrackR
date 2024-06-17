@@ -1,15 +1,13 @@
 <script lang="ts">
-  import { Button, LoadingWheel } from 'src/components';
   import { ButtonTypeEnum, RequestAction } from 'src/enum';
   import { CheckIcon } from 'src/assets/icons';
-  import { translate } from 'src/utils/utils';
+  import { cleanCache, logDebug, reloadCurrentTab, sendChromeMsg, translate } from 'src/utils';
   import type { Measure } from 'src/interface';
-  import { JourneyResults } from 'src/components/GES/results';
-  import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
-  import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
-  import { SEARCH_AUTO } from '../const/key.const';
-  import { logDebug } from '../utils/log';
-  import { ZoneSimulation } from '../components/GES';
+  import { MeasureAcquisition } from 'src/service/MeasureAcquisition.service';
+  import { SEARCH_AUTO } from 'src/const/key.const';
+  import { Button, LoadingWheel } from 'src/components/html';
+  import { ZoneSimulation } from 'src/components/page';
+  import { JourneyResults } from 'src/components/results';
 
   let onGoingAnalysis = false;
   let measureAcquisition = new MeasureAcquisition();

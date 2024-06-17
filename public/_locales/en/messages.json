@@ -74,9 +74,6 @@
   "energyEquivalent": {
     "message": "Electricity"
   },
-  "errorNoToken": {
-    "message": "GreenTrackR uses the 'CO2signal' API from Electricity Maps. To use this API, you need an access token, go to parameters tabs"
-  },
   "evaluationTab": {
     "message": "Evaluation"
   },
@@ -222,7 +219,7 @@
     "message": "Setting"
   },
   "paramTokenCo2Description": {
-    "message": "GreenTrackR uses the 'CO2signal' API from Electricity Maps. To use this API, you need an access token, you can get it on the following link 'Go to api portal' -> "
+    "message": "GreenTrackR can be more precise in its measurements using the 'CO2signal' API from Electricity Maps. To use this API, you need an access token, you can get it on the following link 'Go to api portal' -> "
   },
   "paramTokenCo2URL": {
     "message": "https://www.co2signal.com/"
@@ -241,6 +238,24 @@
   },
   "resDetCaptionDescription": {
     "message": "The resources used by the analyzed page are shown in the first column of the following table. The server part is divided into 3 columns representing the number of cached requests, then those without cache, and finally a percentage of each resources. Next, the networks section displays the weight of the compressed resource transferred, as well as its percentage. Finally, the client part contains the weight of the decompressed page downloaded, as well as its percentage. Translated with DeepL.com (free version)"
+  },
+  "resDetCountCaption": {
+    "message": "Geolocation of resources"
+  },
+  "resDetCountrySwitchUrlHide": {
+    "message": "Hide full URL"
+  },
+  "resDetCountrySwitchUrlShow": {
+    "message": "Show full URL"
+  },
+  "resDetCountTitleHit": {
+    "message": "requests"
+  },
+  "resDetCountTitleResources": {
+    "message": "resources"
+  },
+  "resDetHostDTitleCache": {
+    "message": "cached"
   },
   "resDetSubTitleCliPercent": {
     "message": "Percent"
@@ -286,6 +301,30 @@
   },
   "resetMeasure": {
     "message": "Reset measure"
+  },
+  "resSumCaption": {
+    "message": "Datas"
+  },
+  "resSumEmpCli": {
+    "message": "User location: "
+  },
+  "resSumEmpSrv": {
+    "message": "Server location: "
+  },
+  "resSumNbCountry": {
+    "message": "Server(s)'s country: "
+  },
+  "resSumNbRes": {
+    "message": "Load resource(s): "
+  },
+  "resSumNbSrv": {
+    "message": "Number of server: "
+  },
+  "resSumSizeClient": {
+    "message": "User size: "
+  },
+  "resSumSizeNetwork": {
+    "message": "Network size: "
   },
   "saveAnalysis": {
     "message": "Analysis successfully saved."
@@ -408,7 +447,7 @@
     "message": "WATER"
   },
   "tableZoneIntensityShort": {
-    "message": "Intensité"
+    "message": "Intensity"
   },
   "tableZoneIp": {
     "message": "Zone"

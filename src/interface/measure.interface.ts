@@ -1,4 +1,4 @@
-import type { GES, ResTotals, NetworkResponse, Score } from '.';
+import type { GES, ResTotals, NetworkResponse, Score, SimpleGES } from '.';
 
 export interface Measure {
   date: Date;
@@ -12,10 +12,34 @@ export interface Measure {
   dom: number;
   userGES?: GES;
   serverGES?: GES;
-  networkGES?: GES;
+  serversGES?: SimpleGES;
+  detailResources?: DetailServer[];
+  detailResourcesGes?: DetailServerGes[];
+  networkGES?: SimpleGES;
   networkMeasure: NetworkMeasure;
   extensionMeasure: NetworkMeasure;
   complete: boolean;
+}
+
+export interface DetailServerGes {
+  hostnames: DetailServer[];
+  ges?: GES;
+  hit: number;
+  hitReal: number;
+}
+
+export interface DetailServer {
+  hostname: string;
+  oneUrl?: URL;
+  sizeTotal: NetworkResponse;
+  details: DetailServerUrl[]
+}
+
+export interface DetailServerUrl {
+  url: string;
+  size: NetworkResponse;
+  resource: string;
+  cache: boolean;
 }
 
 export interface NetworkMeasure {
