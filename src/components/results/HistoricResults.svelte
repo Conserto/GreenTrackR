@@ -1,11 +1,13 @@
 <script lang="ts">
   import { gesTableHeaders } from 'src/const';
   import { ButtonTypeEnum } from 'src/enum';
-  import { Button, Modal, Table } from 'src/components';
   import { export_data } from 'src/service';
   import { formatGesMeasuresForTable, getLocalStorageObject, setLocalStorageObject, translate } from 'src/utils';
   import { onMount } from 'svelte';
   import type { Measure, TableData } from 'src/interface';
+  import { Table } from 'src/components/journey';
+  import { Button } from 'src/components/html';
+  import { Modal } from 'src/components/page';
 
   let formattedData: Map<string, TableData>[];
   let measures: Measure[] = [];

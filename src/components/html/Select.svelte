@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { SEARCH_AUTO } from '../const/key.const';
+  import { SEARCH_AUTO } from 'src/const/key.const';
   import { createEventDispatcher } from 'svelte';
 
   export let selectedValue = SEARCH_AUTO;
   export let selectValues: any[] = [];
   export let name: string;
-  export let style: string = "";
+  export let style: string = '';
   const dispatch = createEventDispatcher();
 
   function handleSelectChange() {
@@ -15,7 +15,8 @@
   }
 </script>
 
-<select class="generic-input" {name} id="{name}" bind:value={selectedValue} style="{style}" on:change={handleSelectChange}>
+<select class="generic-input" {name} id="{name}" bind:value={selectedValue} style="{style}"
+        on:change={handleSelectChange}>
   {#each selectValues as selectValue}
     <option value={selectValue.value}>
       {selectValue.label}

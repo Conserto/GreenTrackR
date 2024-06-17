@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Measure } from 'src/interface';
   import { formatGesMeasuresForTable, translate } from 'src/utils';
-  import { SynthesisTable, Table } from 'src/components';
+  import { SynthesisTable, Table } from 'src/components/journey';
   import { gesTableHeaders } from 'src/const';
 
   export let measures: Measure[];

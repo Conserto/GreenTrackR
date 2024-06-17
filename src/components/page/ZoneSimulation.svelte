@@ -3,8 +3,8 @@
   import { formatSimulationLabel, translate } from 'src/utils';
   import { codeZone } from 'src/assets/data/codeZone';
 
-  import { Select } from 'src/components';
-  import { SEARCH_AUTO } from '../../const/key.const';
+  import { Select } from 'src/components/html';
+  import { SEARCH_AUTO } from 'src/const/key.const';
 
   let zonesOptions: any[], countryCodeSelected: string, userCountryCodeSelected: string;
   const dispatch = createEventDispatcher();

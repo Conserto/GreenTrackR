@@ -1,18 +1,24 @@
 <script lang="ts">
-  import { Button, LoadingWheel, Modal, ResDetailByCountry, ResDetailByType, Select } from 'src/components';
   import { ButtonTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
-  import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils';
-  import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils';
+  import {
+    cleanCache,
+    getLocalStorageObject,
+    reloadCurrentTab,
+    sendChromeMsg,
+    setLocalStorageObject,
+    toHistoFormattedDatas,
+    translate
+  } from 'src/utils';
   import { onDestroy, onMount } from 'svelte';
-  import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
-  import Histogram from 'src/components/Histogram.svelte';
-  import GesResults from 'src/components/GES/results/GesResults.svelte';
-  import { PAGE_HEIGHT } from '../const/action.const';
-  import { SEARCH_AUTO } from '../const/key.const';
-  import type { HistoData, Measure } from '../interface';
-  import { ZoneSimulation } from '../components/GES';
-  import { HistoricResults } from '../components/GES/results';
-  import { savedScrollMeasures } from '../const';
+  import { MeasureAcquisition } from 'src/service/MeasureAcquisition.service';
+  import { PAGE_HEIGHT } from 'src/const/action.const';
+  import { SEARCH_AUTO } from 'src/const/key.const';
+  import type { HistoData, Measure } from 'src/interface';
+  import { savedScrollMeasures } from 'src/const';
+  import { Button, LoadingWheel, Select } from 'src/components/html';
+  import { Modal, ZoneSimulation } from 'src/components/page';
+  import { GesResults, HistoricResults } from 'src/components/results';
+  import { Histogram, ResDetailByCountry, ResDetailByType, Summary } from 'src/components/cards';
 
   enum TabType {
     ResultTab,
@@ -177,6 +183,12 @@
     <GesResults measure={currentMeasure} caption="gesEquivalentCaption" />
     <div class="detail-container">
       {#if currentMeasure?.complete}
+        <div class="detail summary">
+          <Summary
+            measure={currentMeasure}
+            captionKey="resSumCaption"
+          />
+        </div>
         <div class="detail request">
           <ResDetailByType
             measure={currentMeasure}

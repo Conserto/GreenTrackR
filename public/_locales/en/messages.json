@@ -302,6 +302,30 @@
   "resetMeasure": {
     "message": "Reset measure"
   },
+  "resSumCaption": {
+    "message": "Summary"
+  },
+  "resSumEmpCli": {
+    "message": "User location: "
+  },
+  "resSumEmpSrv": {
+    "message": "Server location: "
+  },
+  "resSumNbCountry": {
+    "message": "Server(s)'s country: "
+  },
+  "resSumNbRes": {
+    "message": "Load resource(s): "
+  },
+  "resSumNbSrv": {
+    "message": "Number of server: "
+  },
+  "resSumSizeClient": {
+    "message": "User size: "
+  },
+  "resSumSizeNetwork": {
+    "message": "Network size: "
+  },
   "saveAnalysis": {
     "message": "Analysis successfully saved."
   },

@@ -55,9 +55,10 @@
       padding-block-end: .5rem;
       margin-block: 0;
       @media screen and (max-width: 40rem) {
-          display: flex;
-          flex-direction: column;
+        display: flex;
+        flex-direction: column;
       }
+
       &_value {
         margin-left: var(--spacing--md);
         padding: var(--spacing--sm) var(--spacing--xl);
