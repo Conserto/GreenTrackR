@@ -1,5 +1,6 @@
 <script lang="ts">
   import { translate } from 'src/utils';
+
   export let dialogLabelKey: string;
   export let showModal: boolean;
   export let cssClass: string = 'default';
