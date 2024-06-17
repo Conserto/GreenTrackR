@@ -1,5 +1,5 @@
 import type { Measure } from 'src/interface';
-import { formatNumber, translate } from 'src/utils/utils';
+import { formatNumber, translate } from 'src/utils';
 
 const create_csv = (measureHistory: Measure[]) => {
   let csv = translate('csvColumnsLabel') + '\n';

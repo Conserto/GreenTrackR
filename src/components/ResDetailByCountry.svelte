@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Measure } from '../interface';
-  import { formatEmission, formatSizeTransferredWithUnit, formatUriOnly, translate } from '../utils';
+  import { formatEmission, formatSizeTransferredWithUnit, formatUriOnly, translate } from 'src/utils';
   import Button from './Button.svelte';
   import { ButtonTypeEnum } from '../enum';
 
@@ -25,7 +25,8 @@
           <summary class="data" class:even={index % 2 === 0}>
             <span class="import">{detail.ges?.display}</span>
             <span>{formatEmission(detail.ges)}</span>
-            <span class="import">{detail.hit} {translate("resDetCountTitleHit")}</span>
+            <span class="import">{detail.hitReal} {translate("resDetCountTitleHit")}</span>
+            <span>{detail.hit} {translate("resDetCountTitleResources")}</span>
           </summary>
           <ul>
             {#each detail.hostnames as host, index2}

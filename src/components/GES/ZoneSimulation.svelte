@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte';
-  import { formatSimulationLabel, translate } from 'src/utils/utils';
+  import { formatSimulationLabel, translate } from 'src/utils';
   import { codeZone } from 'src/assets/data/codeZone';
 
   import { Select } from 'src/components';

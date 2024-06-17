@@ -1,8 +1,7 @@
 import type { Co2SignalResponse, GeoLocation } from 'src/interface';
-import { CO2_API } from '../const/url.const';
-import { logDebug, logErr, logWarn } from '../utils/log';
-import { getLocalStorageObject } from '../utils';
-import { paramTokenCo2 } from '../const';
+import { CO2_API } from 'src/const/url.const';
+import { getLocalStorageObject, logDebug, logErr, logWarn } from 'src/utils';
+import { paramTokenCo2 } from 'src/const';
 
 const cache = new Map<string, Co2SignalResponse>();
 

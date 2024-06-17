@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Measure } from '../interface';
-  import { formatNbRequest, formatNumber, formatSizeTransferred, translate } from '../utils';
+  import { formatNbRequest, formatNumber, formatSizeTransferred, translate } from 'src/utils';
   import { SynthesisSrv } from '../service/synthesis.service';
   import { AdpIcon, EauIcon, ElecIcon, GesIcon } from '../assets/icons';
 

@@ -1,12 +1,22 @@
 import { RequestAction } from 'src/enum';
-import type { GES, Measure, NetworkMeasure } from '../interface';
+import type { GES, Measure, NetworkMeasure, SimpleGES } from 'src/interface';
 
 import { GESService, NetworkService, ScoreService } from '.';
-import { createEmptyMeasure, getLocalStorageObject, reloadCurrentTab, sendChromeMsg } from 'src/utils';
+import {
+  calculNetworkGes,
+  calculResourcesFromAllServer,
+  createEmptyMeasure,
+  getLocalStorageObject,
+  getUrl,
+  logDebug,
+  logInfo,
+  reloadCurrentTab,
+  sendChromeMsg
+} from 'src/utils';
 import { paramRetry, PREFIX_URL_EXTENSION } from '../const';
-import { logDebug, logInfo } from '../utils/log';
 import { DOM_INFOS } from '../const/action.const';
 import { VITE_MAX_HAR_RETRIES_DEFAULT } from '../const/config.const';
+import { SEARCH_AUTO } from '../const/key.const';
 
 export class MeasureAcquisition {
   public measure: Measure;
@@ -29,12 +39,12 @@ export class MeasureAcquisition {
     this.nbRetry = getLocalStorageObject(paramRetry) ?? VITE_MAX_HAR_RETRIES_DEFAULT;
   }
 
-  updateMeasureValues(serverGES?: GES, userGES?: GES, networkGES?: GES): void {
+  updateMeasureValues(serverGES?: GES, userGES?: GES, networkGES?: SimpleGES, serversGES?: SimpleGES): void {
     // Energie total requetes (réseau, user, server)
     const { ges, wu, adpe, energy } = this.gesService.getEnergyAndResources(
       this.measure.networkMeasure.network,
       this.measure.networkMeasure.nbRequest,
-      serverGES,
+      serversGES,
       userGES,
       networkGES
     );
@@ -45,6 +55,7 @@ export class MeasureAcquisition {
     this.measure.energy = energy;
     this.measure.userGES = userGES;
     this.measure.serverGES = serverGES;
+    this.measure.serversGES = serversGES;
     this.measure.networkGES = networkGES;
     this.measure.complete = !!(serverGES && userGES);
     if (this.measure.ges?.pageTotal) {
@@ -56,8 +67,8 @@ export class MeasureAcquisition {
 
   async getGESMeasure(countryCodeSelected: string, userCountryCodeSelected: string) {
     logDebug('getGESMeasure');
-    let urlHost = this.networkService.getUrl(this.measure.url);
-    const { serverGES, userGES, networkGES } = await this.gesService.computeGES(
+    let urlHost = getUrl(this.measure.url);
+    const { serverGES, userGES } = await this.gesService.computeGES(
       countryCodeSelected,
       userCountryCodeSelected,
       urlHost
@@ -66,7 +77,14 @@ export class MeasureAcquisition {
       ...this.measure,
       detailResourcesGes: await this.gesService.computeGesDetailResource(countryCodeSelected, this.measure.detailResources, serverGES)
     };
-    this.updateMeasureValues(serverGES, userGES, networkGES);
+    let serversGes: SimpleGES | undefined = undefined;
+    if (this.measure.detailResourcesGes && countryCodeSelected === SEARCH_AUTO) {
+      serversGes = calculResourcesFromAllServer(this.measure.networkMeasure.network.size, this.measure.detailResourcesGes);
+    } else if (serverGES) {
+      serversGes = serverGES;
+    }
+    const networkGes: SimpleGES = calculNetworkGes(serversGes, userGES);
+    this.updateMeasureValues(serverGES, userGES, networkGes, serversGes);
     logDebug('Wait Dom');
     await this.waitForDomElements();
     logDebug('End getGESMeasure');

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { InputTypeEnum } from 'src/enum';
-  import { translate } from 'src/utils/utils';
+  import { translate } from 'src/utils';
 
   export let name: string;
   export let value: number | string;

@@ -1,8 +1,8 @@
-import { logDebug, logErr } from '../utils/log';
+import { logDebug, logErr } from 'src/utils';
 import { RequestAction } from '../enum';
 import { DOM_INFOS, PAGE_HEIGHT } from '../const/action.const';
 import { getDomSizeWithoutSvg } from '../service';
-import { scrollPrompt } from '../utils';
+import { scrollPrompt } from 'src/utils';
 
 const sentRuntimeMsg = (payload: any) => {
   chrome.runtime.sendMessage(payload).catch(reason => logErr(`Error when send message ${reason}`));

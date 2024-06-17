@@ -1,7 +1,7 @@
 <script lang="ts">
   import { ButtonTypeEnum } from 'src/enum';
   import { createEventDispatcher } from 'svelte';
-  import { translate } from 'src/utils/utils';
+  import { translate } from 'src/utils';
 
   export let translateKey: string;
   export let buttonType: ButtonTypeEnum;

@@ -1,7 +1,10 @@
-export interface GES {
+export interface SimpleGES {
   carbonIntensity?: number;
   wu?: number;
   adpe?: number;
+}
+
+export interface GES extends SimpleGES {
   countryName: string;
   cityName?: string;
   countryCode: string;

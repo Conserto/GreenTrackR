@@ -2,11 +2,11 @@
   import logo from '/images/logo.png';
   import { AutoScroll, Evaluation, Parameter, Parcours } from 'src/pages';
   import { Alert, Button, Footer, Tab } from 'src/components';
-  import { translate, translateHtmlUrl } from './utils';
+  import { translate, translateHtmlUrl } from 'src/utils';
   import { ButtonTypeEnum } from './enum';
   import { Modal } from './components';
   import { onMount } from 'svelte';
-  import { logErr } from './utils/log';
+  import { logErr } from 'src/utils';
 
   export let tabs = [
     {

@@ -1,8 +1,8 @@
 <script lang="ts">
   import { Button, LoadingWheel, Modal, ResDetailByCountry, ResDetailByType, Select } from 'src/components';
   import { ButtonTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
-  import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
-  import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils/utils';
+  import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils';
+  import { getLocalStorageObject, setLocalStorageObject, toHistoFormattedDatas, translate } from 'src/utils';
   import { onDestroy, onMount } from 'svelte';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
   import Histogram from 'src/components/Histogram.svelte';

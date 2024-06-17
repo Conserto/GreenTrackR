@@ -251,6 +251,9 @@
   "resDetCountTitleHit": {
     "message": "requêtes"
   },
+  "resDetCountTitleResources": {
+    "message": "ressources"
+  },
   "resDetHostDTitleCache": {
     "message": "En cache"
   },

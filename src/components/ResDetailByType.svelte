@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Measure } from '../interface';
-  import { formatNumber, formatSize, translate } from '../utils';
+  import { formatNumber, formatSize, translate } from 'src/utils';
   import { Units } from '../const';
 
   export let measure: Measure;
@@ -11,7 +11,7 @@
   const srvCity = measure.serverGES?.display || '-';
   const cliCity = measure.userGES?.display || '-';
   const netCity = srvCity.split(',')[0] + " -- " + cliCity.split(',')[0];
-  const mixSrv = measure.serverGES?.carbonIntensity ? formatNumber(measure.serverGES?.carbonIntensity) + Units.carbonIntensity : '-';
+  const mixSrv = measure.serversGES?.carbonIntensity ? formatNumber(measure.serversGES?.carbonIntensity) + Units.carbonIntensity : '-';
   const mixNet = measure.networkGES?.carbonIntensity ? formatNumber(measure.networkGES?.carbonIntensity) + Units.carbonIntensity : '-';
   const mixCli = measure.userGES?.carbonIntensity ? formatNumber(measure.userGES?.carbonIntensity) + Units.carbonIntensity : '-';
 </script>

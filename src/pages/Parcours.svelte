@@ -2,13 +2,13 @@
   import { Button, LoadingWheel } from 'src/components';
   import { ButtonTypeEnum, RequestAction } from 'src/enum';
   import { CheckIcon } from 'src/assets/icons';
-  import { translate } from 'src/utils/utils';
+  import { translate } from 'src/utils';
   import type { Measure } from 'src/interface';
   import { JourneyResults } from 'src/components/GES/results';
-  import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils/chrome.utils';
+  import { cleanCache, reloadCurrentTab, sendChromeMsg } from 'src/utils';
   import { MeasureAcquisition } from 'src//service/MeasureAcquisition.service';
   import { SEARCH_AUTO } from '../const/key.const';
-  import { logDebug } from '../utils/log';
+  import { logDebug } from 'src/utils';
   import { ZoneSimulation } from '../components/GES';
 
   let onGoingAnalysis = false;
