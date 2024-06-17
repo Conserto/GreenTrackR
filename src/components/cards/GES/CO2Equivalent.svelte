@@ -17,7 +17,7 @@
 
 <style lang="scss">
 
-  .ges-equivalent{
+  .ges-equivalent {
     display: flex;
     align-items: center;
     font-weight: var(--font-weight--bold);

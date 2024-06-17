@@ -1,12 +1,11 @@
 <script lang="ts">
   import logo from '/images/logo.png';
   import { AutoScroll, Evaluation, Parameter, Parcours } from 'src/pages';
-  import { Alert, Button, Footer, Tab } from 'src/components';
-  import { translate, translateHtmlUrl } from 'src/utils';
-  import { ButtonTypeEnum } from './enum';
-  import { Modal } from './components';
+  import { logErr, translate, translateHtmlUrl } from 'src/utils';
+  import { ButtonTypeEnum } from 'src/enum';
+  import { Alert, Footer, Modal, Tab } from 'src/components/page';
   import { onMount } from 'svelte';
-  import { logErr } from 'src/utils';
+  import { Button } from 'src/components/html';
 
   export let tabs = [
     {

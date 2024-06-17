@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { Measure } from '../interface';
+  import type { Measure } from 'src/interface';
   import { formatEmission, formatSizeTransferredWithUnit, formatUriOnly, translate } from 'src/utils';
-  import Button from './Button.svelte';
-  import { ButtonTypeEnum } from '../enum';
+  import { ButtonTypeEnum } from 'src/enum';
+  import { Button } from 'src/components/html';
 
   export let measure: Measure;
   export let captionKey: string = '';

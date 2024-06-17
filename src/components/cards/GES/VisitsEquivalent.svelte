@@ -2,9 +2,9 @@
   import { translate } from 'src/utils';
   import { CarIcon, PhoneIcon } from 'src/assets/icons';
   import { CAR_AVERAGE_CO2, NUMBER_OF_VISITS, PHONE_AVERAGE_CO2 } from 'src/const/measure.const';
-  import { Input } from 'src/components';
   import { InputTypeEnum } from 'src/enum';
-  import type { Measure } from '../../interface';
+  import type { Measure } from 'src/interface';
+  import { Input } from 'src/components/html';
 
   export let measure: Measure | undefined;
 
