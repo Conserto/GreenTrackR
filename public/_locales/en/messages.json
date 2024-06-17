@@ -303,7 +303,7 @@
     "message": "Reset measure"
   },
   "resSumCaption": {
-    "message": "Summary"
+    "message": "Datas"
   },
   "resSumEmpCli": {
     "message": "User location: "
@@ -447,7 +447,7 @@
     "message": "WATER"
   },
   "tableZoneIntensityShort": {
-    "message": "Intensité"
+    "message": "Intensity"
   },
   "tableZoneIp": {
     "message": "Zone"
