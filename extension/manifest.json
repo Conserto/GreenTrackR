@@ -33,7 +33,7 @@
   "devtools_page": "extension/devtools-page.html",
   "action": {
     "default_icon": "images/logo.png",
-    "default_title": "GreenTrackr",
+    "default_title": "GreenTrackR",
     "default_popup": "extension/menu.html"
   },
   "content_security_policy": {
