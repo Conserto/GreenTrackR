@@ -19,6 +19,8 @@
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "@tsconfig/svelte": "^5.0.2",
     "@types/chrome": "^0.0.287",
+    "@types/webextension-polyfill": "^0.10.7",
+    "web-ext-types": "^3.2.1",
     "@types/node": "^20.11.1",
     "@types/showdown": "^2.0.6",
     "eslint": "^9.1.1",

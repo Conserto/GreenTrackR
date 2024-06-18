@@ -1,11 +1,12 @@
 import { getTabUrl, getUrl, isAfter, isCacheCall, isNetworkResource, logDebug } from 'src/utils';
 import type { DetailServer, DetailServerUrl, NetworkDetail, NetworkResponse } from 'src/interface';
+import { devtools } from 'webextension-polyfill';
 
 export class NetworkService {
 
   getHarEntries(): Promise<any> {
     return new Promise((resolve) => {
-      chrome.devtools.network.getHAR(resolve);
+      devtools.network.getHAR(resolve);
     });
   }
 

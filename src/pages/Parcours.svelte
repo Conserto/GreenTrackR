@@ -8,6 +8,7 @@
   import { Button, LoadingWheel } from 'src/components/html';
   import { ZoneSimulation } from 'src/components/page';
   import { JourneyResults } from 'src/components/results';
+  import { runtime, webNavigation } from 'webextension-polyfill';
 
   let onGoingAnalysis = false;
   let measureAcquisition = new MeasureAcquisition();
@@ -20,14 +21,14 @@
     onGoingAnalysis = !onGoingAnalysis;
     if (onGoingAnalysis) {
       logDebug('onCompleted add');
-      chrome.runtime.onMessage.addListener(handleRuntimeMsg);
+      runtime.onMessage.addListener(handleRuntimeMsg);
       measureAcquisition.applyLatest();
       reloadCurrentTab();
-      chrome.webNavigation.onCompleted.addListener(onPageLoaded);
+      webNavigation.onCompleted.addListener(onPageLoaded);
     } else {
       logDebug('onCompleted remove');
-      chrome.runtime.onMessage.removeListener(handleRuntimeMsg);
-      chrome.webNavigation.onCompleted.removeListener(onPageLoaded);
+      runtime.onMessage.removeListener(handleRuntimeMsg);
+      webNavigation.onCompleted.removeListener(onPageLoaded);
     }
   };
 
