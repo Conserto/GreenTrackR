@@ -1,7 +1,8 @@
 import { logDebug, logErr } from './log';
+import { browsingData, devtools, tabs } from 'webextension-polyfill';
 
 export const cleanCache = () => {
-  chrome.browsingData.remove(
+  browsingData.remove(
     {},
     {
       cache: true,
@@ -19,7 +20,7 @@ export const sendChromeMsg = (payload: any) => {
 
 const sendChromeMsgRetry = (id: number, cur: number, max: number, payload: any) => {
   logDebug(`send Chrome Msg Retry ${cur}/${max}`);
-  chrome.tabs.sendMessage(id, payload).catch(reason => {
+  tabs.sendMessage(id, payload).catch(reason => {
     if (cur === max) {
       logErr(`Error when send chrome tab message: ${reason}`);
     } else {
@@ -29,7 +30,7 @@ const sendChromeMsgRetry = (id: number, cur: number, max: number, payload: any) 
 };
 
 export const getTabId = (): number => {
-  let tabId: number | undefined = chrome.devtools.inspectedWindow?.tabId;
+  let tabId: number | undefined = devtools.inspectedWindow?.tabId;
   logDebug('Tab ID --> ' + tabId);
   if (!tabId) {
     logErr('No Tab Id found, analyse aborted', true);
@@ -38,10 +39,10 @@ export const getTabId = (): number => {
 };
 
 export const getTabUrl = async (): Promise<string | undefined> => {
-  const tab = await chrome.tabs.get(getTabId());
+  const tab = await tabs.get(getTabId());
   return tab?.url;
 };
 
 export const reloadCurrentTab = async (): Promise<void> => {
-  await chrome.tabs.reload(getTabId());
+  await tabs.reload(getTabId());
 };

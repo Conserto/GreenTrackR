@@ -12,16 +12,9 @@
     "browsingData",
     "webNavigation"
   ],
-  "content_scripts": [
-    {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "src/content-scripts/contentScripts.ts"
-      ]
-    }
-  ],
+  "background": {
+    "service_worker": "src/content-scripts/background.js"
+  },
   "host_permissions": [
     "<all_urls>"
   ],

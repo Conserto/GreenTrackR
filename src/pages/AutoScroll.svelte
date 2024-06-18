@@ -19,6 +19,7 @@
   import { Modal, ZoneSimulation } from 'src/components/page';
   import { GesResults, HistoricResults } from 'src/components/results';
   import { Histogram, ResDetailByCountry, ResDetailByType, Summary } from 'src/components/cards';
+  import { runtime } from 'webextension-polyfill';
 
   enum TabType {
     ResultTab,
@@ -47,14 +48,14 @@
   let histoDatas: HistoData[] = [];
 
   onMount(() => {
-    chrome.runtime.onMessage.addListener(handleRuntimeMsg);
+    runtime.onMessage.addListener(handleRuntimeMsg);
     sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
     cleanCache();
     sendChromeMsg({ action: RequestAction.SEND_PAGE_HEIGHT });
   });
 
   onDestroy(() => {
-    chrome.runtime.onMessage.removeListener(handleRuntimeMsg);
+    runtime.onMessage.removeListener(handleRuntimeMsg);
   });
 
   const handleRuntimeMsg = async (message: any) => {

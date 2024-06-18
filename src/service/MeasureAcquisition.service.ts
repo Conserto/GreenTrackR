@@ -17,6 +17,7 @@ import { paramRetry, PREFIX_URL_EXTENSION } from '../const';
 import { DOM_INFOS } from '../const/action.const';
 import { VITE_MAX_HAR_RETRIES_DEFAULT } from '../const/config.const';
 import { SEARCH_AUTO } from '../const/key.const';
+import { runtime, tabs } from 'webextension-polyfill';
 
 export class MeasureAcquisition {
   public measure: Measure;
@@ -181,13 +182,13 @@ export class MeasureAcquisition {
       }, 8000);
       const handleRuntimeMsg = async (message: { type: string; value: any }) => {
         if (message.type === DOM_INFOS) {
-          chrome.runtime.onMessage.addListener(handleRuntimeMsg);
+          runtime.onMessage.addListener(handleRuntimeMsg);
           this.measure.dom = message.value;
           clearTimeout(failed);
           resolve();
         }
       };
-      chrome.runtime.onMessage.addListener(handleRuntimeMsg);
+      runtime.onMessage.addListener(handleRuntimeMsg);
       sendChromeMsg({ action: RequestAction.GET_DOM_ELEMENTS });
     });
   }
@@ -202,13 +203,13 @@ export class MeasureAcquisition {
 
       function onTabUpdated(updatedTabId: number, info: any) {
         if (info.status === 'complete') {
-          chrome.tabs.onUpdated.removeListener(onTabUpdated); // Remove the listener
+          tabs.onUpdated.removeListener(onTabUpdated); // Remove the listener
           clearTimeout(failed);
           resolve(updatedTabId);
         }
       }
 
-      chrome.tabs.onUpdated.addListener(onTabUpdated);
+      tabs.onUpdated.addListener(onTabUpdated);
     });
   }
 
