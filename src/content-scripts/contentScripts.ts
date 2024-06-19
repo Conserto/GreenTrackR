@@ -1,18 +1,17 @@
-import { logDebug, logErr } from 'src/utils';
+import { logDebug, logErr, scrollPrompt } from 'src/utils';
 import { RequestAction } from 'src/enum';
 import { DOM_INFOS, PAGE_HEIGHT } from 'src/const/action.const';
 import { getDomSizeWithoutSvg } from 'src/service';
-import { scrollPrompt } from 'src/utils';
-import { runtime } from 'webextension-polyfill';
+import browser from "webextension-polyfill";
 
 const sentRuntimeMsg = (payload: any) => {
-  runtime.sendMessage(payload).catch(reason => logErr(`Error when send message ${reason}`));
+  browser.runtime.sendMessage(payload).catch(reason => logErr(`Error when send message ${reason}`));
 };
 
 /**
  * Catch devtools messages
  */
-runtime.onMessage.addListener(function(request, sender, sendResponse) {
+browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request) {
     if (request.action === RequestAction.SCROLL_TO_TOP) {
       window.scrollTo({ top: 0 });

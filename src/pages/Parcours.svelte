@@ -8,7 +8,7 @@
   import { Button, LoadingWheel } from 'src/components/html';
   import { ZoneSimulation } from 'src/components/page';
   import { JourneyResults } from 'src/components/results';
-  import { runtime, webNavigation } from 'webextension-polyfill';
+  import browser from "webextension-polyfill";
 
   let onGoingAnalysis = false;
   let measureAcquisition = new MeasureAcquisition();
@@ -21,14 +21,14 @@
     onGoingAnalysis = !onGoingAnalysis;
     if (onGoingAnalysis) {
       logDebug('onCompleted add');
-      runtime.onMessage.addListener(handleRuntimeMsg);
+      browser.runtime.onMessage.addListener(handleRuntimeMsg);
       measureAcquisition.applyLatest();
       reloadCurrentTab();
-      webNavigation.onCompleted.addListener(onPageLoaded);
+      browser.webNavigation.onCompleted.addListener(onPageLoaded);
     } else {
       logDebug('onCompleted remove');
-      runtime.onMessage.removeListener(handleRuntimeMsg);
-      webNavigation.onCompleted.removeListener(onPageLoaded);
+      browser.runtime.onMessage.removeListener(handleRuntimeMsg);
+      browser.webNavigation.onCompleted.removeListener(onPageLoaded);
     }
   };
 

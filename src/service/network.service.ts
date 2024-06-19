@@ -1,12 +1,13 @@
 import { getTabUrl, getUrl, isAfter, isCacheCall, isNetworkResource, logDebug } from 'src/utils';
 import type { DetailServer, DetailServerUrl, NetworkDetail, NetworkResponse } from 'src/interface';
-import { devtools } from 'webextension-polyfill';
+import browser from 'webextension-polyfill';
 
 export class NetworkService {
 
   getHarEntries(): Promise<any> {
+    // TODO Firefox: problem
     return new Promise((resolve) => {
-      devtools.network.getHAR(resolve);
+      browser.devtools.network.getHAR(resolve);
     });
   }
 

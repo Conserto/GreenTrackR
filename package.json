@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "test": "vitest",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "format": "prettier --plugin-search-dir . --write ."
+    "format": "prettier --plugin-search-dir . --write .",
+    "build:firefox": "web-ext build -s ./src"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "2.0.0-beta.28",
@@ -20,7 +21,9 @@
     "@tsconfig/svelte": "^5.0.2",
     "@types/chrome": "^0.0.287",
     "@types/webextension-polyfill": "^0.10.7",
+    "webextension-polyfill": "^0.12.0",
     "web-ext-types": "^3.2.1",
+    "web-ext": "^8.1.0",
     "@types/node": "^20.11.1",
     "@types/showdown": "^2.0.6",
     "eslint": "^9.1.1",

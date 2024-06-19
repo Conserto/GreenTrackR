@@ -12,9 +12,16 @@
     "browsingData",
     "webNavigation"
   ],
-  "background": {
-    "service_worker": "src/content-scripts/background.js"
-  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content-scripts/contentScripts.ts"
+      ]
+    }
+  ],
   "host_permissions": [
     "<all_urls>"
   ],
@@ -23,11 +30,11 @@
       "<all_urls>"
     ]
   },
-  "devtools_page": "extension/devtools-page.html",
+  "devtools_page": "src/devtools-page.html",
   "action": {
     "default_icon": "images/logo.png",
     "default_title": "GreenTrackR",
-    "default_popup": "extension/menu.html"
+    "default_popup": "src/menu.html"
   },
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
