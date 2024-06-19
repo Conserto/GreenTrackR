@@ -3,7 +3,7 @@ import { logErr, logInfo } from 'src/utils';
 import showdown from 'showdown';
 
 const SOURCE_MD_FOLDER = './descriptions/';
-const DEST_HTML_FOLDER = './public/descriptions/';
+const DEST_HTML_FOLDER = './src/public/descriptions/';
 const CONVERTER = new showdown.Converter();
 
 const mkToHtml = () => {

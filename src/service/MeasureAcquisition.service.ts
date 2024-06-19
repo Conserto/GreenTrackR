@@ -13,11 +13,11 @@ import {
   reloadCurrentTab,
   sendChromeMsg
 } from 'src/utils';
-import { paramRetry, PREFIX_URL_EXTENSION } from '../const';
+import { paramRetry, PREFIX_URL_EXTENSION } from 'src/const';
 import { DOM_INFOS } from '../const/action.const';
 import { VITE_MAX_HAR_RETRIES_DEFAULT } from '../const/config.const';
 import { SEARCH_AUTO } from '../const/key.const';
-import { runtime, tabs } from 'webextension-polyfill';
+import browser from 'webextension-polyfill';
 
 export class MeasureAcquisition {
   public measure: Measure;
@@ -182,13 +182,13 @@ export class MeasureAcquisition {
       }, 8000);
       const handleRuntimeMsg = async (message: { type: string; value: any }) => {
         if (message.type === DOM_INFOS) {
-          runtime.onMessage.addListener(handleRuntimeMsg);
+          browser.runtime.onMessage.addListener(handleRuntimeMsg);
           this.measure.dom = message.value;
           clearTimeout(failed);
           resolve();
         }
       };
-      runtime.onMessage.addListener(handleRuntimeMsg);
+      browser.runtime.onMessage.addListener(handleRuntimeMsg);
       sendChromeMsg({ action: RequestAction.GET_DOM_ELEMENTS });
     });
   }
@@ -203,13 +203,13 @@ export class MeasureAcquisition {
 
       function onTabUpdated(updatedTabId: number, info: any) {
         if (info.status === 'complete') {
-          tabs.onUpdated.removeListener(onTabUpdated); // Remove the listener
+          browser.tabs.onUpdated.removeListener(onTabUpdated); // Remove the listener
           clearTimeout(failed);
           resolve(updatedTabId);
         }
       }
 
-      tabs.onUpdated.addListener(onTabUpdated);
+      browser.tabs.onUpdated.addListener(onTabUpdated);
     });
   }
 

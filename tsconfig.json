@@ -25,8 +25,8 @@
     "src/content-scripts/contentScripts.ts",
     "src/devtoolsjts",
     "vite.config.ts",
-    "manifest.json",
-    "extension/devtools-page.ts",
+    "src/manifest.json",
+    "src/devtools-page.ts",
   ],
   "references": [{ "path": "./tsconfig.node.json" }],
 }
