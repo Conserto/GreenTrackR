@@ -56,6 +56,7 @@
   };
 
   const onActionSave = async (component?: string) => {
+    document.getElementsByClassName("received")[0].style = '';
     logDebug('Save ' + component);
     await measureAcquisition.getNetworkMeasure(false);
     const measure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
@@ -65,6 +66,7 @@
     if (measure) {
       results = [...results, measure];
     }
+    document.getElementsByClassName("received")[0].style = 'display: block';
     measureAcquisition.applyLatest();
   };
 
@@ -101,18 +103,20 @@
   <LoadingWheel />
   <p class="in-progress-text">{translate('analysisInProgress')}</p>
 
-  {#if results.length}
-    <div class="flex-center">
-      <CheckIcon />
-      <p>{translate('receivedResults')}</p>
-    </div>
-  {/if}
+  <div class="flex-center received">
+    <CheckIcon />
+    <p>{translate('receivedResults')}</p>
+  </div>
 {/if}
 {#if results.length && !onGoingAnalysis}
   <JourneyResults measures={results} />
 {/if}
 
 <style lang="scss">
+  div.received {
+    display: none;
+  }
+
   .in-progress-text {
     text-align: center;
   }

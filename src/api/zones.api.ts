@@ -9,20 +9,21 @@ const getIpAddress = async (): Promise<string | undefined> => {
   return ip ? ip : undefined;
 };
 
-export const getCurrentZone = async (url?: string): Promise<DetailedGeoLoc | undefined> => {
+export const getCurrentZone = async (url?: URL | string): Promise<DetailedGeoLoc | undefined> => {
   logDebug(`Url ${url}`);
-  const origin = url ? url : await getIpAddress();
+  const origin: string | URL | undefined = url ? url : await getIpAddress();
   logDebug(`Origin ${origin}`);
   if (!origin) {
     return undefined;
   }
-  const { lat, lon, countryCode, country, city } = await fetch(
-    IP_API + origin)
+  const apiCall = IP_API + (origin instanceof URL ? origin.host : origin);
+  logDebug('Call URL for location: ' + apiCall);
+  const { lat, lon, countryCode, country, city } = await fetch(apiCall)
     .then((res) => res.json())
     .catch(reason => logErr('Error getting current zone: ' + reason));
   return city ? { cityName: city, countryCode, countryName: country, lat, lon } : undefined;
 };
 
 export const getServerZone = (urlHost?: URL): Promise<DetailedGeoLoc | undefined> => {
-  return getCurrentZone(urlHost ? urlHost.host.replace(/^www\./, '') : urlHost); // Remove www.
+  return getCurrentZone(urlHost); 
 };

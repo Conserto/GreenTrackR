@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "GreenTrackR",
   "description": "__MSG_extDesc__",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "icons": {
     "64": "images/logo.png"
   },
@@ -33,7 +33,7 @@
   "devtools_page": "extension/devtools-page.html",
   "action": {
     "default_icon": "images/logo.png",
-    "default_title": "GreenTrackr",
+    "default_title": "GreenTrackR",
     "default_popup": "extension/menu.html"
   },
   "content_security_policy": {
