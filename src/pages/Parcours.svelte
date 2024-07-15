@@ -56,7 +56,10 @@
   };
 
   const onActionSave = async (component?: string) => {
-    document.getElementsByClassName("received")[0].style = '';
+    const receive = document.querySelector<HTMLElement>('.received');
+    if (receive){
+      receive.style.display = '';
+    }
     logDebug('Save ' + component);
     await measureAcquisition.getNetworkMeasure(false);
     const measure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
@@ -66,7 +69,9 @@
     if (measure) {
       results = [...results, measure];
     }
-    document.getElementsByClassName("received")[0].style = 'display: block';
+    if (receive){
+      receive.style.display = 'block';
+    }
     measureAcquisition.applyLatest();
   };
 
