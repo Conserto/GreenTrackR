@@ -25,5 +25,5 @@ export const getCurrentZone = async (url?: URL | string): Promise<DetailedGeoLoc
 };
 
 export const getServerZone = (urlHost?: URL): Promise<DetailedGeoLoc | undefined> => {
-  return getCurrentZone(urlHost); // Remove www.
+  return getCurrentZone(urlHost); 
 };
