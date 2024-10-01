@@ -45,7 +45,7 @@ export const formatGesMeasuresForTable = (measures: Measure[], add?: Map<string,
   return measures.map((measure): Map<string, TableData> => {
     let data: Map<any, TableData> = new Map<any, TableData>;
     data.set('date', { content: formatDate(measure.date), style: 'font-weight:bold' });
-    data.set('url', { content: formatShortUrl(measure.url), detail: measure.url });
+    data.set('url', { contentHtml: `<span class="table--url">${measure.url}</span>`});
     data.set('urlAction', { content: measure.action });
     data.set('sizeTransferred', {
       content: formatSizeTransferred(measure.networkMeasure.network.size, measure.networkMeasure.network.sizeUncompress)
@@ -86,15 +86,6 @@ export const formatGesMeasuresForTable = (measures: Measure[], add?: Map<string,
     }
     return data;
   });
-};
-
-export const formatShortUrl = (url: string | undefined) => {
-  let formatted = '';
-  if (url) {
-    formatted = url.replace(/(^\w+:|^)\/\//, '');
-    formatted = formatted.length > 23 ? `${formatted.slice(0, 23)}...` : formatted;
-  }
-  return formatted;
 };
 
 export const formatUriOnly = (url: string | undefined) => {

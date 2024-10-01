@@ -1,6 +1,5 @@
 import { GESService, ScoreService } from '.';
 import type {
-  DetailServerGes,
   GES,
   Measure,
   NetworkMeasure, SimpleGES,
@@ -8,7 +7,7 @@ import type {
   SynthesisCommon,
   SynthesisLine
 } from '../interface';
-import { filterMeasure, formatShortUrl } from 'src/utils';
+import { filterMeasure } from 'src/utils';
 
 export class SynthesisSrv {
   private gesService: GESService;
@@ -31,8 +30,7 @@ export class SynthesisSrv {
           sScroll: calScroll,
           sClick: calClick,
           sPage: calPage,
-          url: url,
-          shortUrl: formatShortUrl(url)
+          url: url
         });
       }
     }
