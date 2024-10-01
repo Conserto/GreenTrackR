@@ -2,7 +2,7 @@ export interface TableData {
   content?: any;
   style?: string;
   action?: boolean;
-  detail?: string;
+  contentHtml?: string;
 }
 
 export interface TableHeader {

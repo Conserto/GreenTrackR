@@ -10,11 +10,13 @@
   export let datas: Map<string, TableData>[] = [];
   export let caption: string = '';
   export let description: string = '';
+  export let className: string = '';
+
   const dispatch = createEventDispatcher();
   const surHeads = getSurHead(columnHeaders);
 </script>
 
-<div class="table-container">
+<div class="table-container {className}">
   <table class="table">
     <caption>
       {caption}
@@ -61,8 +63,8 @@
                   buttonType={ButtonTypeEnum.SECONDARY}
                   translateKey={data.get(header.id)?.content ?? ""}
                 />
-              {:else if data.get(header.id)?.detail}
-                {data.get(header.id)?.content}
+              {:else if data.get(header.id)?.contentHtml}
+                {@html data.get(header.id)?.contentHtml}
               {:else}
                 {translate(data.get(header.id)?.content)}
               {/if}

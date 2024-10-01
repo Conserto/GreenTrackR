@@ -51,3 +51,11 @@ h1 {
   text-align: center;
   color: var(--color--green);
 }
+
+.hide--url .table--url {
+  max-width: 24ch;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

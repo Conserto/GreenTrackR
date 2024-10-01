@@ -7,6 +7,8 @@
   export let datas: Measure[];
   export let caption: string = '';
   export let description: string = '';
+  export let className: string = '';
+
   let srv = new SynthesisSrv();
   const synthesis = srv.getSynthesis(datas);
 
@@ -27,7 +29,7 @@
 </script>
 
 <!-- TODO trop de code répété, faire un générateur) -->
-<div class="synthesis-container">
+<div class="synthesis-container {className}">
   <table class="table">
     <caption>
       {caption}
@@ -79,7 +81,7 @@
     {#each synthesis.pages as page, index}
       <tr class:even={index % 2 === 0}>
         <td>
-          {page.shortUrl}
+          <span class="table--url">{page.url}</span>
         </td>
         <td class="scroll">{page.sScroll.count}</td>
         <td
