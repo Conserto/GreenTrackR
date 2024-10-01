@@ -7,7 +7,6 @@ export interface Synthesis {
 
 export interface SynthesisLine extends SynthesisBase {
   url: string;
-  shortUrl: string;
 }
 
 export interface SynthesisBase {

@@ -245,9 +245,6 @@
   "resDetCountrySwitchUrlHide": {
     "message": "Hide full URL"
   },
-  "resDetCountrySwitchUrlShow": {
-    "message": "Show full URL"
-  },
   "resDetCountTitleHit": {
     "message": "requests"
   },
@@ -484,5 +481,8 @@
   },
   "wuEquivalent": {
     "message": "Water"
+  },
+  "switchUrlShow": {
+    "message": "Show full URL"
   }
 }

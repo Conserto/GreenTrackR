@@ -69,7 +69,7 @@
     <Button
       on:buttonClick={switchUrl}
       buttonType={ButtonTypeEnum.PRIMARY}
-      translateKey={'resDetCountrySwitchUrlShow'}
+      translateKey={'switchUrlShow'}
     />
   {/if}
 {/if}
