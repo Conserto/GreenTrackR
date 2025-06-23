@@ -219,7 +219,7 @@
     "message": "Paramétrage"
   },
   "paramTokenCo2Description": {
-    "message": "GreenTrackR peut-être plus précis dans ses mesures en utilisant l'API 'CO2signal' de 'Electricity Maps', afin de pouvoir utiliser cette API il vous faut un token d'accès, cliquez sur le lien puis sur 'Go to api portal' -> "
+    "message": "GreenTrackR peut être plus précis dans ses mesures en utilisant l'API 'CO2signal' de 'Electricity Maps', afin de pouvoir utiliser cette API il vous faut un token d'accès, cliquez sur le lien puis sur 'Go to api portal' -> "
   },
   "paramTokenCo2URL": {
     "message": "https://www.co2signal.com/"
@@ -237,7 +237,7 @@
     "message": "Analyse des ressources"
   },
   "resDetCaptionDescription": {
-    "message": "Les ressources utilisées par la page analysée sont présentées dans la première colonne du tableau suivant. La partie serveur est subdivisé en 3 colonnes qui représente le nombre de requêtes en cache, puis celles sans cache et enfin un pourcentage de la part de chaque ressource. Ensuite, la partie réseaux présentent le poids de la ressource compressée transférée, ainsi que son pourcentage. Enfin, la partie client contient le poids de la page décompressé téléchargée ainsi que son pourcentage."
+    "message": "Les ressources utilisées par la page analysée sont présentées dans la première colonne du tableau suivant. La partie serveur est subdivisée en 3 colonnes qui représentent le nombre de requêtes en cache, puis celles sans cache et enfin un pourcentage de la part de chaque ressource. Ensuite, la partie réseau présente le poids de la ressource compressée transférée, ainsi que son pourcentage. Enfin, la partie client contient le poids de la page décompressé téléchargée ainsi que son pourcentage."
   },
   "resDetCountCaption": {
     "message": "Géolocalisation des ressources"
