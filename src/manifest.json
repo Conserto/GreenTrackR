@@ -18,6 +18,7 @@
         "<all_urls>"
       ],
       "js": [
+        "browser-polyfill.js",
         "src/content-scripts/contentScripts.ts"
       ]
     }
