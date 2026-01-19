@@ -34,7 +34,9 @@
 
   let serverSearch = SEARCH_AUTO;
   let userSearch = SEARCH_AUTO;
-  let updateHistoryTab: any;
+
+  // Clé pour forcer le remontage de HistoricResults
+  let historyKey = 0;
 
   const onResetMeasure = () => {
     currentMeasure = null;
@@ -61,9 +63,8 @@
       savedMeasures,
       lsMeasures ? [...lsMeasures, currentMeasure] : [currentMeasure]
     );
-    if (currentDisplayedTab === TabType.HistoricTab) {
-      updateHistoryTab();
-    }
+    // Incrémenter pour forcer le refresh si on est sur l'historique
+    historyKey++;
     showModal = true;
   };
 
@@ -74,6 +75,12 @@
     currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
     loading = false;
     histoDatas = toHistoFormattedDatas(currentMeasure);
+  };
+
+  const handleViewHistory = () => {
+    // Incrémenter pour forcer le remontage du composant
+    historyKey++;
+    currentDisplayedTab = TabType.HistoricTab;
   };
 
   const handleSimulation = async (event: any) => {
@@ -96,7 +103,7 @@
     disabled={!currentMeasure}
   />
   <Button
-    on:buttonClick={() => (currentDisplayedTab = TabType.HistoricTab)}
+    on:buttonClick={handleViewHistory}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="viewHistoryButton"
   />
@@ -163,7 +170,9 @@
     </div>
   {/if}
 {:else if currentDisplayedTab === TabType.HistoricTab}
-  <HistoricResults saveName="{savedMeasures}" bind:updateHistory={updateHistoryTab} />
+  {#key historyKey}
+    <HistoricResults saveName={savedMeasures} />
+  {/key}
 {/if}
 <Modal dialogLabelKey="saveAnalysisTitle" bind:showModal>
   <h2>{translate('saveAnalysis')}</h2>
@@ -202,5 +211,4 @@
       }
     }
   }
-
 </style>

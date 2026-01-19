@@ -1,47 +1,102 @@
-import { logDebug, logErr } from './log';
+import { browser } from 'wxt/browser';
+import { logDebug, logErr, logWarn } from './log';
+import { PREFIX_URL_EXTENSION } from '../const';
 
-export const cleanCache = () => {
-  chrome.browsingData.remove(
-    {},
-    {
-      cache: true,
-      serviceWorkers: true,
-      downloads: true
+/**
+ * ID de l'onglet inspecté
+ */
+export const getTabId = (): number => {
+  const tabId = browser.devtools?.inspectedWindow?.tabId;
+  if (!tabId) logDebug('No Tab Id found');
+  return tabId ?? 0;
+};
+
+/**
+ * Récupère l'URL de l'onglet (Fix Firefox + Chrome)
+ */
+/**
+ * Récupère l'URL de l'onglet inspecté de manière ultra-robuste.
+ * Compatible Chrome & Firefox (même sous CSP strict).
+ */
+export const getTabUrl = async (): Promise<string | undefined> => {
+  const tabId = getTabId();
+  if (!tabId) return undefined;
+
+  try {
+    const response = await browser.runtime.sendMessage({
+      action: 'GET_TAB_URL',
+      tabId
+    });
+    return response?.url;
+  } catch (e) {
+    logErr("Failed to get URL via background");
+    return undefined;
+  }
+};
+
+/**
+ * Formate une string en objet URL (Centralisé ici pour éviter les doublons)
+ */
+export const getUrl = (url?: string) => {
+  if (url && url !== '' && !PREFIX_URL_EXTENSION.test(url)) {
+    try {
+      return new URL(url);
+    } catch (e) {
+      logWarn(`Error parsing url ${url}`);
     }
-  ).catch(reason => logErr(`Error when clear browsing cache: ${reason}`));
+  }
+  return undefined;
 };
 
-export const sendChromeMsg = (payload: any) => {
-  let id = getTabId();
-  let max = 100;
-  sendChromeMsgRetry(id, 0, max, payload);
-};
-
+/**
+ * Envoi de message via Background (Fix Firefox "tabs is undefined")
+ */
 const sendChromeMsgRetry = (id: number, cur: number, max: number, payload: any) => {
-  logDebug(`send Chrome Msg Retry ${cur}/${max}`);
-  chrome.tabs.sendMessage(id, payload).catch(reason => {
-    if (cur === max) {
-      logErr(`Error when send chrome tab message: ${reason}`);
+  browser.runtime.sendMessage({
+    forwardToTab: true,
+    tabId: id,
+    payload: payload
+  }).then((res) => {
+    if (res && !res.success) throw new Error(res.error);
+  }).catch(reason => {
+    if (cur < max) {
+      setTimeout(() => sendChromeMsgRetry(id, cur + 1, max, payload), 50);
     } else {
-      sendChromeMsgRetry(id, cur + 1, max, payload);
+      logErr(`Message failed: ${reason}`);
     }
   });
 };
 
-export const getTabId = (): number => {
-  let tabId: number | undefined = chrome.devtools.inspectedWindow?.tabId;
-  logDebug('Tab ID --> ' + tabId);
-  if (!tabId) {
-    logErr('No Tab Id found, analyse aborted', true);
+export const sendChromeMsg = (payload: any) => {
+  const id = getTabId();
+  if (id) sendChromeMsgRetry(id, 0, 10, payload);
+};
+
+export const sendMessageAndWait = async <T>(payload: any): Promise<T | undefined> => {
+  const tabId = getTabId();
+  if (!tabId) return undefined;
+  try {
+    const response = await browser.runtime.sendMessage({
+      forwardToTab: true,
+      tabId: tabId,
+      payload: payload
+    });
+    return response?.data as T;
+  } catch (error) {
+    return undefined;
   }
-  return tabId;
 };
 
-export const getTabUrl = async (): Promise<string | undefined> => {
-  const tab = await chrome.tabs.get(getTabId());
-  return tab?.url;
+export const cleanCache = () => {
+  browser.runtime.sendMessage({ type: 'CLEAN_CACHE' })
+    .catch(reason => logErr(`Error clearing browsing cache: ${reason}`));
 };
 
-export const reloadCurrentTab = async (): Promise<void> => {
-  await chrome.tabs.reload(getTabId());
+export const reloadCurrentTab = async () => {
+  const tabId = getTabId();
+  if (browser.devtools?.inspectedWindow?.reload) {
+    browser.devtools.inspectedWindow.reload({});
+  } else if (tabId && browser.tabs?.reload) {
+    browser.tabs.reload(tabId);
+  }
 };

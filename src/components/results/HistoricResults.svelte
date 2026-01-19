@@ -3,26 +3,25 @@
   import { ButtonTypeEnum } from 'src/enum';
   import { export_data } from 'src/service';
   import { formatGesMeasuresForTable, getLocalStorageObject, setLocalStorageObject, translate } from 'src/utils';
-  import { onMount } from 'svelte';
   import type { Measure, TableData } from 'src/interface';
   import { Table } from 'src/components/journey';
   import { Button } from 'src/components/html';
   import { Modal } from 'src/components/page';
 
-  let formattedData: Map<string, TableData>[];
+  let formattedData: Map<string, TableData>[] = [];
   let measures: Measure[] = [];
   let showModal = false;
   export let saveName: string;
 
-  onMount(() => {
-    updateHistory();
-  });
+  $: if (saveName) {
+    loadHistory();
+  }
 
   const handleExport = () => {
     export_data(measures);
   };
 
-  export const updateHistory = () => {
+  const loadHistory = () => {
     measures = getLocalStorageObject(saveName) ?? [];
     let btn = new Map<string, TableData>;
     btn.set('action', { content: 'deleteButton', action: true });
@@ -39,6 +38,7 @@
   const handleDeleteAll = () => {
     localStorage.removeItem(saveName);
     formattedData = [];
+    measures = [];
     showModal = false;
   };
 </script>
@@ -64,7 +64,6 @@
     disabled={!formattedData?.length}
   />
 </div>
-
 <Modal dialogLabelKey="deleteAllTitle" bind:showModal>
   <h2>{translate('deleteAllConfirmMessage')}</h2>
   <div>

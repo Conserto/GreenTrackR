@@ -1,3 +1,4 @@
+import { browser } from 'wxt/browser';
 import { RequestAction } from 'src/enum';
 import type { GES, Measure, NetworkMeasure, SimpleGES } from 'src/interface';
 
@@ -7,16 +8,21 @@ import {
   calculResourcesFromAllServer,
   createEmptyMeasure,
   getLocalStorageObject,
+  getTabId,
   getUrl,
   logDebug,
+  logErr,
   logInfo,
-  reloadCurrentTab,
-  sendChromeMsg
+  reloadCurrentTab
 } from 'src/utils';
 import { paramRetry, PREFIX_URL_EXTENSION } from '../const';
-import { DOM_INFOS } from '../const/action.const';
 import { VITE_MAX_HAR_RETRIES_DEFAULT } from '../const/config.const';
 import { SEARCH_AUTO } from '../const/key.const';
+
+/**
+ * Detect Firefox browser via user agent
+ */
+const IS_FIREFOX = typeof navigator !== 'undefined' && /Firefox/i.test(navigator.userAgent);
 
 export class MeasureAcquisition {
   public measure: Measure;
@@ -37,10 +43,14 @@ export class MeasureAcquisition {
     this.scoreService = new ScoreService();
     this.measure = createEmptyMeasure();
     this.nbRetry = getLocalStorageObject(paramRetry) ?? VITE_MAX_HAR_RETRIES_DEFAULT;
+
+    logDebug(`MeasureAcquisition initialized - Browser: ${IS_FIREFOX ? 'Firefox' : 'Chrome/Chromium'}`);
   }
 
+  /**
+   * Updates measure values including total energy and resources (network, user, server).
+   */
   updateMeasureValues(serverGES?: GES, userGES?: GES, networkGES?: SimpleGES, serversGES?: SimpleGES): void {
-    // Energie total requetes (réseau, user, server)
     const { ges, wu, adpe, energy } = this.gesService.getEnergyAndResources(
       this.measure.networkMeasure.network,
       this.measure.networkMeasure.nbRequest,
@@ -58,6 +68,7 @@ export class MeasureAcquisition {
     this.measure.serversGES = serversGES;
     this.measure.networkGES = networkGES;
     this.measure.complete = !!(serverGES && userGES);
+
     if (this.measure.ges?.pageTotal) {
       this.measure.score = this.scoreService.getScore(this.measure.ges.pageTotal);
     } else {
@@ -85,33 +96,103 @@ export class MeasureAcquisition {
     }
     const networkGes: SimpleGES = calculNetworkGes(serversGes, userGES);
     this.updateMeasureValues(serverGES, userGES, networkGes, serversGes);
-    logDebug('Wait Dom');
+    logDebug('Wait for DOM');
     await this.waitForDomElements();
     logDebug('End getGESMeasure');
     return this.measure;
   }
 
+  /**
+   * Main method to get network measurements
+   * Handles both Chrome and Firefox
+   */
   async getNetworkMeasure(forceRefresh: boolean = true) {
-    let har;
+    logDebug(`getNetworkMeasure started - forceRefresh: ${forceRefresh}, retryCount: ${this.harRetryCount}`);
+
+    // If first call with forceRefresh, reload page first to capture fresh network data
     if (this.harRetryCount === 0 && forceRefresh) {
-      await this.retryGetNetworkMeasure(forceRefresh);
-    } else {
-      har = await this.networkService.getHarEntries();
-      let entriesNetwork = this.networkService.filterNetworkResources(har.entries);
-      let entriesNew = this.networkService.filterNewerOnly(entriesNetwork, this.latestCheck);
-      let [entriesExtension, entriesPage] = this.filterEntriesExtensionAndPage(entriesNew);
-      if (entriesPage.length == 0 && entriesNetwork.length == 0) {
-        await this.retryGetNetworkMeasure(forceRefresh);
-      } else {
-        this.measure = await this.getMeasureFromEntries(this.measure, entriesPage);
-        this.measure = {
-          ...this.measure,
-          extensionMeasure: this.getNetworkAndRequestFromEntries(entriesExtension)
-        };
-        logInfo(`Extension request ignore, datas: requests=${this.measure.extensionMeasure.nbRequest}` +
-          ` / size(compress/uncompress)=${this.measure.extensionMeasure.network.size}/${this.measure.extensionMeasure.network.size} KB`);
+      logDebug('First call with forceRefresh - reloading page...');
+      this.harRetryCount++;
+
+      // Reload page using devtools API (works on both Chrome and Firefox)
+      browser.devtools.inspectedWindow.reload({ ignoreCache: true });
+
+      await this.waitTabUpdate();
+
+      // Extra delay for Firefox HAR population
+      if (IS_FIREFOX) {
+        logDebug('Firefox detected - adding extra delay for HAR population');
+        await new Promise(resolve => setTimeout(resolve, 1500));
       }
     }
+
+    // Now get HAR entries
+    const har = await this.networkService.getHarEntries();
+
+    logDebug(`HAR result: ${har ? 'received' : 'null'}, entries: ${har?.entries?.length ?? 0}`);
+
+    if (!har || !har.entries || har.entries.length === 0) {
+      // Retry if we haven't exhausted retries
+      if (this.harRetryCount <= this.nbRetry) {
+        logDebug(`No HAR entries, retrying (${this.harRetryCount}/${this.nbRetry})...`);
+        this.harRetryCount++;
+
+        browser.devtools.inspectedWindow.reload({ ignoreCache: true });
+        await this.waitTabUpdate();
+
+        if (IS_FIREFOX) {
+          await new Promise(resolve => setTimeout(resolve, 1500));
+        }
+
+        // Recursive call
+        await this.getNetworkMeasure(false); // false to avoid infinite reload loop
+        return;
+      } else {
+        logErr(`Failed to retrieve HAR entries after ${this.nbRetry} retries`);
+        this.harRetryCount = 0;
+        return;
+      }
+    }
+
+    // Process entries
+    let entriesNetwork = this.networkService.filterNetworkResources(har.entries);
+    let entriesNew = this.networkService.filterNewerOnly(entriesNetwork, this.latestCheck);
+    let [entriesExtension, entriesPage] = this.filterEntriesExtensionAndPage(entriesNew);
+
+    logDebug(`Entries stats - Total: ${entriesNetwork.length}, New: ${entriesNew.length}, Page: ${entriesPage.length}, Extension: ${entriesExtension.length}`);
+
+    if (entriesPage.length === 0 && entriesNetwork.length === 0) {
+      // Retry if we haven't exhausted retries
+      if (this.harRetryCount <= this.nbRetry) {
+        logDebug(`No page entries found, retrying (${this.harRetryCount}/${this.nbRetry})...`);
+        this.harRetryCount++;
+
+        browser.devtools.inspectedWindow.reload({ ignoreCache: true });
+        await this.waitTabUpdate();
+
+        if (IS_FIREFOX) {
+          await new Promise(resolve => setTimeout(resolve, 1500));
+        }
+
+        await this.getNetworkMeasure(false);
+        return;
+      } else {
+        logErr(`No entries found after ${this.nbRetry} retries`);
+      }
+    } else {
+      // Success - process the entries
+      this.measure = await this.getMeasureFromEntries(this.measure, entriesPage);
+      this.measure = {
+        ...this.measure,
+        extensionMeasure: this.getNetworkAndRequestFromEntries(entriesExtension)
+      };
+
+      logInfo(`Page stats: requests=${this.measure.networkMeasure.nbRequest}, size=${this.measure.networkMeasure.network.size} KB`);
+      logInfo(`Extension request ignored, stats: requests=${this.measure.extensionMeasure.nbRequest}` +
+        ` / size(compress/uncompress)=${this.measure.extensionMeasure.network.size}/${this.measure.extensionMeasure.network.size} KB`);
+    }
+
+    // Reset retry counter at the end
     this.harRetryCount = 0;
   }
 
@@ -162,54 +243,154 @@ export class MeasureAcquisition {
     return networkMeasure;
   }
 
-  async retryGetNetworkMeasure(forceRefresh: boolean): Promise<void> {
-    if (this.harRetryCount <= this.nbRetry) {
-      logDebug('Reload');
-      this.harRetryCount++;
-      await reloadCurrentTab();
-      //TODO: to delete, we'll have to implement this on service-worker so it can send message to svelte component
-      // wen new entries are loaded -> Replace it by chrome?webNavigation.onCompleted on service-worker.ts (see this file)
-      await this.waitTabUpdate();
-      await this.getNetworkMeasure(forceRefresh);
+  /**
+   * Gets DOM element count using devtools.inspectedWindow.eval
+   * This method works on both Chrome and Firefox
+   */
+  async waitForDomElements(): Promise<void> {
+    const tabId = getTabId();
+    if (!tabId) {
+      logErr('No tab ID found for DOM elements');
+      this.measure.dom = 0;
+      return;
     }
-  }
 
-  waitForDomElements() {
-    return new Promise<void>((resolve, reject) => {
-      const failed = setTimeout(() => {
-        reject();
-      }, 8000);
-      const handleRuntimeMsg = async (message: { type: string; value: any }) => {
-        if (message.type === DOM_INFOS) {
-          chrome.runtime.onMessage.addListener(handleRuntimeMsg);
-          this.measure.dom = message.value;
-          clearTimeout(failed);
-          resolve();
-        }
-      };
-      chrome.runtime.onMessage.addListener(handleRuntimeMsg);
-      sendChromeMsg({ action: RequestAction.GET_DOM_ELEMENTS });
-    });
-  }
+    logDebug(`Getting DOM elements for tab ${tabId}`);
 
-  // TODO: to delete, we'll have to implement this on service-worker so it can send message to svelte component
-  // wen new entries are loaded
-  waitTabUpdate() {
-    return new Promise((resolve, reject) => {
-      const failed = setTimeout(() => {
-        reject();
-      }, 8000);
+    try {
+      // Method 1: Use devtools.inspectedWindow.eval (works on both browsers)
+      const domCount = await this.evalInInspectedWindow('document.getElementsByTagName("*").length');
+      if (typeof domCount === 'number' && domCount >= 0) {
+        this.measure.dom = domCount;
+        logDebug(`DOM elements count (inspectedWindow.eval): ${this.measure.dom}`);
+        return;
+      }
 
-      function onTabUpdated(updatedTabId: number, info: any) {
-        if (info.status === 'complete') {
-          chrome.tabs.onUpdated.removeListener(onTabUpdated); // Remove the listener
-          clearTimeout(failed);
-          resolve(updatedTabId);
+      // Method 2: Chrome - direct tabs.sendMessage
+      if (!IS_FIREFOX && browser.tabs?.sendMessage) {
+        try {
+          const response = await browser.tabs.sendMessage(tabId, { action: RequestAction.GET_DOM_ELEMENTS });
+          if (response?.success) {
+            this.measure.dom = response.data?.domElements || 0;
+            logDebug(`DOM elements count (tabs.sendMessage): ${this.measure.dom}`);
+            return;
+          }
+        } catch (e) {
+          logDebug(`tabs.sendMessage failed: ${e}`);
         }
       }
 
-      chrome.tabs.onUpdated.addListener(onTabUpdated);
+      // Method 3: Firefox - route through background script
+      if (IS_FIREFOX && browser.runtime?.sendMessage) {
+        try {
+          const response = await browser.runtime.sendMessage({
+            forwardToTab: true,
+            tabId: tabId,
+            payload: { action: RequestAction.GET_DOM_ELEMENTS }
+          });
+          if (response?.success && response?.data) {
+            this.measure.dom = response.data.domElements ?? response.data.data?.domElements ?? 0;
+            logDebug(`DOM elements count (runtime.sendMessage): ${this.measure.dom}`);
+            return;
+          }
+        } catch (e) {
+          logDebug(`runtime.sendMessage failed: ${e}`);
+        }
+      }
+
+      logDebug('All DOM element retrieval methods failed, using 0 as default');
+      this.measure.dom = 0;
+
+    } catch (error) {
+      logErr(`Error getting DOM elements: ${error}`);
+      this.measure.dom = 0;
+    }
+  }
+
+  /**
+   * Evaluates expression in inspected window context
+   * Returns Promise that resolves with the result
+   */
+  private evalInInspectedWindow(expression: string): Promise<any> {
+    return new Promise((resolve) => {
+      const timeout = setTimeout(() => resolve(null), 3000);
+
+      browser.devtools.inspectedWindow.eval(expression, (result, exceptionInfo) => {
+        clearTimeout(timeout);
+        if (exceptionInfo) {
+          logDebug(`inspectedWindow.eval exception: ${JSON.stringify(exceptionInfo)}`);
+          resolve(null);
+        } else {
+          resolve(result);
+        }
+      });
     });
   }
 
+  /**
+   * Waits for tab to finish loading
+   */
+  waitTabUpdate(): Promise<number> {
+    return new Promise((resolve) => {
+      const maxTimeout = setTimeout(() => {
+        logDebug('Tab update wait timed out (max 8s)');
+        cleanup();
+        resolve(0);
+      }, 8000);
+
+      let navListener: ((url: string) => void) | null = null;
+      let tabListener: ((tabId: number, info: chrome.tabs.TabChangeInfo) => void) | null = null;
+
+      const cleanup = () => {
+        clearTimeout(maxTimeout);
+        if (navListener) {
+          try { browser.devtools.network.onNavigated.removeListener(navListener); } catch (e) { /* ignore */ }
+        }
+        if (tabListener && browser.tabs?.onUpdated) {
+          try { browser.tabs.onUpdated.removeListener(tabListener); } catch (e) { /* ignore */ }
+        }
+      };
+
+      // Primary: Use devtools.network.onNavigated (works in DevTools context for both browsers)
+      navListener = (url: string) => {
+        logDebug(`Navigation completed to: ${url}`);
+        setTimeout(() => {
+          cleanup();
+          resolve(0);
+        }, IS_FIREFOX ? 1500 : 500);
+      };
+
+      try {
+        browser.devtools.network.onNavigated.addListener(navListener);
+        logDebug('Listening for navigation via devtools.network.onNavigated');
+        return;
+      } catch (e) {
+        logDebug(`Failed to add onNavigated listener: ${e}`);
+      }
+
+      // Fallback: Use tabs.onUpdated (Chrome, needs tabs permission)
+      if (browser.tabs?.onUpdated) {
+        tabListener = (updatedTabId: number, info: chrome.tabs.TabChangeInfo) => {
+          if (info.status === 'complete') {
+            logDebug(`Tab ${updatedTabId} finished loading`);
+            cleanup();
+            resolve(updatedTabId);
+          }
+        };
+
+        try {
+          browser.tabs.onUpdated.addListener(tabListener);
+          logDebug('Listening for tab update via tabs.onUpdated');
+          return;
+        } catch (e) {
+          logDebug(`Failed to add tabs.onUpdated listener: ${e}`);
+        }
+      }
+
+      // Last resort: fixed delay
+      logDebug('Using fixed delay fallback for tab update wait');
+      cleanup();
+      setTimeout(() => resolve(0), IS_FIREFOX ? 3000 : 2000);
+    });
+  }
 }

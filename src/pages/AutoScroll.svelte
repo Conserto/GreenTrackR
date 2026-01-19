@@ -1,10 +1,17 @@
 <script lang="ts">
+  import { browser } from 'wxt/browser';
+  import { tick } from 'svelte';
   import { ButtonTypeEnum, RequestAction, ScrollInputType } from 'src/enum';
   import {
     cleanCache,
     getLocalStorageObject,
+    getTabId,
+    logDebug,
+    logErr,
+    logInfo,
     reloadCurrentTab,
     sendChromeMsg,
+    sendMessageAndWait,
     setLocalStorageObject,
     toHistoFormattedDatas,
     translate
@@ -46,40 +53,100 @@
   let currentMeasure: Measure | null;
   let histoDatas: HistoData[] = [];
 
-  onMount(() => {
-    chrome.runtime.onMessage.addListener(handleRuntimeMsg);
-    sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
-    cleanCache();
-    sendChromeMsg({ action: RequestAction.SEND_PAGE_HEIGHT });
-  });
+  let myTabId: number = 0;
 
-  onDestroy(() => {
-    chrome.runtime.onMessage.removeListener(handleRuntimeMsg);
-  });
+  /**
+   * Récupère la hauteur de page via sendMessageAndWait
+   */
+  const fetchPageHeight = async () => {
+    logInfo('[AutoScroll] Fetching page height...');
 
-  const handleRuntimeMsg = async (message: any) => {
-    if (message.type === PAGE_HEIGHT) {
-      totalPagePixels = message.totalHeight;
-      viewportPixels = message.viewportHeight;
-    } else if (message.autoScrollDone) {
-      loading = true;
-      await measureAcquisition.getNetworkMeasure(false);
-      currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
-      loading = false;
-      histoDatas = toHistoFormattedDatas(currentMeasure);
-      currentDisplayedTab = TabType.ResultTab;
+    try {
+      const response = await sendMessageAndWait<{
+        pageHeight?: number;
+        viewportHeight?: number;
+        data?: {
+          pageHeight?: number;
+          viewportHeight?: number;
+        };
+      }>({ action: RequestAction.SEND_PAGE_HEIGHT });
+
+      if (response) {
+        const pageHeight = response.pageHeight ?? response.data?.pageHeight ?? 0;
+        const viewHeight = response.viewportHeight ?? response.data?.viewportHeight ?? 0;
+
+        if (pageHeight > 0) {
+          totalPagePixels = pageHeight;
+          viewportPixels = viewHeight;
+          logInfo(`[AutoScroll] Page height fetched: ${totalPagePixels}x${viewportPixels}`);
+        }
+      }
+    } catch (e) {
+      logErr(`[AutoScroll] fetchPageHeight error: ${e}`);
     }
   };
 
-  const handleAutoScroll = () => {
+  /**
+   * Lance le scroll et attend la fin via délai
+   */
+  const handleAutoScroll = async () => {
+    // Si on n'a pas encore la hauteur de page, la récupérer
+    if (totalPagePixels === 0) {
+      await fetchPageHeight();
+    }
+
+    // Reset et afficher loading
     currentMeasure = null;
     loading = true;
-    const value =
-      currentScrollType === ScrollInputType.PIXEL
-        ? scrollValue
-        : ((totalPagePixels - viewportPixels) * scrollValue) / 100;
+    currentDisplayedTab = TabType.None;
+
+    // Force Svelte à mettre à jour le DOM pour afficher le loading
+    await tick();
+
+    let value: number;
+    if (currentScrollType === ScrollInputType.PIXEL) {
+      value = scrollValue;
+    } else {
+      const scrollableHeight = totalPagePixels - viewportPixels;
+      value = (scrollableHeight * scrollValue) / 100;
+    }
+
+    logInfo(`[AutoScroll] Scroll to: ${value}px (${scrollValue}%)`);
+
+    // Envoie la commande de scroll
     sendChromeMsg({ action: RequestAction.SCROLL_TO, value });
+
+    // Attendre que le scroll se termine
+    const estimatedTime = Math.max(1500, (value / 200) * 100 + 1000);
+    logInfo(`[AutoScroll] Waiting ${estimatedTime}ms`);
+
+    await new Promise(resolve => setTimeout(resolve, estimatedTime));
+
+    // Faire la mesure
+    logInfo('[AutoScroll] Starting measurement');
+    try {
+      await measureAcquisition.getNetworkMeasure(false);
+      currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
+      histoDatas = toHistoFormattedDatas(currentMeasure);
+      currentDisplayedTab = TabType.ResultTab;
+      logInfo('[AutoScroll] Measurement complete');
+    } catch (e) {
+      logErr(`[AutoScroll] Measurement error: ${e}`);
+    } finally {
+      loading = false;
+    }
   };
+
+  onMount(() => {
+    myTabId = getTabId();
+    logInfo(`[AutoScroll] onMount - tabId: ${myTabId}`);
+
+    sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
+    cleanCache();
+    fetchPageHeight();
+  });
+
+  onDestroy(() => {});
 
   const handleCleanCache = () => {
     sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
@@ -139,7 +206,7 @@
 
 <div class="flex-center buttons-container">
   <Button
-    disabled={!scrollValue}
+    disabled={!scrollValue || loading}
     on:buttonClick={handleAutoScroll}
     buttonType={ButtonTypeEnum.PRIMARY}
     translateKey={'launchAnalysisButtonWithAutoScrollButton'}
@@ -178,47 +245,47 @@
 </div>
 <p class="info-mix">{translate('infoMix')}</p>
 <ZoneSimulation on:submitSimulation={handleSimulation} />
-{#if currentDisplayedTab === TabType.ResultTab}
-  {#if currentMeasure && !loading}
-    <GesResults measure={currentMeasure} caption="gesEquivalentCaption" />
-    <div class="detail-container">
-      {#if currentMeasure?.complete}
-        <div class="detail summary">
-          <Summary
-            measure={currentMeasure}
-            captionKey="resSumCaption"
-          />
-        </div>
-        <div class="detail request">
-          <ResDetailByType
-            measure={currentMeasure}
-            caption={translate("resDetCaption")}
-            description={translate("resDetCaptionDescription")}
-          />
-        </div>
-        <div class="detail histo">
-          <Histogram
-            datas={histoDatas}
-            chartLabel="barChartGES"
-            yLabel="greenhouseGasesEmissionDefault"
-            yLabel2="energyDefault"
-          />
-        </div>
-        <div class="detail request">
-          <ResDetailByCountry
-            measure={currentMeasure}
-            captionKey="resDetCountCaption"
-          />
-        </div>
-      {/if}
-    </div>
-  {/if}
-  {#if loading === true}
-    <LoadingWheel />
-  {/if}
+
+<!-- Loading affiché quand loading=true -->
+{#if loading}
+  <LoadingWheel />
+{:else if currentDisplayedTab === TabType.ResultTab && currentMeasure}
+  <GesResults measure={currentMeasure} caption="gesEquivalentCaption" />
+  <div class="detail-container">
+    {#if currentMeasure?.complete}
+      <div class="detail summary">
+        <Summary
+          measure={currentMeasure}
+          captionKey="resSumCaption"
+        />
+      </div>
+      <div class="detail request">
+        <ResDetailByType
+          measure={currentMeasure}
+          caption={translate("resDetCaption")}
+          description={translate("resDetCaptionDescription")}
+        />
+      </div>
+      <div class="detail histo">
+        <Histogram
+          datas={histoDatas}
+          chartLabel="barChartGES"
+          yLabel="greenhouseGasesEmissionDefault"
+          yLabel2="energyDefault"
+        />
+      </div>
+      <div class="detail request">
+        <ResDetailByCountry
+          measure={currentMeasure}
+          captionKey="resDetCountCaption"
+        />
+      </div>
+    {/if}
+  </div>
 {:else if currentDisplayedTab === TabType.HistoricTab}
   <HistoricResults saveName="{savedScrollMeasures}" bind:updateHistory={updateHistoryTab} />
 {/if}
+
 <Modal dialogLabelKey="saveAnalysisTitle" bind:showModal>
   <h2>{translate('saveAnalysis')}</h2>
   <Button
@@ -229,7 +296,6 @@
 </Modal>
 
 <style lang="scss">
-
   .input-label {
     text-align: center;
   }

@@ -1,5 +1,5 @@
 import type { DetailServerUrl, Measure, TableHeader, TableSurHeader } from 'src/interface';
-import { logDebug, logWarn } from './log';
+import { logDebug } from './log';
 import { PREFIX_URL_DATA, PREFIX_URL_EXTENSION } from '../const';
 
 export const filterMeasure = (measures: Measure[], filter: string) => {
@@ -12,24 +12,8 @@ export const filterMeasure = (measures: Measure[], filter: string) => {
   }
 };
 
-export const getUrl = (url?: string) => {
-  let formattedUrl: URL | undefined = undefined;
-  if (url && isRealUrl(url)) {
-    try {
-      formattedUrl = new URL(url);
-    } catch (e) {
-      logWarn(`Error when parsing url ${url} -> ${e}`);
-    }
-  } else {
-    logWarn('No url found');
-  }
-  logDebug(`return url ${formattedUrl}`);
-  return formattedUrl;
-};
-
 /**
  * Detect network resources (data urls embedded in page is not network resource)
- *  Test with request.url as  request.httpVersion === "data"  does not work with old chrome version (example v55)
  */
 export const isNetworkResource = (harEntry: HARFormatEntry) => {
   return harEntry.request.url && !harEntry.request.url.startsWith(PREFIX_URL_DATA);
@@ -97,75 +81,17 @@ export const createEmptyMeasure = (): Measure => {
   return {
     date: new Date(),
     url: '',
-    ges: {
-      dataCenterTotal: 0,
-      networkTotal: 0,
-      deviceTotal: 0,
-      pageTotal: 0
-    },
-    wu: {
-      dataCenterTotal: 0,
-      networkTotal: 0,
-      deviceTotal: 0,
-      pageTotal: 0
-    },
-    adpe: {
-      dataCenterTotal: 0,
-      networkTotal: 0,
-      deviceTotal: 0,
-      pageTotal: 0
-    },
-    energy: {
-      kWhDataCenter: 0,
-      kWhNetwork: 0,
-      kWhDevice: 0,
-      kWhPage: 0
-    },
-    score: {
-      value: 0,
-      color: '',
-      textColor: '',
-      gradeLetter: '',
-      limit: 0
-    },
-    userGES: {
-      carbonIntensity: 0,
-      wu: 0,
-      adpe: 0,
-      countryName: '',
-      cityName: '',
-      countryCode: '',
-      display: ''
-    },
-    serverGES: {
-      carbonIntensity: 0,
-      wu: 0,
-      adpe: 0,
-      countryName: '',
-      cityName: '',
-      countryCode: '',
-      display: ''
-    },
+    ges: { dataCenterTotal: 0, networkTotal: 0, deviceTotal: 0, pageTotal: 0 },
+    wu: { dataCenterTotal: 0, networkTotal: 0, deviceTotal: 0, pageTotal: 0 },
+    adpe: { dataCenterTotal: 0, networkTotal: 0, deviceTotal: 0, pageTotal: 0 },
+    energy: { kWhDataCenter: 0, kWhNetwork: 0, kWhDevice: 0, kWhPage: 0 },
+    score: { value: 0, color: '', textColor: '', gradeLetter: '', limit: 0 },
+    userGES: { carbonIntensity: 0, wu: 0, adpe: 0, countryName: '', cityName: '', countryCode: '', display: '' },
+    serverGES: { carbonIntensity: 0, wu: 0, adpe: 0, countryName: '', cityName: '', countryCode: '', display: '' },
     complete: false,
     dom: 0,
-    extensionMeasure: {
-      nbRequest: 0,
-      nbRequestCache: 0,
-      detail: [],
-      network: {
-        size: 0,
-        sizeUncompress: 0
-      }
-    },
-    networkMeasure: {
-      nbRequest: 0,
-      nbRequestCache: 0,
-      detail: [],
-      network: {
-        size: 0,
-        sizeUncompress: 0
-      }
-    }
+    extensionMeasure: { nbRequest: 0, nbRequestCache: 0, detail: [], network: { size: 0, sizeUncompress: 0 } },
+    networkMeasure: { nbRequest: 0, nbRequestCache: 0, detail: [], network: { size: 0, sizeUncompress: 0 } }
   };
 };
 
@@ -175,9 +101,7 @@ export const scrollPrompt = (topPrompt: number, leftPrompt: number, timeout: num
   if (!end) {
     window.scrollBy({ left: leftPrompt, top: topPrompt, behavior: 'smooth' });
     return new Promise<void>((resolve, reject) => {
-      const failed = setTimeout(() => {
-        reject(Error('Timeout'));
-      }, timeout);
+      const failed = setTimeout(() => { reject(Error('Timeout')); }, timeout);
       window.addEventListener('scrollend', () => {
         clearTimeout(failed);
         resolve();
@@ -188,5 +112,3 @@ export const scrollPrompt = (topPrompt: number, leftPrompt: number, timeout: num
     return new Promise<void>((resolve) => resolve());
   }
 };
-
-
