@@ -157,11 +157,23 @@
   };
 
   const handleResetMeasure = () => {
+    logInfo('[Reset] Nettoyage complet et remontée en haut...');
+
+    // A. On dit au navigateur d'arrêter de mémoriser la position du scroll
+    browser.devtools.inspectedWindow.eval("history.scrollRestoration = 'manual'");
+
+    // B. On ordonne la remontée immédiate
     sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
+
+    // C. On vide l'état de l'application
     currentMeasure = null;
     currentDisplayedTab = TabType.None;
+    histoDatas = [];
     cleanCache();
     measureAcquisition.applyLatest();
+
+    // D. On recharge la page (ce qui appliquera le "manual" du point A)
+    reloadCurrentTab();
   };
 
   const handleRefresh = () => {

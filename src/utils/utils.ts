@@ -19,8 +19,96 @@ export const isNetworkResource = (harEntry: HARFormatEntry) => {
   return harEntry.request.url && !harEntry.request.url.startsWith(PREFIX_URL_DATA);
 };
 
+/**
+ * ULTRA-ROBUST cache detection for Firefox + Chrome
+ * Uses ALL possible indicators to guarantee detection
+ */
 export const isCacheCall = (harEntry: HARFormatEntry): boolean => {
-  return !!harEntry._fromCache;
+  const response = harEntry.response;
+  const entryAny = harEntry as any;
+
+  // ========== CHROME ==========
+  // Main Chrome indicator
+  if (harEntry._fromCache) {
+    return true;
+  }
+
+  // ========== FIREFOX - Method 1: Negative sizes ==========
+  // Firefox uses negative values to indicate cache
+  const transferSize = response?._transferSize;
+  const bodySize = response?.bodySize;
+
+  if (typeof transferSize === 'number' && transferSize < 0) {
+    return true;
+  }
+
+  if (typeof bodySize === 'number' && bodySize < 0) {
+    return true;
+  }
+
+  // ========== FIREFOX - Method 2: Status 304 ==========
+  if (response?.status === 304) {
+    return true;
+  }
+
+  // ========== FIREFOX - Method 3: Cache headers ==========
+  const headers = response?.headers || [];
+
+  // X-Cache header
+  const xCache = headers.find(h => h.name.toLowerCase() === 'x-cache');
+  if (xCache?.value?.toLowerCase().includes('hit')) {
+    return true;
+  }
+
+  // Age header (present if served from cache)
+  const age = headers.find(h => h.name.toLowerCase() === 'age');
+  if (age && parseInt(age.value) > 0) {
+    return true;
+  }
+
+  // CF-Cache-Status (Cloudflare)
+  const cfCache = headers.find(h => h.name.toLowerCase() === 'cf-cache-status');
+  if (cfCache?.value?.toLowerCase() === 'hit') {
+    return true;
+  }
+
+  // ========== FIREFOX - Method 4: Timing pattern ==========
+  // Firefox: time=0 + no transfer but content present = cache
+  const contentSize = response?.content?.size ?? 0;
+  if (harEntry.time === 0 && bodySize === 0 && contentSize > 0) {
+    return true;
+  }
+
+  // Very short response time (< 5ms) + no bodySize = probably cache
+  if (harEntry.time < 5 && bodySize === 0 && contentSize > 0) {
+    return true;
+  }
+
+  // ========== FIREFOX - Method 5: Cache object ==========
+  // Firefox sometimes exposes a cache object
+  if (entryAny.cache?.beforeRequest || entryAny.cache?.afterRequest) {
+    return true;
+  }
+
+  // ========== FIREFOX - Method 6: Timings ==========
+  // If all timing phases are 0 except 'receive' = cache
+  const timings = harEntry.timings;
+  if (timings) {
+    const { blocked, dns, connect, send, wait, ssl } = timings;
+    const totalNonReceive = (blocked ?? 0) + (dns ?? 0) + (connect ?? 0) + (send ?? 0) + (wait ?? 0) + (ssl ?? 0);
+
+    if (totalNonReceive === 0 && timings.receive > 0) {
+      return true;
+    }
+  }
+
+  // ========== FIREFOX - Method 7: From disk/memory cache ==========
+  // Some versions of Firefox expose this
+  if (entryAny._fromDiskCache || entryAny._fromMemoryCache) {
+    return true;
+  }
+
+  return false;
 };
 
 export const isAfter = (harEntry: HARFormatEntry, date: Date) => {

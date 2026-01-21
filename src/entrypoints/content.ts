@@ -1,9 +1,8 @@
-// Content Script - Runs on every web page
-// Receives messages from the DevTools panel and executes actions on the page
+// Content Script - Main entry point for page interaction
+// Handles event listeners, DOM manipulation, and communication with the DevTools panel
 
 import { browser } from 'wxt/browser';
 import { RequestAction } from 'src/enum';
-import { PAGE_HEIGHT } from 'src/const/action.const';
 import { logErr, logInfo, logWarn } from 'src/utils';
 import { defineContentScript } from 'wxt/utils/define-content-script';
 
@@ -12,21 +11,27 @@ export default defineContentScript({
   runAt: 'document_end',
 
   main() {
-    logInfo('Content script loaded on: ' + window.location.href);
+    logInfo(`Content script loaded on: ${window.location.href}`);
 
-    // Track if event listeners are active
-    let listenersActive = false;
-    let isRecording = false;
+    // ==========================================
+    // STATE & CONSTANTS
+    // ==========================================
 
-    // Debounce timers to avoid sending too many messages
-    let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
-
-    // Debounce delay in milliseconds
+    // Configuration
     const SCROLL_DEBOUNCE_DELAY = 500;
 
+    // State tracking
+    let listenersActive = false;
+    let isRecording = false;
+    let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    // ==========================================
+    // EVENT HANDLERS
+    // ==========================================
+
     /**
-     * Handler for scroll events
-     * Sends a message to the panel to save scroll measurement
+     * Handles scroll events with debouncing to prevent event flooding.
+     * Triggers a 'saveAnalysis' message to the panel.
      */
     const handleScroll = () => {
       if (!isRecording) return;
@@ -38,45 +43,43 @@ export default defineContentScript({
           saveAnalysis: true,
           component: 'scroll'
         }).catch(err => {
-          logErr('Error sending scroll message: ' + err);
+          logErr(`Error sending scroll message: ${err}`);
         });
       }, SCROLL_DEBOUNCE_DELAY);
     };
 
     /**
-     * Handler for click events
-     * Detects if it's a navigation click (link) or regular click
-     * For navigation clicks, sends message before page unloads
+     * Handles click events, distinguishing between standard interactions and navigation.
+     * Intercepts navigation clicks to ensure data persistence before the page unloads.
      */
     const handleClick = (event: MouseEvent) => {
       if (!isRecording) return;
       const target = event.target as HTMLElement;
 
-      // Find if the click was on a link or inside a link
+      // Determine if the click target is a link or within a link
       const link = target.closest('a');
       const isNavigationClick = link && link.href && !link.href.startsWith('javascript:');
 
       if (isNavigationClick) {
-        logInfo('Navigation click detected on link: ' + link.href);
+        logInfo(`Navigation click detected on link: ${link.href}`);
 
-        // Block navigation temporarily to ensure message is sent
+        // Temporarily halt navigation to guarantee message transmission
         event.preventDefault();
         event.stopPropagation();
 
         const targetUrl = link.href;
         const targetInNewTab = link.target === '_blank' || event.ctrlKey || event.metaKey;
 
-        // Send message immediately before navigation
+        // Dispatch message immediately before navigation
         browser.runtime.sendMessage({
           saveAnalysis: true,
           component: 'click',
           isNavigation: true,
           targetUrl: targetUrl
         }).catch(err => {
-          logErr('Error sending click message: ' + err);
+          logErr(`Error sending click message: ${err}`);
         }).finally(() => {
-          // Trigger navigation manually after message is sent
-          // Short delay ensures message has time to be processed
+          // Manually trigger navigation after a short buffer
           setTimeout(() => {
             if (targetInNewTab) {
               window.open(targetUrl, '_blank');
@@ -87,7 +90,8 @@ export default defineContentScript({
         });
 
       } else {
-        logInfo('Click event detected on: ' + (target.tagName || 'unknown'));
+        // Standard click handling
+        logInfo(`Click event detected on: ${target.tagName || 'unknown'}`);
 
         setTimeout(() => {
           browser.runtime.sendMessage({
@@ -95,14 +99,18 @@ export default defineContentScript({
             component: 'click',
             isNavigation: false
           }).catch(err => {
-            logErr('Error sending click message: ' + err);
+            logErr(`Error sending click message: ${err}`);
           });
         }, 100);
       }
     };
 
+    // ==========================================
+    // LIFECYCLE MANAGEMENT
+    // ==========================================
+
     /**
-     * Start listening for scroll and click events
+     * Initializes event listeners for user interaction tracking.
      */
     const startListening = () => {
       if (listenersActive) {
@@ -112,13 +120,13 @@ export default defineContentScript({
 
       logInfo('Starting scroll and click listeners');
       window.addEventListener('scroll', handleScroll, { passive: true });
-      // Use capture phase to catch clicks before they trigger navigation
+      // Capture phase ensures clicks are detected before other handlers potentially stop propagation
       document.addEventListener('click', handleClick, { capture: true });
       listenersActive = true;
     };
 
     /**
-     * Stop listening for scroll and click events
+     * Cleans up event listeners and pending timers.
      */
     const stopListening = () => {
       if (!listenersActive) {
@@ -130,17 +138,17 @@ export default defineContentScript({
       window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('click', handleClick, { capture: true });
 
-      // Clear any pending timeouts
       if (scrollTimeout) clearTimeout(scrollTimeout);
-
       listenersActive = false;
     };
 
-    // ============ AUTOSCROLL ============
+    // ==========================================
+    // FEATURE: AUTO-SCROLL
+    // ==========================================
 
     /**
-     * Auto-scroll progressif jusqu'à la position cible
-     * Scroll par étapes pour charger le contenu lazy-loaded
+     * Executes a progressive auto-scroll to a target Y position.
+     * Performs incremental scrolling to ensure lazy-loaded content triggers correctly.
      */
     const performAutoScroll = async (targetScrollY: number) => {
       const maxScroll = document.body.scrollHeight - window.innerHeight;
@@ -153,17 +161,17 @@ export default defineContentScript({
         return;
       }
 
-      const scrollStep = 300; // pixels par étape
-      const scrollDelay = 50; // ms entre chaque étape
+      const scrollStep = 300; // Pixels per step
+      const scrollDelay = 50; // Delay in ms between steps
       let currentScroll = window.scrollY;
 
-      // Scroll progressif
-      while (currentScroll < finalTarget - 10) { // -10 pour la marge d'erreur
+      // Progressive scroll loop
+      while (currentScroll < finalTarget - 10) { // -10 buffer for calculation errors
         const nextScroll = Math.min(currentScroll + scrollStep, finalTarget);
         window.scrollTo({ top: nextScroll, behavior: 'instant' });
         currentScroll = window.scrollY;
 
-        // Vérifier si on a vraiment scrollé
+        // Verify if scroll actually occurred (check for stuck scroll)
         if (Math.abs(window.scrollY - nextScroll) > 50) {
           logWarn(`[AutoScroll] Scroll mismatch: expected=${nextScroll}, actual=${window.scrollY}`);
         }
@@ -171,47 +179,46 @@ export default defineContentScript({
         await new Promise(r => setTimeout(r, scrollDelay));
       }
 
-      // Position finale
+      // Set final position
       window.scrollTo({ top: finalTarget, behavior: 'instant' });
-
       logInfo(`[AutoScroll] Complete: final position=${window.scrollY}`);
     };
 
-    // Listen for messages from the panel (via background or direct)
+    // ==========================================
+    // MESSAGE LISTENER (CONTROLLER)
+    // ==========================================
+
+    /**
+     * Core message listener - Routes actions received from the background script or DevTools panel.
+     */
     browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      logInfo('Content script received: ' + JSON.stringify(message));
+      logInfo(`Content script received: ${JSON.stringify(message)}`);
 
       try {
         const action = message.action;
 
         switch (action) {
           case 'START_RECORDING':
-            isRecording = true;
-            startListening();
-            sendResponse({ success: true });
-            break;
-
-          case 'STOP_RECORDING':
-            isRecording = false;
-            stopListening();
-            sendResponse({ success: true });
-            break;
-
           case 'listenEvents':
             isRecording = true;
             startListening();
             sendResponse({ success: true });
             break;
 
+          case 'STOP_RECORDING':
+          case 'stopListenEvents':
+            isRecording = false;
+            stopListening();
+            sendResponse({ success: true, message: 'Event listeners stopped' });
+            break;
+
           case 'getDomElements':
           case RequestAction.GET_DOM_ELEMENTS:
             const domCount = document.getElementsByTagName('*').length;
-            logInfo('DOM elements count: ' + domCount);
+            logInfo(`DOM elements count: ${domCount}`);
             sendResponse({
               success: true,
-              data: {
-                domElements: domCount
-              }
+              data: { domElements: domCount }
             });
             break;
 
@@ -225,16 +232,17 @@ export default defineContentScript({
           case RequestAction.SCROLL_TO:
             const scrollValue = message.value ?? message.payload?.top;
             if (scrollValue !== undefined) {
-              // Lancer le scroll (ne pas attendre pour ne pas bloquer)
+              // Trigger scroll asynchronously (non-blocking)
               performAutoScroll(scrollValue);
               sendResponse({ success: true, message: 'Auto-scroll started' });
             } else {
+              // Legacy/Alternative scroll method
               const { top, left, timeout } = message.payload || {};
               scrollPage(top || 100, left || 0, timeout || 5000)
                 .then(() => sendResponse({ success: true }))
                 .catch((err) => sendResponse({ success: false, error: err.message }));
             }
-            return true;
+            return true; // Keep channel open for async response
 
           case 'sendPageHeight':
           case RequestAction.SEND_PAGE_HEIGHT:
@@ -248,36 +256,35 @@ export default defineContentScript({
             });
             break;
 
-          case 'stopListenEvents':
-            stopListening();
-            sendResponse({ success: true, message: 'Event listeners stopped' });
-            break;
-
           case 'PING':
             sendResponse({ success: true, message: 'pong' });
             break;
 
           default:
-            logWarn('Unknown action: ' + action);
+            logWarn(`Unknown action: ${action}`);
             sendResponse({ success: false, error: `Unknown action: ${action}` });
         }
       } catch (error) {
-        logErr('Error in content script: ' + error);
+        logErr(`Error in content script: ${error}`);
         sendResponse({ success: false, error: String(error) });
       }
 
-      return true;
+      return true; // Indicates async response is possible
     });
 
-    // Clean up listeners when the page is unloaded
+    // Cleanup on unload
     window.addEventListener('beforeunload', () => {
       stopListening();
     });
   },
 });
 
+// ==========================================
+// UTILITY FUNCTIONS
+// ==========================================
+
 /**
- * Handles page scrolling with a smooth behavior and timeout.
+ * Helper: Handles page scrolling with smooth behavior and a timeout safeguard.
  */
 function scrollPage(top: number, left: number, timeout: number): Promise<void> {
   return new Promise((resolve, reject) => {

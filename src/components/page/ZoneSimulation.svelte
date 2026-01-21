@@ -13,7 +13,7 @@
 
   // Immediate initialization (safer than onMount)
   const zonesOptions = [
-    { label: 'Automatic', value: SEARCH_AUTO },
+    { label: 'Automatique', value: SEARCH_AUTO },
     ...codeZone.map((zone) => ({
       label: formatSimulationLabel(zone),
       value: zone.zoneAlpha2

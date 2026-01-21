@@ -35,13 +35,22 @@
   let serverSearch = SEARCH_AUTO;
   let userSearch = SEARCH_AUTO;
 
-  // Clé pour forcer le remontage de HistoricResults
+  // Key to force a re-render of the HistoricResults component
   let historyKey = 0;
 
+  // Flag to handle the first run after a reset
+  let isFirstAnalysisAfterReset = false;
+
+  // Resetting the service completely to avoid filtering bugs [cite: 10]
   const onResetMeasure = () => {
     currentMeasure = null;
     currentDisplayedTab = TabType.None;
-    measureAcquisition.applyLatest();
+
+     // Re-create the instance to wipe internal state (latest, retry counts, etc.) [cite: 11]
+    measureAcquisition = new MeasureAcquisition();
+
+     // Force a refresh on the next analysis [cite: 12]
+    isFirstAnalysisAfterReset = true;
   };
 
   const onCleanCache = () => {
@@ -63,22 +72,38 @@
       savedMeasures,
       lsMeasures ? [...lsMeasures, currentMeasure] : [currentMeasure]
     );
-    // Incrémenter pour forcer le refresh si on est sur l'historique
+    // Increment to force an update if we are currently on the history tab
     historyKey++;
     showModal = true;
   };
 
+  // [cite_start] Logic to run the analysis, handling the forced refresh if needed [cite: 18]
   const handleRunAnalysis = async () => {
+    console.log('🎯 [DEBUG] Starting analysis...');
+    console.log('🎯 [DEBUG] isFirstAnalysisAfterReset:', isFirstAnalysisAfterReset);
+    console.log('🎯 [DEBUG] measureAcquisition instance:', measureAcquisition);
+
     currentDisplayedTab = TabType.ResultTab;
     loading = true;
-    await measureAcquisition.getNetworkMeasure(false);
+
+    const shouldForceRefresh = isFirstAnalysisAfterReset;
+    console.log('🎯 [DEBUG] shouldForceRefresh:', shouldForceRefresh);
+
+    await measureAcquisition.getNetworkMeasure(shouldForceRefresh);
+
+    if (isFirstAnalysisAfterReset) {
+      isFirstAnalysisAfterReset = false;
+    }
+
     currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
+    console.log('🎯 [DEBUG] Analysis complete, measure:', currentMeasure);
+
     loading = false;
     histoDatas = toHistoFormattedDatas(currentMeasure);
   };
 
   const handleViewHistory = () => {
-    // Incrémenter pour forcer le remontage du composant
+    // Increment to trigger a component remount
     historyKey++;
     currentDisplayedTab = TabType.HistoricTab;
   };
@@ -197,14 +222,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
     .detail {
       overflow: auto;
       margin: var(--spacing--md);
       margin-right: 0;
       padding-top: var(--spacing--xxl);
       box-shadow: var(--box-shadow--md);
-
       &.request {
         padding-left: 1em;
         padding-right: 1em;

@@ -1,6 +1,11 @@
 import { browser } from 'wxt/browser';
-import { getTabUrl, getUrl, isAfter, isCacheCall, isNetworkResource, logDebug, logWarn } from 'src/utils';
+import { getTabUrl, getUrl, isAfter, isCacheCall, isNetworkResource, logDebug, logWarn, logInfo } from 'src/utils';
 import type { DetailServer, DetailServerUrl, NetworkDetail, NetworkResponse } from 'src/interface';
+
+/**
+ * Detect Firefox browser
+ */
+const IS_FIREFOX = typeof navigator !== 'undefined' && /Firefox/i.test(navigator.userAgent);
 
 /**
  * Content-Type to resource type mapping (Firefox fallback)
@@ -39,9 +44,9 @@ const EXTENSION_MAP: Record<string, string> = {
   '.png': 'image',
   '.gif': 'image',
   '.webp': 'image',
+  '.avif': 'image',
   '.svg': 'image',
   '.ico': 'image',
-  '.avif': 'image',
   '.woff': 'font',
   '.woff2': 'font',
   '.ttf': 'font',
@@ -57,10 +62,10 @@ const EXTENSION_MAP: Record<string, string> = {
 export class NetworkService {
 
   /**
-   * Get HAR entries from DevTools
-   * Handles both Chrome and Firefox
+   * Get HAR entries - OPTIMIZED FOR FIREFOX
+   * Firefox needs more time to populate the HAR after navigation
    */
-  getHarEntries(retryCount: number = 0, maxRetries: number = 3): Promise<{ entries: HARFormatEntry[] }> {
+  getHarEntries(retryCount: number = 0, maxRetries: number = 5): Promise<{ entries: HARFormatEntry[] }> {
     return new Promise((resolve) => {
       if (!browser.devtools?.network?.getHAR) {
         logWarn('browser.devtools.network.getHAR not available');
@@ -72,14 +77,21 @@ export class NetworkService {
         const harAny = har as any;
         const entries: HARFormatEntry[] = harAny?.entries || harAny?.log?.entries || [];
 
-        logDebug(`HAR entries count: ${entries.length}`);
+        logDebug(`HAR entries count: ${entries.length} (attempt ${retryCount + 1}/${maxRetries + 1})`);
 
+        // Firefox: give more time if HAR is empty and it's a retry
         if (entries.length === 0 && retryCount < maxRetries) {
-          logDebug(`HAR empty, retrying (${retryCount + 1}/${maxRetries})...`);
+          // Progressive delay: 300ms, 500ms, 800ms, 1200ms, 1500ms
+          const delay = IS_FIREFOX ? Math.min(300 + retryCount * 300, 1500) : 500;
+
+          logDebug(`HAR empty, retrying in ${delay}ms (${retryCount + 1}/${maxRetries})...`);
           setTimeout(() => {
             this.getHarEntries(retryCount + 1, maxRetries).then(resolve);
-          }, 500);
+          }, delay);
         } else {
+          if (entries.length > 0) {
+            logInfo(`✓ HAR populated with ${entries.length} entries`);
+          }
           resolve({ entries });
         }
       });
@@ -93,7 +105,9 @@ export class NetworkService {
   }
 
   calculateNbCache(entries: HARFormatEntry[]): number {
-    return entries.filter((entry) => isCacheCall(entry)).length;
+    const cacheCount = entries.filter((entry) => isCacheCall(entry)).length;
+    logDebug(`Cache detection: ${cacheCount}/${entries.length} cached`);
+    return cacheCount;
   }
 
   filterNewerOnly(entries: HARFormatEntry[], latest?: Date): HARFormatEntry[] {
@@ -111,33 +125,108 @@ export class NetworkService {
     return url;
   }
 
+  /**
+   * Size calculation OPTIMIZED with detailed logs
+   */
   calculateResponseSizes(entries: HARFormatEntry[]): { responsesSize: number; responsesSizeUncompress: number } {
     let responsesSize = 0;
     let responsesSizeUncompress = 0;
+    let cacheCount = 0;
+    let realCount = 0;
+
+    // Group by cache status for clean logs
+    const cached: string[] = [];
+    const real: string[] = [];
 
     entries.forEach((entry) => {
-      responsesSize += this.getTransferSize(entry);
-      responsesSizeUncompress += entry.response?.content?.size ?? 0;
+      const isCache = isCacheCall(entry);
+      const transferSize = this.getTransferSize(entry);
+      const uncompressSize = this.getUncompressedSize(entry);
+
+      responsesSize += transferSize;
+      responsesSizeUncompress += uncompressSize;
+
+      const urlShort = entry.request.url.split('?')[0].substring(entry.request.url.lastIndexOf('/') + 1);
+
+      if (isCache) {
+        cacheCount++;
+        cached.push(urlShort);
+      } else {
+        realCount++;
+        real.push(`${urlShort} (${Math.round(transferSize)}KB)`);
+      }
     });
+
+    // Condensed and informative logs
+    if (cached.length > 0) {
+      logInfo(`🟢 CACHED (${cacheCount}): ${cached.slice(0, 3).join(', ')}${cached.length > 3 ? ` +${cached.length - 3} more` : ''}`);
+    }
+    if (real.length > 0) {
+      logInfo(`🔵 REAL (${realCount}): ${real.slice(0, 3).join(', ')}${real.length > 3 ? ` +${real.length - 3} more` : ''}`);
+    }
+
+    logInfo(`📊 Total: ${responsesSize.toFixed(2)} KB transferred, ${responsesSizeUncompress.toFixed(2)} KB uncompressed`);
 
     return { responsesSize, responsesSizeUncompress };
   }
 
   /**
-   * Get transfer size (cross-browser)
-   * Chrome: _transferSize | Firefox: bodySize or content.size
+   * Get transfer size - ULTRA-ROBUST VERSION
    */
   private getTransferSize(entry: HARFormatEntry): number {
-    if (typeof entry.response?._transferSize === 'number' && entry.response._transferSize > 0) {
-      return entry.response._transferSize;
+    const response = entry.response;
+
+    // If cache detected, transferSize = 0
+    if (isCacheCall(entry)) {
+      return 0;
     }
 
-    const bodySize = entry.response?.bodySize ?? 0;
+    // Chrome: _transferSize
+    const transferSize = response?._transferSize ?? null;
+    if (typeof transferSize === 'number' && transferSize > 0) {
+      return transferSize;
+    }
+
+    // Firefox: bodySize (but not if negative)
+    const bodySize = response?.bodySize ?? 0;
     if (bodySize > 0) {
       return bodySize;
     }
 
-    return entry.response?.content?.size ?? 0;
+    // Fallback: content.size
+    const contentSize = response?.content?.size ?? 0;
+    if (contentSize > 0) {
+      // If we get here with a negative bodySize, it's an undetected cache
+      if (bodySize < 0 || (transferSize !== null && transferSize < 0)) {
+        logDebug(`⚠️ Possible cache miss-detection: ${entry.request.url.substring(0, 60)}...`);
+        return 0;
+      }
+      return contentSize;
+    }
+
+    return 0;
+  }
+
+  /**
+   * Get uncompressed size - ROBUST VERSION
+   */
+  private getUncompressedSize(entry: HARFormatEntry): number {
+    const response = entry.response;
+    const contentSize = response?.content?.size ?? 0;
+
+    // Firefox can return -1 for certain resources
+    if (contentSize < 0) {
+      // Try bodySize or transferSize
+      const bodySize = response?.bodySize ?? 0;
+      const transferSize = response?._transferSize ?? 0;
+
+      if (bodySize > 0) return bodySize;
+      if (transferSize > 0) return transferSize;
+
+      return 0;
+    }
+
+    return contentSize;
   }
 
   calculateDetailResponseSizes(entries: HARFormatEntry[]): NetworkDetail[] {
@@ -156,6 +245,8 @@ export class NetworkService {
         nbRequestCache: nbCache,
         nbRequest: groupEntries.length - nbCache
       });
+
+      logDebug(`📦 ${resourceType}: ${groupEntries.length} total (${nbCache} cached, ${groupEntries.length - nbCache} real)`);
     }
 
     // Sort: 'other' always last, rest alphabetically
@@ -168,7 +259,6 @@ export class NetworkService {
 
   /**
    * Get resource type (cross-browser)
-   * Chrome: _resourceType directly | Firefox: Content-Type or URL extension
    */
   getResourceType(entry: HARFormatEntry): string {
     // Chrome provides _resourceType
@@ -239,7 +329,7 @@ export class NetworkService {
     if (entries) {
       entries.forEach((entry) => {
         const size = this.getTransferSize(entry);
-        const sizeUncompress = entry.response?.content?.size ?? 0;
+        const sizeUncompress = this.getUncompressedSize(entry);
 
         responsesSize += size;
         responsesSizeUncompress += sizeUncompress;

@@ -1,6 +1,6 @@
 // Background Script - Service Worker
-// Handles communication between the DevTools panel and content scripts
-// Supports both Chrome and Firefox with appropriate fallbacks
+// Central hub for communication between DevTools panel, Content Scripts, and Browser API.
+// Handles message routing, cache management, and tab interactions with cross-browser support.
 
 import { browser } from 'wxt/browser';
 import { logErr, logInfo } from 'src/utils';
@@ -9,24 +9,31 @@ import { defineBackground } from 'wxt/utils/define-background';
 export default defineBackground(() => {
   logInfo('Background script started');
 
-  // Listen for long-lived connections from the DevTools panel
+  // ==========================================
+  // LONG-LIVED CONNECTIONS (PORTS)
+  // ==========================================
+
+  /**
+   * Manages persistent connections, primarily from the DevTools panel.
+   * Acts as a bridge to forward messages from the panel to specific tabs.
+   */
   browser.runtime.onConnect.addListener((port) => {
-    logInfo('New connection: ' + port.name);
+    logInfo(`New connection established: ${port.name}`);
 
     if (port.name === 'devtools-panel') {
       port.onMessage.addListener(async (message: any) => {
-        logInfo('Message from panel: ' + JSON.stringify(message));
+        logInfo(`Message received from panel: ${JSON.stringify(message)}`);
 
         if (message.tabId && message.action) {
           try {
-            // Forward the message to the content script of the specific tab
+            // Relay message to the target tab's content script
             const response = await browser.tabs.sendMessage(message.tabId, {
               action: message.action,
               payload: message.payload,
             });
             port.postMessage({ id: message.id, response });
           } catch (error) {
-            logErr('Error forwarding message: ' + error);
+            logErr(`Error forwarding message via port: ${error}`);
             port.postMessage({
               id: message.id,
               error: error instanceof Error ? error.message : String(error)
@@ -37,17 +44,25 @@ export default defineBackground(() => {
     }
   });
 
-  // Listen for one-time messages
-  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    logInfo('Background received: ' + JSON.stringify(message));
+  // ==========================================
+  // ONE-TIME MESSAGE LISTENERS
+  // ==========================================
 
-    // Handle tab reload requests from DevTools (Firefox compatibility)
+  /**
+   * Handles single messages from any part of the extension (Popup, Content Script, Panel).
+   */
+  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    logInfo(`Background received: ${JSON.stringify(message)}`);
+
+    // 1. Tab Management: Reload
+    // Handles reload requests, often needed for Firefox compatibility
     if (message.action === 'RELOAD_TAB' && message.tabId) {
       handleTabReload(message.tabId, sendResponse);
       return true; // Keep channel open for async response
     }
 
-    // Récupérer l'URL proprement
+    // 2. Tab Management: Get URL
+    // Safely retrieves the URL of a specific tab
     if (message.action === 'GET_TAB_URL') {
       browser.tabs.get(message.tabId)
         .then(tab => sendResponse({ url: tab?.url }))
@@ -55,7 +70,8 @@ export default defineBackground(() => {
       return true;
     }
 
-    // --- AJOUT POUR LE CACHE ---
+    // 3. Cache Management
+    // Clears browsing data (cache, service workers, downloads)
     if (message.type === 'CLEAN_CACHE') {
       browser.browsingData.remove({}, {
         cache: true,
@@ -70,33 +86,37 @@ export default defineBackground(() => {
       return true;
     }
 
-    // Forward saveAnalysis messages from content script to all extension pages (including panel)
+    // 4. Data Broadcasting: Save Analysis
+    // Forwards analysis results from content script to all extension views (Panel, Popup)
     if (message.saveAnalysis) {
       logInfo('Forwarding saveAnalysis message to extension pages');
 
-      // Broadcast to all extension views (including DevTools panel)
       browser.runtime.sendMessage(message).catch(() => {
-        logInfo('No listeners for saveAnalysis (this is normal if panel is closed)');
+        logInfo('No listeners for saveAnalysis (panel might be closed)');
       });
 
       sendResponse({ success: true, forwarded: true });
       return true;
     }
 
-    // If the message is from the panel and needs to be forwarded to a tab
-    // This is the primary method for Firefox DevTools communication
+    // 5. Message Relay: Forward to Tab
+    // Primary method for Firefox DevTools communication to reach Content Scripts
     if (message.forwardToTab && message.tabId) {
       handleForwardToTab(message.tabId, message.payload, sendResponse);
-      return true; // Keep the message channel open for asynchronous response
+      return true;
     }
 
     return false;
   });
 });
 
+// ==========================================
+// HELPER FUNCTIONS
+// ==========================================
+
 /**
- * Reloads a specific tab with cache bypass
- * Used when DevTools panel cannot directly reload the inspected window (Firefox)
+ * Reloads a specific tab bypassing the local cache.
+ * Essential when DevTools cannot directly control the inspected window.
  */
 async function handleTabReload(
   tabId: number,
@@ -113,9 +133,9 @@ async function handleTabReload(
 }
 
 /**
- * Forwards a message to a specific tab's content script
- * Essential for Firefox where DevTools panel cannot use tabs.sendMessage directly
- * Includes fallback to executeScript for DOM element retrieval
+ * Forwards a payload to a specific tab's content script.
+ * Includes a fallback mechanism: if `sendMessage` fails, it attempts
+ * to execute a script directly (useful for DOM metrics retrieval).
  */
 async function handleForwardToTab(
   tabId: number,
@@ -123,14 +143,14 @@ async function handleForwardToTab(
   sendResponse: (response?: any) => void
 ): Promise<void> {
   try {
-    // Primary method: Forward to content script
+    // Attempt 1: Standard messaging
     const response = await browser.tabs.sendMessage(tabId, payload);
     logInfo(`Message forwarded to tab ${tabId}, response: ${JSON.stringify(response)}`);
     sendResponse({ success: true, data: response });
   } catch (error) {
     logErr(`Forward to tab ${tabId} failed: ${error}`);
 
-    // Fallback: Try to execute script directly for DOM element requests
+    // Attempt 2: Fallback to script execution for specific actions
     if (payload?.action === 'GET_DOM_ELEMENTS') {
       try {
         const domResult = await getDomElementsViaScript(tabId);
@@ -155,12 +175,12 @@ async function handleForwardToTab(
 }
 
 /**
- * Gets DOM element count by executing script directly in the tab
- * Works when content script is not responding or not injected
+ * Retrieves the count of DOM elements by injecting a script.
+ * Supports both Manifest V3 (scripting API) and Manifest V2 (tabs API).
  */
 async function getDomElementsViaScript(tabId: number): Promise<number | null> {
   try {
-    // Try Manifest V3 scripting API first
+    // Manifest V3: Use scripting API
     if (browser.scripting?.executeScript) {
       const results = await browser.scripting.executeScript({
         target: { tabId },
@@ -171,7 +191,7 @@ async function getDomElementsViaScript(tabId: number): Promise<number | null> {
       }
     }
 
-    // Fallback to Manifest V2 tabs.executeScript
+    // Manifest V2: Fallback to tabs API
     if (browser.tabs?.executeScript) {
       const results = await browser.tabs.executeScript(tabId, {
         code: 'document.getElementsByTagName("*").length'

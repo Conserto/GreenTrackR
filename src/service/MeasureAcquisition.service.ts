@@ -13,7 +13,7 @@ import {
   logDebug,
   logErr,
   logInfo,
-  reloadCurrentTab
+  logWarn,
 } from 'src/utils';
 import { paramRetry, PREFIX_URL_EXTENSION } from '../const';
 import { VITE_MAX_HAR_RETRIES_DEFAULT } from '../const/config.const';
@@ -44,7 +44,7 @@ export class MeasureAcquisition {
     this.measure = createEmptyMeasure();
     this.nbRetry = getLocalStorageObject(paramRetry) ?? VITE_MAX_HAR_RETRIES_DEFAULT;
 
-    logDebug(`MeasureAcquisition initialized - Browser: ${IS_FIREFOX ? 'Firefox' : 'Chrome/Chromium'}`);
+    logInfo(`🔧 MeasureAcquisition initialized - Browser: ${IS_FIREFOX ? 'Firefox 🦊' : 'Chrome/Chromium'}`);
   }
 
   /**
@@ -103,96 +103,105 @@ export class MeasureAcquisition {
   }
 
   /**
-   * Main method to get network measurements
-   * Handles both Chrome and Firefox
+   * MAIN METHOD (OPTIMIZED FOR FIREFOX)
+   * Smartly handles cache and retries
    */
   async getNetworkMeasure(forceRefresh: boolean = true) {
-    logDebug(`getNetworkMeasure started - forceRefresh: ${forceRefresh}, retryCount: ${this.harRetryCount}`);
+    logInfo(`🚀 getNetworkMeasure - forceRefresh: ${forceRefresh}, retryCount: ${this.harRetryCount}`);
 
-    // If first call with forceRefresh, reload page first to capture fresh network data
+    // ========== STEP 1: RELOAD IF NECESSARY ==========
     if (this.harRetryCount === 0 && forceRefresh) {
-      logDebug('First call with forceRefresh - reloading page...');
+      logInfo('🔄 First call with forceRefresh - reloading page with cache bypass...');
       this.harRetryCount++;
 
-      // Reload page using devtools API (works on both Chrome and Firefox)
+      // Reload with cache bypass
       browser.devtools.inspectedWindow.reload({ ignoreCache: true });
 
+      // Wait for reload to finish
       await this.waitTabUpdate();
 
-      // Extra delay for Firefox HAR population
+      // Firefox: extra delay for HAR population
       if (IS_FIREFOX) {
-        logDebug('Firefox detected - adding extra delay for HAR population');
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        logDebug('⏳ Firefox detected - extra delay for HAR population (2000ms)');
+        await new Promise(resolve => setTimeout(resolve, 2000));
       }
     }
 
-    // Now get HAR entries
+    // ========== STEP 2: HAR RETRIEVAL ==========
     const har = await this.networkService.getHarEntries();
 
-    logDebug(`HAR result: ${har ? 'received' : 'null'}, entries: ${har?.entries?.length ?? 0}`);
+    logDebug(`📊 HAR result: ${har ? 'received' : 'null'}, entries: ${har?.entries?.length ?? 0}`);
 
+    // ========== STEP 3: VALIDATION AND RETRY ==========
     if (!har || !har.entries || har.entries.length === 0) {
-      // Retry if we haven't exhausted retries
       if (this.harRetryCount <= this.nbRetry) {
-        logDebug(`No HAR entries, retrying (${this.harRetryCount}/${this.nbRetry})...`);
+        logWarn(`⚠️ No HAR entries, retrying (${this.harRetryCount}/${this.nbRetry})...`);
         this.harRetryCount++;
 
-        browser.devtools.inspectedWindow.reload({ ignoreCache: true });
+        // Reload without bypassing cache to enable cache detection
+        browser.devtools.inspectedWindow.reload({ ignoreCache: false });
         await this.waitTabUpdate();
 
         if (IS_FIREFOX) {
-          await new Promise(resolve => setTimeout(resolve, 1500));
+          await new Promise(resolve => setTimeout(resolve, 2000));
         }
 
         // Recursive call
-        await this.getNetworkMeasure(false); // false to avoid infinite reload loop
+        await this.getNetworkMeasure(false);
         return;
       } else {
-        logErr(`Failed to retrieve HAR entries after ${this.nbRetry} retries`);
+        logErr(`❌ Failed to retrieve HAR entries after ${this.nbRetry} retries`);
         this.harRetryCount = 0;
         return;
       }
     }
 
-    // Process entries
+    // ========== STEP 4: FILTERING ENTRIES ==========
     let entriesNetwork = this.networkService.filterNetworkResources(har.entries);
     let entriesNew = this.networkService.filterNewerOnly(entriesNetwork, this.latestCheck);
     let [entriesExtension, entriesPage] = this.filterEntriesExtensionAndPage(entriesNew);
 
-    logDebug(`Entries stats - Total: ${entriesNetwork.length}, New: ${entriesNew.length}, Page: ${entriesPage.length}, Extension: ${entriesExtension.length}`);
+    logInfo(`📈 Entries - Total: ${entriesNetwork.length}, New: ${entriesNew.length}, Page: ${entriesPage.length}, Extension: ${entriesExtension.length}`);
 
+    // ========== STEP 5: FINAL VALIDATION ==========
     if (entriesPage.length === 0 && entriesNetwork.length === 0) {
-      // Retry if we haven't exhausted retries
       if (this.harRetryCount <= this.nbRetry) {
-        logDebug(`No page entries found, retrying (${this.harRetryCount}/${this.nbRetry})...`);
+        logWarn(`⚠️ No page entries found, retrying (${this.harRetryCount}/${this.nbRetry})...`);
         this.harRetryCount++;
 
-        browser.devtools.inspectedWindow.reload({ ignoreCache: true });
+        browser.devtools.inspectedWindow.reload({ ignoreCache: false });
         await this.waitTabUpdate();
 
         if (IS_FIREFOX) {
-          await new Promise(resolve => setTimeout(resolve, 1500));
+          await new Promise(resolve => setTimeout(resolve, 2000));
         }
 
         await this.getNetworkMeasure(false);
         return;
       } else {
-        logErr(`No entries found after ${this.nbRetry} retries`);
+        logErr(`❌ No entries found after ${this.nbRetry} retries`);
       }
     } else {
-      // Success - process the entries
+      // ========== STEP 6: DATA PROCESSING ==========
       this.measure = await this.getMeasureFromEntries(this.measure, entriesPage);
       this.measure = {
         ...this.measure,
         extensionMeasure: this.getNetworkAndRequestFromEntries(entriesExtension)
       };
 
-      logInfo(`Page stats: requests=${this.measure.networkMeasure.nbRequest}, size=${this.measure.networkMeasure.network.size} KB`);
-      logInfo(`Extension request ignored, stats: requests=${this.measure.extensionMeasure.nbRequest}` +
-        ` / size(compress/uncompress)=${this.measure.extensionMeasure.network.size}/${this.measure.extensionMeasure.network.size} KB`);
+      // Calculate the number of cached requests
+      const cacheCount = this.measure.networkMeasure.nbRequestCache;
+      const realCount = this.measure.networkMeasure.nbRequest;
+      const totalCount = cacheCount + realCount;
+
+      logInfo(`✅ Analysis complete:`);
+      logInfo(`   📦 Total requests: ${totalCount}`);
+      logInfo(`   🔵 Real requests: ${realCount} (${this.measure.networkMeasure.network.size.toFixed(2)} KB)`);
+      logInfo(`   🟢 Cached requests: ${cacheCount} (0 KB transferred)`);
+      logInfo(`   🎯 Cache efficiency: ${totalCount > 0 ? ((cacheCount / totalCount) * 100).toFixed(1) : 0}%`);
     }
 
-    // Reset retry counter at the end
+    // Reset retry counter
     this.harRetryCount = 0;
   }
 
@@ -245,7 +254,6 @@ export class MeasureAcquisition {
 
   /**
    * Gets DOM element count using devtools.inspectedWindow.eval
-   * This method works on both Chrome and Firefox
    */
   async waitForDomElements(): Promise<void> {
     const tabId = getTabId();
@@ -309,7 +317,6 @@ export class MeasureAcquisition {
 
   /**
    * Evaluates expression in inspected window context
-   * Returns Promise that resolves with the result
    */
   private evalInInspectedWindow(expression: string): Promise<any> {
     return new Promise((resolve) => {
@@ -328,15 +335,17 @@ export class MeasureAcquisition {
   }
 
   /**
-   * Waits for tab to finish loading
+   * Waits for tab to finish loading - OPTIMIZED FOR FIREFOX
    */
   waitTabUpdate(): Promise<number> {
     return new Promise((resolve) => {
+      // Firefox: longer timeout
+      const maxWait = IS_FIREFOX ? 10000 : 8000;
       const maxTimeout = setTimeout(() => {
-        logDebug('Tab update wait timed out (max 8s)');
+        logDebug(`Tab update wait timed out (max ${maxWait}ms)`);
         cleanup();
         resolve(0);
-      }, 8000);
+      }, maxWait);
 
       let navListener: ((url: string) => void) | null = null;
       let tabListener: ((tabId: number, info: chrome.tabs.TabChangeInfo) => void) | null = null;
@@ -351,13 +360,15 @@ export class MeasureAcquisition {
         }
       };
 
-      // Primary: Use devtools.network.onNavigated (works in DevTools context for both browsers)
+      // Primary: Use devtools.network.onNavigated
       navListener = (url: string) => {
-        logDebug(`Navigation completed to: ${url}`);
+        logDebug(`✓ Navigation completed to: ${url}`);
+        // Firefox: longer delay after navigation
+        const postNavDelay = IS_FIREFOX ? 1500 : 500;
         setTimeout(() => {
           cleanup();
           resolve(0);
-        }, IS_FIREFOX ? 1500 : 500);
+        }, postNavDelay);
       };
 
       try {
@@ -368,7 +379,7 @@ export class MeasureAcquisition {
         logDebug(`Failed to add onNavigated listener: ${e}`);
       }
 
-      // Fallback: Use tabs.onUpdated (Chrome, needs tabs permission)
+      // Fallback: Use tabs.onUpdated
       if (browser.tabs?.onUpdated) {
         tabListener = (updatedTabId: number, info: chrome.tabs.TabChangeInfo) => {
           if (info.status === 'complete') {
