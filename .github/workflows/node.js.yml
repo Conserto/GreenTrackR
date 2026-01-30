@@ -13,13 +13,6 @@ jobs:
     strategy:
       matrix:
         node-version: [20]
-        include:
-          - browser: chrome
-            build-command: yarn run zip:chrome
-            dist-path: .output
-          - browser: firefox
-            build-command: yarn run zip:firefox
-            dist-path: .output
 
     steps:
       - name: Checkout
@@ -37,11 +30,12 @@ jobs:
         run: yarn run test
       - name: Run check
         run: yarn run check
-      - name: Run Build
-        run: ${{ matrix.build-command }}
+      - name: Run Build chrome
+        run: yarn run zip:chrome
+      - name: Run Build firefox
+        run: yarn run zip:firefox
       - name: Archive dist
         uses: actions/upload-artifact@v4
         with:
-          # FIXME Pour tester
-          name: greentrackr-2.2.3-${{ matrix.browser }}
-          path: ${{ matrix.dist-path }}
+          name: greentrackr-2.2.3
+          path: .output
