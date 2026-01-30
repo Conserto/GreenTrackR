@@ -24,6 +24,7 @@ export default defineConfig({
       'browsingData',
       'storage',
       'webNavigation',
+      'webRequest',
     ],
 
     // Grants access to all URLs for content script injection

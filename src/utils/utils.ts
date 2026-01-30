@@ -2,6 +2,45 @@ import type { DetailServerUrl, Measure, TableHeader, TableSurHeader } from 'src/
 import { logDebug } from './log';
 import { PREFIX_URL_DATA, PREFIX_URL_EXTENSION } from '../const';
 
+// ==========================================
+// WEBREQUEST CACHE (Firefox only)
+// ==========================================
+
+let webRequestCache: Map<string, { fromCache: boolean }> = new Map();
+let webRequestDataLoaded = false;
+
+export const setWebRequestCache = (cache: Map<string, { fromCache: boolean }>, loaded: boolean): void => {
+  webRequestCache = cache;
+  webRequestDataLoaded = loaded;
+};
+
+const isUrlCachedViaWebRequest = (url: string): boolean | null => {
+  if (!webRequestDataLoaded) return null;
+
+  let normalizedUrl = url;
+  try {
+    const parsed = new URL(url);
+    parsed.hash = '';
+    normalizedUrl = parsed.href;
+  } catch { /* ignore */ }
+
+  const info = webRequestCache.get(normalizedUrl);
+  if (info) return info.fromCache;
+
+  const urlWithoutQuery = normalizedUrl.split('?')[0];
+  for (const [cachedUrl, cachedInfo] of webRequestCache.entries()) {
+    if (cachedUrl.split('?')[0] === urlWithoutQuery) {
+      return cachedInfo.fromCache;
+    }
+  }
+
+  return null;
+};
+
+// ==========================================
+// EXISTING FUNCTIONS
+// ==========================================
+
 export const filterMeasure = (measures: Measure[], filter: string) => {
   if (measures) {
     return measures.filter((mes) => {
@@ -12,100 +51,73 @@ export const filterMeasure = (measures: Measure[], filter: string) => {
   }
 };
 
-/**
- * Detect network resources (data urls embedded in page is not network resource)
- */
 export const isNetworkResource = (harEntry: HARFormatEntry) => {
   return harEntry.request.url && !harEntry.request.url.startsWith(PREFIX_URL_DATA);
 };
 
 /**
- * ULTRA-ROBUST cache detection for Firefox + Chrome
- *
- * CRITICAL: Chrome uses bodySize=-1 to mean "unknown", NOT "cached"
- * We must check _transferSize first on Chrome to avoid false positives
+ * Cache detection - Firefox uses webRequest API, Chrome uses HAR
  */
 export const isCacheCall = (harEntry: HARFormatEntry): boolean => {
   const response = harEntry.response;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const entryAny = harEntry as any;
-
   const IS_FIREFOX = typeof navigator !== 'undefined' && /Firefox/i.test(navigator.userAgent);
 
-  // ========== CHROME - Primary indicator ==========
-  // Chrome sets _fromCache to 'memory' or 'disk' when cached
-  if (typeof harEntry._fromCache === 'string') {
+  // FIREFOX: webRequest API en priorité (fiable)
+  if (IS_FIREFOX) {
+    const webRequestResult = isUrlCachedViaWebRequest(harEntry.request?.url);
+    if (webRequestResult !== null) {
+      return webRequestResult;
+    }
+  }
+
+  // CHROME: _fromCache
+  if (harEntry._fromCache) {
     return true;
   }
 
-  // ========== CHROME - Check _transferSize FIRST ==========
-  // If _transferSize > 0, it's definitely NOT cached (real network transfer)
+  // CHROME: _transferSize > 0 = PAS cache
   const transferSize = response?._transferSize;
   if (typeof transferSize === 'number' && transferSize > 0) {
-    return false;  // Definitely NOT cache - data was transferred!
+    return false;
   }
 
-  // ========== FIREFOX ONLY - Negative sizes ==========
-  // Firefox uses negative values to indicate cache
-  // Chrome uses -1 to mean "unknown" (not cache), so only apply this to Firefox
+  // FIREFOX: bodySize < 0 = cache
   if (IS_FIREFOX) {
     const bodySize = response?.bodySize;
     if (typeof bodySize === 'number' && bodySize < 0) {
       return true;
     }
-
     if (typeof transferSize === 'number' && transferSize < 0) {
       return true;
     }
   }
 
-  // ========== BOTH - Status 304 ==========
+  // Status 304
   if (response?.status === 304) {
     return true;
   }
 
-  // ========== BOTH - Cache headers ==========
+  // Cache headers
   const headers = response?.headers || [];
-
-  const xCache = headers.find(h => h.name.toLowerCase() === 'x-cache');
+  const xCache = headers.find((h: { name: string; value: string }) => h.name.toLowerCase() === 'x-cache');
   if (xCache?.value?.toLowerCase().includes('hit')) {
     return true;
   }
-
-  const cfCache = headers.find(h => h.name.toLowerCase() === 'cf-cache-status');
+  const cfCache = headers.find((h: { name: string; value: string }) => h.name.toLowerCase() === 'cf-cache-status');
   if (cfCache?.value?.toLowerCase() === 'hit') {
     return true;
   }
 
-  // ========== FIREFOX ONLY - Timing patterns ==========
-  if (IS_FIREFOX) {
-    const contentSize = response?.content?.size ?? 0;
-    const bodySize = response?.bodySize ?? 0;
-
-    if (harEntry.time === 0 && bodySize === 0 && contentSize > 0) {
-      return true;
-    }
-
-    const timings = harEntry.timings;
-    if (timings) {
-      const { blocked, dns, connect, send, wait, ssl } = timings;
-      const totalNonReceive = (blocked ?? 0) + (dns ?? 0) + (connect ?? 0) + (send ?? 0) + (wait ?? 0) + (ssl ?? 0);
-
-      if (totalNonReceive === 0 && timings.receive > 0 && contentSize > 0) {
-        return true;
-      }
-    }
-  }
-
-  // ========== BOTH - Cache object / flags ==========
+  // Cache object / flags
   if (entryAny.cache?.beforeRequest || entryAny.cache?.afterRequest) {
     return true;
   }
-
   if (entryAny._fromDiskCache || entryAny._fromMemoryCache) {
     return true;
   }
 
-  // ========== DEFAULT ==========
   return false;
 };
 
@@ -132,6 +144,7 @@ export const getLocalStorageObject = (key: string) => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const setLocalStorageObject = (key: string, value: any) => {
   logDebug(`Save ${key} -> ${value}`);
   localStorage.setItem(key, JSON.stringify(value));
