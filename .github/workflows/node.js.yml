@@ -43,5 +43,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           # FIXME Pour tester
-          name: GreenTrackR-2.2.3-${{ matrix.browser }}
+          name: greentrackr-2.2.3-${{ matrix.browser }}
           path: ${{ matrix.dist-path }}
