@@ -15,7 +15,7 @@ jobs:
         node-version: [20]
         include:
           - browser: chrome
-            build-command: yarn run zip
+            build-command: yarn run zip:chrome
             dist-path: .output
 
           - browser: firefox
