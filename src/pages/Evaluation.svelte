@@ -79,15 +79,15 @@
 
   // [cite_start] Logic to run the analysis, handling the forced refresh if needed [cite: 18]
   const handleRunAnalysis = async () => {
-    console.log('🎯 [DEBUG] Starting analysis...');
-    console.log('🎯 [DEBUG] isFirstAnalysisAfterReset:', isFirstAnalysisAfterReset);
-    console.log('🎯 [DEBUG] measureAcquisition instance:', measureAcquisition);
+    console.debug('🎯 [DEBUG] Starting analysis...');
+    console.debug('🎯 [DEBUG] isFirstAnalysisAfterReset:', isFirstAnalysisAfterReset);
+    console.debug('🎯 [DEBUG] measureAcquisition instance:', measureAcquisition);
 
     currentDisplayedTab = TabType.ResultTab;
     loading = true;
 
     const shouldForceRefresh = isFirstAnalysisAfterReset;
-    console.log('🎯 [DEBUG] shouldForceRefresh:', shouldForceRefresh);
+    console.debug('🎯 [DEBUG] shouldForceRefresh:', shouldForceRefresh);
 
     await measureAcquisition.getNetworkMeasure(shouldForceRefresh);
 
@@ -96,7 +96,7 @@
     }
 
     currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
-    console.log('🎯 [DEBUG] Analysis complete, measure:', currentMeasure);
+    console.debug('🎯 [DEBUG] Analysis complete, measure:', currentMeasure);
 
     loading = false;
     histoDatas = toHistoFormattedDatas(currentMeasure);

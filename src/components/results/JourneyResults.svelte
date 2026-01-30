@@ -37,8 +37,8 @@
 
   // Debug log
   $: {
-    console.log('JourneyResults - measures:', measures.length);
-    console.log('JourneyResults - uniqueMeasures:', uniqueMeasures.length);
+    console.info('JourneyResults - measures:', measures.length);
+    console.info('JourneyResults - uniqueMeasures:', uniqueMeasures.length);
     if (measures.length !== uniqueMeasures.length) {
       console.warn(`Removed ${measures.length - uniqueMeasures.length} duplicate(s)`);
     }
@@ -47,7 +47,7 @@
   // Format the deduplicated measures into table-compatible data structure
   $: dataFormatted = formatGesMeasuresForTable(uniqueMeasures);
 
-  $: console.log('details:', dataFormatted);
+  $: console.info('details:', dataFormatted);
 
   // Toggle state for showing/hiding full URLs
   let shortUrl = true;

@@ -11,17 +11,18 @@
   let formattedData: Map<string, TableData>[] = [];
   let measures: Measure[] = [];
   let showModal = false;
+
   export let saveName: string;
 
   $: if (saveName) {
-    loadHistory();
+    updateHistory();
   }
 
   const handleExport = () => {
     export_data(measures);
   };
 
-  const loadHistory = () => {
+  export const updateHistory = () => {
     measures = getLocalStorageObject(saveName) ?? [];
     let btn = new Map<string, TableData>;
     btn.set('action', { content: 'deleteButton', action: true });
