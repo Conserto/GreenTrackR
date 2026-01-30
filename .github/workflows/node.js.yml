@@ -16,11 +16,11 @@ jobs:
         include:
           - browser: chrome
             build-command: yarn run zip
-            dist-path: .output/chrome-mv3.zip
+            dist-path: .output
 
           - browser: firefox
             build-command: yarn run zip:firefox
-            dist-path: .output/firefox-mv2.zip
+            dist-path: .output
 
     steps:
       - name: Checkout
