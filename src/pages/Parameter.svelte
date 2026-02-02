@@ -17,7 +17,7 @@
   onMount(() => {
     co2TokenStr = getLocalStorageObject(paramTokenCo2) ?? '';
     nbRetry = getLocalStorageObject(paramRetry) ?? VITE_MAX_HAR_RETRIES_DEFAULT;
-    logDebug`nbRetry=${nbRetry} / co2TokenStr=${co2TokenStr}`;
+    logDebug(`nbRetry=${nbRetry} / co2TokenStr=${co2TokenStr}`);
     nbRetryStr = nbRetry.toString();
   });
 
