@@ -12,6 +12,7 @@
   import { onDestroy } from 'svelte';
 
   // State management
+  export let unavailable = false;
   let onGoingAnalysis = false;
   let measureAcquisition = new MeasureAcquisition();
   let serverSearch = SEARCH_AUTO;

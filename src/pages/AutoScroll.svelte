@@ -18,7 +18,6 @@
   } from 'src/utils';
   import { onDestroy, onMount } from 'svelte';
   import { MeasureAcquisition } from 'src/service/MeasureAcquisition.service';
-  import { PAGE_HEIGHT } from 'src/const/action.const';
   import { SEARCH_AUTO } from 'src/const/key.const';
   import type { HistoData, Measure } from 'src/interface';
   import { savedScrollMeasures } from 'src/const';
@@ -33,6 +32,7 @@
     None,
   }
 
+  export let unavailable = false;
   let currentDisplayedTab = TabType.None;
   let showModal = false;
 

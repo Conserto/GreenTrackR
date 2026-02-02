@@ -114,11 +114,7 @@
           <Alert message="betaMessage" />
         {/if}
 
-        {#if tab.unavailable}
-          <Alert message="unavailableMessage" />
-        {/if}
-
-        <svelte:component this={tab.component} />
+        <svelte:component this={tab.component} unavailable={tab.unavailable ?? false} />
       </div>
     {/if}
   {/each}

@@ -23,6 +23,7 @@
     None,
   }
 
+  export let unavailable = false;
   let currentDisplayedTab = TabType.None;
   let showModal = false;
 
