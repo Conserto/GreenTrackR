@@ -38,7 +38,8 @@
       translateKey: 'tabParameter',
       name: translate('parameterTab'),
       id: 'parameter-tab',
-      component: Parameter
+      component: Parameter,
+      unavailable: true
     }
   ];
   export let activeTabId = 'evaluation-tab';
@@ -112,6 +113,11 @@
         {#if tab.beta}
           <Alert message="betaMessage" />
         {/if}
+
+        {#if tab.unavailable}
+          <Alert message="unavailableMessage" />
+        {/if}
+
         <svelte:component this={tab.component} />
       </div>
     {/if}
