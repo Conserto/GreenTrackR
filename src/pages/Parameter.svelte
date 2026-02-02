@@ -28,11 +28,11 @@
   };
 </script>
 
-<div class="page-content" class:disabled={isDisabled}>
+<div class="page-content" >
   <h1 class="plugin-title">{translate('paramTabTitle')}</h1>
 
-  <div class="parameter-container">
-    <div class="parameter">
+  <div class="parameter-container" >
+    <div class="parameter" class:disabled={isDisabled}>
       <p>{translate('paramTokenCo2Description')}
         <a href="{translate('paramTokenCo2URL')}" target="_blank">{translate('paramTokenCo2URL')}</a>
       </p>
@@ -71,12 +71,6 @@
 </div>
 
 <style lang="scss">
-  .page-content {
-    &.disabled {
-      filter: grayscale(100%) opacity(0.5);
-      pointer-events: none;
-    }
-  }
 
   .plugin-title {
     font-size: var(--font-size--xxl);
@@ -102,6 +96,11 @@
       box-shadow: var(--box-shadow--md);
       padding: var(--spacing--xxl);
       max-width: 90%;
+
+      &.disabled {
+        filter: grayscale(100%) opacity(0.5);
+        pointer-events: none;
+      }
     }
   }
 </style>
