@@ -2,7 +2,7 @@
   import { ButtonTypeEnum } from 'src/enum';
   import {
     cleanCache,
-    getLocalStorageObject,
+    getLocalStorageObject, logDebug,
     reloadCurrentTab,
     setLocalStorageObject,
     toHistoFormattedDatas,
@@ -80,15 +80,15 @@
 
   // [cite_start] Logic to run the analysis, handling the forced refresh if needed [cite: 18]
   const handleRunAnalysis = async () => {
-    console.debug('🎯 [DEBUG] Starting analysis...');
-    console.debug('🎯 [DEBUG] isFirstAnalysisAfterReset:', isFirstAnalysisAfterReset);
-    console.debug('🎯 [DEBUG] measureAcquisition instance:', measureAcquisition);
+    logDebug('🎯 [DEBUG] Starting analysis...');
+    logDebug('🎯 [DEBUG] isFirstAnalysisAfterReset: ' + isFirstAnalysisAfterReset);
+    logDebug('🎯 [DEBUG] measureAcquisition instance: ' + measureAcquisition);
 
     currentDisplayedTab = TabType.ResultTab;
     loading = true;
 
     const shouldForceRefresh = isFirstAnalysisAfterReset;
-    console.debug('🎯 [DEBUG] shouldForceRefresh:', shouldForceRefresh);
+    logDebug('🎯 [DEBUG] shouldForceRefresh: ' + shouldForceRefresh);
 
     await measureAcquisition.getNetworkMeasure(shouldForceRefresh);
 
@@ -97,7 +97,7 @@
     }
 
     currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
-    console.debug('🎯 [DEBUG] Analysis complete, measure:', currentMeasure);
+    logDebug('🎯 [DEBUG] Analysis complete, measure:' + currentMeasure);
 
     loading = false;
     histoDatas = toHistoFormattedDatas(currentMeasure);

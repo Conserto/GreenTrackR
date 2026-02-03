@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { Measure } from 'src/interface';
-  import type { TableData, TableHeader } from 'src/interface/table.interface';
-  import { formatGesMeasuresForTable, translate } from 'src/utils';
+  import { formatGesMeasuresForTable, logDebug, logInfo, translate } from 'src/utils';
   import { SynthesisTable, Table } from 'src/components/journey';
   import { gesTableHeaders } from 'src/const';
   import { ButtonTypeEnum } from '../../enum';
@@ -9,6 +8,7 @@
 
   // Props: array of measurement data from parent component
   export let measures: Measure[];
+  let DEBUG_LOG = false;
 
   /**
    * Deduplicate measures based on URL, action, and timestamp proximity
@@ -36,18 +36,19 @@
   $: uniqueMeasures = deduplicateMeasures(measures);
 
   // Debug log
-  $: {
-    console.info('JourneyResults - measures:', measures.length);
-    console.info('JourneyResults - uniqueMeasures:', uniqueMeasures.length);
-    if (measures.length !== uniqueMeasures.length) {
-      console.warn(`Removed ${measures.length - uniqueMeasures.length} duplicate(s)`);
+  if(DEBUG_LOG) {
+    $: {
+      logDebug('JourneyResults - measures: ' + measures.length);
+      logDebug('JourneyResults - uniqueMeasures: ' + uniqueMeasures.length);
+      if (measures.length !== uniqueMeasures.length) {
+        logDebug(`Removed ${measures.length - uniqueMeasures.length} duplicate(s)`);
+      }
     }
   }
 
   // Format the deduplicated measures into table-compatible data structure
   $: dataFormatted = formatGesMeasuresForTable(uniqueMeasures);
 
-  $: console.info('details:', dataFormatted);
 
   // Toggle state for showing/hiding full URLs
   let shortUrl = true;
