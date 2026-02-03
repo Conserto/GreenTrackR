@@ -8,7 +8,6 @@
 
   // Props: array of measurement data from parent component
   export let measures: Measure[];
-  let DEBUG_LOG = false;
 
   /**
    * Deduplicate measures based on URL, action, and timestamp proximity
@@ -35,16 +34,16 @@
   // Deduplicate measures before processing
   $: uniqueMeasures = deduplicateMeasures(measures);
 
+  /*
   // Debug log
-  if(DEBUG_LOG) {
-    $: {
-      logDebug('JourneyResults - measures: ' + measures.length);
-      logDebug('JourneyResults - uniqueMeasures: ' + uniqueMeasures.length);
-      if (measures.length !== uniqueMeasures.length) {
-        logDebug(`Removed ${measures.length - uniqueMeasures.length} duplicate(s)`);
-      }
+  $: {
+    logDebug('JourneyResults - measures: ' + measures.length);
+    logDebug('JourneyResults - uniqueMeasures: ' + uniqueMeasures.length);
+    if (measures.length !== uniqueMeasures.length) {
+      logDebug(`Removed ${measures.length - uniqueMeasures.length} duplicate(s)`);
     }
   }
+   */
 
   // Format the deduplicated measures into table-compatible data structure
   $: dataFormatted = formatGesMeasuresForTable(uniqueMeasures);

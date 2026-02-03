@@ -1,6 +1,8 @@
 import { defineConfig } from 'wxt';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import pkg from './package.json';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,8 +14,8 @@ export default defineConfig({
 
   manifest: {
     name: 'GreenTrackR',
-    description: "Web sustainability and environmental footprint analysis tool",
-    version: '2.2.3',
+    description: "__MSG_extDesc__",
+    version: pkg.version,
     default_locale: 'fr',
 
     // Required permissions for core features
