@@ -30,7 +30,15 @@ export default defineConfig({
     ],
 
     // In this case, the permission is granted.
-    data_collection: ["technicalAndInteraction"],
+    browser_specific_settings: {
+      gecko: {
+        id: '@example-data-collection-with-fallback',
+        data_collection_permissions: {
+          required: ['locationInfo'],
+          optional: ['technicalAndInteraction'],
+        },
+      },
+    },
 
     // Grants access to all URLs for content script injection
     host_permissions: ['<all_urls>'],
