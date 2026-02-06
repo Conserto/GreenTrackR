@@ -19,12 +19,15 @@ For more information on GreenTrackr calculations, please refer to https://conser
 
 ## ⚙️ Install and setup
 
-- Add GreenTrackr to Chrome (the plugin is available on Chrome Web Store) 
+- Add **GreenTrackr** to:
+  - **Chrome** (available on the Chrome Web Store)
+  - **Chromium-based browsers** (e.g. Edge, Brave, Opera, Vivaldi)
+  - **Firefox** (available on Firefox Add-ons)
 - Open the browser dev tools (DevTools): ```Ctrl+Shift+I```
   - Check if GreenTrackr tab is added on the DevTools 
     - Four tabs are available : **Assessment/Page**, **Auto scroll/Page**, **User journey** and **Settings**
   - Two parameters are required to activate GreenTrackr in the **Settings** tab of the extension
-    - A **token** to access the 'CO2signal' API of 'Electricity Maps': click on the link and then on '**Go to api portal**' -> https://www.co2signal.com/
+    - ⚠️ A **token** to access the 'Electricity Maps' API: *Temporarily unavailable. We are currently working on restoring this service.*
     - Number of retries to analyze requests for the current page
 - Click on the three vertical dots ($\vdots$) to customize and control DevTools
   - We recommend you undock it in a **separate window**
@@ -33,7 +36,9 @@ For more information on GreenTrackr calculations, please refer to https://conser
 
 ### 📋 Note
 
-- This version of the extension is only compatible with Manifest V3 (chromium and chromium-based browser versions). A specific version for Firefox/Manifest V2 will be available separately.
+- GreenTrackr is compatible with:
+  - **Chromium / Chromium-based browsers** (Manifest V3)
+  - **Firefox** (dedicated version)
 - Remember to refresh the page
 - The use of an ad blocker or other filter has an impact on the result
 
