@@ -30,16 +30,7 @@ export default defineConfig({
     ],
 
     // In this case, the permission is granted.
-    data_collection_permissions: {
-      technical_data: {
-        collects: true,
-        purpose: ['app_functionality'],
-      },
-      technicalAndInteraction: {
-        collects: true,
-        purpose: ['app_functionality'],
-      },
-    },
+    data_collection_permissions: ['technicalAndInteraction'],
 
     // Grants access to all URLs for content script injection
     host_permissions: ['<all_urls>'],
