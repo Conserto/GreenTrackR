@@ -14,7 +14,7 @@ export default defineConfig({
 
   manifest: {
     name: 'GreenTrackR',
-    description: "__MSG_extDesc__",
+    description: '__MSG_extDesc__',
     version: pkg.version,
     default_locale: 'fr',
 
@@ -29,10 +29,11 @@ export default defineConfig({
       'webRequest',
     ],
 
+    // In this case, the permission is granted.
+    data_collection: ["technicalAndInteraction"],
+
     // Grants access to all URLs for content script injection
-    host_permissions: [
-      '<all_urls>'
-    ],
+    host_permissions: ['<all_urls>'],
 
     // DevTools page configuration
     // This enables browser.devtools.* APIs in the devtools panel
