@@ -30,12 +30,17 @@ export default defineConfig({
     ],
 
     // In this case, the permission is granted.
-    browser_specific_settings: {
-      gecko: {
-        id: '@example-data-collection-with-fallback',
+    firefox: {
+      manifest: {
         data_collection_permissions: {
-          required: ['locationInfo'],
-          optional: ['technicalAndInteraction'],
+          technical_data: {
+            collects: true,
+            purpose: ['app_functionality'],
+          },
+          technicalAndInteraction: {
+            collects: true,
+            purpose: ['app_functionality'],
+          },
         },
       },
     },
