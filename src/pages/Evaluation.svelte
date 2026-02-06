@@ -2,7 +2,7 @@
   import { ButtonTypeEnum } from 'src/enum';
   import {
     cleanCache,
-    getLocalStorageObject,
+    getLocalStorageObject, logDebug,
     reloadCurrentTab,
     setLocalStorageObject,
     toHistoFormattedDatas,
@@ -23,6 +23,7 @@
     None,
   }
 
+  export let unavailable = false;
   let currentDisplayedTab = TabType.None;
   let showModal = false;
 
@@ -34,12 +35,23 @@
 
   let serverSearch = SEARCH_AUTO;
   let userSearch = SEARCH_AUTO;
-  let updateHistoryTab: any;
 
+  // Key to force a re-render of the HistoricResults component
+  let historyKey = 0;
+
+  // Flag to handle the first run after a reset
+  let isFirstAnalysisAfterReset = false;
+
+  // Resetting the service completely to avoid filtering bugs [cite: 10]
   const onResetMeasure = () => {
     currentMeasure = null;
     currentDisplayedTab = TabType.None;
-    measureAcquisition.applyLatest();
+
+     // Re-create the instance to wipe internal state (latest, retry counts, etc.) [cite: 11]
+    measureAcquisition = new MeasureAcquisition();
+
+     // Force a refresh on the next analysis [cite: 12]
+    isFirstAnalysisAfterReset = true;
   };
 
   const onCleanCache = () => {
@@ -61,19 +73,40 @@
       savedMeasures,
       lsMeasures ? [...lsMeasures, currentMeasure] : [currentMeasure]
     );
-    if (currentDisplayedTab === TabType.HistoricTab) {
-      updateHistoryTab();
-    }
+    // Increment to force an update if we are currently on the history tab
+    historyKey++;
     showModal = true;
   };
 
+  // [cite_start] Logic to run the analysis, handling the forced refresh if needed [cite: 18]
   const handleRunAnalysis = async () => {
+    logDebug('🎯 [DEBUG] Starting analysis...');
+    logDebug('🎯 [DEBUG] isFirstAnalysisAfterReset: ' + isFirstAnalysisAfterReset);
+    logDebug('🎯 [DEBUG] measureAcquisition instance: ' + measureAcquisition);
+
     currentDisplayedTab = TabType.ResultTab;
     loading = true;
-    await measureAcquisition.getNetworkMeasure(false);
+
+    const shouldForceRefresh = isFirstAnalysisAfterReset;
+    logDebug('🎯 [DEBUG] shouldForceRefresh: ' + shouldForceRefresh);
+
+    await measureAcquisition.getNetworkMeasure(shouldForceRefresh);
+
+    if (isFirstAnalysisAfterReset) {
+      isFirstAnalysisAfterReset = false;
+    }
+
     currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
+    logDebug('🎯 [DEBUG] Analysis complete, measure:' + currentMeasure);
+
     loading = false;
     histoDatas = toHistoFormattedDatas(currentMeasure);
+  };
+
+  const handleViewHistory = () => {
+    // Increment to trigger a component remount
+    historyKey++;
+    currentDisplayedTab = TabType.HistoricTab;
   };
 
   const handleSimulation = async (event: any) => {
@@ -96,7 +129,7 @@
     disabled={!currentMeasure}
   />
   <Button
-    on:buttonClick={() => (currentDisplayedTab = TabType.HistoricTab)}
+    on:buttonClick={handleViewHistory}
     buttonType={ButtonTypeEnum.SECONDARY}
     translateKey="viewHistoryButton"
   />
@@ -163,7 +196,9 @@
     </div>
   {/if}
 {:else if currentDisplayedTab === TabType.HistoricTab}
-  <HistoricResults saveName="{savedMeasures}" bind:updateHistory={updateHistoryTab} />
+  {#key historyKey}
+    <HistoricResults saveName={savedMeasures} />
+  {/key}
 {/if}
 <Modal dialogLabelKey="saveAnalysisTitle" bind:showModal>
   <h2>{translate('saveAnalysis')}</h2>
@@ -188,19 +223,16 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
     .detail {
       overflow: auto;
       margin: var(--spacing--md);
       margin-right: 0;
       padding-top: var(--spacing--xxl);
       box-shadow: var(--box-shadow--md);
-
       &.request {
         padding-left: 1em;
         padding-right: 1em;
       }
     }
   }
-
 </style>

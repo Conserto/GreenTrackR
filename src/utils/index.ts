@@ -1,4 +1,4 @@
-export * from './chrome.utils';
+export * from './browser.utils';
 export * from './utils';
 export * from './lang';
 export * from './log';

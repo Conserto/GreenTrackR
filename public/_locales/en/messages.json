@@ -20,6 +20,9 @@
   "betaMessage": {
     "message": "This feature is a beta version, errors may occur."
   },
+  "unavailableMessage": {
+    "message": "The Electricity Maps API is temporarily unavailable."
+  },
   "cancelButton": {
     "message": "Cancel"
   },

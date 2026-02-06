@@ -1,5 +1,5 @@
 export const logErr = (message: string, throwEx: boolean = false) => {
-  let value = '[GreenTrackR] ' + message;
+  const value = '[GreenTrackR] ' + message;
   if (throwEx) {
     throw new Error(value);
   } else {

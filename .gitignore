@@ -1,4 +1,13 @@
-# Logs
+# --- Dépendances ---
+node_modules/
+
+# --- WXT & Build
+.wxt/
+dist/
+.output/
+*.zip
+
+# --- Logs ---
 logs
 *.log
 npm-debug.log*
@@ -7,21 +16,20 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-tmp
-dist-ssr
-*.local
-/public/descriptions/
-!/public/descriptions/.gitkeep
+# --- Environment Variables ---
+.env
+.env.*.local
 
-# Editor directories and files
-.vscode
-.idea
+# --- IDEs & OS ---
+.vscode/
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-.env
+
+# --- Fichiers temporaires ---
+tmp/
+*.local

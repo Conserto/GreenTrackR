@@ -5,7 +5,9 @@
   import { paramRetry, paramTokenCo2 } from 'src/const';
   import { VITE_MAX_HAR_RETRIES_DEFAULT } from 'src/const/config.const';
   import { Button, Input } from 'src/components/html';
-  import { Modal } from 'src/components/page';
+  import { Alert, Modal } from 'src/components/page';
+
+  export let unavailable = false;
 
   let showModal = false;
 
@@ -25,48 +27,60 @@
     setLocalStorageObject(paramRetry, nbRetryStr);
     showModal = true;
   };
-
 </script>
 
-<h1 class="plugin-title">{translate('paramTabTitle')}</h1>
+<div class="page-content">
+  <h1 class="plugin-title">{translate('paramTabTitle')}</h1>
 
-<div class="parameter-container">
-  <div class="parameter">
-    <p>{translate('paramTokenCo2Description')}
-      <a href="{translate('paramTokenCo2URL')}" target="_blank">{translate('paramTokenCo2URL')}</a>
-    </p>
-    <Input
-      type={InputTypeEnum.TEXT}
-      name="co2Token"
-      bind:value={co2TokenStr}
-      translateKey="paramCo2TokenLabel"
-    />
-  </div>
-  <div class="parameter">
-    <p>{translate('paramRetryDescription')}</p>
-    <Input
-      type={InputTypeEnum.NUMBER}
-      name="nbRetry"
-      bind:value={nbRetryStr}
-      translateKey="paramNbRetryLabel"
-    />
-  </div>
-</div>
+  <div class="parameter-container">
+    <div class="parameter">
 
-<Modal dialogLabelKey="paramSaveTitle" bind:showModal>
-  <h2>{translate('paramSaveMessage')}</h2>
+      <!-- Alert EN DEHORS du div grisé -->
+      {#if unavailable}
+        <Alert message="unavailableMessage" />
+      {/if}
+
+      <div class="parameter-content" class:disabled={unavailable}>
+        <p>{translate('paramTokenCo2Description')}
+          <a href="{translate('paramTokenCo2URL')}" target="_blank">{translate('paramTokenCo2URL')}</a>
+        </p>
+        <Input
+          type={InputTypeEnum.TEXT}
+          name="co2Token"
+          bind:value={co2TokenStr}
+          translateKey="paramCo2TokenLabel"
+        />
+      </div>
+    </div>
+
+    <div class="parameter">
+      <div class="parameter-content">
+        <p>{translate('paramRetryDescription')}</p>
+        <Input
+          type={InputTypeEnum.NUMBER}
+          name="nbRetry"
+          bind:value={nbRetryStr}
+          translateKey="paramNbRetryLabel"
+        />
+      </div>
+    </div>
+  </div>
+
+  <Modal dialogLabelKey="paramSaveTitle" bind:showModal>
+    <h2>{translate('paramSaveMessage')}</h2>
+    <Button
+      on:buttonClick={() => (location.reload())}
+      buttonType={ButtonTypeEnum.PRIMARY}
+      translateKey="paramSavePopup"
+    />
+  </Modal>
+
   <Button
-    on:buttonClick={() => (location.reload())}
+    on:buttonClick={onSaveParameters}
     buttonType={ButtonTypeEnum.PRIMARY}
-    translateKey="paramSavePopup"
+    translateKey="paramBtnSave"
   />
-</Modal>
-
-<Button
-  on:buttonClick={onSaveParameters}
-  buttonType={ButtonTypeEnum.PRIMARY}
-  translateKey="paramBtnSave"
-/>
+</div>
 
 <style lang="scss">
   .plugin-title {
@@ -96,4 +110,15 @@
     }
   }
 
+  .parameter-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &.disabled {
+      filter: grayscale(100%) opacity(0.5);
+      pointer-events: none;
+    }
+  }
 </style>

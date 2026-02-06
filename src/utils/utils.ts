@@ -1,6 +1,45 @@
 import type { DetailServerUrl, Measure, TableHeader, TableSurHeader } from 'src/interface';
-import { logDebug, logWarn } from './log';
+import { logDebug } from './log';
 import { PREFIX_URL_DATA, PREFIX_URL_EXTENSION } from '../const';
+
+// ==========================================
+// WEBREQUEST CACHE (Firefox only)
+// ==========================================
+
+let webRequestCache: Map<string, { fromCache: boolean }> = new Map();
+let webRequestDataLoaded = false;
+
+export const setWebRequestCache = (cache: Map<string, { fromCache: boolean }>, loaded: boolean): void => {
+  webRequestCache = cache;
+  webRequestDataLoaded = loaded;
+};
+
+const isUrlCachedViaWebRequest = (url: string): boolean | null => {
+  if (!webRequestDataLoaded) return null;
+
+  let normalizedUrl = url;
+  try {
+    const parsed = new URL(url);
+    parsed.hash = '';
+    normalizedUrl = parsed.href;
+  } catch { /* ignore */ }
+
+  const info = webRequestCache.get(normalizedUrl);
+  if (info) return info.fromCache;
+
+  const urlWithoutQuery = normalizedUrl.split('?')[0];
+  for (const [cachedUrl, cachedInfo] of webRequestCache.entries()) {
+    if (cachedUrl.split('?')[0] === urlWithoutQuery) {
+      return cachedInfo.fromCache;
+    }
+  }
+
+  return null;
+};
+
+// ==========================================
+// EXISTING FUNCTIONS
+// ==========================================
 
 export const filterMeasure = (measures: Measure[], filter: string) => {
   if (measures) {
@@ -12,31 +51,74 @@ export const filterMeasure = (measures: Measure[], filter: string) => {
   }
 };
 
-export const getUrl = (url?: string) => {
-  let formattedUrl: URL | undefined = undefined;
-  if (url && isRealUrl(url)) {
-    try {
-      formattedUrl = new URL(url);
-    } catch (e) {
-      logWarn(`Error when parsing url ${url} -> ${e}`);
-    }
-  } else {
-    logWarn('No url found');
-  }
-  logDebug(`return url ${formattedUrl}`);
-  return formattedUrl;
-};
-
-/**
- * Detect network resources (data urls embedded in page is not network resource)
- *  Test with request.url as  request.httpVersion === "data"  does not work with old chrome version (example v55)
- */
 export const isNetworkResource = (harEntry: HARFormatEntry) => {
   return harEntry.request.url && !harEntry.request.url.startsWith(PREFIX_URL_DATA);
 };
 
+/**
+ * Cache detection - Firefox uses webRequest API, Chrome uses HAR
+ */
 export const isCacheCall = (harEntry: HARFormatEntry): boolean => {
-  return !!harEntry._fromCache;
+  const response = harEntry.response;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const entryAny = harEntry as any;
+  const IS_FIREFOX = typeof navigator !== 'undefined' && /Firefox/i.test(navigator.userAgent);
+
+  // FIREFOX: webRequest API en priorité (fiable)
+  if (IS_FIREFOX) {
+    const webRequestResult = isUrlCachedViaWebRequest(harEntry.request?.url);
+    if (webRequestResult !== null) {
+      return webRequestResult;
+    }
+  }
+
+  // CHROME: _fromCache
+  if (harEntry._fromCache) {
+    return true;
+  }
+
+  // CHROME: _transferSize > 0 = PAS cache
+  const transferSize = response?._transferSize;
+  if (typeof transferSize === 'number' && transferSize > 0) {
+    return false;
+  }
+
+  // FIREFOX: bodySize < 0 = cache
+  if (IS_FIREFOX) {
+    const bodySize = response?.bodySize;
+    if (typeof bodySize === 'number' && bodySize < 0) {
+      return true;
+    }
+    if (typeof transferSize === 'number' && transferSize < 0) {
+      return true;
+    }
+  }
+
+  // Status 304
+  if (response?.status === 304) {
+    return true;
+  }
+
+  // Cache headers
+  const headers = response?.headers || [];
+  const xCache = headers.find((h: { name: string; value: string }) => h.name.toLowerCase() === 'x-cache');
+  if (xCache?.value?.toLowerCase().includes('hit')) {
+    return true;
+  }
+  const cfCache = headers.find((h: { name: string; value: string }) => h.name.toLowerCase() === 'cf-cache-status');
+  if (cfCache?.value?.toLowerCase() === 'hit') {
+    return true;
+  }
+
+  // Cache object / flags
+  if (entryAny.cache?.beforeRequest || entryAny.cache?.afterRequest) {
+    return true;
+  }
+  if (entryAny._fromDiskCache || entryAny._fromMemoryCache) {
+    return true;
+  }
+
+  return false;
 };
 
 export const isAfter = (harEntry: HARFormatEntry, date: Date) => {
@@ -62,6 +144,7 @@ export const getLocalStorageObject = (key: string) => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const setLocalStorageObject = (key: string, value: any) => {
   logDebug(`Save ${key} -> ${value}`);
   localStorage.setItem(key, JSON.stringify(value));
@@ -97,75 +180,17 @@ export const createEmptyMeasure = (): Measure => {
   return {
     date: new Date(),
     url: '',
-    ges: {
-      dataCenterTotal: 0,
-      networkTotal: 0,
-      deviceTotal: 0,
-      pageTotal: 0
-    },
-    wu: {
-      dataCenterTotal: 0,
-      networkTotal: 0,
-      deviceTotal: 0,
-      pageTotal: 0
-    },
-    adpe: {
-      dataCenterTotal: 0,
-      networkTotal: 0,
-      deviceTotal: 0,
-      pageTotal: 0
-    },
-    energy: {
-      kWhDataCenter: 0,
-      kWhNetwork: 0,
-      kWhDevice: 0,
-      kWhPage: 0
-    },
-    score: {
-      value: 0,
-      color: '',
-      textColor: '',
-      gradeLetter: '',
-      limit: 0
-    },
-    userGES: {
-      carbonIntensity: 0,
-      wu: 0,
-      adpe: 0,
-      countryName: '',
-      cityName: '',
-      countryCode: '',
-      display: ''
-    },
-    serverGES: {
-      carbonIntensity: 0,
-      wu: 0,
-      adpe: 0,
-      countryName: '',
-      cityName: '',
-      countryCode: '',
-      display: ''
-    },
+    ges: { dataCenterTotal: 0, networkTotal: 0, deviceTotal: 0, pageTotal: 0 },
+    wu: { dataCenterTotal: 0, networkTotal: 0, deviceTotal: 0, pageTotal: 0 },
+    adpe: { dataCenterTotal: 0, networkTotal: 0, deviceTotal: 0, pageTotal: 0 },
+    energy: { kWhDataCenter: 0, kWhNetwork: 0, kWhDevice: 0, kWhPage: 0 },
+    score: { value: 0, color: '', textColor: '', gradeLetter: '', limit: 0 },
+    userGES: { carbonIntensity: 0, wu: 0, adpe: 0, countryName: '', cityName: '', countryCode: '', display: '' },
+    serverGES: { carbonIntensity: 0, wu: 0, adpe: 0, countryName: '', cityName: '', countryCode: '', display: '' },
     complete: false,
     dom: 0,
-    extensionMeasure: {
-      nbRequest: 0,
-      nbRequestCache: 0,
-      detail: [],
-      network: {
-        size: 0,
-        sizeUncompress: 0
-      }
-    },
-    networkMeasure: {
-      nbRequest: 0,
-      nbRequestCache: 0,
-      detail: [],
-      network: {
-        size: 0,
-        sizeUncompress: 0
-      }
-    }
+    extensionMeasure: { nbRequest: 0, nbRequestCache: 0, detail: [], network: { size: 0, sizeUncompress: 0 } },
+    networkMeasure: { nbRequest: 0, nbRequestCache: 0, detail: [], network: { size: 0, sizeUncompress: 0 } }
   };
 };
 
@@ -175,9 +200,7 @@ export const scrollPrompt = (topPrompt: number, leftPrompt: number, timeout: num
   if (!end) {
     window.scrollBy({ left: leftPrompt, top: topPrompt, behavior: 'smooth' });
     return new Promise<void>((resolve, reject) => {
-      const failed = setTimeout(() => {
-        reject(Error('Timeout'));
-      }, timeout);
+      const failed = setTimeout(() => { reject(Error('Timeout')); }, timeout);
       window.addEventListener('scrollend', () => {
         clearTimeout(failed);
         resolve();
@@ -188,5 +211,3 @@ export const scrollPrompt = (topPrompt: number, leftPrompt: number, timeout: num
     return new Promise<void>((resolve) => resolve());
   }
 };
-
-

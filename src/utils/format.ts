@@ -67,7 +67,7 @@ export const formatGesMeasuresForTable = (measures: Measure[], add?: Map<string,
     data.set('wuNetwork', { content: formatNumber(measure.wu?.networkTotal) });
     data.set('wuDevice', { content: formatNumber(measure.wu?.deviceTotal) });
     data.set('wuTotal', { content: formatNumber(measure.wu?.pageTotal) });
-    data.set('apdeDataCenter', { content: formatNumber(measure.adpe?.dataCenterTotal) });
+    data.set('adpeDataCenter', { content: formatNumber(measure.adpe?.dataCenterTotal) });
     data.set('adpeNetwork', { content: formatNumber(measure.adpe?.networkTotal) });
     data.set('adpeDevice', { content: formatNumber(measure.adpe?.deviceTotal) });
     data.set('adpeTotal', { content: formatNumber(measure.adpe?.pageTotal) });
