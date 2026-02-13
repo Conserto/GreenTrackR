@@ -72,5 +72,32 @@ To work properly, the extension requires the following permissions:
 - **Storage**: used to store the different assessments
 - **Web Navigation**: used to detect when the analyzed page has finished loading
 
+## ⚙️ Development
+
+### Safari
+
+First time creating the extension :
+```
+npm run build:safari
+npm run convert:safari
+```
+
+Subsequent builds :
+```
+npm run build:safari
+```
+
+Run it in Xcode :
+```
+npm run open:safari
+```
+
+Run & configuration of Safari :
+- Click on the "Play" xCode button to run the project
+- A popup then appear with a button "Quit and Open Safari Settings", click on it
+- In Safari, If not alredy done, activate "Dev features" : Settings > Advanced > Activate web developer features
+- In the Setttings > Developer tab, activate "Allow unsigned extensions"
+- In the Extensions tab, Activate the GreenTrackR extension and allow it to run on any website
+
 ## 📃 License
 [GNU Affero General Public License v3.0](./LICENSE)

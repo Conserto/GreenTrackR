@@ -12,6 +12,8 @@ export default defineConfig({
 
   modules: ['@wxt-dev/module-svelte'],
 
+  manifestVersion: 3,
+
   manifest: {
     name: 'GreenTrackR',
     description: "__MSG_extDesc__",
