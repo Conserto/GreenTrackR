@@ -25,8 +25,8 @@ export default defineConfig({
     browser_specific_settings: {
       gecko: {
         id: 'greentrackr@conserto.pro',
-        "data_collection_permissions" : {
-          "required": ["none"]
+        data_collection_permissions: {
+          required: ["none"]
         },
       },
     },
