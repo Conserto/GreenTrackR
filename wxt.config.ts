@@ -14,25 +14,26 @@ export default defineConfig({
 
   manifest: {
     name: 'GreenTrackR',
-    description: "__MSG_extDesc__",
+    description: '__MSG_extDesc__',
     version: pkg.version,
     default_locale: 'fr',
 
     // Required permissions for core features
-    permissions: [
-      'tabs',
-      'activeTab',
-      'scripting',
-      'browsingData',
-      'storage',
-      'webNavigation',
-      'webRequest',
-    ],
+    permissions: ['tabs', 'activeTab', 'scripting', 'browsingData', 'webNavigation', 'webRequest'],
 
     // Grants access to all URLs for content script injection
-    host_permissions: [
-      '<all_urls>'
-    ],
+    host_permissions: ['<all_urls>'],
+
+    // Specific firefox
+    browser_specific_settings: {
+      gecko: {
+        id: 'greentrackr@conserto.pro',
+        // @ts-ignore
+        data_collection_permissions: {
+          required: ['none'],
+        },
+      },
+    },
 
     // DevTools page configuration
     // This enables browser.devtools.* APIs in the devtools panel
