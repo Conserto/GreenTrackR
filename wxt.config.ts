@@ -19,18 +19,17 @@ export default defineConfig({
     default_locale: 'fr',
 
     // Required permissions for core features
-    permissions: [
-      'tabs',
-      'activeTab',
-      'scripting',
-      'browsingData',
-      'storage',
-      'webNavigation',
-      'webRequest',
-    ],
+    permissions: ['tabs', 'activeTab', 'scripting', 'browsingData', 'webNavigation', 'webRequest'],
 
     // In this case, the permission is granted.
-    data_collection_permissions: ['technicalAndInteraction'],
+    browser_specific_settings: {
+      gecko: {
+        id: 'greentrackr@conserto.pro',
+        "data_collection_permissions" : {
+          "required": ["none"]
+        },
+      },
+    },
 
     // Grants access to all URLs for content script injection
     host_permissions: ['<all_urls>'],
