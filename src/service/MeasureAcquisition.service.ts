@@ -7,22 +7,21 @@ import {
   calculNetworkGes,
   calculResourcesFromAllServer,
   createEmptyMeasure,
+  getBrowserName,
   getLocalStorageObject,
   getTabId,
   getUrl,
+  IS_FIREFOX,
+  IS_SAFARI,
   logDebug,
   logErr,
   logInfo,
   logWarn,
+  reloadCurrentTab,
 } from 'src/utils';
 import { paramRetry, PREFIX_URL_EXTENSION } from '../const';
 import { VITE_MAX_HAR_RETRIES_DEFAULT } from '../const/config.const';
 import { SEARCH_AUTO } from '../const/key.const';
-
-/**
- * Detect Firefox browser via user agent
- */
-const IS_FIREFOX = typeof navigator !== 'undefined' && /Firefox/i.test(navigator.userAgent);
 
 export class MeasureAcquisition {
   public measure: Measure;
@@ -44,7 +43,7 @@ export class MeasureAcquisition {
     this.measure = createEmptyMeasure();
     this.nbRetry = getLocalStorageObject(paramRetry) ?? VITE_MAX_HAR_RETRIES_DEFAULT;
 
-    logInfo(`🔧 MeasureAcquisition initialized - Browser: ${IS_FIREFOX ? 'Firefox 🦊' : 'Chrome/Chromium'}`);
+    logInfo(`🔧 MeasureAcquisition initialized - Browser: ${getBrowserName()}`);
   }
 
   /**
@@ -78,16 +77,19 @@ export class MeasureAcquisition {
 
   async getGESMeasure(countryCodeSelected: string, userCountryCodeSelected: string) {
     logDebug('getGESMeasure');
+
     let urlHost = getUrl(this.measure.url);
     const { serverGES, userGES } = await this.gesService.computeGES(
       countryCodeSelected,
       userCountryCodeSelected,
       urlHost
     );
+
     this.measure = {
       ...this.measure,
       detailResourcesGes: await this.gesService.computeGesDetailResource(countryCodeSelected, this.measure.detailResources, serverGES)
     };
+
     let serversGes: SimpleGES | undefined = undefined;
     if (this.measure.detailResourcesGes && countryCodeSelected === SEARCH_AUTO) {
       serversGes = calculResourcesFromAllServer(this.measure.networkMeasure.network.size, this.measure.detailResourcesGes);
@@ -103,19 +105,68 @@ export class MeasureAcquisition {
   }
 
   /**
-   * MAIN METHOD (OPTIMIZED FOR FIREFOX)
+   * MAIN METHOD (OPTIMIZED FOR FIREFOX & SAFARI)
    * Smartly handles cache and retries
+   * Safari: Uses webRequest API instead of HAR (not available)
    */
   async getNetworkMeasure(forceRefresh: boolean = true) {
     logInfo(`🚀 getNetworkMeasure - forceRefresh: ${forceRefresh}, retryCount: ${this.harRetryCount}`);
 
-    // ========== STEP 1: RELOAD IF NECESSARY ==========
+    const harApiAvailable = this.networkService.isHarApiAvailable();
+    
+    // ========== SAFARI SPECIAL HANDLING (No HAR API) ==========
+    if (!harApiAvailable && IS_SAFARI) {
+      logInfo('Safari detected - HAR API unavailable, using webRequest API only');
+      
+      if (this.harRetryCount === 0) {
+        logInfo('🔄 First call - reloading page for webRequest monitoring...');
+        this.harRetryCount++;
+        
+        await reloadCurrentTab(forceRefresh);
+        await this.waitTabUpdate();
+        
+        // Extra delay for webRequest population
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      }
+      
+      const har = await this.networkService.getWebRequestNetworkEntries();
+      
+      if (har && har.entries && har.entries.length > 0) {
+        let entriesNetwork = this.networkService.filterNetworkResources(har.entries);
+        let entriesNew = this.networkService.filterNewerOnly(entriesNetwork, this.latestCheck);
+        let [entriesExtension, entriesPage] = this.filterEntriesExtensionAndPage(entriesNew);
+
+        logInfo(`📈 Safari WebRequest - Total: ${entriesNetwork.length}, Page: ${entriesPage.length}, Extension: ${entriesExtension.length}`);
+
+        this.measure = await this.getMeasureFromEntries(this.measure, entriesPage);
+        this.measure = {
+          ...this.measure,
+          extensionMeasure: this.getNetworkAndRequestFromEntries(entriesExtension)
+        };
+
+        const cacheCount = this.measure.networkMeasure.nbRequestCache;
+        const realCount = this.measure.networkMeasure.nbRequest;
+        const totalCount = cacheCount + realCount;
+
+        logInfo(`✅ Safari Analysis complete:`);
+        logInfo(`   📦 Total requests: ${totalCount}`);
+        logInfo(`   🔵 Real requests: ${realCount} (${this.measure.networkMeasure.network.size.toFixed(2)} KB)`);
+        logInfo(`   🟢 Cached requests: ${cacheCount} (0 KB transferred)`);
+      } else {
+        logWarn('⚠️ No webRequest entries found on Safari');
+      }
+      
+      this.harRetryCount = 0;
+      return;
+    }
+
+    // ========== STEP 1: RELOAD IF NECESSARY (Chrome/Firefox) ==========
     if (this.harRetryCount === 0 && forceRefresh) {
       logInfo('🔄 First call with forceRefresh - reloading page with cache bypass...');
       this.harRetryCount++;
 
       // Reload with cache bypass
-      browser.devtools.inspectedWindow.reload({ ignoreCache: true });
+      await reloadCurrentTab(true);
 
       // Wait for reload to finish
       await this.waitTabUpdate();
@@ -139,7 +190,7 @@ export class MeasureAcquisition {
         this.harRetryCount++;
 
         // Reload without bypassing cache to enable cache detection
-        browser.devtools.inspectedWindow.reload({ ignoreCache: false });
+        await reloadCurrentTab();
         await this.waitTabUpdate();
 
         if (IS_FIREFOX) {
@@ -169,7 +220,7 @@ export class MeasureAcquisition {
         logWarn(`⚠️ No page entries found, retrying (${this.harRetryCount}/${this.nbRetry})...`);
         this.harRetryCount++;
 
-        browser.devtools.inspectedWindow.reload({ ignoreCache: false });
+        await reloadCurrentTab();
         await this.waitTabUpdate();
 
         if (IS_FIREFOX) {
@@ -256,7 +307,7 @@ export class MeasureAcquisition {
    * Gets DOM element count using devtools.inspectedWindow.eval
    */
   async waitForDomElements(): Promise<void> {
-    const tabId = getTabId();
+    const tabId = await getTabId();
     if (!tabId) {
       logErr('No tab ID found for DOM elements');
       this.measure.dom = 0;
@@ -266,12 +317,15 @@ export class MeasureAcquisition {
     logDebug(`Getting DOM elements for tab ${tabId}`);
 
     try {
-      // Method 1: Use devtools.inspectedWindow.eval (works on both browsers)
-      const domCount = await this.evalInInspectedWindow('document.getElementsByTagName("*").length');
-      if (typeof domCount === 'number' && domCount >= 0) {
-        this.measure.dom = domCount;
-        logDebug(`DOM elements count (inspectedWindow.eval): ${this.measure.dom}`);
-        return;
+
+      if (!IS_SAFARI) {
+        // Method 1: Use devtools.inspectedWindow.eval (works on both browsers)
+        const domCount = await this.evalInInspectedWindow('document.getElementsByTagName("*").length');
+        if (typeof domCount === 'number' && domCount >= 0) {
+          this.measure.dom = domCount;
+          logDebug(`DOM elements count (inspectedWindow.eval): ${this.measure.dom}`);
+          return;
+        }
       }
 
       // Method 2: Chrome - direct tabs.sendMessage
@@ -289,7 +343,7 @@ export class MeasureAcquisition {
       }
 
       // Method 3: Firefox - route through background script
-      if (IS_FIREFOX && browser.runtime?.sendMessage) {
+      if ((IS_FIREFOX || IS_SAFARI) && browser.runtime?.sendMessage) {
         try {
           const response = await browser.runtime.sendMessage({
             forwardToTab: true,
@@ -335,73 +389,24 @@ export class MeasureAcquisition {
   }
 
   /**
-   * Waits for tab to finish loading - OPTIMIZED FOR FIREFOX
+   * Waits for tab to finish loading - DELEGATED TO BACKGROUND FOR ALL BROWSERS
    */
   waitTabUpdate(): Promise<number> {
     return new Promise((resolve) => {
-      // Firefox: longer timeout
-      const maxWait = IS_FIREFOX ? 10000 : 8000;
-      const maxTimeout = setTimeout(() => {
-        logDebug(`Tab update wait timed out (max ${maxWait}ms)`);
-        cleanup();
-        resolve(0);
-      }, maxWait);
-
-      let navListener: ((url: string) => void) | null = null;
-      let tabListener: ((tabId: number, info: chrome.tabs.TabChangeInfo) => void) | null = null;
-
-      const cleanup = () => {
-        clearTimeout(maxTimeout);
-        if (navListener) {
-          try { browser.devtools.network.onNavigated.removeListener(navListener); } catch (e) { /* ignore */ }
-        }
-        if (tabListener && browser.tabs?.onUpdated) {
-          try { browser.tabs.onUpdated.removeListener(tabListener); } catch (e) { /* ignore */ }
-        }
-      };
-
-      // Primary: Use devtools.network.onNavigated
-      navListener = (url: string) => {
-        logDebug(`✓ Navigation completed to: ${url}`);
-        // Firefox: longer delay after navigation
-        const postNavDelay = IS_FIREFOX ? 1500 : 500;
-        setTimeout(() => {
-          cleanup();
-          resolve(0);
-        }, postNavDelay);
-      };
-
-      try {
-        browser.devtools.network.onNavigated.addListener(navListener);
-        logDebug('Listening for navigation via devtools.network.onNavigated');
-        return;
-      } catch (e) {
-        logDebug(`Failed to add onNavigated listener: ${e}`);
-      }
-
-      // Fallback: Use tabs.onUpdated
-      if (browser.tabs?.onUpdated) {
-        tabListener = (updatedTabId: number, info: chrome.tabs.TabChangeInfo) => {
-          if (info.status === 'complete') {
-            logDebug(`Tab ${updatedTabId} finished loading`);
-            cleanup();
-            resolve(updatedTabId);
+      browser.runtime.sendMessage({ action: 'WAIT_TAB_UPDATE' })
+        .then((resp: any) => {
+          logDebug('Background WAIT_TAB_UPDATE returned: ' + JSON.stringify(resp));
+          if (resp?.success) {
+            resolve(0);
+          } else {
+            logDebug('Background WAIT_TAB_UPDATE timed out or failed');
+            resolve(0);
           }
-        };
-
-        try {
-          browser.tabs.onUpdated.addListener(tabListener);
-          logDebug('Listening for tab update via tabs.onUpdated');
-          return;
-        } catch (e) {
-          logDebug(`Failed to add tabs.onUpdated listener: ${e}`);
-        }
-      }
-
-      // Last resort: fixed delay
-      logDebug('Using fixed delay fallback for tab update wait');
-      cleanup();
-      setTimeout(() => resolve(0), IS_FIREFOX ? 3000 : 2000);
+        })
+        .catch((e) => {
+          logDebug(`Background WAIT_TAB_UPDATE message error: ${e}`);
+          resolve(0);
+        });
     });
   }
 }

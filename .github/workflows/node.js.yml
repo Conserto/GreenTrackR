@@ -34,6 +34,8 @@ jobs:
         run: yarn run zip:chrome
       - name: Run Build firefox
         run: yarn run zip:firefox
+      - name: Run Build safari
+        run: yarn run zip:safari
       - name: Archive dist
         uses: actions/upload-artifact@v4
         with:

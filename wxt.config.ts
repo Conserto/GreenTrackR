@@ -12,6 +12,8 @@ export default defineConfig({
 
   modules: ['@wxt-dev/module-svelte'],
 
+  manifestVersion: process.env.TARGET == "firefox" ? 2 : 3,
+
   manifest: {
     name: 'GreenTrackR',
     description: '__MSG_extDesc__',
@@ -38,6 +40,16 @@ export default defineConfig({
     // DevTools page configuration
     // This enables browser.devtools.* APIs in the devtools panel
     devtools_page: 'devtools.html',
+
+    icons: {
+      16: 'images/icon-16.png',
+      32: 'images/icon-32.png',
+      48: 'images/icon-48.png',
+      64: 'images/icon-64.png',
+      128: 'images/icon-128.png',
+      512: 'images/icon-512.png',
+    },
+      
   },
 
   vite: () => ({

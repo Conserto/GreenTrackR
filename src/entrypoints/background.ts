@@ -2,7 +2,7 @@
 // OPTIMIZED: Uses webRequest API only on Firefox (Chrome doesn't need it)
 
 import { browser } from 'wxt/browser';
-import { logErr, logInfo, logDebug } from 'src/utils';
+import { logErr, logInfo, logDebug, logWarn, IS_CHROME, IS_FIREFOX, getBrowserName } from 'src/utils';
 import { defineBackground } from 'wxt/utils/define-background';
 
 // ==========================================
@@ -17,13 +17,8 @@ interface RequestInfo {
   responseSize: number;
   timestamp: number;
   statusCode?: number;
+  contentType?: string;
 }
-
-// ==========================================
-// BROWSER DETECTION
-// ==========================================
-
-const IS_FIREFOX = typeof navigator !== 'undefined' && /Firefox/i.test(navigator.userAgent);
 
 // ==========================================
 // STORAGE
@@ -34,20 +29,20 @@ const MAX_REQUESTS_PER_TAB = 500;
 const REQUEST_TTL_MS = 5 * 60 * 1000;
 
 export default defineBackground(() => {
-  logInfo(`Background script started - Browser: ${IS_FIREFOX ? 'Firefox 🦊' : 'Chrome/Chromium 🌐'}`);
+  logInfo(`Background script started - Browser: ${getBrowserName()}`);
 
   // ==========================================
-  // WEBREQUEST LISTENERS (FIREFOX ONLY)
+  // WEBREQUEST LISTENERS (FIREFOX + SAFARI ONLY)
   // ==========================================
 
   function initWebRequestListeners(): void {
-    if (!IS_FIREFOX) {
+    if (IS_CHROME ) {
       logInfo('Chrome detected - skipping webRequest (HAR data is reliable)');
       return;
     }
 
     if (!browser.webRequest) {
-      logErr('webRequest API not available on Firefox');
+      logErr('webRequest API not available');
       return;
     }
 
@@ -108,6 +103,14 @@ export default defineBackground(() => {
           );
           if (contentLength?.value) {
             requestInfo.responseSize = parseInt(contentLength.value, 10) || 0;
+          }
+
+          // Capture Content-Type for resource type detection (especially Safari)
+          const contentType = responseHeaders?.find(
+            (h: { name: string; value?: string }) => h.name.toLowerCase() === 'content-type'
+          );
+          if (contentType?.value) {
+            requestInfo.contentType = contentType.value;
           }
 
           logDebug(`[webRequest] ${fromCache ? '🟢 CACHE' : '🔵 REAL'}: ${url.substring(0, 80)}`);
@@ -237,7 +240,8 @@ export default defineBackground(() => {
     if (msg.action === 'GET_REQUEST_CACHE_INFO') {
       const tabId = msg.tabId as number | undefined;
 
-      if (!IS_FIREFOX || !tabId) {
+      // Chrome never uses webRequest cache
+      if (IS_CHROME || !tabId) {
         sendResponse({ success: true, data: [], count: 0, source: 'chrome-har-fallback' });
         return true;
       }
@@ -252,12 +256,68 @@ export default defineBackground(() => {
       return true;
     }
 
+    if (msg.action === 'WAIT_TAB_UPDATE') {
+      const maxWait = 8000;
+      let responded = false;
+
+      const cleanup = () => {
+        try { browser.tabs.onUpdated.removeListener(onTabUpdated); } catch {};
+        try { browser.webNavigation?.onCompleted.removeListener(onWebNav); } catch {};
+        clearTimeout(timeout);
+      };
+
+      const onTabUpdated = (tabId: number, changeInfo: chrome.tabs.TabChangeInfo) => {
+        if (changeInfo.status === 'complete' && !responded) {
+          responded = true;
+          logInfo('WAIT_TAB_UPDATE: Tab loading completed via tabs.onUpdated');
+          cleanup();
+          sendResponse({ success: true, method: 'tabs.onUpdated' });
+        }
+      };
+
+      const onWebNav = (details: chrome.webNavigation.WebNavigationFramedCallbackDetails) => {
+        if (details.frameId === 0 && !responded) {
+          responded = true;
+          logInfo('WAIT_TAB_UPDATE: Navigation completed via webNavigation.onCompleted');
+          cleanup();
+          sendResponse({ success: true, method: 'webNavigation.onCompleted' });
+        }
+      };
+
+      let timeout = setTimeout(() => {
+        if (!responded) {
+          responded = true;
+          logInfo('WAIT_TAB_UPDATE: Timed out after 8000ms');
+          cleanup();
+          sendResponse({ success: false, timeout: true });
+        }
+      }, maxWait);
+
+      // Primary method: tabs.onUpdated (works on all browsers)
+      if (browser.tabs?.onUpdated) {
+        browser.tabs.onUpdated.addListener(onTabUpdated);
+        logDebug('WAIT_TAB_UPDATE: Listening for tabs.onUpdated');
+      }
+
+      // Fallback: webNavigation.onCompleted (Safari works better with this)
+      if (browser.webNavigation?.onCompleted) {
+        browser.webNavigation.onCompleted.addListener(onWebNav);
+        logDebug('WAIT_TAB_UPDATE: Also listening for webNavigation.onCompleted');
+      }
+
+      if (!browser.tabs?.onUpdated && !browser.webNavigation?.onCompleted) {
+        logWarn('WAIT_TAB_UPDATE: No navigation APIs available, using timeout fallback');
+      }
+
+      return true;
+    }
+
     // IS URL CACHED
     if (msg.action === 'IS_URL_CACHED') {
       const tabId = msg.tabId as number | undefined;
       const url = msg.url as string | undefined;
 
-      if (!IS_FIREFOX || !tabId) {
+      if (IS_CHROME || !tabId) {
         sendResponse({ success: true, fromCache: null, source: 'chrome-har-fallback' });
         return true;
       }
@@ -265,6 +325,22 @@ export default defineBackground(() => {
       const tabRequests = tabRequestsMap.get(tabId);
       const requestInfo = url ? tabRequests?.get(url) : undefined;
       sendResponse({ success: true, fromCache: requestInfo?.fromCache ?? null, info: requestInfo ?? null });
+      return true;
+    }
+
+    // ACTIVE TAB DETECTION : should be done through the service worker (message) because SAFARI has restriction and cannot use browser.tabs API outside it
+    if (msg.action === 'GET_ACTIVE_TAB') {
+      browser.tabs.query({ active: true, currentWindow: true })
+        .then((tabs) => sendResponse({ success: true, tab: tabs[0] }))
+        .catch((err) => sendResponse({ success: false, error: String(err) }));
+      return true;
+    }
+
+    // TAB INFO (by id)
+    if (msg.action === 'GET_TAB_INFO' && typeof msg.tabId === 'number') {
+      browser.tabs.get(msg.tabId)
+        .then(tab => sendResponse({ success: true, tab }))
+        .catch(err => sendResponse({ success: false, error: String(err) }));
       return true;
     }
 
@@ -284,17 +360,9 @@ export default defineBackground(() => {
     // RELOAD TAB
     if (msg.action === 'RELOAD_TAB' && typeof msg.tabId === 'number') {
       clearTabRequests(msg.tabId);
-      browser.tabs.reload(msg.tabId, { bypassCache: true })
+      browser.tabs.reload(msg.tabId, { bypassCache: !!msg.bypassCache })
         .then(() => sendResponse({ success: true }))
         .catch((err) => sendResponse({ success: false, error: String(err) }));
-      return true;
-    }
-
-    // GET TAB URL
-    if (msg.action === 'GET_TAB_URL' && typeof msg.tabId === 'number') {
-      browser.tabs.get(msg.tabId)
-        .then((tab) => sendResponse({ url: tab?.url }))
-        .catch(() => sendResponse({ url: undefined }));
       return true;
     }
 

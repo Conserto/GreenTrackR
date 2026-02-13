@@ -9,7 +9,10 @@ import {
   logDebug,
   logWarn,
   logInfo,
-  getTabId
+  getTabId,
+  IS_CHROME,
+  IS_FIREFOX,
+  IS_SAFARI
 } from 'src/utils';
 import type { DetailServer, DetailServerUrl, NetworkDetail, NetworkResponse } from 'src/interface';
 
@@ -30,8 +33,6 @@ interface WebRequestResponse {
 // ==========================================
 // CONSTANTS
 // ==========================================
-
-const IS_FIREFOX = typeof navigator !== 'undefined' && /Firefox/i.test(navigator.userAgent);
 
 const CONTENT_TYPE_MAP: Record<string, string> = {
   'text/html': 'document',
@@ -84,10 +85,101 @@ const EXTENSION_MAP: Record<string, string> = {
 // ==========================================
 
 export class NetworkService {
+  private harAvailable: boolean | null = null;
+
+  /**
+   * Checks if HAR API is available (not available on Safari)
+   */
+  isHarApiAvailable(): boolean {
+    if (this.harAvailable === null) {
+      this.harAvailable = !!browser.devtools?.network?.getHAR;
+    }
+    return this.harAvailable;
+  }
+
+  /**
+   * Converts webRequest API data to HAR-like entries for Safari
+   */
+  async getWebRequestNetworkEntries(): Promise<{ entries: HARFormatEntry[] }> {
+    const tabId = await getTabId();
+    if (!tabId) {
+      logDebug('getWebRequestNetworkEntries: no tab ID available, requesting all entries');
+    }
+
+    try {
+      const message: any = { action: 'GET_REQUEST_CACHE_INFO' };
+      if (tabId) {
+        message.tabId = tabId;
+      }
+      const response = await browser.runtime.sendMessage(message) as any;
+      logDebug(`getWebRequestNetworkEntries response source=${response?.source}, count=${response?.count}`);
+
+      if (response?.success && response.data && Array.isArray(response.data)) {
+        const entries: HARFormatEntry[] = response.data.map((info: any) => {
+          const startedTime = new Date(info.timestamp);
+          
+          return {
+            startedDateTime: startedTime.toISOString(),
+            time: 0,
+            request: {
+              method: 'GET',
+              url: info.url,
+              httpVersion: 'HTTP/1.1',
+              headers: [],
+              queryString: [],
+              cookies: [],
+              headersSize: -1,
+              bodySize: 0
+            },
+            response: {
+              status: info.statusCode || 200,
+              statusText: info.statusCode === 304 ? 'Not Modified' : 'OK',
+              httpVersion: 'HTTP/1.1',
+              headers: info.contentType ? [{ name: 'Content-Type', value: info.contentType }] : [],
+              cookies: [],
+              content: {
+                size: 0, // Safari: uncompressed size not available
+                mimeType: info.contentType || 'application/octet-stream',
+                text: ''
+              },
+              redirectURL: '',
+              headersSize: -1,
+              bodySize: info.responseSize || 0,
+              _transferSize: info.transferSize || 0,
+              _fromCache: info.fromCache
+            },
+            cache: info.fromCache ? { beforeRequest: {}, afterRequest: {} } : {},
+            timings: {
+              blocked: -1,
+              dns: -1,
+              connect: -1,
+              send: 0,
+              wait: 0,
+              receive: 0,
+              ssl: -1
+            }
+          } as any as HARFormatEntry;
+        });
+
+        logInfo(`Safari: Converted ${entries.length} webRequest entries to HAR format`);
+        return { entries };
+      }
+    } catch (error) {
+      logWarn(`Failed to fetch webRequest network entries: ${error}`);
+    }
+
+    return { entries: [] };
+  }
 
   async fetchWebRequestCacheInfo(): Promise<void> {
-    if (!IS_FIREFOX) {
+    if (IS_CHROME) {
       logDebug('Chrome detected - using HAR for cache detection');
+      setWebRequestCache(new Map(), false);
+      return;
+    }
+
+    if (!IS_FIREFOX && !IS_SAFARI) {
+      logDebug('Unknown browser - skipping webRequest cache');
       setWebRequestCache(new Map(), false);
       return;
     }
@@ -118,7 +210,7 @@ export class NetworkService {
         }
 
         setWebRequestCache(cache, true);
-        logInfo(`✅ Firefox: Loaded ${cache.size} requests from webRequest API`);
+        logInfo(`✅ Loaded ${cache.size} requests from webRequest API`);
       }
     } catch (error) {
       logWarn(`Failed to fetch webRequest cache info: ${error}`);
@@ -130,8 +222,12 @@ export class NetworkService {
     await this.fetchWebRequestCacheInfo();
 
     return new Promise((resolve) => {
-      if (!browser.devtools?.network?.getHAR) {
-        logWarn('browser.devtools.network.getHAR not available');
+      if (!this.isHarApiAvailable()) {
+        if (IS_SAFARI) {
+          logDebug('Safari detected - HAR API not available, using webRequest API only');
+        } else {
+          logWarn('browser.devtools.network.getHAR not available');
+        }
         resolve({ entries: [] });
         return;
       }
