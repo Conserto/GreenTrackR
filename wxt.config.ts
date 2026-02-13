@@ -21,18 +21,19 @@ export default defineConfig({
     // Required permissions for core features
     permissions: ['tabs', 'activeTab', 'scripting', 'browsingData', 'webNavigation', 'webRequest'],
 
-    // In this case, the permission is granted.
+    // Grants access to all URLs for content script injection
+    host_permissions: ['<all_urls>'],
+
+    // Specific firefox
     browser_specific_settings: {
       gecko: {
         id: 'greentrackr@conserto.pro',
+        // @ts-ignore
         data_collection_permissions: {
-          required: ["none"]
+          required: ['none'],
         },
       },
     },
-
-    // Grants access to all URLs for content script injection
-    host_permissions: ['<all_urls>'],
 
     // DevTools page configuration
     // This enables browser.devtools.* APIs in the devtools panel
