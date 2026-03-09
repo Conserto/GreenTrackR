@@ -1,6 +1,7 @@
 import type { DetailServerUrl, Measure, TableHeader, TableSurHeader } from 'src/interface';
 import { logDebug } from './log';
 import { PREFIX_URL_DATA, PREFIX_URL_EXTENSION } from '../const';
+import { IS_FIREFOX } from './browser.utils';
 
 // ==========================================
 // WEBREQUEST CACHE (Firefox only)
@@ -62,7 +63,6 @@ export const isCacheCall = (harEntry: HARFormatEntry): boolean => {
   const response = harEntry.response;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const entryAny = harEntry as any;
-  const IS_FIREFOX = typeof navigator !== 'undefined' && /Firefox/i.test(navigator.userAgent);
 
   // FIREFOX: webRequest API en priorité (fiable)
   if (IS_FIREFOX) {

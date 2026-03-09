@@ -1,6 +1,21 @@
 import { browser } from 'wxt/browser';
 import { logDebug, logErr, logWarn } from './log';
-import { PREFIX_URL_EXTENSION } from '../const';
+import { F, PREFIX_URL_EXTENSION } from '../const';
+
+// ==========================================
+// BROWSER DETECTION
+// ==========================================
+
+export const IS_FIREFOX = typeof navigator !== 'undefined' && /Firefox/i.test(navigator.userAgent);
+export const IS_CHROME = typeof navigator !== 'undefined' && /Chrome/i.test(navigator.userAgent) && typeof globalThis?.chrome !== "undefined";
+export const IS_SAFARI = typeof navigator !== 'undefined' && typeof (globalThis as any)?.GestureEvent !== "undefined" && !IS_FIREFOX && !IS_CHROME;
+
+export const getBrowserName = (): String => {
+  if (IS_CHROME) return "Chrome";
+  if (IS_FIREFOX) return "Firefox 🦊";
+  if (IS_SAFARI) return "Safari";
+  return "Unknown"
+}
 
 // ==========================================
 // TAB IDENTIFICATION & INFORMATION
@@ -9,11 +24,43 @@ import { PREFIX_URL_EXTENSION } from '../const';
 /**
  * Retrieves the ID of the currently inspected tab.
  * Returns 0 if no tab ID is found.
+ * Should never work on Safari
  */
-export const getTabId = (): number => {
-  const tabId = browser.devtools?.inspectedWindow?.tabId;
-  if (!tabId) logDebug('No Tab Id found');
-  return tabId ?? 0;
+export const getTabId = async (): Promise<number> => {
+   const devtoolsId = browser.devtools?.inspectedWindow?.tabId;
+   
+   if (devtoolsId && devtoolsId !== -1) {
+      return devtoolsId;
+   }
+
+   // Fallback Safari : on demande au service worker quel est le tab actif
+   try {
+      const response = await browser.runtime.sendMessage({ action: 'GET_ACTIVE_TAB' });
+      if (response?.success && response.tab?.id) {
+         return response.tab.id;
+      }
+   } catch (e) {
+      logErr("Impossible de récupérer l'ID via sendMessage");
+   }
+
+   logDebug('No Tab Id found');
+   return 0;
+};
+
+/**
+ * Version universelle (Safari/Chrome/FF) pour obtenir les infos du Tab
+ */
+export const getTabInfo = async (tabId: number): Promise<any> => {
+  try {
+    const response = await browser.runtime.sendMessage({
+      action: 'GET_TAB_INFO',
+      tabId
+    });
+    return response?.success ? response.tab : undefined;
+  } catch (e) {
+    logErr("Failed to get Tab info via sendMessage");
+    return undefined;
+  }
 };
 
 /**
@@ -21,19 +68,11 @@ export const getTabId = (): number => {
  * Ensures compatibility with Chrome and Firefox (bypassing strict CSP restrictions).
  */
 export const getTabUrl = async (): Promise<string | undefined> => {
-  const tabId = getTabId();
+  const tabId = await getTabId();
   if (!tabId) return undefined;
 
-  try {
-    const response = await browser.runtime.sendMessage({
-      action: 'GET_TAB_URL',
-      tabId
-    });
-    return response?.url;
-  } catch (e) {
-    logErr("Failed to get URL via background");
-    return undefined;
-  }
+  const tab = await getTabInfo(tabId);
+  return tab?.url;
 };
 
 /**
@@ -79,8 +118,8 @@ const sendChromeMsgRetry = (id: number, cur: number, max: number, payload: any) 
  * Sends a message to the content script via the background script (Fire-and-forget).
  * Includes automatic retries to handle initialization delays.
  */
-export const sendChromeMsg = (payload: any) => {
-  const id = getTabId();
+export const sendChromeMsg = async (payload: any) => {
+  const id = await getTabId();
   if (id) sendChromeMsgRetry(id, 0, 10, payload);
 };
 
@@ -89,8 +128,9 @@ export const sendChromeMsg = (payload: any) => {
  * Useful for fetching data synchronously from the page context.
  */
 export const sendMessageAndWait = async <T>(payload: any): Promise<T | undefined> => {
-  const tabId = getTabId();
+  const tabId = await getTabId();
   if (!tabId) return undefined;
+
   try {
     const response = await browser.runtime.sendMessage({
       forwardToTab: true,
@@ -117,13 +157,18 @@ export const cleanCache = () => {
 
 /**
  * Reloads the current tab.
- * Prioritizes the DevTools reload API, falls back to the standard Tabs API.
  */
-export const reloadCurrentTab = async () => {
-  const tabId = getTabId();
-  if (browser.devtools?.inspectedWindow?.reload) {
-    browser.devtools.inspectedWindow.reload({});
-  } else if (tabId && browser.tabs?.reload) {
-    browser.tabs.reload(tabId);
+export const reloadCurrentTab = async (bypassCache: boolean = false) => {
+  const tabId = await getTabId();
+  if (!tabId) return;
+
+  try {
+    await browser.runtime.sendMessage({
+      action: 'RELOAD_TAB',
+      tabId,
+      bypassCache
+    });
+  } catch (e) {
+    logErr("Failed to reload tab via sendMessage");
   }
 };

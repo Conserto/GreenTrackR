@@ -3,6 +3,7 @@
   import {
     cleanCache,
     getLocalStorageObject, logDebug,
+    logErr,
     reloadCurrentTab,
     setLocalStorageObject,
     toHistoFormattedDatas,
@@ -23,6 +24,7 @@
     None,
   }
 
+  
   export let unavailable = false;
   let currentDisplayedTab = TabType.None;
   let showModal = false;
@@ -80,27 +82,31 @@
 
   // [cite_start] Logic to run the analysis, handling the forced refresh if needed [cite: 18]
   const handleRunAnalysis = async () => {
-    logDebug('🎯 [DEBUG] Starting analysis...');
-    logDebug('🎯 [DEBUG] isFirstAnalysisAfterReset: ' + isFirstAnalysisAfterReset);
-    logDebug('🎯 [DEBUG] measureAcquisition instance: ' + measureAcquisition);
+    try {    
+      logDebug('🎯 [DEBUG] Starting analysis...');
+      logDebug('🎯 [DEBUG] isFirstAnalysisAfterReset: ' + isFirstAnalysisAfterReset);
+      logDebug('🎯 [DEBUG] measureAcquisition instance: ' + measureAcquisition);
 
-    currentDisplayedTab = TabType.ResultTab;
-    loading = true;
+      currentDisplayedTab = TabType.ResultTab;
+      loading = true;
 
-    const shouldForceRefresh = isFirstAnalysisAfterReset;
-    logDebug('🎯 [DEBUG] shouldForceRefresh: ' + shouldForceRefresh);
+      const shouldForceRefresh = isFirstAnalysisAfterReset;
+      logDebug('🎯 [DEBUG] shouldForceRefresh: ' + shouldForceRefresh);
 
-    await measureAcquisition.getNetworkMeasure(shouldForceRefresh);
+      await measureAcquisition.getNetworkMeasure(shouldForceRefresh);
 
-    if (isFirstAnalysisAfterReset) {
-      isFirstAnalysisAfterReset = false;
+      if (isFirstAnalysisAfterReset) {
+        isFirstAnalysisAfterReset = false;
+      }
+
+      currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
+      logDebug('🎯 [DEBUG] Analysis complete, measure:' + currentMeasure);
+
+      loading = false;
+      histoDatas = toHistoFormattedDatas(currentMeasure);
+    } catch (error) {
+      logErr(`handleRunAnalysis failed: ${error}`)
     }
-
-    currentMeasure = await measureAcquisition.getGESMeasure(serverSearch, userSearch);
-    logDebug('🎯 [DEBUG] Analysis complete, measure:' + currentMeasure);
-
-    loading = false;
-    histoDatas = toHistoFormattedDatas(currentMeasure);
   };
 
   const handleViewHistory = () => {

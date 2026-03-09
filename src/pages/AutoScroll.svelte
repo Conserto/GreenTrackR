@@ -6,7 +6,6 @@
     cleanCache,
     getLocalStorageObject,
     getTabId,
-    logDebug,
     logErr,
     logInfo,
     reloadCurrentTab,
@@ -137,8 +136,8 @@
     }
   };
 
-  onMount(() => {
-    myTabId = getTabId();
+  onMount(async () => {
+    myTabId = await getTabId();
     logInfo(`[AutoScroll] onMount - tabId: ${myTabId}`);
 
     sendChromeMsg({ action: RequestAction.SCROLL_TO_TOP });
