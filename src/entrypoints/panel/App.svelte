@@ -39,7 +39,7 @@
       name: translate('parameterTab'),
       id: 'parameter-tab',
       component: Parameter,
-      unavailable: true
+      unavailable: false
     }
   ];
   export let activeTabId = 'evaluation-tab';

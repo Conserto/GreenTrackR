@@ -138,7 +138,12 @@ export const getLocalStorageObject = (key: string) => {
   const stringValue = localStorage.getItem(key);
   logDebug(`Value for ${key}: ${stringValue}`);
   if (stringValue && stringValue.length > 0) {
-    return JSON.parse(stringValue);
+    try {
+      return JSON.parse(stringValue);
+    } catch (error) {
+      logDebug(`Error parsing localStorage value for key ${key}: ${error}`);
+      return null;
+    }
   } else {
     return null;
   }
