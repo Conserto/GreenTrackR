@@ -195,7 +195,7 @@
     "message": "Sauvegarder"
   },
   "paramCo2TokenLabel": {
-    "message": "Token API CO2signal"
+    "message": "Token API ElectricityMaps"
   },
   "parameterTab": {
     "message": "Paramètre"
@@ -222,10 +222,10 @@
     "message": "Paramétrage"
   },
   "paramTokenCo2Description": {
-    "message": "GreenTrackR peut-être plus précis dans ses mesures en utilisant l'API 'CO2signal' de 'Electricity Maps', afin de pouvoir utiliser cette API il vous faut un token d'accès, cliquez sur le lien puis sur 'Go to api portal' -> "
+    "message": "GreenTrackR peut-être plus précis dans ses mesures en utilisant l'API 'CarbonIntensity' de 'Electricity Maps', afin de pouvoir utiliser cette API il vous faut un token d'accès, cliquez sur le lien puis sur 'Go to api portal' -> "
   },
   "paramTokenCo2URL": {
-    "message": "https://www.co2signal.com/"
+    "message": "https://www.app.electricitymaps.com"
   },
   "pixelDisplayed": {
     "message": "Cet onglet affiche une hauteur de "

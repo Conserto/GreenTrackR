@@ -11,15 +11,13 @@
 
   let showModal = false;
 
-  let co2TokenStr: string;
-  let nbRetry: number;
-  let nbRetryStr: string;
+  let hasCo2Token: boolean = !!getLocalStorageObject(paramTokenCo2);
+  let co2TokenStr: string = '';
+  let nbRetry: number = getLocalStorageObject(paramRetry) ?? VITE_MAX_HAR_RETRIES_DEFAULT;
+  let nbRetryStr: string = nbRetry.toString();
 
   onMount(() => {
-    co2TokenStr = getLocalStorageObject(paramTokenCo2) ?? '';
-    nbRetry = getLocalStorageObject(paramRetry) ?? VITE_MAX_HAR_RETRIES_DEFAULT;
     logDebug(`nbRetry=${nbRetry} / co2TokenStr=${co2TokenStr}`);
-    nbRetryStr = nbRetry.toString();
   });
 
   const onSaveParameters = () => {
@@ -47,6 +45,7 @@
         <Input
           type={InputTypeEnum.TEXT}
           name="co2Token"
+          placeholder={hasCo2Token ? "*********" : ""}
           bind:value={co2TokenStr}
           translateKey="paramCo2TokenLabel"
         />

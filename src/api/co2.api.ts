@@ -1,11 +1,11 @@
-import type { Co2SignalResponse, GeoLocation } from 'src/interface';
+import type { Co2SignalResponse, DetailedGeoLoc, GeoLocation } from 'src/interface';
 import { CO2_API } from 'src/const/url.const';
 import { getLocalStorageObject, logDebug, logErr, logWarn } from 'src/utils';
 import { paramTokenCo2 } from 'src/const';
 
 const cache = new Map<string, Co2SignalResponse>();
 
-export const getCarbonIntensity = async (location: string | GeoLocation | undefined): Promise<Co2SignalResponse | undefined> => {
+export const getCarbonIntensity = async (location: string | DetailedGeoLoc | undefined): Promise<Co2SignalResponse | undefined> => {
   let token = getLocalStorageObject(paramTokenCo2);
   if (!location) {
     logWarn('Carbon intensity not check because no location');
@@ -19,7 +19,7 @@ export const getCarbonIntensity = async (location: string | GeoLocation | undefi
   let params = '';
   let cacheVal: Co2SignalResponse | undefined = undefined;
   if (typeof location === 'string') {
-    params = `countryCode=${location}`;
+    params = `zone=${location}`;
   } else if (location.lon !== 0 && location.lat !== 0) {
     params = `lon=${location.lon}&lat=${location.lat}`;
   } else {
@@ -32,12 +32,17 @@ export const getCarbonIntensity = async (location: string | GeoLocation | undefi
     return cacheVal;
   } else {
     requestUrl += params;
-    const { countryCode, data } = await fetch(requestUrl, {
+    const { carbonIntensity } = await fetch(requestUrl, {
       headers: { 'auth-token': `${token}` }
     }).then((res) => res.json()).catch(reason => logErr('Error getting carbon intensity: ' + reason));
-    if (data.carbonIntensity) {
-      cache.set(params, { carbonIntensity: data.carbonIntensity, countryCode: countryCode });
+
+    const countryCode = typeof location === 'string' ? location : location.countryCode;
+    if (carbonIntensity) {
+      const data = { carbonIntensity, countryCode };
+      cache.set(params, data);
+      return data;
     }
-    return data ? { carbonIntensity: data.carbonIntensity, countryCode: countryCode } : undefined;
+    
+    return undefined;
   }
 };
